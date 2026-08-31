@@ -1,0 +1,231 @@
+{
+  "generated_at": "2026-08-31T21:50:43Z",
+  "script": "scripts/verify_hw01.py",
+  "summary": {
+    "passed": 44,
+    "total": 44,
+    "all_passed": true
+  },
+  "checks": [
+    {
+      "name": "file_exists:index.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "file_exists:DOMAIN_SCHEMA.md",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "file_exists:Dockerfile",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "file_exists:nginx.conf",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "file_exists:agents_demo.py",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "file_exists:hw1_client.py",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "file_exists:AGENT.md",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "file_exists:src/model_client.py",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "file_exists:reports/hw01/METRICS.md",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "file_exists:reports/hw01/RUN_LOG.txt",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "file_exists:reports/hw01/cases/nondeterminism_input.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "file_exists:reports/hw01/raw/nondeterminism_raw.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "file_exists:reports/hw01/AI_USE.md",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "html_has_autofocus",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "html_required_field_count_gte_4",
+      "passed": true,
+      "detail": "found 4 'required' attributes"
+    },
+    {
+      "name": "html_has_checkbox",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "html_has_4_category_options",
+      "passed": true,
+      "detail": "found 4 non-placeholder options"
+    },
+    {
+      "name": "html_has_script_tag",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "html_title_starts_HW1",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "js_has_25char_validation",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "js_has_checkbox_validation",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "js_has_json_stringify",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "js_has_destructuring",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "js_has_spread_operator",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "js_has_closure_counter",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "dockerfile_from_nginx",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "dockerfile_exposes_8675",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "nginx_listens_8675",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "agents_has_planner",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "agents_has_reviewer",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "agents_has_finalizer",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "agents_uses_json_output",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "model_client_defines_complete",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "model_client_accepts_messages_tools",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "agentmd_requests_bullets",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "nondeterminism_input_has_title_content",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "nondeterminism_raw_is_list",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "nondeterminism_raw_has_40_runs",
+      "passed": true,
+      "detail": "found 40 runs"
+    },
+    {
+      "name": "nondeterminism_raw_20_runs_temp_0.7",
+      "passed": true,
+      "detail": "found 20"
+    },
+    {
+      "name": "nondeterminism_raw_20_runs_temp_0.0",
+      "passed": true,
+      "detail": "found 20"
+    },
+    {
+      "name": "nondeterminism_raw_has_tags_and_latency",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "metrics_md_non_empty",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "metrics_md_has_distinct_tag_sets",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "run_log_non_empty",
+      "passed": true,
+      "detail": ""
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "description": "Per-turn and cumulative token counts from the Part 4 hw1_client.py five-turn conversation demo (AGENT.md bullet-only code review system prompt, model qwen3:8b via Ollama).",
+  "turns": [
+    {
+      "turn": 1,
+      "user_message": "Review this code: def add(a,b): return a+b",
+      "input_tokens": 147,
+      "output_tokens": 747,
+      "total_tokens": 894
+    },
+    {
+      "turn": 2,
+      "user_message": "Review this code: def divide(a, b): return a / b",
+      "input_tokens": 243,
+      "output_tokens": 597,
+      "total_tokens": 840
+    },
+    {
+      "turn": 3,
+      "user_message": "Review this code: for i in range(10): print(i)",
+      "input_tokens": 368,
+      "output_tokens": 341,
+      "total_tokens": 709
+    },
+    {
+      "turn": 4,
+      "user_message": "Review this code: x = [1, 2, 3]; y = x; y.append(4)",
+      "input_tokens": 496,
+      "output_tokens": 442,
+      "total_tokens": 938
+    },
+    {
+      "turn": 5,
+      "user_message": "Review this code: class Foo: pass",
+      "input_tokens": 636,
+      "output_tokens": 337,
+      "total_tokens": 973
+    }
+  ],
+  "stats_snapshots": [
+    {
+      "after_turn": 3,
+      "command": "/stats",
+      "cumulative_input_tokens": 758,
+      "cumulative_output_tokens": 1685,
+      "cumulative_total_tokens": 2443,
+      "history_length_chars": 2254
+    },
+    {
+      "after_turn": 5,
+      "command": "/stats",
+      "cumulative_input_tokens": 1890,
+      "cumulative_output_tokens": 2464,
+      "cumulative_total_tokens": 4354,
+      "history_length_chars": 3450
+    }
+  ],
+  "exit_summary": {
+    "total_turns": 5,
+    "cumulative_input_tokens": 1890,
+    "cumulative_output_tokens": 2464,
+    "cumulative_total_tokens": 4354
+  }
+}

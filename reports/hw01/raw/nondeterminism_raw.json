@@ -1,0 +1,522 @@
+[
+  {
+    "run_index": 1,
+    "temperature": 0.7,
+    "tags": [
+      "Food Safety",
+      "Product Recall",
+      "Salmonella Outbreak"
+    ],
+    "summary": "A peanut butter brand recalled for salmonella contamination linked to reported illnesses highlights food safety concerns.",
+    "latency_ms": 382326.20504207443,
+    "returncode": 0,
+    "timestamp": "2026-08-31T05:52:25Z"
+  },
+  {
+    "run_index": 2,
+    "temperature": 0.0,
+    "tags": [
+      "Peanut Butter Recall",
+      "Salmonella Contamination",
+      "Consumer Illness Outbreak"
+    ],
+    "summary": "A popular peanut butter brand was recalled due to salmonella contamination causing consumer illnesses.",
+    "latency_ms": 380387.78999994975,
+    "returncode": 0,
+    "timestamp": "2026-08-31T05:58:46Z"
+  },
+  {
+    "run_index": 3,
+    "temperature": 0.7,
+    "tags": [
+      "Peanut Butter Recall",
+      "Salmonella Contamination",
+      "Foodborne Illness"
+    ],
+    "summary": "A peanut butter brand recalled for salmonella contamination linked to reported illnesses.",
+    "latency_ms": 449826.82758406736,
+    "returncode": 0,
+    "timestamp": "2026-08-31T06:25:27Z"
+  },
+  {
+    "run_index": 4,
+    "temperature": 0.7,
+    "tags": [
+      "Food Safety Recall",
+      "Salmonella Contamination",
+      "Consumer Health Alerts"
+    ],
+    "summary": "A peanut butter brand's salmonella contamination led to recalls and health concerns.",
+    "latency_ms": 353969.74145807326,
+    "returncode": 0,
+    "timestamp": "2026-08-31T06:31:21Z"
+  },
+  {
+    "run_index": 5,
+    "temperature": 0.7,
+    "tags": [
+      "Salmonella Outbreak",
+      "Food Recall",
+      "Foodborne Illness"
+    ],
+    "summary": "A popular peanut butter brand was recalled due to salmonella contamination, causing illnesses with stomach cramps and fever.",
+    "latency_ms": 513025.54429206066,
+    "returncode": 0,
+    "timestamp": "2026-08-31T06:39:54Z"
+  },
+  {
+    "run_index": 6,
+    "temperature": 0.7,
+    "tags": [
+      "Peanut Butter Recall",
+      "Salmonella Outbreak",
+      "Food Safety Issues"
+    ],
+    "summary": "Peanut butter recall linked to salmonella contamination causing stomach cramps and fever.",
+    "latency_ms": 412544.9610829819,
+    "returncode": 0,
+    "timestamp": "2026-08-31T06:46:47Z"
+  },
+  {
+    "run_index": 7,
+    "temperature": 0.7,
+    "tags": [
+      "Peanut Butter Recall",
+      "Salmonella Contamination",
+      "Foodborne Illness"
+    ],
+    "summary": "A peanut butter brand recalled for salmonella contamination caused stomach cramps and fever in consumers.",
+    "latency_ms": 565791.9923749287,
+    "returncode": 0,
+    "timestamp": "2026-08-31T06:56:12Z"
+  },
+  {
+    "run_index": 8,
+    "temperature": 0.7,
+    "tags": [
+      "Food Safety Recall",
+      "Salmonella Outbreak",
+      "Consumer Health Risks"
+    ],
+    "summary": "A peanut butter brand recalled for salmonella contamination caused illnesses with stomach cramps and fever in consumers.",
+    "latency_ms": 461148.2578750001,
+    "returncode": 0,
+    "timestamp": "2026-08-31T07:03:54Z"
+  },
+  {
+    "run_index": 9,
+    "temperature": 0.7,
+    "tags": [
+      "Food Safety Recall",
+      "Salmonella Contamination",
+      "Health Risks"
+    ],
+    "summary": "A peanut butter brand recalled for salmonella contamination caused reported illnesses with stomach cramps and fever.",
+    "latency_ms": 767734.3314170139,
+    "returncode": 0,
+    "timestamp": "2026-08-31T07:16:41Z"
+  },
+  {
+    "run_index": 10,
+    "temperature": 0.7,
+    "tags": [
+      "Food Safety",
+      "Salmonella Outbreak",
+      "Product Recall"
+    ],
+    "summary": "A peanut butter brand recalled for salmonella contamination caused illnesses, underscoring food safety risks.",
+    "latency_ms": 605002.4733339669,
+    "returncode": 0,
+    "timestamp": "2026-08-31T07:26:46Z"
+  },
+  {
+    "run_index": 11,
+    "temperature": 0.7,
+    "tags": [
+      "Food Safety",
+      "Salmonella Contamination",
+      "Consumer Illness"
+    ],
+    "summary": "A peanut butter brand's recall follows salmonella contamination linked to consumer illnesses.",
+    "latency_ms": 752607.1359169437,
+    "returncode": 0,
+    "timestamp": "2026-08-31T07:39:19Z"
+  },
+  {
+    "run_index": 12,
+    "temperature": 0.7,
+    "tags": [
+      "Food Safety",
+      "Peanut Butter Recall",
+      "Salmonella Outbreak"
+    ],
+    "summary": "A popular peanut butter brand recalled due to salmonella contamination, causing illness in consumers.",
+    "latency_ms": 445980.1422080491,
+    "returncode": 0,
+    "timestamp": "2026-08-31T07:46:45Z"
+  },
+  {
+    "run_index": 13,
+    "temperature": 0.7,
+    "tags": [
+      "Food Safety",
+      "Peanut Butter Recall",
+      "Salmonella Contamination"
+    ],
+    "summary": "A peanut butter brand's recall due to salmonella contamination led to illness reports, raising food safety concerns.",
+    "latency_ms": 414310.0615829462,
+    "returncode": 0,
+    "timestamp": "2026-08-31T07:53:39Z"
+  },
+  {
+    "run_index": 14,
+    "temperature": 0.7,
+    "tags": [
+      "Peanut Butter Recall",
+      "Salmonella Contamination",
+      "Health Risks"
+    ],
+    "summary": "A peanut butter brand recalled for salmonella contamination linked to illness reports.",
+    "latency_ms": 499049.34645898174,
+    "returncode": 0,
+    "timestamp": "2026-08-31T08:01:58Z"
+  },
+  {
+    "run_index": 15,
+    "temperature": 0.7,
+    "tags": [
+      "Food Safety",
+      "Salmonella Outbreak",
+      "Product Recall"
+    ],
+    "summary": "A peanut butter brand recalled for salmonella contamination caused illnesses in consumers.",
+    "latency_ms": 332933.82258398924,
+    "returncode": 0,
+    "timestamp": "2026-08-31T08:07:31Z"
+  },
+  {
+    "run_index": 16,
+    "temperature": 0.7,
+    "tags": [
+      "Peanut Butter Recall",
+      "Salmonella Contamination",
+      "Food Safety Concerns"
+    ],
+    "summary": "A peanut butter brand recalled for salmonella contamination sickened consumers, raising food safety concerns.",
+    "latency_ms": 428124.1629170254,
+    "returncode": 0,
+    "timestamp": "2026-08-31T08:14:39Z"
+  },
+  {
+    "run_index": 17,
+    "temperature": 0.7,
+    "tags": [
+      "Food Safety Recall",
+      "Salmonella Contamination",
+      "Public Health Alert"
+    ],
+    "summary": "A peanut butter brand recalled due to salmonella contamination caused illnesses in consumers.",
+    "latency_ms": 425928.1191249611,
+    "returncode": 0,
+    "timestamp": "2026-08-31T08:21:45Z"
+  },
+  {
+    "run_index": 18,
+    "temperature": 0.7,
+    "tags": [
+      "Peanut Butter Recall",
+      "Salmonella Contamination",
+      "Foodborne Illness"
+    ],
+    "summary": "A peanut butter brand recalled for salmonella contamination linked to foodborne illnesses.",
+    "latency_ms": 362295.0137089938,
+    "returncode": 0,
+    "timestamp": "2026-08-31T08:27:47Z"
+  },
+  {
+    "run_index": 19,
+    "temperature": 0.7,
+    "tags": [
+      "Food Safety",
+      "Product Recall",
+      "Salmonella Outbreak"
+    ],
+    "summary": "A peanut butter brand's recall due to salmonella contamination led to consumer illnesses, highlighting food safety risks.",
+    "latency_ms": 606382.6855419902,
+    "returncode": 0,
+    "timestamp": "2026-08-31T08:37:54Z"
+  },
+  {
+    "run_index": 20,
+    "temperature": 0.7,
+    "tags": [
+      "Salmonella Contamination",
+      "Food Safety Recall",
+      "Consumer Health Alert"
+    ],
+    "summary": "A peanut butter brand recalled for salmonella contamination caused illness with stomach cramps and fever.",
+    "latency_ms": 515790.81087501254,
+    "returncode": 0,
+    "timestamp": "2026-08-31T08:46:30Z"
+  },
+  {
+    "run_index": 21,
+    "temperature": 0.7,
+    "tags": [
+      "Peanut Butter Safety",
+      "Product Recall",
+      "Salmonella Contamination"
+    ],
+    "summary": "Peanut butter brand recalled for salmonella contamination linked to illness reports.",
+    "latency_ms": 622346.2377079995,
+    "returncode": 0,
+    "timestamp": "2026-08-31T08:56:52Z"
+  },
+  {
+    "run_index": 22,
+    "temperature": 0.0,
+    "tags": [
+      "Peanut Butter Recall",
+      "Salmonella Contamination",
+      "Consumer Illness Outbreak"
+    ],
+    "summary": "A popular peanut butter brand was recalled due to salmonella contamination causing consumer illnesses.",
+    "latency_ms": 370757.57537502795,
+    "returncode": 0,
+    "timestamp": "2026-08-31T09:03:03Z"
+  },
+  {
+    "run_index": 23,
+    "temperature": 0.0,
+    "tags": [
+      "Peanut Butter Recall",
+      "Salmonella Contamination",
+      "Consumer Illnesses"
+    ],
+    "summary": "A peanut butter brand recalled for salmonella contamination linked to consumer illnesses.",
+    "latency_ms": 306385.32679202035,
+    "returncode": 0,
+    "timestamp": "2026-08-31T09:08:09Z"
+  },
+  {
+    "run_index": 24,
+    "temperature": 0.0,
+    "tags": [
+      "Peanut Butter Recall",
+      "Salmonella Contamination",
+      "Consumer Illnesses"
+    ],
+    "summary": "A peanut butter brand recalled for salmonella contamination linked to consumer illnesses.",
+    "latency_ms": 296206.6164590651,
+    "returncode": 0,
+    "timestamp": "2026-08-31T09:13:06Z"
+  },
+  {
+    "run_index": 25,
+    "temperature": 0.0,
+    "tags": [
+      "Peanut Butter Recall",
+      "Salmonella Contamination",
+      "Consumer Illnesses"
+    ],
+    "summary": "A peanut butter brand recalled for salmonella contamination linked to consumer illnesses.",
+    "latency_ms": 299628.1515409937,
+    "returncode": 0,
+    "timestamp": "2026-08-31T09:18:05Z"
+  },
+  {
+    "run_index": 26,
+    "temperature": 0.0,
+    "tags": [
+      "Peanut Butter Recall",
+      "Salmonella Contamination",
+      "Consumer Illnesses"
+    ],
+    "summary": "A peanut butter brand recalled for salmonella contamination linked to consumer illnesses.",
+    "latency_ms": 304487.4834159855,
+    "returncode": 0,
+    "timestamp": "2026-08-31T09:23:10Z"
+  },
+  {
+    "run_index": 27,
+    "temperature": 0.0,
+    "tags": [
+      "Peanut Butter Recall",
+      "Salmonella Contamination",
+      "Consumer Illnesses"
+    ],
+    "summary": "A peanut butter brand recalled for salmonella contamination linked to consumer illnesses.",
+    "latency_ms": 303599.56483298447,
+    "returncode": 0,
+    "timestamp": "2026-08-31T09:28:13Z"
+  },
+  {
+    "run_index": 28,
+    "temperature": 0.0,
+    "tags": [
+      "Peanut Butter Recall",
+      "Salmonella Contamination",
+      "Consumer Illnesses"
+    ],
+    "summary": "A peanut butter brand recalled for salmonella contamination linked to consumer illnesses.",
+    "latency_ms": 310859.353250009,
+    "returncode": 0,
+    "timestamp": "2026-08-31T09:33:24Z"
+  },
+  {
+    "run_index": 29,
+    "temperature": 0.0,
+    "tags": [
+      "Peanut Butter Recall",
+      "Salmonella Contamination",
+      "Consumer Illnesses"
+    ],
+    "summary": "A peanut butter brand recalled for salmonella contamination linked to consumer illnesses.",
+    "latency_ms": 302815.0160840014,
+    "returncode": 0,
+    "timestamp": "2026-08-31T09:38:27Z"
+  },
+  {
+    "run_index": 30,
+    "temperature": 0.0,
+    "tags": [
+      "Peanut Butter Recall",
+      "Salmonella Contamination",
+      "Consumer Illnesses"
+    ],
+    "summary": "A peanut butter brand recalled for salmonella contamination linked to consumer illnesses.",
+    "latency_ms": 323936.2008330645,
+    "returncode": 0,
+    "timestamp": "2026-08-31T09:43:51Z"
+  },
+  {
+    "run_index": 31,
+    "temperature": 0.0,
+    "tags": [
+      "Peanut Butter Recall",
+      "Salmonella Contamination",
+      "Consumer Illnesses"
+    ],
+    "summary": "A peanut butter brand recalled for salmonella contamination linked to consumer illnesses.",
+    "latency_ms": 310040.1810830226,
+    "returncode": 0,
+    "timestamp": "2026-08-31T09:49:01Z"
+  },
+  {
+    "run_index": 32,
+    "temperature": 0.0,
+    "tags": [
+      "Peanut Butter Recall",
+      "Salmonella Contamination",
+      "Consumer Illnesses"
+    ],
+    "summary": "A peanut butter brand recalled for salmonella contamination linked to consumer illnesses.",
+    "latency_ms": 312137.37599994056,
+    "returncode": 0,
+    "timestamp": "2026-08-31T09:54:13Z"
+  },
+  {
+    "run_index": 33,
+    "temperature": 0.0,
+    "tags": [
+      "Peanut Butter Recall",
+      "Salmonella Contamination",
+      "Consumer Illnesses"
+    ],
+    "summary": "A peanut butter brand recalled for salmonella contamination linked to consumer illnesses.",
+    "latency_ms": 305463.97395897657,
+    "returncode": 0,
+    "timestamp": "2026-08-31T09:59:19Z"
+  },
+  {
+    "run_index": 34,
+    "temperature": 0.0,
+    "tags": [
+      "Peanut Butter Recall",
+      "Salmonella Contamination",
+      "Consumer Illnesses"
+    ],
+    "summary": "A peanut butter brand recalled for salmonella contamination linked to consumer illnesses.",
+    "latency_ms": 320486.1660829047,
+    "returncode": 0,
+    "timestamp": "2026-08-31T10:04:39Z"
+  },
+  {
+    "run_index": 35,
+    "temperature": 0.0,
+    "tags": [
+      "Peanut Butter Recall",
+      "Salmonella Contamination",
+      "Consumer Illnesses"
+    ],
+    "summary": "A peanut butter brand recalled for salmonella contamination linked to consumer illnesses.",
+    "latency_ms": 318986.1832089955,
+    "returncode": 0,
+    "timestamp": "2026-08-31T10:09:58Z"
+  },
+  {
+    "run_index": 36,
+    "temperature": 0.0,
+    "tags": [
+      "Peanut Butter Recall",
+      "Salmonella Contamination",
+      "Consumer Illnesses"
+    ],
+    "summary": "A peanut butter brand recalled for salmonella contamination linked to consumer illnesses.",
+    "latency_ms": 312428.0291670002,
+    "returncode": 0,
+    "timestamp": "2026-08-31T10:15:11Z"
+  },
+  {
+    "run_index": 37,
+    "temperature": 0.0,
+    "tags": [
+      "Peanut Butter Recall",
+      "Salmonella Contamination",
+      "Consumer Illnesses"
+    ],
+    "summary": "A peanut butter brand recalled for salmonella contamination linked to consumer illnesses.",
+    "latency_ms": 310343.0757919559,
+    "returncode": 0,
+    "timestamp": "2026-08-31T10:20:21Z"
+  },
+  {
+    "run_index": 38,
+    "temperature": 0.0,
+    "tags": [
+      "Peanut Butter Recall",
+      "Salmonella Contamination",
+      "Consumer Illnesses"
+    ],
+    "summary": "A peanut butter brand recalled for salmonella contamination linked to consumer illnesses.",
+    "latency_ms": 322132.9672919819,
+    "returncode": 0,
+    "timestamp": "2026-08-31T10:25:43Z"
+  },
+  {
+    "run_index": 39,
+    "temperature": 0.0,
+    "tags": [
+      "Peanut Butter Recall",
+      "Salmonella Contamination",
+      "Consumer Illnesses"
+    ],
+    "summary": "A peanut butter brand recalled for salmonella contamination linked to consumer illnesses.",
+    "latency_ms": 329428.81650000345,
+    "returncode": 0,
+    "timestamp": "2026-08-31T10:31:13Z"
+  },
+  {
+    "run_index": 40,
+    "temperature": 0.0,
+    "tags": [
+      "Peanut Butter Recall",
+      "Salmonella Contamination",
+      "Consumer Illnesses"
+    ],
+    "summary": "A peanut butter brand recalled for salmonella contamination linked to consumer illnesses.",
+    "latency_ms": 350186.5271249553,
+    "returncode": 0,
+    "timestamp": "2026-08-31T10:37:03Z"
+  }
+]

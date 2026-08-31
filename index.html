@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>HW1-Pinal</title>
+    </head>
+    <body>
+        <h1>Grocery supply and recall notices</h1>
+        <form id="noticeForm">
+            <label for="product">Product: </label>&nbsp;
+            <input type="text" id="product" placeholder="Enter the product" required autofocus>
+            <br><br>
+            <label for="manufacturer">Manufacturer: </label>&nbsp;
+            <input type="text" id="manufacturer" placeholder="Enter the Manufacturer" required>
+            <br><br>
+            <label for="submitterEmail">Email: </label>&nbsp;
+            <input type="email" id="submitterEmail" placeholder="name@gmail.com" required>
+            <br><br>
+            <label for="description">Description: </label>&nbsp;
+            <textarea id="description" placeholder="Describe the issue" required></textarea>
+            <br><br>
+            <label for="category">Category: </label>&nbsp;
+            <select id="category">
+                <option value="" disabled selected>Select category</option>
+                <option value="supplyShortage">Supply Shortage</option>
+                <option value="bacterialContamination">Bacterial Contamination</option>
+                <option value="foreignMaterial">Foreign Material</option>
+                <option value="Mislabelling">Mislabeling / Packaging Defect</option>
+            </select>  
+            <br><br>
+            <input type="checkbox" id="agreeTerms"> 
+            <label for="agreeTerms">I agree to the terms and conditions</label>
+            <br><br>
+            <button type="submit">Report</button>
+
+        </form>
+        <script>
+
+
+            //Validation arrow function
+            const validateForm = () => {
+                const description = document.getElementById("description").value
+                const agreed = document.getElementById("agreeTerms").checked
+
+                if (description.trim().length <=25) {
+                    alert("Description must be more than 25 characters.")
+                    return false
+                }
+                if (!agreed) {
+                    alert("You must agree to the terms and conditions.")
+                    return false
+                }
+
+                return true
+            }
+
+            //Counter closure
+            const createCounter = () => {
+                    let count =0
+                    return  () => ++count}
+            const submissionCount = createCounter ()
+
+            //Form Submission
+            document.getElementById("noticeForm").addEventListener("submit", (e) => {
+                e.preventDefault()
+
+                if(!validateForm()) return
+
+                const product = document.getElementById("product").value
+                //console.log("Product Name" + product)
+                const manufacturer = document.getElementById("manufacturer").value
+                //console.log("Manufacturer" + manufacturer)
+                const submitterEmail = document.getElementById("submitterEmail").value
+                //console.log("Email" + submitterEmail)
+                const description = document.getElementById("description").value
+                //console.log("Description" + description)
+                const category = document.getElementById("category").value
+                //console.log("Category" + category)
+                const agreed = document.getElementById("agreeTerms").checked
+                //console.log("Agreed to terms" + agreed)
+
+                const formData = {
+                    "product": product,
+                    "manufacturer": manufacturer,
+                    "email":submitterEmail,
+                    "description":description,
+                    "category":category,
+                    
+                }
+
+                const jsonFormData = JSON.stringify(formData)
+                console.log("Form data to JSON string : \n" + jsonFormData)
+
+                //Parse JSON object
+                const parsedFormData=JSON.parse(jsonFormData)
+                const {product: productfromData, email:emailfromData} = parsedFormData
+                console.log("Primary product (xtracted field):" + productfromData)
+                console.log("Email (extracted field)" + emailfromData)
+
+                //Updated obejct 
+                const updateFormData = {...parsedFormData, submissionDate: new Date().toISOString()}
+                console.log("Updated object : ")
+                console.log(updateFormData)
+                
+                //Submission count
+                console.log("Submission count:", submissionCount())
+                
+                //Reset fields
+                document.getElementById("noticeForm").reset()
+
+            })
+        </script>
+    </body>
+</html>
