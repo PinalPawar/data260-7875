@@ -104,3 +104,57 @@ over 4x, and none of that came from longer messages, just accumulated history.
 Every model has a context window, a hard limit on tokens it can hold at once. So this can't keep
 going forever. Once a conversation gets close to that ceiling, older messages have to get dropped,
 summarized, or truncated to keep it going.
+
+---
+
+# DATA-260 HW2, Pinal Pawar (SID4: 7875)
+
+GitHub repository: https://github.com/PinalPawar/data260-7875 (this repository, extended from HW1).
+Tagged commit: see the `hw2` tag on this repository.
+Hardware: MacBook Air, Apple M2, 16GB RAM (same machine as HW1).
+Local model: HW1 used qwen3:8b via Ollama. For HW2 Part 3 and Part 4, qwen3:1.7b was used instead
+as a documented substitute (see `reports/hw02/report.pdf`, Section 0, for the full reasoning).
+
+## HW2 Reproducible run instructions
+
+### Prerequisites
+- Everything listed above for HW1, plus:
+- Python deps: `pip install fastapi "uvicorn[standard]" pydantic langgraph` (see `requirements.txt`
+  for the pinned FastAPI/uvicorn/pydantic versions)
+
+### Part 1, Responsive UI with loading/empty/error states
+Open `index.html` (served by the Part 2 FastAPI app below) and resize the browser to 375px width,
+or use browser devtools' device toolbar, to see the responsive layout and the loading, empty, and
+error states.
+
+### Part 2, FastAPI backend
+```
+python3 main.py
+```
+Starts the FastAPI app on `PORT_BASE` (8675) and serves `index.html` plus the `/api/notices` CRUD
+and search endpoints. Visit `http://localhost:8675` in a browser.
+
+### Part 3, Stateful supervisor graph
+```
+python3 graph_agent.py --title "Organic Baby Spinach Recall" --content "Routine testing detected Listeria in lot #L4471. Affected bags were sold in California and Nevada stores." --llm qwen3:1.7b
+```
+Streams Planner -> Supervisor -> Reviewer -> Supervisor node-by-node output and prints the final
+published state. Add `--strict` to enable strict mode. A saved example run is in
+`reports/hw02/part3_run_log.txt`.
+
+### Part 4, Output schema validation and loop safety
+```
+python3 run_experiment1.py   # 30 runs on the fixed input in reports/hw02/cases/schema_input.json
+python3 run_experiment2.py   # 20 runs each at turn_ceiling=2 and turn_ceiling=10
+python3 run_experiment3.py   # 5 runs on an adversarial input
+python3 natural_retry_test.py  # single run demonstrating an unforced validation retry
+```
+Each experiment script writes its raw results to `reports/hw02/raw/`. `schema_agent.py` defines the
+Pydantic schema (`PlannerOutputSchema`), the validator node, and the schema-aware graph
+(`build_graph_v2`) used by all four scripts above.
+
+### Self-check
+```
+python3 scripts/verify_hw02.py
+```
+Runs static checks against the required HW2 files/content and writes `reports/hw02/verification.json`.
