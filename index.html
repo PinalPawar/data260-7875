@@ -2,9 +2,76 @@
 <html>
     <head>
         <title>HW1-Pinal</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <style>
+    * {
+        box-sizing: border-box;
+    }
+    body {
+        font-family: Arial, sans-serif;
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 16px;
+    }
+    input, textarea, select, button {
+        width: 100%;
+        padding: 8px;
+        margin: 6px 0;
+        font-size: 16px;
+    }
+    input[type="checkbox"] {
+    width: auto;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 16px;
+}
+th, td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+}
+th {
+    background-color: #f0f0f0;
+}
+.actions-container {
+    margin: 16px 0;
+    padding: 16px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fafafa;
+}
+.actions-container h3 {
+    margin-top: 0;
+}
+</style>
+
+
     </head>
     <body>
         <h1>Grocery supply and recall notices</h1>
+        <div id="noticesArea">
+  <p id="loadingMsg" hidden>Loading recall notices...</p>
+  <p id="emptyMsg" hidden>No recall notices yet.</p>
+  <p id="errorMsg" hidden>Something went wrong loading the notices.</p>
+  <div style="overflow-x: auto;">
+  <table id="noticesTable" hidden>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Product</th>
+        <th>Manufacturer</th>
+        <th>Category</th>
+      </tr>
+    </thead>
+    <tbody id="noticesTableBody"></tbody>
+  </table>
+</div>
+        </div>
+
+        <h2>Add New Notice</h2>
         <form id="noticeForm">
             <label for="product">Product: </label>&nbsp;
             <input type="text" id="product" placeholder="Enter the product" required autofocus>
@@ -33,8 +100,137 @@
             <button type="submit">Report</button>
 
         </form>
+
+        <h2>Manage Existing Notices</h2>
+
+        <div class="actions-container">
+            <h3>Update Notice (ID 1)</h3>
+            <input type="text" id="updateProduct" placeholder="New product name">
+            <input type="text" id="updateManufacturer" placeholder="New manufacturer">
+            <input type="email" id="updateEmail" placeholder="New email">
+            <textarea id="updateDescription" placeholder="New description"></textarea>
+            <select id="updateCategory">
+                <option value="" disabled selected>Select category</option>
+                <option value="supplyShortage">Supply Shortage</option>
+                <option value="bacterialContamination">Bacterial Contamination</option>
+                <option value="foreignMaterial">Foreign Material</option>
+                <option value="Mislabelling">Mislabeling / Packaging Defect</option>
+            </select>
+            <button id="updateBtn" type="button">Update Notice ID 1</button>
+        </div>
+
+        <div class="actions-container">
+            <h3>Delete Highest ID Notice</h3>
+            <button id="deleteBtn" type="button">Delete Highest ID Notice</button>
+        </div>
+
+        <div class="actions-container">
+            <h3>Search Notices</h3>
+            <input type="text" id="searchInput" placeholder="Search by product or manufacturer">
+            <button id="searchBtn" type="button">Search</button>
+            <button id="clearSearchBtn" type="button">Clear Search</button>
+        </div>
+
         <script>
 
+            // Keeps all submitted notices in memory (for now — no backend yet)
+let notices = []
+
+// Decides which of the 4 boxes to show: loading, empty, error, or the table
+function renderNotices(state = "ready") {
+    document.getElementById("loadingMsg").hidden = true
+    document.getElementById("emptyMsg").hidden = true
+    document.getElementById("errorMsg").hidden = true
+    document.getElementById("noticesTable").hidden = true
+
+    if (state === "loading") {
+        document.getElementById("loadingMsg").hidden = false
+        return
+    }
+    if (state === "error") {
+        document.getElementById("errorMsg").hidden = false
+        return
+    }
+    if (notices.length === 0) {
+        document.getElementById("emptyMsg").hidden = false
+        return
+    }
+
+    const tbody = document.getElementById("noticesTableBody")
+    tbody.innerHTML = ""
+    notices.forEach(n => {
+        const row = document.createElement("tr")
+        row.innerHTML = `<td>${n.id}</td><td>${n.product}</td><td>${n.manufacturer}</td><td>${n.category}</td>`
+        tbody.appendChild(row)
+    })
+    document.getElementById("noticesTable").hidden = false
+}
+
+async function loadNotices(query = "") {
+    renderNotices("loading")
+    try {
+        const url = query ? `/api/notices?q=${encodeURIComponent(query)}` : "/api/notices"
+        const response = await fetch(url)
+        if (!response.ok) {
+            throw new Error("Failed to fetch notices")
+        }
+        notices = await response.json()
+        renderNotices()
+    } catch (error) {
+        console.error("Error loading notices:", error)
+        renderNotices("error")
+    }
+}
+
+loadNotices()
+
+document.getElementById("updateBtn").addEventListener("click", async () => {
+    const product = document.getElementById("updateProduct").value
+    const manufacturer = document.getElementById("updateManufacturer").value
+    const email = document.getElementById("updateEmail").value
+    const description = document.getElementById("updateDescription").value
+    const category = document.getElementById("updateCategory").value
+
+    try {
+        const response = await fetch("/api/notices/1", {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ product, manufacturer, email, description, category })
+        })
+        if (!response.ok) {
+            throw new Error("Failed to update notice")
+        }
+        await loadNotices()
+    } catch (error) {
+        console.error("Error updating notice:", error)
+        alert("Could not update notice ID 1 — it may not exist.")
+        await loadNotices()
+    }
+})
+
+document.getElementById("deleteBtn").addEventListener("click", async () => {
+    try {
+        const response = await fetch("/api/notices/highest", { method: "DELETE" })
+        if (!response.ok) {
+            throw new Error("Failed to delete notice")
+        }
+        await loadNotices()
+    } catch (error) {
+        console.error("Error deleting notice:", error)
+        alert("Could not delete — there may be no notices left.")
+        await loadNotices()
+    }
+})
+
+document.getElementById("searchBtn").addEventListener("click", () => {
+    const query = document.getElementById("searchInput").value
+    loadNotices(query)
+})
+
+document.getElementById("clearSearchBtn").addEventListener("click", () => {
+    document.getElementById("searchInput").value = ""
+    loadNotices()
+})
 
             //Validation arrow function
             const validateForm = () => {
@@ -60,23 +256,17 @@
             const submissionCount = createCounter ()
 
             //Form Submission
-            document.getElementById("noticeForm").addEventListener("submit", (e) => {
+            document.getElementById("noticeForm").addEventListener("submit", async (e) => {
                 e.preventDefault()
 
                 if(!validateForm()) return
 
                 const product = document.getElementById("product").value
-                //console.log("Product Name" + product)
                 const manufacturer = document.getElementById("manufacturer").value
-                //console.log("Manufacturer" + manufacturer)
                 const submitterEmail = document.getElementById("submitterEmail").value
-                //console.log("Email" + submitterEmail)
                 const description = document.getElementById("description").value
-                //console.log("Description" + description)
                 const category = document.getElementById("category").value
-                //console.log("Category" + category)
                 const agreed = document.getElementById("agreeTerms").checked
-                //console.log("Agreed to terms" + agreed)
 
                 const formData = {
                     "product": product,
@@ -90,21 +280,31 @@
                 const jsonFormData = JSON.stringify(formData)
                 console.log("Form data to JSON string : \n" + jsonFormData)
 
-                //Parse JSON object
                 const parsedFormData=JSON.parse(jsonFormData)
                 const {product: productfromData, email:emailfromData} = parsedFormData
                 console.log("Primary product (xtracted field):" + productfromData)
                 console.log("Email (extracted field)" + emailfromData)
 
-                //Updated obejct 
                 const updateFormData = {...parsedFormData, submissionDate: new Date().toISOString()}
                 console.log("Updated object : ")
                 console.log(updateFormData)
                 
-                //Submission count
                 console.log("Submission count:", submissionCount())
-                
-                //Reset fields
+
+                try {
+                    const response = await fetch("/api/notices", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ product, manufacturer, email: submitterEmail, description, category })
+                    })
+                    if (!response.ok) {
+                        throw new Error("Failed to add notice")
+                    }
+                    await loadNotices()
+                } catch (error) {
+                    console.error("Error adding notice:", error)
+                    renderNotices("error")
+                }
                 document.getElementById("noticeForm").reset()
 
             })
