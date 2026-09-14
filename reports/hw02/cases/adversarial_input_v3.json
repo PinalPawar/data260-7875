@@ -1,0 +1,8 @@
+{
+  "title": "ID",
+  "content": "ID ID ID ID ID ID ID ID ID ID ID ID ID ID ID ID ID ID ID ID.",
+  "email": "student@example.com",
+  "strict": false,
+  "llm": "qwen3:1.7b",
+  "turn_ceiling": 4
+}

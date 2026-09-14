@@ -1,0 +1,8 @@
+{
+  "title": "URGENT: Lot Code Field Corrupted in Recall Export",
+  "content": "System-generated recall alert. Lot Code: ID ID ID ID ID ID ID ID ID ID ID ID ID ID ID ID ID ID ID ID (export error \u2014 lot code field failed to populate correctly). Please treat as unconfirmed pending manual review.",
+  "email": "student@example.com",
+  "strict": false,
+  "llm": "qwen3:1.7b",
+  "turn_ceiling": 4
+}

@@ -1,0 +1,37 @@
+=========================================
+PART 3 — LangGraph Supervisor Pattern
+Model: qwen3:1.7b (documented substitute for qwen3:8b)
+=========================================
+
+-----------------------------------------
+RUN 1: Normal run (no forced issues)
+Command: python3 graph_agent.py --title "Test Recall" --content "A quick test of the streamed graph runner." --email "student@example.com" --llm qwen3:1.7b
+-----------------------------------------
+Path taken: Planner -> Supervisor(turn 1) -> Reviewer -> Supervisor(turn 2) -> END
+Result: Reviewer found no issues, graph stopped after 2 turns.
+
+-----------------------------------------
+RUN 2: Forced-issue run (proves the self-correction loop works)
+Reviewer temporarily hardcoded to always report:
+  "FORCED TEST ISSUE: pretend the summary needs fixing"
+Command: python3 graph_agent.py --title "Test Recall" --content "A quick test of the streamed graph runner." --email "student@example.com" --llm qwen3:1.7b
+-----------------------------------------
+Path taken: Planner -> Supervisor(1) -> Reviewer -> Supervisor(2)
+            -> LOOP BACK -> Planner -> Supervisor(3) -> Reviewer -> Supervisor(4)
+            -> turn_count hit TURN_CEILING (4) -> END
+Result: Confirms router_logic correctly routes back to the Planner when the
+Reviewer reports issues, and correctly stops once the turn ceiling is reached.
+
+Bug found + fixed during this test: initially, reviewer_feedback was never
+cleared when looping back to the Planner, so the graph kept re-running only
+the Planner without re-checking with the Reviewer. Fixed by having
+planner_node reset reviewer_feedback to None every time it produces a new
+proposal, forcing router_logic to send the new proposal back through the
+Reviewer.
+
+-----------------------------------------
+RUN 3: Final clean run (after reverting the forced-issue test)
+Command: python3 graph_agent.py --title "Test Recall" --content "A quick test of the streamed graph runner." --email "student@example.com" --llm qwen3:1.7b
+-----------------------------------------
+Path taken: Planner -> Supervisor(1) -> Reviewer -> Supervisor(2) -> END
+Result: Same as Run 1 — confirms the bug fix did not break normal behavior.

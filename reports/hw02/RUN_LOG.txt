@@ -1,0 +1,643 @@
+=========================================
+PART 3 — LangGraph Supervisor Pattern
+Model: qwen3:1.7b (documented substitute for qwen3:8b)
+=========================================
+
+-----------------------------------------
+RUN 1: Normal run (no forced issues)
+Command: python3 graph_agent.py --title "Test Recall" --content "A quick test of the streamed graph runner." --email "student@example.com" --llm qwen3:1.7b
+-----------------------------------------
+Path taken: Planner -> Supervisor(turn 1) -> Reviewer -> Supervisor(turn 2) -> END
+Result: Reviewer found no issues, graph stopped after 2 turns.
+
+-----------------------------------------
+RUN 2: Forced-issue run (proves the self-correction loop works)
+Reviewer temporarily hardcoded to always report:
+  "FORCED TEST ISSUE: pretend the summary needs fixing"
+Command: python3 graph_agent.py --title "Test Recall" --content "A quick test of the streamed graph runner." --email "student@example.com" --llm qwen3:1.7b
+-----------------------------------------
+Path taken: Planner -> Supervisor(1) -> Reviewer -> Supervisor(2)
+            -> LOOP BACK -> Planner -> Supervisor(3) -> Reviewer -> Supervisor(4)
+            -> turn_count hit TURN_CEILING (4) -> END
+Result: Confirms router_logic correctly routes back to the Planner when the
+Reviewer reports issues, and correctly stops once the turn ceiling is reached.
+
+Bug found + fixed during this test: initially, reviewer_feedback was never
+cleared when looping back to the Planner, so the graph kept re-running only
+the Planner without re-checking with the Reviewer. Fixed by having
+planner_node reset reviewer_feedback to None every time it produces a new
+proposal, forcing router_logic to send the new proposal back through the
+Reviewer.
+
+-----------------------------------------
+RUN 3: Final clean run (after reverting the forced-issue test)
+Command: python3 graph_agent.py --title "Test Recall" --content "A quick test of the streamed graph runner." --email "student@example.com" --llm qwen3:1.7b
+-----------------------------------------
+Path taken: Planner -> Supervisor(1) -> Reviewer -> Supervisor(2) -> END
+Result: Same as Run 1 — confirms the bug fix did not break normal behavior.
+=====================================================================
+PART 4 — OUTPUT SCHEMA AND LOOP SAFETY — REAL CONSOLE OUTPUT
+=====================================================================
+ 
+---------------------------------------------------------------
+Unit test 1 — validate_output(): good, bad tag count, bad tag
+length, bad summary
+---------------------------------------------------------------
+(data260) atharvamundada@Atharvas-MacBook-Air data260-7875 % python3 -c "
+from schema_agent import validate_output
+ 
+good = {'tags': ['peanut butter', 'salmonella', 'food safety'], 'summary': 'A short recall summary under 25 words.'}
+bad_tag_count = {'tags': ['too', 'few'], 'summary': 'A short summary.'}
+bad_tag_length = {'tags': ['ok', 'salmonella', 'food safety'], 'summary': 'A short summary.'}
+bad_summary = {'tags': ['peanut butter', 'salmonella', 'food safety'], 'summary': ' '.join(['word'] * 30)}
+ 
+print('good:', validate_output(good))
+print('bad_tag_count:', validate_output(bad_tag_count))
+print('bad_tag_length:', validate_output(bad_tag_length))
+print('bad_summary:', validate_output(bad_summary))
+"
+good: None
+bad_tag_count: 1 validation error for PlannerOutputSchema
+tags
+  Value error, must have exactly 3 tags, got 2 [type=value_error, input_value=['too', 'few'], input_type=list]
+    For further information visit https://errors.pydantic.dev/2.12/v/value_error
+bad_tag_length: 1 validation error for PlannerOutputSchema
+tags
+  Value error, tag 'ok' must be 3-30 characters long, got 2 [type=value_error, input_value=['ok', 'salmonella', 'food safety'], input_type=list]
+    For further information visit https://errors.pydantic.dev/2.12/v/value_error
+bad_summary: 1 validation error for PlannerOutputSchema
+summary
+  Value error, summary must be at most 25 words, got 30 [type=value_error, input_value='word word word word word...ord word word word word', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.12/v/value_error
+ 
+---------------------------------------------------------------
+Unit test 2 — router_logic_v2(): error+under ceiling,
+error+at ceiling, no error
+---------------------------------------------------------------
+(data260) atharvamundada@Atharvas-MacBook-Air data260-7875 % python3 -c "
+from schema_agent import router_logic_v2
+ 
+s1 = {'planner_proposal': {'data': {}}, 'validation_error': 'bad tags', 'turn_count': 1, 'turn_ceiling': 2}
+print('error + under ceiling:', router_logic_v2(s1))
+ 
+s2 = {'planner_proposal': {'data': {}}, 'validation_error': 'bad tags', 'turn_count': 2, 'turn_ceiling': 2}
+print('error + at ceiling:', router_logic_v2(s2))
+ 
+s3 = {'planner_proposal': {'data': {}}, 'validation_error': None, 'turn_count': 1, 'turn_ceiling': 2}
+print('no error:', router_logic_v2(s3))
+"
+error + under ceiling: planner
+error + at ceiling: END
+no error: END
+ 
+---------------------------------------------------------------
+Unit test 3 — one normal single run of build_graph_v2()
+---------------------------------------------------------------
+(data260) atharvamundada@Atharvas-MacBook-Air data260-7875 % python3 -c "
+...
+initial_state = {
+    'title': 'Test Recall',
+    'content': 'A quick test of the schema validation retry loop.',
+    'email': 'student@example.com',
+    'strict': False,
+    'task': '',
+    'llm': 'qwen3:1.7b',
+    'planner_proposal': None,
+    'validation_error': None,
+    'turn_count': 0,
+    'turn_ceiling': 2,
+}
+ 
+state = dict(initial_state)
+for step in graph.stream(initial_state):
+    for node_name, update in step.items():
+        print(f'--- Node: {node_name} ---')
+        print(json.dumps(update, indent=2))
+        state.update(update)
+ 
+print('=== Final ===')
+print(json.dumps(state, indent=2))
+"
+[Planner] Node activated (schema mode)
+--- Node: planner ---
+{
+  "planner_proposal": {
+    "thought": "Identify relevant tags for a blog post on schema validation retry loops and create a concise summary.",
+    "message": "Exploring how retry loops in schema validation enhance test reliability.",
+    "data": {
+      "tags": [
+        "test recall quick",
+        "recall quick test",
+        "quick test schema"
+      ],
+      "summary": "Summary of Test Recall.",
+      "issues": []
+    }
+  },
+  "validation_error": null
+}
+[Validator] Node activated
+--- Node: validator ---
+{
+  "validation_error": null
+}
+[Supervisor] Node activated
+--- Node: supervisor ---
+{
+  "turn_count": 1
+}
+=== Final ===
+{
+  "title": "Test Recall",
+  "content": "A quick test of the schema validation retry loop.",
+  "email": "student@example.com",
+  "strict": false,
+  "task": "",
+  "llm": "qwen3:1.7b",
+  "planner_proposal": {
+    "thought": "Identify relevant tags for a blog post on schema validation retry loops and create a concise summary.",
+    "message": "Exploring how retry loops in schema validation enhance test reliability.",
+    "data": {
+      "tags": [
+        "test recall quick",
+        "recall quick test",
+        "quick test schema"
+      ],
+      "summary": "Summary of Test Recall.",
+      "issues": []
+    }
+  },
+  "validation_error": null,
+  "turn_count": 1,
+  "turn_ceiling": 2
+}
+ 
+---------------------------------------------------------------
+Unit test 4 — forced-failure retry loop (validator_node
+temporarily edited to force an error on the first attempt only)
+---------------------------------------------------------------
+[Planner] Node activated (schema mode)
+--- Node: planner ---
+{
+  "planner_proposal": {
+    "thought": "Identify relevant tags for a blog post on schema validation retry loops and create a concise summary.",
+    "message": "Exploring how retry loops in schema validation enhance test reliability.",
+    "data": {
+      "tags": [
+        "test recall quick",
+        "recall quick test",
+        "quick test schema"
+      ],
+      "summary": "Summary of Test Recall.",
+      "issues": []
+    }
+  },
+  "validation_error": null
+}
+[Validator] Node activated
+--- Node: validator ---
+{
+  "validation_error": "FORCED TEST ERROR: pretend the tags were invalid"
+}
+[Supervisor] Node activated
+--- Node: supervisor ---
+{
+  "turn_count": 1
+}
+[Planner] Node activated (schema mode)
+--- Node: planner ---
+{
+  "planner_proposal": {
+    "thought": "Identified relevant tags for 'Test Recall' content with retry loops and schema validation.",
+    "message": "This post explores how to handle schema validation errors with retry loops in test automation.",
+    "data": {
+      "tags": [
+        "test recall quick",
+        "recall quick test",
+        "quick test schema"
+      ],
+      "summary": "Summary of Test Recall.",
+      "issues": []
+    }
+  },
+  "validation_error": null
+}
+[Validator] Node activated
+--- Node: validator ---
+{
+  "validation_error": null
+}
+[Supervisor] Node activated
+--- Node: supervisor ---
+{
+  "turn_count": 2
+}
+=== Final ===
+{
+  "title": "Test Recall",
+  "content": "A quick test of the schema validation retry loop.",
+  "email": "student@example.com",
+  "strict": false,
+  "task": "",
+  "llm": "qwen3:1.7b",
+  "planner_proposal": {
+    "thought": "Identified relevant tags for 'Test Recall' content with retry loops and schema validation.",
+    "message": "This post explores how to handle schema validation errors with retry loops in test automation.",
+    "data": {
+      "tags": [
+        "test recall quick",
+        "recall quick test",
+        "quick test schema"
+      ],
+      "summary": "Summary of Test Recall.",
+      "issues": []
+    }
+  },
+  "validation_error": null,
+  "turn_count": 2,
+  "turn_ceiling": 2
+}
+(Immediately after this test, validator_node was reverted back to its
+original, unmodified form.)
+ 
+---------------------------------------------------------------
+Experiment 1 — 30 runs on a fixed input
+(reports/hw02/cases/schema_input.json, turn_ceiling=4)
+---------------------------------------------------------------
+(data260) atharvamundada@Atharvas-MacBook-Air data260-7875 % python3 run_experiment1.py
+[Planner] Node activated (schema mode)
+[Validator] Node activated
+[Supervisor] Node activated
+Run 1/30: valid_first_attempt (turn_count=1, latency=17983 ms)
+[Planner] Node activated (schema mode)
+[Validator] Node activated
+[Supervisor] Node activated
+Run 2/30: valid_first_attempt (turn_count=1, latency=14769 ms)
+[Planner] Node activated (schema mode)
+[Validator] Node activated
+[Supervisor] Node activated
+Run 3/30: valid_first_attempt (turn_count=1, latency=17651 ms)
+[Planner] Node activated (schema mode)
+[Validator] Node activated
+[Supervisor] Node activated
+Run 4/30: valid_first_attempt (turn_count=1, latency=15479 ms)
+[Planner] Node activated (schema mode)
+[Validator] Node activated
+[Supervisor] Node activated
+Run 5/30: valid_first_attempt (turn_count=1, latency=15880 ms)
+[Planner] Node activated (schema mode)
+[Validator] Node activated
+[Supervisor] Node activated
+Run 6/30: valid_first_attempt (turn_count=1, latency=16646 ms)
+[Planner] Node activated (schema mode)
+[Validator] Node activated
+[Supervisor] Node activated
+Run 7/30: valid_first_attempt (turn_count=1, latency=19497 ms)
+[Planner] Node activated (schema mode)
+[Validator] Node activated
+[Supervisor] Node activated
+Run 8/30: valid_first_attempt (turn_count=1, latency=16491 ms)
+[Planner] Node activated (schema mode)
+[Validator] Node activated
+[Supervisor] Node activated
+Run 9/30: valid_first_attempt (turn_count=1, latency=14574 ms)
+[Planner] Node activated (schema mode)
+[Validator] Node activated
+[Supervisor] Node activated
+Run 10/30: valid_first_attempt (turn_count=1, latency=14811 ms)
+[Planner] Node activated (schema mode)
+[Validator] Node activated
+[Supervisor] Node activated
+Run 11/30: valid_first_attempt (turn_count=1, latency=14983 ms)
+[Planner] Node activated (schema mode)
+[Validator] Node activated
+[Supervisor] Node activated
+Run 12/30: valid_first_attempt (turn_count=1, latency=15588 ms)
+[Planner] Node activated (schema mode)
+[Validator] Node activated
+[Supervisor] Node activated
+Run 13/30: valid_first_attempt (turn_count=1, latency=15481 ms)
+[Planner] Node activated (schema mode)
+[Validator] Node activated
+[Supervisor] Node activated
+Run 14/30: valid_first_attempt (turn_count=1, latency=15313 ms)
+[Planner] Node activated (schema mode)
+[Validator] Node activated
+[Supervisor] Node activated
+Run 15/30: valid_first_attempt (turn_count=1, latency=14932 ms)
+[Planner] Node activated (schema mode)
+[Validator] Node activated
+[Supervisor] Node activated
+Run 16/30: valid_first_attempt (turn_count=1, latency=14774 ms)
+[Planner] Node activated (schema mode)
+[Validator] Node activated
+[Supervisor] Node activated
+Run 17/30: valid_first_attempt (turn_count=1, latency=14686 ms)
+[Planner] Node activated (schema mode)
+[Validator] Node activated
+[Supervisor] Node activated
+Run 18/30: valid_first_attempt (turn_count=1, latency=14903 ms)
+[Planner] Node activated (schema mode)
+[Validator] Node activated
+[Supervisor] Node activated
+Run 19/30: valid_first_attempt (turn_count=1, latency=14875 ms)
+[Planner] Node activated (schema mode)
+[Validator] Node activated
+[Supervisor] Node activated
+Run 20/30: valid_first_attempt (turn_count=1, latency=14766 ms)
+[Planner] Node activated (schema mode)
+[Validator] Node activated
+[Supervisor] Node activated
+Run 21/30: valid_first_attempt (turn_count=1, latency=14806 ms)
+[Planner] Node activated (schema mode)
+[Validator] Node activated
+[Supervisor] Node activated
+Run 22/30: valid_first_attempt (turn_count=1, latency=14831 ms)
+[Planner] Node activated (schema mode)
+[Validator] Node activated
+[Supervisor] Node activated
+Run 23/30: valid_first_attempt (turn_count=1, latency=15026 ms)
+[Planner] Node activated (schema mode)
+[Validator] Node activated
+[Supervisor] Node activated
+Run 24/30: valid_first_attempt (turn_count=1, latency=14853 ms)
+[Planner] Node activated (schema mode)
+[Validator] Node activated
+[Supervisor] Node activated
+Run 25/30: valid_first_attempt (turn_count=1, latency=14498 ms)
+[Planner] Node activated (schema mode)
+[Validator] Node activated
+[Supervisor] Node activated
+Run 26/30: valid_first_attempt (turn_count=1, latency=14963 ms)
+[Planner] Node activated (schema mode)
+[Validator] Node activated
+[Supervisor] Node activated
+Run 27/30: valid_first_attempt (turn_count=1, latency=15137 ms)
+[Planner] Node activated (schema mode)
+[Validator] Node activated
+[Supervisor] Node activated
+Run 28/30: valid_first_attempt (turn_count=1, latency=14754 ms)
+[Planner] Node activated (schema mode)
+[Validator] Node activated
+[Supervisor] Node activated
+Run 29/30: valid_first_attempt (turn_count=1, latency=14859 ms)
+[Planner] Node activated (schema mode)
+[Validator] Node activated
+[Supervisor] Node activated
+Run 30/30: valid_first_attempt (turn_count=1, latency=14798 ms)
+ 
+=== Summary over 30 runs ===
+Outcome                         Count    Mean latency (ms)
+valid_first_attempt                30                15420
+valid_after_1_retry                 0                    0
+valid_after_2plus_retries           0                    0
+hit_turn_ceiling                    0                    0
+ 
+---------------------------------------------------------------
+Experiment 2 — turn_ceiling = 2 vs. 10 (20 runs each)
+---------------------------------------------------------------
+(data260) atharvamundada@Atharvas-MacBook-Air data260-7875 % python3 run_experiment2.py
+[Planner] Node activated (schema mode)
+[Validator] Node activated
+[Supervisor] Node activated
+[ceiling=2] Run 1/20: OK (turn_count=1, latency=16653 ms)
+[Planner] Node activated (schema mode)
+[Validator] Node activated
+[Supervisor] Node activated
+[ceiling=2] Run 2/20: OK (turn_count=1, latency=15085 ms)
+[Planner] Node activated (schema mode)
+[Validator] Node activated
+[Supervisor] Node activated
+[ceiling=2] Run 3/20: OK (turn_count=1, latency=15194 ms)
+[Planner] Node activated (schema mode)
+[Validator] Node activated
+[Supervisor] Node activated
+[ceiling=2] Run 4/20: OK (turn_count=1, latency=14728 ms)
+[Planner] Node activated (schema mode)
+[Validator] Node activated
+[Supervisor] Node activated
+[ceiling=2] Run 5/20: OK (turn_count=1, latency=14880 ms)
+[Planner] Node activated (schema mode)
+[Validator] Node activated
+[Supervisor] Node activated
+[ceiling=2] Run 6/20: OK (turn_count=1, latency=15055 ms)
+[Planner] Node activated (schema mode)
+[Validator] Node activated
+[Supervisor] Node activated
+[ceiling=2] Run 7/20: OK (turn_count=1, latency=14647 ms)
+[Planner] Node activated (schema mode)
+[Validator] Node activated
+[Supervisor] Node activated
+[ceiling=2] Run 8/20: OK (turn_count=1, latency=14342 ms)
+[Planner] Node activated (schema mode)
+[Validator] Node activated
+[Supervisor] Node activated
+[ceiling=2] Run 9/20: OK (turn_count=1, latency=15149 ms)
+[Planner] Node activated (schema mode)
+[Validator] Node activated
+[Supervisor] Node activated
+[ceiling=2] Run 10/20: OK (turn_count=1, latency=14917 ms)
+[Planner] Node activated (schema mode)
+[Validator] Node activated
+[Supervisor] Node activated
+[ceiling=2] Run 11/20: OK (turn_count=1, latency=14854 ms)
+[Planner] Node activated (schema mode)
+[Validator] Node activated
+[Supervisor] Node activated
+[ceiling=2] Run 12/20: OK (turn_count=1, latency=14656 ms)
+[Planner] Node activated (schema mode)
+[Validator] Node activated
+[Supervisor] Node activated
+[ceiling=2] Run 13/20: OK (turn_count=1, latency=14844 ms)
+[Planner] Node activated (schema mode)
+[Validator] Node activated
+[Supervisor] Node activated
+[ceiling=2] Run 14/20: OK (turn_count=1, latency=14777 ms)
+[Planner] Node activated (schema mode)
+[Validator] Node activated
+[Supervisor] Node activated
+[ceiling=2] Run 15/20: OK (turn_count=1, latency=14711 ms)
+[Planner] Node activated (schema mode)
+[Validator] Node activated
+[Supervisor] Node activated
+[ceiling=2] Run 16/20: OK (turn_count=1, latency=14640 ms)
+[Planner] Node activated (schema mode)
+[Validator] Node activated
+[Supervisor] Node activated
+[ceiling=2] Run 17/20: OK (turn_count=1, latency=14683 ms)
+[Planner] Node activated (schema mode)
+[Validator] Node activated
+[Supervisor] Node activated
+[ceiling=2] Run 18/20: OK (turn_count=1, latency=14871 ms)
+[Planner] Node activated (schema mode)
+[Validator] Node activated
+[Supervisor] Node activated
+[ceiling=2] Run 19/20: OK (turn_count=1, latency=14781 ms)
+[Planner] Node activated (schema mode)
+[Validator] Node activated
+[Supervisor] Node activated
+[ceiling=2] Run 20/20: OK (turn_count=1, latency=14696 ms)
+[Planner] Node activated (schema mode)
+[Validator] Node activated
+[Supervisor] Node activated
+[ceiling=10] Run 1/20: OK (turn_count=1, latency=14516 ms)
+[Planner] Node activated (schema mode)
+[Validator] Node activated
+[Supervisor] Node activated
+[ceiling=10] Run 2/20: OK (turn_count=1, latency=14877 ms)
+[Planner] Node activated (schema mode)
+[Validator] Node activated
+[Supervisor] Node activated
+[ceiling=10] Run 3/20: OK (turn_count=1, latency=14949 ms)
+[Planner] Node activated (schema mode)
+[Validator] Node activated
+[Supervisor] Node activated
+[ceiling=10] Run 4/20: OK (turn_count=1, latency=16011 ms)
+[Planner] Node activated (schema mode)
+[Validator] Node activated
+[Supervisor] Node activated
+[ceiling=10] Run 5/20: OK (turn_count=1, latency=14769 ms)
+[Planner] Node activated (schema mode)
+[Validator] Node activated
+[Supervisor] Node activated
+[ceiling=10] Run 6/20: OK (turn_count=1, latency=15022 ms)
+[Planner] Node activated (schema mode)
+[Validator] Node activated
+[Supervisor] Node activated
+[ceiling=10] Run 7/20: OK (turn_count=1, latency=14820 ms)
+[Planner] Node activated (schema mode)
+[Validator] Node activated
+[Supervisor] Node activated
+[ceiling=10] Run 8/20: OK (turn_count=1, latency=14841 ms)
+[Planner] Node activated (schema mode)
+[Validator] Node activated
+[Supervisor] Node activated
+[ceiling=10] Run 9/20: OK (turn_count=1, latency=14849 ms)
+[Planner] Node activated (schema mode)
+[Validator] Node activated
+[Supervisor] Node activated
+[ceiling=10] Run 10/20: OK (turn_count=1, latency=14762 ms)
+[Planner] Node activated (schema mode)
+[Validator] Node activated
+[Supervisor] Node activated
+[ceiling=10] Run 11/20: OK (turn_count=1, latency=14935 ms)
+[Planner] Node activated (schema mode)
+[Validator] Node activated
+[Supervisor] Node activated
+[ceiling=10] Run 12/20: OK (turn_count=1, latency=14641 ms)
+[Planner] Node activated (schema mode)
+[Validator] Node activated
+[Supervisor] Node activated
+[ceiling=10] Run 13/20: OK (turn_count=1, latency=14695 ms)
+[Planner] Node activated (schema mode)
+[Validator] Node activated
+[Supervisor] Node activated
+[ceiling=10] Run 14/20: OK (turn_count=1, latency=14837 ms)
+[Planner] Node activated (schema mode)
+[Validator] Node activated
+[Supervisor] Node activated
+[ceiling=10] Run 15/20: OK (turn_count=1, latency=14822 ms)
+[Planner] Node activated (schema mode)
+[Validator] Node activated
+[Supervisor] Node activated
+[ceiling=10] Run 16/20: OK (turn_count=1, latency=14395 ms)
+[Planner] Node activated (schema mode)
+[Validator] Node activated
+[Supervisor] Node activated
+[ceiling=10] Run 17/20: OK (turn_count=1, latency=14811 ms)
+[Planner] Node activated (schema mode)
+[Validator] Node activated
+[Supervisor] Node activated
+[ceiling=10] Run 18/20: OK (turn_count=1, latency=14785 ms)
+[Planner] Node activated (schema mode)
+[Validator] Node activated
+[Supervisor] Node activated
+[ceiling=10] Run 19/20: OK (turn_count=1, latency=14786 ms)
+[Planner] Node activated (schema mode)
+[Validator] Node activated
+[Supervisor] Node activated
+[ceiling=10] Run 20/20: OK (turn_count=1, latency=14704 ms)
+ 
+=== Summary: turn ceiling comparison ===
+   Ceiling    Completion Rate    Mean Latency (ms)
+         2             100.0%                14908
+        10             100.0%                14841
+ 
+---------------------------------------------------------------
+Experiment 3, Attempt 3 — natural retry test (minimal input,
+"ID" repeated 20 times, turn_ceiling=4)
+---------------------------------------------------------------
+(data260) atharvamundada@Atharvas-MacBook-Air data260-7875 % python3 /tmp/natural_retry_test.py > reports/hw02/raw/natural_retry_example.txt
+Traceback (most recent call last):
+  File "/tmp/natural_retry_test.py", line 1, in <module>
+    from schema_agent import build_graph_v2
+ModuleNotFoundError: No module named 'schema_agent'
+(script moved from /tmp into the project folder so the import would resolve)
+(data260) atharvamundada@Atharvas-MacBook-Air data260-7875 % python3 natural_retry_test.py > reports/hw02/raw/natural_retry_example.txt
+cat reports/hw02/raw/natural_retry_example.txt
+[Planner] Node activated (schema mode)
+--- Node: planner ---
+{
+  "planner_proposal": {
+    "thought": "Identify key themes in the repetitive 'ID' content and create relevant tags.",
+    "message": "The blog explores the concept of identity through repeated use of the term 'ID'.",
+    "data": {
+      "tags": [
+        "id id",
+        "id id id",
+        "id"
+      ],
+      "summary": "Summary of ID.",
+      "issues": []
+    }
+  },
+  "validation_error": null
+}
+[Validator] Node activated
+--- Node: validator ---
+{
+  "validation_error": "1 validation error for PlannerOutputSchema\ntags\n  Value error, tag 'id' must be 3-30 characters long, got 2 [type=value_error, input_value=['id id', 'id id id', 'id'], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.12/v/value_error"
+}
+[Supervisor] Node activated
+--- Node: supervisor ---
+{
+  "turn_count": 1
+}
+[Planner] Node activated (schema mode)
+--- Node: planner ---
+{
+  "planner_proposal": {
+    "thought": "Identify relevant tags based on content repetition and theme.",
+    "message": "The blog explores the concept of identity through repeated use of the term 'ID'.",
+    "data": {
+      "tags": [
+        "ID Repeated",
+        "Identity in Motion",
+        "Uniqueness in Repetition"
+      ],
+      "summary": "The blog explores the concept of identity through repeated use of the term 'ID'.",
+      "issues": [
+        "Value error, tag 'id' must be 3-30 characters long, got 2"
+      ]
+    }
+  },
+  "validation_error": null
+}
+[Validator] Node activated
+--- Node: validator ---
+{
+  "validation_error": null
+}
+[Supervisor] Node activated
+--- Node: supervisor ---
+{
+  "turn_count": 2
+}
+ 
+This run was not forced — the model proposed "id" as one of its own
+three tags on the first attempt, unprompted. The Validator caught it,
+fed the exact error back, and the Planner corrected itself on the very
+next attempt. Full experiment 3 attempts 1 and 2 (acronym-heavy and
+corrupted-data-export framings) are logged in
+reports/hw02/raw/experiment3_raw.json and experiment3_v2_raw.json.
+ 

@@ -1,0 +1,212 @@
+[
+  {
+    "run": 1,
+    "turn_count": 1,
+    "validation_error": null,
+    "outcome": "valid_first_attempt",
+    "latency_ms": 17983
+  },
+  {
+    "run": 2,
+    "turn_count": 1,
+    "validation_error": null,
+    "outcome": "valid_first_attempt",
+    "latency_ms": 14769
+  },
+  {
+    "run": 3,
+    "turn_count": 1,
+    "validation_error": null,
+    "outcome": "valid_first_attempt",
+    "latency_ms": 17651
+  },
+  {
+    "run": 4,
+    "turn_count": 1,
+    "validation_error": null,
+    "outcome": "valid_first_attempt",
+    "latency_ms": 15479
+  },
+  {
+    "run": 5,
+    "turn_count": 1,
+    "validation_error": null,
+    "outcome": "valid_first_attempt",
+    "latency_ms": 15880
+  },
+  {
+    "run": 6,
+    "turn_count": 1,
+    "validation_error": null,
+    "outcome": "valid_first_attempt",
+    "latency_ms": 16646
+  },
+  {
+    "run": 7,
+    "turn_count": 1,
+    "validation_error": null,
+    "outcome": "valid_first_attempt",
+    "latency_ms": 19497
+  },
+  {
+    "run": 8,
+    "turn_count": 1,
+    "validation_error": null,
+    "outcome": "valid_first_attempt",
+    "latency_ms": 16491
+  },
+  {
+    "run": 9,
+    "turn_count": 1,
+    "validation_error": null,
+    "outcome": "valid_first_attempt",
+    "latency_ms": 14574
+  },
+  {
+    "run": 10,
+    "turn_count": 1,
+    "validation_error": null,
+    "outcome": "valid_first_attempt",
+    "latency_ms": 14811
+  },
+  {
+    "run": 11,
+    "turn_count": 1,
+    "validation_error": null,
+    "outcome": "valid_first_attempt",
+    "latency_ms": 14983
+  },
+  {
+    "run": 12,
+    "turn_count": 1,
+    "validation_error": null,
+    "outcome": "valid_first_attempt",
+    "latency_ms": 15588
+  },
+  {
+    "run": 13,
+    "turn_count": 1,
+    "validation_error": null,
+    "outcome": "valid_first_attempt",
+    "latency_ms": 15481
+  },
+  {
+    "run": 14,
+    "turn_count": 1,
+    "validation_error": null,
+    "outcome": "valid_first_attempt",
+    "latency_ms": 15313
+  },
+  {
+    "run": 15,
+    "turn_count": 1,
+    "validation_error": null,
+    "outcome": "valid_first_attempt",
+    "latency_ms": 14932
+  },
+  {
+    "run": 16,
+    "turn_count": 1,
+    "validation_error": null,
+    "outcome": "valid_first_attempt",
+    "latency_ms": 14774
+  },
+  {
+    "run": 17,
+    "turn_count": 1,
+    "validation_error": null,
+    "outcome": "valid_first_attempt",
+    "latency_ms": 14686
+  },
+  {
+    "run": 18,
+    "turn_count": 1,
+    "validation_error": null,
+    "outcome": "valid_first_attempt",
+    "latency_ms": 14903
+  },
+  {
+    "run": 19,
+    "turn_count": 1,
+    "validation_error": null,
+    "outcome": "valid_first_attempt",
+    "latency_ms": 14875
+  },
+  {
+    "run": 20,
+    "turn_count": 1,
+    "validation_error": null,
+    "outcome": "valid_first_attempt",
+    "latency_ms": 14766
+  },
+  {
+    "run": 21,
+    "turn_count": 1,
+    "validation_error": null,
+    "outcome": "valid_first_attempt",
+    "latency_ms": 14806
+  },
+  {
+    "run": 22,
+    "turn_count": 1,
+    "validation_error": null,
+    "outcome": "valid_first_attempt",
+    "latency_ms": 14831
+  },
+  {
+    "run": 23,
+    "turn_count": 1,
+    "validation_error": null,
+    "outcome": "valid_first_attempt",
+    "latency_ms": 15026
+  },
+  {
+    "run": 24,
+    "turn_count": 1,
+    "validation_error": null,
+    "outcome": "valid_first_attempt",
+    "latency_ms": 14853
+  },
+  {
+    "run": 25,
+    "turn_count": 1,
+    "validation_error": null,
+    "outcome": "valid_first_attempt",
+    "latency_ms": 14498
+  },
+  {
+    "run": 26,
+    "turn_count": 1,
+    "validation_error": null,
+    "outcome": "valid_first_attempt",
+    "latency_ms": 14963
+  },
+  {
+    "run": 27,
+    "turn_count": 1,
+    "validation_error": null,
+    "outcome": "valid_first_attempt",
+    "latency_ms": 15137
+  },
+  {
+    "run": 28,
+    "turn_count": 1,
+    "validation_error": null,
+    "outcome": "valid_first_attempt",
+    "latency_ms": 14754
+  },
+  {
+    "run": 29,
+    "turn_count": 1,
+    "validation_error": null,
+    "outcome": "valid_first_attempt",
+    "latency_ms": 14859
+  },
+  {
+    "run": 30,
+    "turn_count": 1,
+    "validation_error": null,
+    "outcome": "valid_first_attempt",
+    "latency_ms": 14798
+  }
+]

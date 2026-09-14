@@ -1,0 +1,67 @@
+[
+  {
+    "run": 1,
+    "turn_count": 1,
+    "hit_ceiling": false,
+    "final_validation_error": null,
+    "final_tags": [
+      "id id",
+      "id id id",
+      "lot code"
+    ],
+    "final_summary": "Summary of URGENT: Lot Code Field Corrupted in Recall Export.",
+    "latency_ms": 18871
+  },
+  {
+    "run": 2,
+    "turn_count": 1,
+    "hit_ceiling": false,
+    "final_validation_error": null,
+    "final_tags": [
+      "id id",
+      "id id id",
+      "lot code"
+    ],
+    "final_summary": "Summary of URGENT: Lot Code Field Corrupted in Recall Export.",
+    "latency_ms": 14451
+  },
+  {
+    "run": 3,
+    "turn_count": 1,
+    "hit_ceiling": false,
+    "final_validation_error": null,
+    "final_tags": [
+      "id id",
+      "id id id",
+      "lot code"
+    ],
+    "final_summary": "Summary of URGENT: Lot Code Field Corrupted in Recall Export.",
+    "latency_ms": 13964
+  },
+  {
+    "run": 4,
+    "turn_count": 1,
+    "hit_ceiling": false,
+    "final_validation_error": null,
+    "final_tags": [
+      "id id",
+      "id id id",
+      "lot code"
+    ],
+    "final_summary": "Summary of URGENT: Lot Code Field Corrupted in Recall Export.",
+    "latency_ms": 14490
+  },
+  {
+    "run": 5,
+    "turn_count": 1,
+    "hit_ceiling": false,
+    "final_validation_error": null,
+    "final_tags": [
+      "id id",
+      "id id id",
+      "lot code"
+    ],
+    "final_summary": "Summary of URGENT: Lot Code Field Corrupted in Recall Export.",
+    "latency_ms": 13942
+  }
+]

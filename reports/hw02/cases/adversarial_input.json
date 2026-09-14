@@ -1,0 +1,8 @@
+{
+  "title": "QA Recall re PH ID Lot AI ML",
+  "content": "ID Lot AI ML PH QA UV IR CO2 O2 pH re lot no data. Re QA ID lot no data yet. AI ML flagged low pH high CO2. UV IR sensors down. QA team re-testing ID lot ASAP.",
+  "email": "student@example.com",
+  "strict": false,
+  "llm": "qwen3:1.7b",
+  "turn_ceiling": 4
+}

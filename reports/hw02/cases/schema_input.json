@@ -1,0 +1,8 @@
+{
+  "title": "Salmonella Outbreak Linked to Peanut Butter Batch #4521",
+  "content": "ACME Foods is recalling Batch #4521 of its creamy peanut butter after routine testing detected Salmonella contamination. Consumers who purchased this batch are advised to stop use immediately and return the product for a full refund. No illnesses have been reported to date.",
+  "email": "student@example.com",
+  "strict": false,
+  "llm": "qwen3:1.7b",
+  "turn_ceiling": 4
+}

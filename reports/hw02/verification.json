@@ -1,0 +1,287 @@
+{
+  "homework": "HW2",
+  "sid4": "7875",
+  "commit_hash": "TODO_PASTE_TAGGED_COMMIT_HASH_HERE",
+  "model_used": "qwen3:1.7b (documented substitute for qwen3:8b)",
+  "seed": 7875,
+  "verify_seed": 267875,
+  "generated_at": "2026-09-14T10:08:16Z",
+  "script": "scripts/verify_hw02.py",
+  "summary": {
+    "passed": 54,
+    "total": 54,
+    "all_passed": true
+  },
+  "checks": [
+    {
+      "name": "file_exists:index.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "file_exists:main.py",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "file_exists:graph_agent.py",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "file_exists:schema_agent.py",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "file_exists:run_experiment1.py",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "file_exists:run_experiment2.py",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "file_exists:run_experiment3.py",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "file_exists:natural_retry_test.py",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "file_exists:agents_demo.py",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "file_exists:src/model_client.py",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "file_exists:reports/hw02/METRICS.md",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "file_exists:reports/hw02/RUN_LOG.txt",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "file_exists:reports/hw02/AI_USE.md",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "file_exists:reports/hw02/cases/schema_input.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "file_exists:reports/hw02/cases/adversarial_input.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "file_exists:reports/hw02/cases/adversarial_input_v2.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "file_exists:reports/hw02/cases/adversarial_input_v3.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "file_exists:reports/hw02/raw/experiment1_raw.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "file_exists:reports/hw02/raw/experiment2_raw.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "file_exists:reports/hw02/raw/natural_retry_example.txt",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "html_has_viewport_meta",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "html_has_render_notices_function",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "main_defines_fastapi_app",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "main_runs_on_port_base_8675",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "main_has_add_route",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "main_has_update_route",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "main_has_delete_highest_route",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "main_has_search_route",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "graph_defines_planner_node",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "graph_defines_reviewer_node",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "graph_defines_supervisor_node",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "graph_defines_router_logic",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "graph_defines_build_graph",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "graph_planner_clears_stale_feedback",
+      "passed": true,
+      "detail": "planner_node must reset reviewer_feedback on every new proposal (the bug fixed during testing)"
+    },
+    {
+      "name": "graph_uses_model_client_complete",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "schema_defines_output_schema",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "schema_checks_exactly_3_tags",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "schema_checks_tag_length_3_30",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "schema_checks_summary_25_words",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "schema_defines_validate_output",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "schema_defines_planner_node_v2",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "schema_defines_validator_node",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "schema_defines_router_logic_v2",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "schema_defines_build_graph_v2",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "experiment1_raw_is_list",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "experiment1_raw_has_30_runs",
+      "passed": true,
+      "detail": "found 30 runs"
+    },
+    {
+      "name": "experiment2_raw_is_list",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "experiment2_raw_has_40_runs",
+      "passed": true,
+      "detail": "found 40 runs"
+    },
+    {
+      "name": "natural_retry_log_non_empty",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "natural_retry_shows_validation_failure",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "natural_retry_shows_successful_recovery",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "non_empty:reports/hw02/METRICS.md",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "non_empty:reports/hw02/RUN_LOG.txt",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "non_empty:reports/hw02/AI_USE.md",
+      "passed": true,
+      "detail": ""
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+[
+  {
+    "run": 1,
+    "turn_count": 1,
+    "hit_ceiling": false,
+    "final_validation_error": null,
+    "final_tags": [
+      "id lot",
+      "ai ml",
+      "id lot ai"
+    ],
+    "final_summary": "Summary of QA Recall re PH ID Lot AI ML.",
+    "latency_ms": 19588
+  },
+  {
+    "run": 2,
+    "turn_count": 1,
+    "hit_ceiling": false,
+    "final_validation_error": null,
+    "final_tags": [
+      "id lot",
+      "ai ml",
+      "id lot ai"
+    ],
+    "final_summary": "Summary of QA Recall re PH ID Lot AI ML.",
+    "latency_ms": 17082
+  },
+  {
+    "run": 3,
+    "turn_count": 1,
+    "hit_ceiling": false,
+    "final_validation_error": null,
+    "final_tags": [
+      "id lot",
+      "ai ml",
+      "id lot ai"
+    ],
+    "final_summary": "Summary of QA Recall re PH ID Lot AI ML.",
+    "latency_ms": 17301
+  },
+  {
+    "run": 4,
+    "turn_count": 1,
+    "hit_ceiling": false,
+    "final_validation_error": null,
+    "final_tags": [
+      "id lot",
+      "ai ml",
+      "id lot ai"
+    ],
+    "final_summary": "Summary of QA Recall re PH ID Lot AI ML.",
+    "latency_ms": 17025
+  },
+  {
+    "run": 5,
+    "turn_count": 1,
+    "hit_ceiling": false,
+    "final_validation_error": null,
+    "final_tags": [
+      "id lot",
+      "ai ml",
+      "id lot ai"
+    ],
+    "final_summary": "Summary of QA Recall re PH ID Lot AI ML.",
+    "latency_ms": 17195
+  }
+]
