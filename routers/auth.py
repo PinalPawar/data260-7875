@@ -71,27 +71,23 @@ def _session_status(request: Request):
 
 
 @router.get("/")
-def home(request: Request):
+def home(request: Request, logged_out: Optional[str] = None):
     """
     Home page. Shows a Login link if nobody is logged in, or a
-    Dashboard/Logout link if someone is.
+    Dashboard/Logout link if someone is. Shows a "logged out" confirmation
+    banner when redirected here right after /logout.
     """
     _status, user = _session_status(request)
-    return templates.TemplateResponse("home.html", {"request": request, "user": user})
+    return templates.TemplateResponse(
+        "home.html", {"request": request, "user": user, "logged_out": logged_out}
+    )
 
 
 @router.get("/login")
-def login_page(
-    request: Request,
-    expired: Optional[str] = None,
-    logged_out: Optional[str] = None,
-):
-    """Displays the login form, with a Bootstrap alert if we got redirected here."""
-    error = None
-    if expired:
-        error = "Your session timed out from inactivity. Please log in again."
-    elif logged_out:
-        error = "You have been logged out."
+def login_page(request: Request, expired: Optional[str] = None):
+    """Displays the login form, with a Bootstrap alert if we got redirected here
+    because an idle session expired."""
+    error = "Your session timed out from inactivity. Please log in again." if expired else None
     return templates.TemplateResponse("login.html", {"request": request, "error": error})
 
 
@@ -133,9 +129,10 @@ def dashboard(request: Request):
 
 @router.get("/logout")
 def logout(request: Request):
-    """Revokes the current session id (server-side) and clears the cookie's contents."""
+    """Revokes the current session id (server-side), clears the cookie's contents,
+    and redirects to the home page (per assignment spec: logout returns to /)."""
     sid = request.session.get("sid")
     if sid:
         REVOKED_SIDS.add(sid)
     request.session.clear()
-    return RedirectResponse(url="/login?logged_out=1", status_code=HTTP_302_FOUND)
+    return RedirectResponse(url="/?logged_out=1", status_code=HTTP_302_FOUND)
