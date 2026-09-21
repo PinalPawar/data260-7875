@@ -1,0 +1,260 @@
+{
+  "homework": "HW3",
+  "sid4": "7875",
+  "port_base": 8675,
+  "prefix": "s7875",
+  "domain_id": 3,
+  "commit_hash": "TODO_PASTE_TAGGED_COMMIT_HASH_HERE",
+  "model_used": "sentence-transformers/all-MiniLM-L6-v2 (HuggingFace embedding model, Part 2)",
+  "seed": 7875,
+  "verify_seed": 267875,
+  "generated_at": "2026-09-21T02:48:57Z",
+  "script": "scripts/verify_hw03.py",
+  "summary": {
+    "passed": 48,
+    "total": 48,
+    "all_passed": true
+  },
+  "checks": [
+    {
+      "name": "file_exists:main.py",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "file_exists:routers/auth.py",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "file_exists:templates/home.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "file_exists:templates/login.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "file_exists:templates/dashboard.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "file_exists:retrieval_pipeline.py",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "file_exists:questions.yaml",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "file_exists:SOURCES.md",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "file_exists:CORPUS_MANIFEST.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "file_exists:scripts/fetch_corpus.py",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "file_exists:scripts/summarize_metrics.py",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "file_exists:reports/hw03/METRICS.md",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "file_exists:reports/hw03/RUN_LOG.txt",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "file_exists:reports/hw03/AI_USE.md",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "file_exists:reports/hw03/raw/retrieval_results.csv",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "file_exists:reports/hw03/raw/retrieval_results.jsonl",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "file_exists:reports/hw03/raw/chunk_stats.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "auth_has_home_route",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "auth_has_login_get_route",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "auth_has_login_post_route",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "auth_has_dashboard_route",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "auth_has_logout_route",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "auth_has_idle_timeout",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "auth_has_revocation_list",
+      "passed": true,
+      "detail": "server-side blocklist proving logout/expiry can't be replayed"
+    },
+    {
+      "name": "main_has_session_middleware",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "main_session_is_https_only",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "main_session_is_same_site",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "main_includes_auth_router",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "main_keeps_existing_notices_api",
+      "passed": true,
+      "detail": "must extend, not replace, the existing codebase"
+    },
+    {
+      "name": "pipeline_uses_token_splitter",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "pipeline_uses_semantic_splitter",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "pipeline_uses_sentence_window",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "pipeline_uses_vector_store_index",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "pipeline_uses_huggingface_embedding",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "pipeline_computes_cosine_explicitly",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "pipeline_measures_latency",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "pipeline_saves_csv",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "pipeline_saves_jsonl",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "questions_at_least_5",
+      "passed": true,
+      "detail": "found 6"
+    },
+    {
+      "name": "questions_at_least_2_single_source",
+      "passed": true,
+      "detail": "found 5"
+    },
+    {
+      "name": "questions_have_expected_answers",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "corpus_at_least_200kb",
+      "passed": true,
+      "detail": "found 278777 bytes (272.2 KB)"
+    },
+    {
+      "name": "corpus_manifest_has_hashes",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "raw_results_has_3_techniques",
+      "passed": true,
+      "detail": "found {'sentence_window', 'semantic', 'token'}"
+    },
+    {
+      "name": "raw_results_non_empty",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "non_empty:reports/hw03/METRICS.md",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "non_empty:reports/hw03/RUN_LOG.txt",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "non_empty:reports/hw03/AI_USE.md",
+      "passed": true,
+      "detail": ""
+    }
+  ]
+}

@@ -1,0 +1,297 @@
+DATA260 HW3 — RUN_LOG.txt
+SID4=7875  PORT_BASE=8675  DOMAIN_ID=3 (Grocery supply and recall notices)
+================================================================================
+
+===== PART 1 — Auth app manual verification (real run, 2026-09-20/21) =====
+Run on my own MacBook Air, in the data260-7875 repo folder, with the app's
+conda environment (data260) except where noted -- curl itself doesn't need
+a Python environment, so a couple of these were run from a plain terminal
+tab still on (base), which does not affect the result.
+
+$ python3 main.py
+INFO:     Uvicorn running on http://0.0.0.0:8675 (Press CTRL+C to quit)
+INFO:     Application startup complete.
+
+--- Wrong password -> rejected, HTTP 401 ---
+$ curl -s -o /dev/null -w "HTTP %{http_code}\n" -X POST http://127.0.0.1:8675/login -d "username=admin&password=WRONG"
+HTTP 401
+(Also verified visually -- see screenshots/3_login_invalid_alert.png: a red
+Bootstrap alert "Invalid username or password." is shown on the login page.)
+
+--- No cookie at all -> redirected straight to /login ---
+$ curl -s -D - -o /dev/null http://127.0.0.1:8675/dashboard
+HTTP/1.1 302 Found
+location: /login
+
+--- Correct login -> Set-Cookie with all 3 required security attributes ---
+$ curl -s -D - -o /dev/null -X POST http://127.0.0.1:8675/login -d "username=admin&password=password" -c cookies.txt
+HTTP/1.1 302 Found
+location: /dashboard
+set-cookie: session=eyJ1c2VyIjogImFkbWluIiwgInNpZCI6ICIwNTE1NzRjNi0wYThhLTQzMDAtOTI1OS02ZWNhZWE4ZjA0YmUiLCAibGFzdF9zZWVuIjogMTc4OTk1NDI3Mi40MTA5MTJ9.arCI4A.ZZDelG77eSABdTxU7jqW0Bgw43U; path=/; Max-Age=3600; httponly; samesite=lax; secure
+
+All 3 required attributes are present on this one line:
+  httponly  -- JavaScript on the page can't read this cookie
+  samesite=lax -- not sent along with most cross-site requests
+  secure    -- only ever sent over HTTPS in production
+(Full copy: screenshots/set_cookie_header.txt)
+
+--- Logout, then reuse the SAME (now-revoked) cookie against /dashboard ---
+$ curl -s -o /dev/null -c cookies.txt -X POST http://127.0.0.1:8675/login -d "username=admin&password=password"
+$ curl -s -o /dev/null -w "HTTP %{http_code}\n" -b cookies.txt http://127.0.0.1:8675/dashboard
+HTTP 200
+$ curl -s -D - -o /dev/null -b cookies.txt http://127.0.0.1:8675/logout
+HTTP/1.1 302 Found
+location: /login?logged_out=1
+set-cookie: session=null; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; httponly; samesite=lax; secure
+$ curl -s -D - -o /dev/null -b cookies.txt http://127.0.0.1:8675/dashboard
+HTTP/1.1 302 Found
+location: /login
+(PASS -- the exact same cookie that returned 200 a moment earlier is rejected
+after logout. Full copy + explanation: screenshots/cookie_reuse_proof.txt)
+
+Note: an earlier attempt at this same test accidentally showed the *first*
+curl (immediately after login) already returning 302 instead of 200 --
+about 6.5 minutes had passed between logging in and running the test during
+normal back-and-forth conversation, which exceeded the default 5-minute
+idle timeout on its own. Not a bug -- an unplanned, genuine demonstration
+that idle timeout works, in addition to the deliberate test below.
+
+--- Idle timeout test (IDLE_TIMEOUT_SECONDS=3, restarted server for a fast demo) ---
+$ IDLE_TIMEOUT_SECONDS=3 python3 main.py
+$ curl -s -o /dev/null -c cookies3.txt -X POST http://127.0.0.1:8675/login -d "username=admin&password=password"
+$ curl -s -o /dev/null -w "HTTP %{http_code}\n" -b cookies3.txt http://127.0.0.1:8675/dashboard
+HTTP 200
+$ sleep 5
+$ curl -s -D - -o /dev/null -b cookies3.txt http://127.0.0.1:8675/dashboard
+HTTP/1.1 302 Found
+location: /login?expired=1
+set-cookie: session=null; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; httponly; samesite=lax; secure
+(PASS -- idle session expired on its own after the timeout window and was
+rejected; note the redirect target, /login?expired=1, is distinct from
+/login?logged_out=1 used by an explicit logout.)
+
+--- Existing recall-notices app/API still works after the HW3 merge ---
+$ curl -s -o /dev/null -w "GET /notices -> HTTP %{http_code}\n" http://127.0.0.1:8675/notices
+GET /notices -> HTTP 200
+$ curl -s -o /dev/null -w "GET /api/notices -> HTTP %{http_code}\n" http://127.0.0.1:8675/api/notices
+GET /api/notices -> HTTP 200
+
+--- Screenshots captured on my own machine (screenshots/) ---
+1_home_logged_out.png, 2_login_page.png, 3_login_invalid_alert.png,
+4_dashboard_logged_in.png, 5_home_logged_in.png, 6_after_logout.png,
+7_templates_directory.png
+
+================================================================================
+===== PART 2 — Retrieval pipeline run (real run, 2026-09-20) =====
+
+$ pip install -r requirements.txt
+$ python3 scripts/fetch_corpus.py
+$ python3 retrieval_pipeline.py 2>&1 | tee -a reports/hw03/RUN_LOG.txt
+$ python3 scripts/summarize_metrics.py
+$ python3 scripts/verify_hw03.py
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[2026-09-20 17:11:12] Loading embedding model: sentence-transformers/all-MiniLM-L6-v2
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 10315.26it/s]
+Loaded 39 corpus documents from /Users/atharvamundada/Downloads/data260-7875/corpus (263.4 KB total)
+Loaded 6 questions from questions.yaml
+
+==============================================================================
+TECHNIQUE: token
+==============================================================================
+Chunks produced: 507   avg chunk length: 634.4 chars
+
+--- [token] q1: What pathogen caused the June 2026 soft cheese (requeson) outbreak linked to Clover Hill Dairy, and how many people died?
+    query embedding dim=384 first8=[7e-06, -0.081537, -0.022016, 0.050061, 0.063802, 0.008431, -0.129139, 0.075899]
+    query vector shape=(1, 384) stacked doc vectors shape=(5, 384) retrieval latency=18.421 ms
+    rank store_score  cosine_sim  chunk_len source_file                                  preview
+    1    0.720782     0.712961    620       fda_outbreak_listeria_soft_cheese_2026.txt   ## Overview The FDA and CDC investigated a multi-state outbreak of Listeria monocytogenes infections linked to requeson (soft ricotta-style cheese) manufactured
+    2    0.715255     0.675308    709       fda_outbreak_listeria_soft_cheese_2026.txt   Mexicano products under La Colonia and Selectos Latinos brands; distributed to Maryland, Virginia, and Washington D.C. from May 11 to June 1, 2026. Nelson & Isa
+    3    0.690888     0.661852    522       fda_outbreak_listeria_soft_cheese_2026.txt   positive for outbreak strain Listeria monocytogenes. Of interviewed individuals, most reported consuming cheese, with several specifically consuming Clover Hill
+    4    0.615822     0.586718    444       fda_outbreaks_investigations_index.txt       Investigations Date Posted Reference # Pathogen or Cause of Illness Product(s) Linked to Illnesses (if any) Total Case Count Investigation Status Outbreak/ Even
+    5    0.608269     0.47948     597       fda_outbreak_listeria_soft_cheese_2026.txt   Recalled Products & Manufacturers Clover Hill Dairy, LLC (Primary source) Recalled all cheese products manufactured at their facility, including soft ricotta/re
+
+--- [token] q2: Which company's pistachio nut butter was elevated to a Class I recall in August 2026, and which retailer sold it?
+    query embedding dim=384 first8=[-0.068129, -0.02336, -0.000506, 0.043493, -0.011224, 0.022967, -0.043635, 0.042458]
+    query vector shape=(1, 384) stacked doc vectors shape=(5, 384) retrieval latency=15.374 ms
+    rank store_score  cosine_sim  chunk_len source_file                                  preview
+    1    0.668647     0.774998    626       news_nutbutter_salmonella_botticelli_2026.txtPublished: Aug 27, 2026. Updated: Aug 27, 2026. The FDA elevated a pistachio nut butter recall to Class I status on August 26, 2026 -- its most serious risk cla
+    2    0.579836     0.584562    726       openfda_enforcement_bulk_records.txt         between May 25th and July 13th which failed to declare soy flour (soy) as an ingredient. | Distribution: These were made in house at Whole Foods Market location
+    3    0.513909     0.605587    559       openfda_enforcement_bulk_records.txt         and Dominica Recall #F-0370-2013 | Class I | Firm: Sunland, Incorporated (Portales, NM) | Initiated: 20120924 | Product: Sunland Creamy Peanut Butter, 12 oz, UP
+    4    0.500971     0.580029    741       openfda_enforcement_bulk_records.txt         | Class I | Firm: Sunland, Incorporated (Portales, NM) | Initiated: 20120924 | Product: Cadia All Natural Creamy Peanut Butter No Stir, 18 oz, UPC 815369010993.
+    5    0.499736     0.554461    691       openfda_enforcement_bulk_records.txt         and Dominica Recall #F-2044-2016 | Class I | Firm: Superior Dairy Inc (Canton, OH) | Initiated: 20160803 | Product: Mint Chocolate Chip Devils Food Rollcake -89
+
+--- [token] q3: What shared supplier link did investigators find between the 2026 Nara Organics infant formula botulism outbreak and the earlier ByHeart formula outbreak?
+    query embedding dim=384 first8=[-0.109831, -0.005342, -0.053596, 0.048721, 0.053127, 0.041485, -0.121131, 0.121615]
+    query vector shape=(1, 384) stacked doc vectors shape=(5, 384) retrieval latency=15.672 ms
+    rank store_score  cosine_sim  chunk_len source_file                                  preview
+    1    0.734821     0.720674    665       fda_outbreak_infant_botulism_formula_2026.txtKey Dates: Investigation Period June-August 2026. Illness Onset April-May 2026. Last Illness Onset May 31, 2026. Recall Date June 13, 2026. Outbreak Declared Ov
+    2    0.701363     0.559847    748       fda_outbreak_infant_botulism_formula_2026.txtOrganics Whole Milk Organic Powdered Infant Formula. Recalled products should no longer be available for sale. Recalled product has Best By dates ending in 2027
+    3    0.677816     0.429881    155       fda_recall_nara_organics_infant_formula_2026.txtbotulism appear. Refund Process: Automatic refunds for May-June 2026 website purchases; others may request refunds via Nara's website or return to Target.
+    4    0.670668     0.62027     419       fda_recall_nara_organics_infant_formula_2026.txtCompany Name: Nara Organics of New York, NY Product: Nara Organics Whole Milk Powdered Infant Formula Sizes and UPCs: - 700g, UPC 860013251901 - 400g, UPC 86001
+    5    0.663338     0.581068    629       fda_recall_nara_organics_infant_formula_2026.txt709125273E14F2, 709125280E14F2, 709125288E14F2, 409125307E14F2, 70926019ENNB, 70926029ENNB, 70926035ENNB, 70926039ENNB, 70926042ENNB Distribution: distributed n
+
+--- [token] q4: How many U.S. states were affected by the July 2026 Cyclospora outbreak linked to iceberg lettuce from Taylor Farms de Mexico, and how many deaths occurred?
+    query embedding dim=384 first8=[0.03987, -0.026822, 0.000971, 0.063458, 0.052108, 0.024303, -0.085853, 0.082043]
+    query vector shape=(1, 384) stacked doc vectors shape=(5, 384) retrieval latency=15.141 ms
+    rank store_score  cosine_sim  chunk_len source_file                                  preview
+    1    0.760914     0.728318    579       fda_outbreak_cyclospora_iceberg_lettuce_2026.txt## Title and Status CDC declared the outbreak concluded as of September 11, 2026, though FDA continues investigating. ## Summary The FDA and CDC collaborated wi
+    2    0.741824     0.575721    517       fda_outbreak_cyclospora_iceberg_lettuce_2026.txtitems sold at Walmart: - 12-oz and 24-oz Iceberg Salad with Best if Used By dates 7/18/2026 to 8/3/2026 - 8-oz and 16-oz Shredded Lettuce with Best if Used By d
+    3    0.699608     0.567996    705       fda_outbreak_cyclospora_iceberg_lettuce_2026.txt570 hospitalizations and 2 deaths. States included: Arkansas, Georgia, Iowa, Illinois, Indiana, Kansas, Kentucky, Massachusetts, Maine, Michigan, Missouri, Nebr
+    4    0.682032     0.450858    308       fda_outbreak_cyclospora_iceberg_lettuce_2026.txtRecommendations People with symptoms should contact their health care provider to report symptoms and receive care, especially if they ate shredded iceberg lett
+    5    0.639829     0.65251     744       fda_outbreaks_investigations_index.txt       the outbreak of Cyclospora (ref #1392), the case count has increased from 231 to 234. For the outbreak of Cyclospora (ref #1390) linked to iceberg lettuce, the 
+
+--- [token] q5: According to the CDC, roughly how many Salmonella infections occur in the U.S. every year, and what are the most common food sources?
+    query embedding dim=384 first8=[0.090399, -0.074047, -0.007898, 0.018425, 0.017764, 0.049298, -0.001344, 0.022402]
+    query vector shape=(1, 384) stacked doc vectors shape=(5, 384) retrieval latency=16.298 ms
+    rank store_score  cosine_sim  chunk_len source_file                                  preview
+    1    0.700326     0.625954    748       cdc_about_salmonella.txt                     CDC estimates Salmonella causes about 1.35 million infections in the United States every year, along with 26,500 hospitalizations and 420 deaths. Most people de
+    2    0.644246     0.511514    537       fda_outbreak_salmonella_cantaloupes_2023.txt January 19, 2024, CDC announced that the outbreak is over. CDC reports a total of 407 illnesses in 44 states. There has been a total of 158 hospitalizations and
+    3    0.609132     0.577888    493       fda_outbreaks_investigations_index.txt       Investigations Date Posted Reference # Pathogen or Cause of Illness Product(s) Linked to Illnesses (if any) Total Case Count Investigation Status Outbreak/ Even
+    4    0.603651     0.573808    789       fda_outbreak_salmonella_cantaloupes_2023.txt linked to recalled cantaloupe. As part of this investigation, FDA and industry partners worked together to collect and analyze samples of cantaloupe. Two of the
+    5    0.589951     0.556007    487       fda_outbreaks_investigations_index.txt       Investigations Date Posted Reference # Pathogen or Cause of Illness Product(s) Linked to Illnesses (if any) Total Case Count Investigation Status Outbreak/ Even
+
+--- [token] q6: What precautions reduce E. coli contamination risk in ground beef at a grocery store?
+    query embedding dim=384 first8=[0.044023, 0.010292, 0.034522, 0.013434, 0.023119, -0.04805, -0.019851, 0.090757]
+    query vector shape=(1, 384) stacked doc vectors shape=(5, 384) retrieval latency=15.562 ms
+    rank store_score  cosine_sim  chunk_len source_file                                  preview
+    1    0.667772     0.561986    742       fsis_ground_beef_ecoli_2026.txt              will be posted on the FSIS website at www.fsis.usda.gov/recalls . FSIS advises all consumers to safely prepare their raw meat products, including fresh and froz
+    2    0.644306     0.529123    874       fsis_ground_beef_ecoli_2026.txt              but is most common in children under 5 years old, older adults and persons with weakened immune systems. It is marked by easy bruising, pallor and decreased uri
+    3    0.640863     0.491717    693       fsis_ground_beef_ecoli_2026.txt              Recall Cases in Calendar Year 2015 Summary of Recall Cases in Calendar Year 2014 Summary of Recall Cases in Calendar Year 2013 Summary of Recall Cases in Calend
+    4    0.632541     0.576458    670       cdc_about_ecoli.txt                          E. coli are bacteria found in intestines and the environment. Most strains are harmless, but some cause diarrhea and serious conditions. Infection with Shiga to
+    5    0.632111     0.655045    669       fsis_ground_beef_ecoli_2026.txt              a Problem with Food Online If you have a problem with a food product, let FSIS know or find the appropriate public health organization. Report Problem 042-2025 
+
+==============================================================================
+TECHNIQUE: semantic
+==============================================================================
+Chunks produced: 142   avg chunk length: 1899.5 chars
+
+--- [semantic] q1: What pathogen caused the June 2026 soft cheese (requeson) outbreak linked to Clover Hill Dairy, and how many people died?
+    query embedding dim=384 first8=[7e-06, -0.081537, -0.022016, 0.050061, 0.063802, 0.008431, -0.129139, 0.075899]
+    query vector shape=(1, 384) stacked doc vectors shape=(5, 384) retrieval latency=9.877 ms
+    rank store_score  cosine_sim  chunk_len source_file                                  preview
+    1    0.713577     0.669146    602       fda_outbreak_listeria_soft_cheese_2026.txt   ## Investigation Findings Six product samples and environmental samples tested positive for outbreak strain Listeria monocytogenes. Of interviewed individuals, 
+    2    0.697684     0.632791    1398      fda_outbreak_listeria_soft_cheese_2026.txt   ## Overview The FDA and CDC investigated a multi-state outbreak of Listeria monocytogenes infections linked to requeson (soft ricotta-style cheese) manufactured
+    3    0.549028     0.571647    2888      openfda_enforcement_bulk_records.txt         OUS: HONDURAS, NICARAGUA, CHILE. Recall #F-1572-2016 | Class I | Firm: Hy-Vee Stores Inc (West Des Moines, IA) | Initiated: 20160303 | Product: Whole wheels and
+    4    0.526689     0.550757    2748      openfda_enforcement_bulk_records.txt         Recall #F-1656-2017 | Class I | Firm: Sargento Foods, Inc. (Plymouth, WI) | Initiated: 20170210 | Product: Sargento Shredded Chef Blends 4 Cheese Pizzeria, 8oz.
+    5    0.518243     0.480693    709       openfda_enforcement_bulk_records.txt         | Distribution: The product was distributed nationwide. Recall #F-2543-2015 | Class I | Firm: Blue Bell Creameries, L.P. (Brenham, TX) | Initiated: 20150313 | P
+
+--- [semantic] q2: Which company's pistachio nut butter was elevated to a Class I recall in August 2026, and which retailer sold it?
+    query embedding dim=384 first8=[-0.068129, -0.02336, -0.000506, 0.043493, -0.011224, 0.022967, -0.043635, 0.042458]
+    query vector shape=(1, 384) stacked doc vectors shape=(5, 384) retrieval latency=9.721 ms
+    rank store_score  cosine_sim  chunk_len source_file                                  preview
+    1    0.622073     0.656914    1331      news_nutbutter_salmonella_botticelli_2026.txtUpdated: Aug 27, 2026. The FDA elevated a pistachio nut butter recall to Class I status on August 26, 2026 -- its most serious risk classification. According to
+    2    0.495775     0.502497    1251      openfda_enforcement_bulk_records.txt         Distribution was also made to Canada. Recall #F-0369-2013 | Class I | Firm: Sunland, Incorporated (Portales, NM) | Initiated: 20120924 | Product: Sunland Creamy
+    3    0.486213     0.540627    9347      openfda_enforcement_bulk_records.txt         Thomas and St. Croix, Anguilla, St, Kitts and Nevis, Montserrat, and Dominica Recall #F-0370-2013 | Class I | Firm: Sunland, Incorporated (Portales, NM) | Initi
+    4    0.484095     0.156945    25        news_nutbutter_salmonella_botticelli_2026.txtPublished: Aug 27, 2026.
+    5    0.47536      0.505701    941       openfda_enforcement_bulk_records.txt         Thomas and St. Croix, Anguilla, St, Kitts and Nevis, Montserrat, and Dominica Recall #F-2044-2016 | Class I | Firm: Superior Dairy Inc (Canton, OH) | Initiated:
+
+--- [semantic] q3: What shared supplier link did investigators find between the 2026 Nara Organics infant formula botulism outbreak and the earlier ByHeart formula outbreak?
+    query embedding dim=384 first8=[-0.109831, -0.005342, -0.053596, 0.048721, 0.053127, 0.041485, -0.121131, 0.121615]
+    query vector shape=(1, 384) stacked doc vectors shape=(5, 384) retrieval latency=9.543 ms
+    rank store_score  cosine_sim  chunk_len source_file                                  preview
+    1    0.731538     0.69797     837       fda_outbreak_infant_botulism_formula_2026.txtKey Dates: Investigation Period June-August 2026. Illness Onset April-May 2026. Last Illness Onset May 31, 2026. Recall Date June 13, 2026. Outbreak Declared Ov
+    2    0.722384     0.594913    154       cdc_outbreak_infant_botulism_formula_2026.txtProduct: Nara Organics Whole Milk Organic Infant Formula (recalled June 13, 2026). Cases: 4 confirmed cases across 3 states, all hospitalized, no deaths.
+    3    0.670668     0.609825    731       fda_recall_nara_organics_infant_formula_2026.txtCompany Name: Nara Organics of New York, NY Product: Nara Organics Whole Milk Powdered Infant Formula Sizes and UPCs: - 700g, UPC 860013251901 - 400g, UPC 86001
+    4    0.663843     0.513553    292       fda_recall_nara_organics_infant_formula_2026.txtConsumer Guidance: Customers should stop using the affected products immediately and contact healthcare providers if symptoms of infant botulism appear. Refund 
+    5    0.651323     0.646312    869       fda_outbreak_infant_botulism_formula_2026.txtHospitalizations 4. Deaths 0. States Affected: California, Pennsylvania, Washington. Investigation Findings: Genetic analysis revealed one clinical sample from 
+
+--- [semantic] q4: How many U.S. states were affected by the July 2026 Cyclospora outbreak linked to iceberg lettuce from Taylor Farms de Mexico, and how many deaths occurred?
+    query embedding dim=384 first8=[0.03987, -0.026822, 0.000971, 0.063458, 0.052108, 0.024303, -0.085853, 0.082043]
+    query vector shape=(1, 384) stacked doc vectors shape=(5, 384) retrieval latency=9.486 ms
+    rank store_score  cosine_sim  chunk_len source_file                                  preview
+    1    0.758688     0.762882    902       fda_outbreak_cyclospora_iceberg_lettuce_2026.txt## Title and Status CDC declared the outbreak concluded as of September 11, 2026, though FDA continues investigating. ## Summary The FDA and CDC collaborated wi
+    2    0.672228     0.53097     784       fda_outbreak_cyclospora_iceberg_lettuce_2026.txtStates included: Arkansas, Georgia, Iowa, Illinois, Indiana, Kansas, Kentucky, Massachusetts, Maine, Michigan, Missouri, Nebraska, New Hampshire, North Carolina
+    3    0.510311     0.440515    2153      fda_outbreak_ecoli_spinach_2021.txt          This is an ongoing investigation and additional information will be provided as it becomes available. November 16, 2021 The FDA and CDC, in collaboration with s
+    4    0.504992     0.485216    1208      fda_outbreak_ecoli_spinach_2021.txt          Outbreak Investigation of E. Coli O157:H7 - Spinach (November 2021) | FDA Skip to main content Skip to FDA Search Skip to in this section menu Skip to footer li
+    5    0.48846      0.506505    813       fda_outbreaks_investigations_index.txt       For both investigations, CDC, FDA, and state and local partners conducted epidemiologic and traceback investigations and collected and analyzed product and envi
+
+--- [semantic] q5: According to the CDC, roughly how many Salmonella infections occur in the U.S. every year, and what are the most common food sources?
+    query embedding dim=384 first8=[0.090399, -0.074047, -0.007898, 0.018425, 0.017764, 0.049298, -0.001344, 0.022402]
+    query vector shape=(1, 384) stacked doc vectors shape=(5, 384) retrieval latency=9.933 ms
+    rank store_score  cosine_sim  chunk_len source_file                                  preview
+    1    0.712752     0.61154     472       cdc_about_salmonella.txt                     CDC estimates Salmonella causes about 1.35 million infections in the United States every year, along with 26,500 hospitalizations and 420 deaths. Most people de
+    2    0.66532      0.370003    277       cdc_about_salmonella.txt                     Most people recover on their own with rest and fluids; severe cases may need antibiotics or hospitalization. Prevention centers on cooking food to safe temperat
+    3    0.617712     0.42987     425       fda_outbreak_salmonella_eggs_2026.txt        Status: The investigation concluded with the CDC declaring the outbreak over and FDA closing its investigation as of September 3, 2026. Key Dates: - Illness ons
+    4    0.609028     0.398805    158       cdc_outbreak_cucumbers_salmonella_2024.txt   This outbreak is over. 113 cases across 23 states, 28 hospitalizations, 0 deaths. The outbreak involved whole fresh cucumbers grown by Agrotato, S.A. de C.V.
+    5    0.570667     0.53295     1081      cdc_about_listeria.txt                       Listeria are bacteria (germs) that can contaminate many foods. The infection is rare but serious, though preventable through proper food safety practices. At-Ri
+
+--- [semantic] q6: What precautions reduce E. coli contamination risk in ground beef at a grocery store?
+    query embedding dim=384 first8=[0.044023, 0.010292, 0.034522, 0.013434, 0.023119, -0.04805, -0.019851, 0.090757]
+    query vector shape=(1, 384) stacked doc vectors shape=(5, 384) retrieval latency=9.348 ms
+    rank store_score  cosine_sim  chunk_len source_file                                  preview
+    1    0.674602     0.608973    2214      fsis_ground_beef_ecoli_2026.txt              Persons who experience these symptoms should seek emergency medical care immediately. FSIS is concerned that some product may be in consumers’ refrigerators or 
+    2    0.649521     0.544526    247       cdc_about_ecoli.txt                          Transmission occurs through contaminated food, water, or contact with animals and people. Common food sources include undercooked ground beef, unpasteurized mil
+    3    0.60156      0.625787    244       fsis_ground_beef_ecoli_2026.txt              Mountain West Food Group, LLC Recalls Ground Beef Products Due To Possible E. Coli O26 Contamination | Food Safety and Inspection Service Sorry, you need to ena
+    4    0.562906     0.311536    7440      fsis_ground_beef_ecoli_2026.txt              Federal government websites often end in .gov or .mil. Before sharing sensitive information, make sure you’re on a federal government site. The site is secure. 
+    5    0.560854     0.621589    2116      fda_outbreak_ecoli_spinach_2021.txt          This type of product co-mingling is not uncommon; but continues to present challenges for traceback investigations of foodborne outbreaks. Recommendation CDC an
+
+==============================================================================
+TECHNIQUE: sentence_window
+==============================================================================
+Chunks produced: 1726   avg chunk length: 1056.0 chars
+
+--- [sentence_window] q1: What pathogen caused the June 2026 soft cheese (requeson) outbreak linked to Clover Hill Dairy, and how many people died?
+    query embedding dim=384 first8=[7e-06, -0.081537, -0.022016, 0.050061, 0.063802, 0.008431, -0.129139, 0.075899]
+    query vector shape=(1, 384) stacked doc vectors shape=(5, 384) retrieval latency=38.383 ms
+    rank store_score  cosine_sim  chunk_len source_file                                  preview
+    1    0.787807     0.674659    921       fda_outbreak_listeria_soft_cheese_2026.txt   Nelson & Isa Lacteos, LLC (June 5, 2026 recall) Requeson cheese sold to New York retail locations from May 15 to May 28, 2026. ## Distribution Areas Confirmed p
+    2    0.706408     0.68773     847       fda_outbreak_listeria_soft_cheese_2026.txt   ## Overview The FDA and CDC investigated a multi-state outbreak of Listeria monocytogenes infections linked to requeson (soft ricotta-style cheese) manufactured
+    3    0.674144     0.633489    1058      fda_outbreak_listeria_soft_cheese_2026.txt   ## Overview The FDA and CDC investigated a multi-state outbreak of Listeria monocytogenes infections linked to requeson (soft ricotta-style cheese) manufactured
+    4    0.663252     0.646916    817       fda_outbreak_listeria_soft_cheese_2026.txt   La Ceiba Foods Latin Market Inc. (June 26, 2026 recall) Requeson Salvadoreno and Requeson Mexicano products under La Colonia and Selectos Latinos brands; distri
+    5    0.657992     0.553621    1126      fda_outbreak_listeria_soft_cheese_2026.txt   ## Case Statistics - Total Illnesses: 15 - Hospitalizations: 14 - Deaths: 1 - States Affected: Illinois, Maryland, New York, Virginia - Illness Onset Period: Ma
+
+--- [sentence_window] q2: Which company's pistachio nut butter was elevated to a Class I recall in August 2026, and which retailer sold it?
+    query embedding dim=384 first8=[-0.068129, -0.02336, -0.000506, 0.043493, -0.011224, 0.022967, -0.043635, 0.042458]
+    query vector shape=(1, 384) stacked doc vectors shape=(5, 384) retrieval latency=35.698 ms
+    rank store_score  cosine_sim  chunk_len source_file                                  preview
+    1    0.621115     0.719109    897       news_nutbutter_salmonella_botticelli_2026.txtPublished: Aug 27, 2026. Updated: Aug 27, 2026. The FDA elevated a pistachio nut butter recall to Class I status on August 26, 2026 -- its most serious risk cla
+    2    0.600201     0.66389     1186      news_nutbutter_salmonella_botticelli_2026.txtUpdated: Aug 27, 2026. The FDA elevated a pistachio nut butter recall to Class I status on August 26, 2026 -- its most serious risk classification. According to
+    3    0.51425      0.600906    993       news_nutbutter_salmonella_botticelli_2026.txtCompany: Botticelli Foods LLC Product: Bettergoods Pistachio Nut Butter (6.7oz/190g jars) Units Affected: 16,200 jars Retailer: Walmart stores across 19 states 
+    4    0.512716     0.453045    2090      fda_recall_peanut_butter_smucker_2022.txt    The table below includes recalls conducted by companies that further processed the peanut butter by using it as an ingredient in new products or by repackaging 
+    5    0.506075     0.539259    1188      news_nutbutter_salmonella_botticelli_2026.txtAccording to federal guidelines, this designation applies when there is a "reasonable probability that use of or exposure to a product will cause serious advers
+
+--- [sentence_window] q3: What shared supplier link did investigators find between the 2026 Nara Organics infant formula botulism outbreak and the earlier ByHeart formula outbreak?
+    query embedding dim=384 first8=[-0.109831, -0.005342, -0.053596, 0.048721, 0.053127, 0.041485, -0.121131, 0.121615]
+    query vector shape=(1, 384) stacked doc vectors shape=(5, 384) retrieval latency=35.143 ms
+    rank store_score  cosine_sim  chunk_len source_file                                  preview
+    1    0.759491     0.710526    547       fda_outbreak_infant_botulism_formula_2026.txtLast Illness Onset May 31, 2026. Recall Date June 13, 2026. Outbreak Declared Over August 27, 2026. Summary: The FDA and CDC investigated a multistate outbreak 
+    2    0.753269     0.708712    565       fda_outbreak_infant_botulism_formula_2026.txtRecall Date June 13, 2026. Outbreak Declared Over August 27, 2026. Summary: The FDA and CDC investigated a multistate outbreak of infant botulism linked to Nara
+    3    0.734448     0.610645    232       cdc_outbreak_infant_botulism_formula_2026.txtProduct: Nara Organics Whole Milk Organic Infant Formula (recalled June 13, 2026). Cases: 4 confirmed cases across 3 states, all hospitalized, no deaths. Status
+    4    0.731668     0.597408    749       fda_outbreak_infant_botulism_formula_2026.txtDeaths 0. States Affected: California, Pennsylvania, Washington. Investigation Findings: Genetic analysis revealed one clinical sample from an infant in this ou
+    5    0.722829     0.531163    386       fda_outbreak_infant_botulism_formula_2026.txtProduct Recalled: Nara Organics Whole Milk Organic Powdered Infant Formula. Recalled products should no longer be available for sale. Recalled product has Best 
+
+--- [sentence_window] q4: How many U.S. states were affected by the July 2026 Cyclospora outbreak linked to iceberg lettuce from Taylor Farms de Mexico, and how many deaths occurred?
+    query embedding dim=384 first8=[0.03987, -0.026822, 0.000971, 0.063458, 0.052108, 0.024303, -0.085853, 0.082043]
+    query vector shape=(1, 384) stacked doc vectors shape=(5, 384) retrieval latency=34.518 ms
+    rank store_score  cosine_sim  chunk_len source_file                                  preview
+    1    0.795066     0.729501    1252      fda_outbreak_cyclospora_iceberg_lettuce_2026.txt## Summary The FDA and CDC collaborated with state and local partners to investigate a multistate Cyclospora outbreak linked to iceberg lettuce from central Mex
+    2    0.789594     0.63775     1301      fda_outbreak_cyclospora_iceberg_lettuce_2026.txtTaylor Farms de Mexico announced that they were voluntarily removing all iceberg lettuce sourced from central Mexico on July 17, 2026. ## Products Involved Reca
+    3    0.787428     0.772926    1147      fda_outbreak_cyclospora_iceberg_lettuce_2026.txt## Title and Status CDC declared the outbreak concluded as of September 11, 2026, though FDA continues investigating. ## Summary The FDA and CDC collaborated wi
+    4    0.745141     0.762882    906       fda_outbreak_cyclospora_iceberg_lettuce_2026.txt## Title and Status CDC declared the outbreak concluded as of September 11, 2026, though FDA continues investigating. ## Summary The FDA and CDC collaborated wi
+    5    0.711876     0.70843     772       fda_outbreak_cyclospora_iceberg_lettuce_2026.txt## Title and Status CDC declared the outbreak concluded as of September 11, 2026, though FDA continues investigating. ## Summary The FDA and CDC collaborated wi
+
+--- [sentence_window] q5: According to the CDC, roughly how many Salmonella infections occur in the U.S. every year, and what are the most common food sources?
+    query embedding dim=384 first8=[0.090399, -0.074047, -0.007898, 0.018425, 0.017764, 0.049298, -0.001344, 0.022402]
+    query vector shape=(1, 384) stacked doc vectors shape=(5, 384) retrieval latency=34.491 ms
+    rank store_score  cosine_sim  chunk_len source_file                                  preview
+    1    0.776705     0.61154     475       cdc_about_salmonella.txt                     CDC estimates Salmonella causes about 1.35 million infections in the United States every year, along with 26,500 hospitalizations and 420 deaths. Most people de
+    2    0.64196      0.631073    548       fda_outbreak_salmonella_cantaloupes_2023.txt One isolate tested positive for Salmonella Newport; however, it was not associated with the outbreak. Industry’s cooperation in collecting and sharing samples w
+    3    0.641589     0.625954    754       cdc_about_salmonella.txt                     CDC estimates Salmonella causes about 1.35 million infections in the United States every year, along with 26,500 hospitalizations and 420 deaths. Most people de
+    4    0.620876     0.470257    527       fda_outbreak_salmonella_eggs_2026.txt        Status: The investigation concluded with the CDC declaring the outbreak over and FDA closing its investigation as of September 3, 2026. Key Dates: - Illness ons
+    5    0.618664     0.606041    458       cdc_about_salmonella.txt                     Salmonella spreads through contaminated food (especially poultry, eggs, beef, and produce), contact with animals, and contaminated water. Diagnosis is by stool 
+
+--- [sentence_window] q6: What precautions reduce E. coli contamination risk in ground beef at a grocery store?
+    query embedding dim=384 first8=[0.044023, 0.010292, 0.034522, 0.013434, 0.023119, -0.04805, -0.019851, 0.090757]
+    query vector shape=(1, 384) stacked doc vectors shape=(5, 384) retrieval latency=34.427 ms
+    rank store_score  cosine_sim  chunk_len source_file                                  preview
+    1    0.694396     0.599414    1369      fsis_ground_beef_ecoli_2026.txt              These products should be thrown away or returned to the place of purchase. FSIS routinely conducts recall effectiveness checks to verify recalling firms notify 
+    2    0.655869     0.498275    1483      fsis_ground_beef_ecoli_2026.txt              Our annual summaries provide an overview of each year's recalls by class, reason and product. Explore the Annual Summaries USDA Recall Classifications Class I -
+    3    0.655603     0.44672     2342      fsis_ground_beef_ecoli_2026.txt              Let's Talk Turkey Roasting Poultry Processing: Questions & Answers Poultry: Basting, Brining, and Marinating Stuffing and Food Safety The Poultry Label Says "Fr
+    4    0.648985     0.39108     2831      fsis_ground_beef_ecoli_2026.txt              Food Safety While Hiking, Camping & Boating Conceptos Básicos de Seguridad Alimentaria Your Guide to Safe Spring Holiday Meals Meat & Catfish Bacon and Food Saf
+    5    0.648775     0.204458    686       fsis_ground_beef_ecoli_2026.txt              Vigorous rehydration and other supportive care is the usual treatment; antibiotic treatment is generally not recommended. Most people recover within a week, but
+
+Saved 90 rows -> reports/hw03/raw/retrieval_results.csv
+Saved 90 rows -> reports/hw03/raw/retrieval_results.jsonl
+Saved chunk stats -> reports/hw03/raw/chunk_stats.json
+
+Next: python3 scripts/summarize_metrics.py   (builds reports/hw03/METRICS.md)
