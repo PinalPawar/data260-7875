@@ -1,0 +1,29 @@
+Source: https://www.fda.gov/safety/recalls-market-withdrawals-safety-alerts/a2-platinum-usa-label-infant-formula-recalled-because-possible-health-risk
+Accessed: 2026-09-20
+Title: a2 Platinum USA Label Infant Formula Recall - May 2, 2026
+
+Company: The a2 Milk Company ("a2MC")
+Product: a2 Platinum Premium Infant Formula 0-12 months USA label
+Packaging: 31.7oz tin
+
+Affected Batches:
+- Batch 2210269454, Use By 7/15/2026
+- Batch 2210324609, Use By 1/21/2027
+- Batch 2210321712, Use By 1/15/2027
+
+Reason for Recall: Presence of cereulide toxin produced by some strains of the bacterium
+Bacillus cereus.
+
+Health Risks: Illness occurs through the consumption of food contaminated with the toxin and
+preparing formula with hot water does not eliminate it. Symptoms include gastrointestinal
+distress, typically resolving within 24 hours, though infants face increased complications
+like dehydration.
+
+Distribution: Distributed nationally through a2MC's website, Amazon and Meijer stores.
+Units: 63,078 total across three batches; approximately 16,428 units sold to consumers.
+
+Consumer Action: Consumers who have purchased the Product are recommended to discontinue use
+of the Product and dispose of it immediately or return to their place of purchase for a
+refund. Contact: 1-844-422-6455 (Monday-Friday, 8am-5pm Eastern).
+
+Status: This recall has been completed and FDA has terminated this recall.

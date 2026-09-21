@@ -1,0 +1,29 @@
+Source: https://www.fda.gov/safety/recalls-market-withdrawals-safety-alerts/nara-organics-recalls-all-lots-nara-infant-formula-because-possible-health-risk
+Accessed: 2026-09-20
+Title: FDA Recall Notice: Nara Organics Infant Formula
+
+Company Name: Nara Organics of New York, NY
+Product: Nara Organics Whole Milk Powdered Infant Formula
+
+Sizes and UPCs:
+- 700g, UPC 860013251901
+- 400g, UPC 860013251918
+
+Recall Reason: potential risk of Clostridium botulinum contamination
+
+Affected Lot Codes: 408125075E14F2, 708125076E14F2, 708125083E14F2, 408125139E14F2,
+708125141E14F2, 708125145E14F2, 708125174E14F2, 709125273E14F2, 709125280E14F2,
+709125288E14F2, 409125307E14F2, 70926019ENNB, 70926029ENNB, 70926035ENNB, 70926039ENNB,
+70926042ENNB
+
+Distribution: distributed nationally across Target retail stores, Target.com, and Nara.com
+between July 2025 and June 2026.
+
+Cases: Three hospitalized infants in California, Washington, and Pennsylvania; no deaths
+reported.
+
+Consumer Guidance: Customers should stop using the affected products immediately and contact
+healthcare providers if symptoms of infant botulism appear.
+
+Refund Process: Automatic refunds for May-June 2026 website purchases; others may request
+refunds via Nara's website or return to Target.

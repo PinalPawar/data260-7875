@@ -1,0 +1,46 @@
+Source: https://www.fda.gov/food/outbreaks-foodborne-illness/outbreak-investigation-listeria-monocytogenes-soft-cheese-june-2026
+Accessed: 2026-09-20
+Title: FDA Outbreak Investigation: Listeria monocytogenes in Soft Cheese (June 2026)
+
+## Overview
+The FDA and CDC investigated a multi-state outbreak of Listeria monocytogenes infections
+linked to requeson (soft ricotta-style cheese) manufactured by Clover Hill Dairy, LLC in
+Mechanicsville, Maryland. As of August 26, 2026, the outbreak investigation concluded.
+
+## Case Statistics
+- Total Illnesses: 15
+- Hospitalizations: 14
+- Deaths: 1
+- States Affected: Illinois, Maryland, New York, Virginia
+- Illness Onset Period: March 6, 2023 to July 8, 2026
+
+## Recalled Products & Manufacturers
+
+Clover Hill Dairy, LLC (Primary source)
+Recalled all cheese products manufactured at their facility, including soft ricotta/requeson,
+cuajada, and hard cheeses in various sizes (10-14 oz clamshells to 5-gallon buckets). Products
+may have been relabeled under brands including KESSO, QUESOS LA RICURA, IZALCO, DE MI PUEBLO,
+and RIO LINDO.
+
+La Ceiba Foods Latin Market Inc. (June 26, 2026 recall)
+Requeson Salvadoreno and Requeson Mexicano products under La Colonia and Selectos Latinos
+brands; distributed to Maryland, Virginia, and Washington D.C. from May 11 to June 1, 2026.
+
+Nelson & Isa Lacteos, LLC (June 5, 2026 recall)
+Requeson cheese sold to New York retail locations from May 15 to May 28, 2026.
+
+## Distribution Areas
+Confirmed product distribution across Maryland, New Jersey, New York, North Carolina,
+Virginia, and Washington D.C., though distribution may have extended further.
+
+## Investigation Findings
+Six product samples and environmental samples tested positive for outbreak strain Listeria
+monocytogenes. Of interviewed individuals, most reported consuming cheese, with several
+specifically consuming Clover Hill Dairy requeson.
+
+## Consumer/Retailer Guidance
+- Do not consume recalled cheeses; check refrigerators and freezers
+- Thoroughly clean and sanitize surfaces that contacted recalled products
+- At-risk groups (pregnant women, persons 65+, immunocompromised individuals) should avoid
+  all soft cheese varieties
+- Report symptoms to healthcare providers immediately

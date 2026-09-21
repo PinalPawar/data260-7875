@@ -1,0 +1,275 @@
+[
+  {
+    "filename": "cdc_about_botulism.txt",
+    "byte_size": 851,
+    "sha256": "2f2d7076dae60c2c15a18b1455567f7d1a5c55dc8b4f0461c49d76ecc78e5159",
+    "source_url": "https://www.cdc.gov/botulism/about/index.html",
+    "accessed": "2026-09-20"
+  },
+  {
+    "filename": "cdc_about_cyclosporiasis.txt",
+    "byte_size": 738,
+    "sha256": "6f86373e21162060bcb2da99916147261f1638cef5a9be3e2f44b3fade30663b",
+    "source_url": "https://www.cdc.gov/cyclosporiasis/about/index.html",
+    "accessed": "2026-09-20"
+  },
+  {
+    "filename": "cdc_about_ecoli.txt",
+    "byte_size": 770,
+    "sha256": "94ffb09db7f599597de4d5b940caa99c77dc9fe65da09cbc32ce37cd64f5c917",
+    "source_url": "https://www.cdc.gov/ecoli/about/index.html",
+    "accessed": "2026-09-20"
+  },
+  {
+    "filename": "cdc_about_listeria.txt",
+    "byte_size": 1458,
+    "sha256": "d0903a3dc17e3be8696159ff553736da9f57db50251913910fa28b059a0f5268",
+    "source_url": "https://www.cdc.gov/listeria/about/index.html",
+    "accessed": "2026-09-20"
+  },
+  {
+    "filename": "cdc_about_salmonella.txt",
+    "byte_size": 856,
+    "sha256": "489de91d3cff751f94dc5573886be31319c0ea42218031020f25e50f6394d65a",
+    "source_url": "https://www.cdc.gov/salmonella/about/index.html",
+    "accessed": "2026-09-20"
+  },
+  {
+    "filename": "cdc_outbreak_cucumbers_salmonella_2024.txt",
+    "byte_size": 564,
+    "sha256": "e82635a171f3f78eeb8154a4f09a1062c8f7503bff952a445bb26f03b2e97ca8",
+    "source_url": "https://www.cdc.gov/salmonella/outbreaks/cucumbers-11-24/index.html",
+    "accessed": "2026-09-20"
+  },
+  {
+    "filename": "cdc_outbreak_deli_meats_listeria.txt",
+    "byte_size": 931,
+    "sha256": "36386a6c11238ac38379ab36e2da976a4f90473d8f70f98aa837a41aa1d23969",
+    "source_url": "https://www.cdc.gov/listeria/outbreaks/delimeats-7-24/index.html",
+    "accessed": "2026-09-20"
+  },
+  {
+    "filename": "cdc_outbreak_infant_botulism_formula_2026.txt",
+    "byte_size": 899,
+    "sha256": "351b5643b7badb6a9d40abeace0612664e4628b45e2aa77f109099fce69dc0de",
+    "source_url": "https://www.cdc.gov/botulism/outbreaks-investigations/infant-formula-june-2026/index.html",
+    "accessed": "2026-09-20"
+  },
+  {
+    "filename": "cdc_outbreak_shell_eggs_salmonella_2026.txt",
+    "byte_size": 971,
+    "sha256": "0eb5b5bb07e63864fe68c36f7fcf2ff31d7811a376914c1f3c3b5d05c4eb4632",
+    "source_url": "https://www.cdc.gov/salmonella/outbreaks/shell-eggs-07-26/index.html",
+    "accessed": "2026-09-20"
+  },
+  {
+    "filename": "fda_major_product_recalls_listing.txt",
+    "byte_size": 1509,
+    "sha256": "9285a2d525975752f2aa9b485467de1cab6b92099d6cf251dd7e0cb23037230e",
+    "source_url": "https://www.fda.gov/safety/recalls-market-withdrawals-safety-alerts/major-product-recalls",
+    "accessed": "2026-09-20"
+  },
+  {
+    "filename": "fda_outbreak_cyclospora_iceberg_lettuce_2026.txt",
+    "byte_size": 1947,
+    "sha256": "bd20373453127aec56638611296b9ab9041fbb1885e9f282bb8b583afa28a8e1",
+    "source_url": "https://www.fda.gov/food/outbreaks-foodborne-illness/investigation-multistate-outbreak-cyclospora-illnesses-iceberg-lettuce-july-2026",
+    "accessed": "2026-09-20"
+  },
+  {
+    "filename": "fda_outbreak_ecoli_frozen_blueberries_2026.txt",
+    "byte_size": 1606,
+    "sha256": "36c919864eaba7a6f322cecf34d96ab00259096109e2c01816d5d5433ac3d33c",
+    "source_url": "https://www.fda.gov/food/outbreaks-foodborne-illness/outbreak-investigation-e-coli-o145h28-frozen-blueberries-july-2026",
+    "accessed": "2026-09-20"
+  },
+  {
+    "filename": "fda_outbreak_ecoli_spinach_2021.txt",
+    "byte_size": 5701,
+    "sha256": "d869dd2f36ca6cb9922a6147a3b660c47e01477824a4337e5a692b65fdc63a70",
+    "source_url": "https://www.fda.gov/food/outbreaks-foodborne-illness/outbreak-investigation-e-coli-o157h7-spinach-november-2021",
+    "accessed": "2026-09-20"
+  },
+  {
+    "filename": "fda_outbreak_infant_botulism_formula_2026.txt",
+    "byte_size": 1948,
+    "sha256": "7df471cc034b4035b5665023961ab2f88cac91885407a2afb24dfc347753c3ac",
+    "source_url": "https://www.fda.gov/food/outbreaks-foodborne-illness/outbreak-investigation-infant-botulism-powdered-infant-formula-june-2026",
+    "accessed": "2026-09-20"
+  },
+  {
+    "filename": "fda_outbreak_listeria_soft_cheese_2026.txt",
+    "byte_size": 2236,
+    "sha256": "92c017dfc010bacb17bf8812af666733ef0de360084ad33340fbc4049180cb28",
+    "source_url": "https://www.fda.gov/food/outbreaks-foodborne-illness/outbreak-investigation-listeria-monocytogenes-soft-cheese-june-2026",
+    "accessed": "2026-09-20"
+  },
+  {
+    "filename": "fda_outbreak_salmonella_cantaloupes_2023.txt",
+    "byte_size": 11123,
+    "sha256": "27cc4432e7aaeac2e1e3f0de4db3fe0e7e59309072fe134bbbf6f756adae3fa2",
+    "source_url": "https://www.fda.gov/food/outbreaks-foodborne-illness/outbreak-investigation-salmonella-cantaloupes-november-2023",
+    "accessed": "2026-09-20"
+  },
+  {
+    "filename": "fda_outbreak_salmonella_eggs_2026.txt",
+    "byte_size": 1499,
+    "sha256": "6de0533c5e1cfae3eaff05d4d1163fab14ceed09bc4375882bc4a0ab4eb06ccc",
+    "source_url": "https://www.fda.gov/food/outbreaks-foodborne-illness/outbreak-investigation-salmonella-eggs-july-2026",
+    "accessed": "2026-09-20"
+  },
+  {
+    "filename": "fda_outbreaks_investigations_index.txt",
+    "byte_size": 20874,
+    "sha256": "a249bcdac58e6e2df96bf2d86e0ddff43c640e6bdaa73a739f105fd0b3e97c26",
+    "source_url": "https://www.fda.gov/food/outbreaks-foodborne-illness/investigations-foodborne-illness-outbreaks",
+    "accessed": "2026-09-20"
+  },
+  {
+    "filename": "fda_recall_a2platinum_infant_formula_2026.txt",
+    "byte_size": 1394,
+    "sha256": "8f11b27d54fdeb0b9e71086ba81a511ffbd91b05249b15559c65fdb3fa4a915e",
+    "source_url": "https://www.fda.gov/safety/recalls-market-withdrawals-safety-alerts/a2-platinum-usa-label-infant-formula-recalled-because-possible-health-risk",
+    "accessed": "2026-09-20"
+  },
+  {
+    "filename": "fda_recall_byheart_infant_formula_2025.txt",
+    "byte_size": 1358,
+    "sha256": "3428a184a6084672bc1876b387678e50044d47e870b66826c1bbd5350a14c5e0",
+    "source_url": "https://www.fda.gov/safety/recalls-market-withdrawals-safety-alerts/response-broader-fda-investigation-byheart-initiates-voluntary-recall-two-batches-infant-formula",
+    "accessed": "2026-09-20"
+  },
+  {
+    "filename": "fda_recall_cantaloupes_2023.txt",
+    "byte_size": 2982,
+    "sha256": "7fb176e3004eb8ac303cadae53ec89ffc2e067f6551216fa49a9f0ea9eedc912",
+    "source_url": "https://www.fda.gov/safety/major-product-recalls/2023-recalls-food-products-associated-cantaloupes-due-potential-risk-salmonella",
+    "accessed": "2026-09-20"
+  },
+  {
+    "filename": "fda_recall_midwest_poultry_eggs_2026.txt",
+    "byte_size": 1746,
+    "sha256": "929719dc129ca531b43497df3fb7dc3da8ce6cd889a3ce456294ed3e82e10684",
+    "source_url": "https://www.fda.gov/safety/recalls-market-withdrawals-safety-alerts/midwest-poultry-services-lp-recalls-shell-eggs-due-possible-salmonella-enteritidis-contamination",
+    "accessed": "2026-09-20"
+  },
+  {
+    "filename": "fda_recall_nara_organics_infant_formula_2026.txt",
+    "byte_size": 1256,
+    "sha256": "2beef7ff7246d84b388b71def54cf8258c9e8f1f6038388f41356d7eadcd704e",
+    "source_url": "https://www.fda.gov/safety/recalls-market-withdrawals-safety-alerts/nara-organics-recalls-all-lots-nara-infant-formula-because-possible-health-risk",
+    "accessed": "2026-09-20"
+  },
+  {
+    "filename": "fda_recall_peanut_butter_smucker_2022.txt",
+    "byte_size": 4218,
+    "sha256": "74e33281dc9642b0e3ebf0b05401e947dfc366590472ed98268d5dec6c515c3b",
+    "source_url": "https://www.fda.gov/safety/major-product-recalls/2022-recalls-food-products-associated-peanut-butter-jm-smucker-company-due-potential-risk-salmonella",
+    "accessed": "2026-09-20"
+  },
+  {
+    "filename": "fda_recall_publix_greenwise_berries_2026.txt",
+    "byte_size": 1466,
+    "sha256": "2b666e36ad3d83c07142a69c43dff3d4ace013dde37188e0c2c00a88be91318f",
+    "source_url": "https://www.fda.gov/safety/recalls-market-withdrawals-safety-alerts/publix-recalls-all-lots-greenwise-organic-frozen-blueberries-and-whole-mixed-berries-due-potential-e",
+    "accessed": "2026-09-20"
+  },
+  {
+    "filename": "fda_recall_snopac_spinach_listeria.txt",
+    "byte_size": 1102,
+    "sha256": "a97fafd8264e4130d38d4cade156d9b371143991fa5f97889380dff7a3d6ed20",
+    "source_url": "https://www.fda.gov/safety/recalls-market-withdrawals-safety-alerts/sno-pac-foods-recalls-del-mar-35-lb-bulk-frozen-spinach-and-10-oz-organic-frozen-cut-spinach",
+    "accessed": "2026-09-20"
+  },
+  {
+    "filename": "fda_recall_tgd_cuts_cucumber_2025.txt",
+    "byte_size": 1288,
+    "sha256": "d57cc259c0a9c551f7eb2cb51445183a7d8592f16d9d2456706a9fa009ca478d",
+    "source_url": "https://www.fda.gov/safety/recalls-market-withdrawals-safety-alerts/tgd-cuts-llc-initiated-voluntary-recall-cucumber-bedner-growers-inc-which-had-potential-be",
+    "accessed": "2026-09-20"
+  },
+  {
+    "filename": "fsis_buffalo_chicken_uninspected.txt",
+    "byte_size": 9671,
+    "sha256": "d006901085b938bb1d3684b20add398ac6fe87c0a41269fd34a01bf879665f34",
+    "source_url": "https://www.fsis.usda.gov/recalls-alerts/shanghai-ravioli-corporation-recalls-not-ready-eat-frozen-buffalo-chicken-products",
+    "accessed": "2026-09-20"
+  },
+  {
+    "filename": "fsis_chicken_caesar_wrap_listeria.txt",
+    "byte_size": 9901,
+    "sha256": "66932ffafe279668958e6618a8cc4d4f91f78ee492167881c7147ceb8ae11c19",
+    "source_url": "https://www.fsis.usda.gov/recalls-alerts/fsis-issues-public-health-alert-ready-eat-chicken-caesar-wrap-products-may-be",
+    "accessed": "2026-09-20"
+  },
+  {
+    "filename": "fsis_chicken_fried_rice_foreign_matter.txt",
+    "byte_size": 10522,
+    "sha256": "9083a4d6cef1583028c383c3b5b13e5a67a5d34cb6a9e3fa277d3cd94c7dd058",
+    "source_url": "https://www.fsis.usda.gov/recalls-alerts/ajinomoto-foods-north-america-inc--recalls-chicken-fried-rice-products-due-0",
+    "accessed": "2026-09-20"
+  },
+  {
+    "filename": "fsis_ground_beef_ecoli_2026.txt",
+    "byte_size": 10746,
+    "sha256": "3bb57d39453343d978b76f82527ac7f48cfc26fee578d753a75bc882b9dfdbbd",
+    "source_url": "https://www.fsis.usda.gov/recalls-alerts/mountain-west-food-group-llc-recalls-ground-beef-products-due-possible-e--coli-o26",
+    "accessed": "2026-09-20"
+  },
+  {
+    "filename": "fsis_headcheese_listeria.txt",
+    "byte_size": 11673,
+    "sha256": "4ee390d48c868e733db9a4d6be06a7711aefb1974c8d84e6910fe564747d55ae",
+    "source_url": "https://www.fsis.usda.gov/recalls-alerts/fsis-issues-public-health-alert-headcheese-deli-meat-products-may-be-contaminated",
+    "accessed": "2026-09-20"
+  },
+  {
+    "filename": "fsis_meat_poultry_dairy_salmonella_2026.txt",
+    "byte_size": 9438,
+    "sha256": "2e1b754a069ff999dfe57c7ff89b5667e3cee1e4a9b8915fa055f61b4dc85743",
+    "source_url": "https://www.fsis.usda.gov/recalls-alerts/fsis-issues-public-health-alert-various-meat-and-poultry-products-containing-fda",
+    "accessed": "2026-09-20"
+  },
+  {
+    "filename": "fsis_meat_poultry_jalapenos_salmonella_2026.txt",
+    "byte_size": 9637,
+    "sha256": "1012bd94cb4cced83dbda0bbdf1e7b0e2492fa3c49441af0c7b63134c7f598f3",
+    "source_url": "https://www.fsis.usda.gov/recalls-alerts/fsis-issues-public-health-alert-various-meat-and-poultry-products-containing-fda-0",
+    "accessed": "2026-09-20"
+  },
+  {
+    "filename": "news_broccoli_sprouts_salmonella_2026.txt",
+    "byte_size": 1286,
+    "sha256": "bd1b284e837746c630ae2601f6a581c6c9ddefca8d132c452f7379d82e658f49",
+    "source_url": "https://www.thehealthy.com/news/salmonella-outbreak-sprouts-recall-september-2026/",
+    "accessed": "2026-09-20"
+  },
+  {
+    "filename": "news_chicken_goat_pickle_recall_2026.txt",
+    "byte_size": 1247,
+    "sha256": "c354f4b7e353214517555746f01a60db75de1ff4e910960646cd95010e966acb",
+    "source_url": "https://www.newsweek.com/chicken-recall-goat-fda-food-health-warning-12353314",
+    "accessed": "2026-09-20"
+  },
+  {
+    "filename": "news_ice_cream_recalls_2026.txt",
+    "byte_size": 1151,
+    "sha256": "7122bc31db32f82a1efe8614a38079a3649218b9ab7355115f4a316861b9ed7c",
+    "source_url": "https://www.thehealthy.com/news/fda-ice-cream-recall-in-6-states-summer-2026/",
+    "accessed": "2026-09-20"
+  },
+  {
+    "filename": "news_nutbutter_salmonella_botticelli_2026.txt",
+    "byte_size": 1589,
+    "sha256": "f75475f707af56d70d1991bf86a7c2c5a384b8ac2cc57e9f9e240256b82b9866",
+    "source_url": "https://www.newsweek.com/nut-butter-recall-update-fda-issues-highest-risk-warning-salmonella-walmart-botticelli-foods-12374520",
+    "accessed": "2026-09-20"
+  },
+  {
+    "filename": "openfda_enforcement_bulk_records.txt",
+    "byte_size": 128625,
+    "sha256": "0ad20f0082b0f820be0b38c733d4b7e54deb40156fb44e3487177332646f8cee",
+    "source_url": "https://api.fda.gov/food/enforcement.json (openFDA public Food Enforcement API)",
+    "accessed": "2026-09-20"
+  }
+]

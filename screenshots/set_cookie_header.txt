@@ -1,0 +1,12 @@
+$ curl -s -D - -o /dev/null -X POST http://127.0.0.1:8675/login -d "username=admin&password=password" -c cookies.txt
+HTTP/1.1 302 Found
+date: Mon, 21 Sep 2026 01:31:11 GMT
+server: uvicorn
+content-length: 0
+location: /dashboard
+set-cookie: session=eyJ1c2VyIjogImFkbWluIiwgInNpZCI6ICIwNTE1NzRjNi0wYThhLTQzMDAtOTI1OS02ZWNhZWE4ZjA0YmUiLCAibGFzdF9zZWVuIjogMTc4OTk1NDI3Mi40MTA5MTJ9.arCI4A.ZZDelG77eSABdTxU7jqW0Bgw43U; path=/; Max-Age=3600; httponly; samesite=lax; secure
+
+All 3 required session-cookie security attributes are present in this one Set-Cookie line:
+  - httponly  -> JavaScript on the page cannot read this cookie (blocks token-stealing via XSS)
+  - samesite=lax -> cookie is not sent along with most cross-site requests (blocks CSRF-style abuse)
+  - secure    -> cookie is only ever sent over HTTPS in production

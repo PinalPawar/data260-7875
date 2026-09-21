@@ -1,0 +1,49 @@
+# DATA260 HW3 Part 2 -- domain questions (DOMAIN_ID 3, Grocery supply and recall notices)
+# Written and committed BEFORE running the retrieval comparison, per assignment
+# instructions, so these expected answers cannot be rewritten after seeing output.
+#
+# q1, q2, q3, q4, q5 = the five required questions.
+# q6 = an extra "probe" question, added on purpose to try to surface a
+#      confidently-scored retrieval that does NOT contain the answer (the
+#      assignment explicitly allows/asks for this: "If your five questions
+#      don't produce one, add questions until you find one.") There is no
+#      ground-beef recall document in the corpus, so this question is
+#      expected to pull back a document about a *different* meat/pathogen
+#      recall that merely shares vocabulary with the query.
+
+questions:
+  - id: q1
+    question: "What pathogen caused the June 2026 soft cheese (requeson) outbreak linked to Clover Hill Dairy, and how many people died?"
+    expected_answer: "Listeria monocytogenes; 1 death (15 illnesses, 14 hospitalizations, 1 death across Illinois, Maryland, New York, and Virginia)."
+    expected_source_file: "fda_outbreak_listeria_soft_cheese_2026.txt"
+    single_source_dependent: true
+
+  - id: q2
+    question: "Which company's pistachio nut butter was elevated to a Class I recall in August 2026, and which retailer sold it?"
+    expected_answer: "Botticelli Foods LLC's Bettergoods Pistachio Nut Butter (6.7oz jars), sold at Walmart across 19 states."
+    expected_source_file: "news_nutbutter_salmonella_botticelli_2026.txt"
+    single_source_dependent: true
+
+  - id: q3
+    question: "What shared supplier link did investigators find between the 2026 Nara Organics infant formula botulism outbreak and the earlier ByHeart formula outbreak?"
+    expected_answer: "Both formulas used organic whole milk supplied by Organic West Milk and spray-dried by Dairy Farms of America; a clinical sample from the Nara outbreak genetically matched a sample from the ByHeart outbreak."
+    expected_source_file: "fda_outbreak_infant_botulism_formula_2026.txt"
+    single_source_dependent: true
+
+  - id: q4
+    question: "How many U.S. states were affected by the July 2026 Cyclospora outbreak linked to iceberg lettuce from Taylor Farms de Mexico, and how many deaths occurred?"
+    expected_answer: "21 states; 2 deaths (12,883 illnesses, 570 hospitalizations)."
+    expected_source_file: "fda_outbreak_cyclospora_iceberg_lettuce_2026.txt"
+    single_source_dependent: true
+
+  - id: q5
+    question: "According to the CDC, roughly how many Salmonella infections occur in the U.S. every year, and what are the most common food sources?"
+    expected_answer: "About 1.35 million infections per year; most commonly linked to poultry, eggs, beef, and produce."
+    expected_source_file: "cdc_about_salmonella.txt"
+    single_source_dependent: true
+
+  - id: q6
+    question: "What precautions reduce E. coli contamination risk in ground beef at a grocery store?"
+    expected_answer: "No document in this corpus is actually about ground beef; the corpus's E. coli content is about frozen blueberries and general CDC guidance. This question is expected to pull back an unrelated E. coli or Salmonella produce document with a deceptively high similarity score -- see METRICS.md 'confidently wrong retrieval' section."
+    expected_source_file: "NONE (no matching document exists in the corpus -- intentional probe question)"
+    single_source_dependent: false

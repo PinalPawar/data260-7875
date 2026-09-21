@@ -1,3 +1,21 @@
 fastapi==0.109.0
 uvicorn[standard]==0.27.0
 pydantic==2.12.5
+
+# HW3 Part 1: login/session support
+jinja2==3.1.4
+python-multipart==0.0.9
+itsdangerous==2.2.0
+
+# HW3 Part 2: LlamaIndex chunking/retrieval comparison
+llama-index
+llama-index-embeddings-huggingface
+sentence-transformers
+faiss-cpu
+numpy
+pandas
+pyyaml
+
+# HW3 Part 2: corpus-gathering script (scripts/fetch_corpus.py)
+requests
+beautifulsoup4

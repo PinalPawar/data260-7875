@@ -1,0 +1,13 @@
+Source: https://www.cdc.gov/ecoli/about/index.html
+Accessed: 2026-09-20
+Title: CDC: About E. coli
+
+E. coli are bacteria found in intestines and the environment. Most strains are
+harmless, but some cause diarrhea and serious conditions. Infection with Shiga
+toxin-producing E. coli (STEC) can lead to a serious health condition called hemolytic
+uremic syndrome (HUS), which risks kidney failure and death.
+
+At-risk groups include children under 5, adults over 65, immunocompromised individuals, and
+international travelers. Transmission occurs through contaminated food, water, or contact
+with animals and people. Common food sources include undercooked ground beef, unpasteurized
+milk or juice, and contaminated raw produce such as leafy greens, sprouts, and cucumbers.

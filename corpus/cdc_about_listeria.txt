@@ -1,0 +1,26 @@
+Source: https://www.cdc.gov/listeria/about/index.html
+Accessed: 2026-09-20
+Title: CDC: About Listeria
+
+Listeria are bacteria (germs) that can contaminate many foods. The infection is rare
+but serious, though preventable through proper food safety practices.
+
+At-Risk Populations: pregnant women, newborns, adults 65 and older, and immunocompromised
+individuals face the highest risk. Other people can be infected with Listeria, but they
+rarely become seriously ill.
+
+Health Impact Statistics: the CDC estimates that annually in the United States, approximately
+1,250 individuals contract Listeria, with roughly 172 deaths occurring. The infection
+represents the fourth leading cause of death from foodborne illness nationally.
+
+Illness Types: Listeria causes two categories, invasive illness and intestinal illness, each
+presenting different symptoms depending on the infected person and affected body area.
+
+Diagnosis and Treatment: laboratory testing identifies infection by growing Listeria from
+body fluid or tissue samples. Treatment approaches vary -- those with intestinal illness
+typically recover without antibiotics, while invasive illness cases require antibiotic
+therapy. Dehydration prevention through fluid intake is recommended for diarrhea cases.
+
+Prevention Strategies: know contamination-prone foods, follow food safety guidelines (Clean,
+Separate, Cook, Chill), and monitor foodborne outbreak alerts and recalls through official
+channels.

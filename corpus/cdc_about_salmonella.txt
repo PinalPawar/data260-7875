@@ -1,0 +1,13 @@
+Source: https://www.cdc.gov/salmonella/about/index.html
+Accessed: 2026-09-20
+Title: CDC: About Salmonella
+
+CDC estimates Salmonella causes about 1.35 million infections in the United States
+every year, along with 26,500 hospitalizations and 420 deaths. Most people develop diarrhea,
+fever, and stomach cramps 6 hours to 6 days after infection, and illness usually lasts 4 to 7
+days without treatment. Salmonella spreads through contaminated food (especially poultry,
+eggs, beef, and produce), contact with animals, and contaminated water. Diagnosis is by stool
+or blood culture. Most people recover on their own with rest and fluids; severe cases may
+need antibiotics or hospitalization. Prevention centers on cooking food to safe temperatures,
+avoiding cross-contamination between raw and ready-to-eat foods, and washing hands after
+contact with animals.

@@ -1,10 +1,37 @@
+import os
+
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import FileResponse
 from pydantic import BaseModel
 from typing import List, Optional
+from starlette.middleware.sessions import SessionMiddleware
 import uvicorn
 
+from routers.auth import router as auth_router
+
 app = FastAPI(title="Grocery Recall Notices API")
+
+# --- HW3 Part 1: session support -------------------------------------------
+# Secret key used to SIGN the session cookie (not encrypt it -- the contents
+# are readable if someone really wants to base64-decode them, but they can't
+# be *forged* or *tampered with* without knowing this key).
+# In real deployment this must come from an environment variable, never be
+# hardcoded/committed -- the fallback here is only so the app still runs
+# out of the box for local grading.
+SECRET_KEY = os.getenv("SECRET_KEY", "dev-only-secret-key-change-me")
+
+app.add_middleware(
+    SessionMiddleware,
+    secret_key=SECRET_KEY,
+    https_only=True,   # "Secure" cookie flag -- browser will only send this over HTTPS
+    same_site="lax",   # "SameSite" cookie flag -- blocks the cookie being sent cross-site
+    max_age=3600,       # absolute cap: cookie itself dies after 1 hour no matter what
+    # Note: HttpOnly is always on for Starlette's SessionMiddleware (not configurable) --
+    # that's the 3rd of the 3 required Set-Cookie attributes.
+)
+
+# Auth routes (/, /login, /logout, /dashboard) live in their own router.
+app.include_router(auth_router)
 
 class Notice(BaseModel):
     id: int
@@ -32,8 +59,15 @@ notices: List[Notice] = [
     )
 ]
 
-@app.get("/")
-def home():
+@app.get("/notices")
+def notices_app():
+    """
+    The original HW1/HW2 recall-notices single-page app (unchanged).
+    Moved from "/" to "/notices" so "/" can be the new HW3 login-aware
+    home page (see routers/auth.py) -- this does NOT affect the separate
+    Nginx/Docker static-hosting path from HW1, which serves index.html
+    directly off disk and never goes through this file.
+    """
     return FileResponse("index.html")
 
 @app.get("/api/notices", response_model=List[Notice])

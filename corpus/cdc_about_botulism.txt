@@ -1,0 +1,18 @@
+Source: https://www.cdc.gov/botulism/about/index.html
+Accessed: 2026-09-20
+Title: CDC: About Botulism
+
+Botulism is a rare but serious illness caused by a toxin that attacks the body's
+nerves; it causes difficulty breathing, muscle paralysis, and potentially death. The toxin is
+produced by Clostridium botulinum bacteria.
+
+Five main types:
+1. Foodborne -- from contaminated foods, especially improperly canned items
+2. Wound -- when spores enter wounds; more common in people who inject drugs
+3. Infant -- when spores grow in infants' intestines (often linked to contaminated formula or
+   honey)
+4. Iatrogenic -- from excessive toxin injection for cosmetic or medical purposes
+5. Adult intestinal toxemia -- rare intestinal colonization in adults
+
+All kinds of botulism can be fatal and are medical emergencies requiring immediate medical
+attention.

@@ -1,0 +1,25 @@
+Source: https://www.fda.gov/safety/recalls-market-withdrawals-safety-alerts/sno-pac-foods-recalls-del-mar-35-lb-bulk-frozen-spinach-and-10-oz-organic-frozen-cut-spinach
+Accessed: 2026-09-20
+Title: FDA Recall: Sno Pac Foods Frozen Spinach
+
+Company Name: Sno Pac Foods, Inc. (Caledonia, MN)
+
+Products Recalled:
+- Del Mar 35 LB Bulk Organic Frozen Spinach
+- Sno Pac 10 oz Organic Frozen Cut Spinach
+
+Lot Codes & Expiration Dates:
+- 35 LB boxes: 250107A, 250107B, 250107C, 250107D, 2501071, 2501073 (exp. 1/7/27)
+- 10 oz packages: SPM1.190.5 (best by 7/9/27), SPC1.160.5 (best by 6/9/27),
+  SPC2.160.5 (best by 6/9/27), SPM1.097.5 (best by 4/7/27)
+
+Recall Reason: Potential contamination with Listeria monocytogenes
+Geographic Distribution: Nationwide in retail stores and through distributors
+
+Consumer Guidance: Dispose of the product, or return it to the place of purchase for a full
+refund.
+
+Health Risks: Infection can cause severe symptoms in vulnerable populations; miscarriages and
+stillbirths among pregnant women are possible.
+
+Status: Recall completed and FDA-terminated; no illnesses reported.

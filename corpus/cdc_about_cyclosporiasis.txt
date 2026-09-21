@@ -1,0 +1,11 @@
+Source: https://www.cdc.gov/cyclosporiasis/about/index.html
+Accessed: 2026-09-20
+Title: CDC: About Cyclosporiasis
+
+Cyclosporiasis is caused by a microscopic parasite, Cyclospora cayetanensis. It
+spreads through contaminated food or water, most often fresh produce such as leafy greens,
+herbs, and berries. Symptoms typically appear about a week after exposure and include watery
+diarrhea, loss of appetite, weight loss, stomach cramps, bloating, increased gas, nausea, and
+fatigue. Most people recover without treatment, though antibiotics (trimethoprim/
+sulfamethoxazole) can help. Prevention focuses on washing produce thoroughly and following
+safe food handling practices, since the parasite is resistant to many common disinfectants.

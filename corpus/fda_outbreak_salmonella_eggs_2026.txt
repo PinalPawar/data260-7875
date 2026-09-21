@@ -1,0 +1,28 @@
+Source: https://www.fda.gov/food/outbreaks-foodborne-illness/outbreak-investigation-salmonella-eggs-july-2026
+Accessed: 2026-09-20
+Title: Outbreak Investigation of Salmonella: Eggs (July 2026)
+
+Status: The investigation concluded with the CDC declaring the outbreak over and FDA
+closing its investigation as of September 3, 2026.
+
+Key Dates:
+- Illness onset range: November 21, 2025 to August 12, 2026
+- Recall initiated: July 22, 2026
+- Final update: September 3, 2026
+
+Case Summary: Total illnesses: 134 across 18 states (AR, AZ, CA, CO, GA, IL, LA, MI, MO, MS,
+NC, NM, NV, NY, OK, SC, TX, WV). Hospitalizations: 34. Deaths: 0. 85% of 54 ill persons with
+available information reported eating eggs before illness.
+
+Recalled Products: Midwest Poultry Services, L.P. recalled white shell eggs and brown
+cage-free eggs produced in Texas between June 6-July 3, 2026. Affected brands included Kroger,
+Simple Truth, Brookshire's, Country Morning, and Sunups, with specific identifying code
+P-1950 or 0840962 and Julian dates 157-184.
+
+Investigation Findings: Epidemiological, laboratory, and traceback evidence determined that
+shell eggs produced by Midwest Poultry Services, L.P. in Texas are a likely source of
+illnesses. Three environmental samples from FDA inspection matched the outbreak strain via
+whole genome sequencing.
+
+Consumer Recommendations: Discard recalled eggs, clean surfaces thoroughly, and wash hands,
+utensils, and surfaces with hot, soapy water before and after handling raw eggs.
