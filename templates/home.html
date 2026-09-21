@@ -27,6 +27,11 @@
     <div class="col-md-8">
       <div class="card shadow-sm">
         <div class="card-body">
+          {% if logged_out %}
+          <div class="alert alert-success" role="alert">
+            You have been logged out.
+          </div>
+          {% endif %}
           <h3 class="card-title">Welcome to the Grocery Recall Notices Portal</h3>
           <p class="card-text">
             Track and report grocery product recalls &mdash; bacterial contamination,
