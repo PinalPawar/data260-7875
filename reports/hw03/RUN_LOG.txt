@@ -1,7 +1,3 @@
-DATA260 HW3 — RUN_LOG.txt
-SID4=7875  PORT_BASE=8675  DOMAIN_ID=3 (Grocery supply and recall notices)
-================================================================================
-
 ===== PART 1 — Auth app manual verification (real run, 2026-09-20/21) =====
 Run on my own MacBook Air, in the data260-7875 repo folder, with the app's
 conda environment (data260) except where noted -- curl itself doesn't need
@@ -41,13 +37,15 @@ $ curl -s -o /dev/null -w "HTTP %{http_code}\n" -b cookies.txt http://127.0.0.1:
 HTTP 200
 $ curl -s -D - -o /dev/null -b cookies.txt http://127.0.0.1:8675/logout
 HTTP/1.1 302 Found
-location: /login?logged_out=1
+location: /?logged_out=1
 set-cookie: session=null; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; httponly; samesite=lax; secure
 $ curl -s -D - -o /dev/null -b cookies.txt http://127.0.0.1:8675/dashboard
 HTTP/1.1 302 Found
 location: /login
 (PASS -- the exact same cookie that returned 200 a moment earlier is rejected
-after logout. Full copy + explanation: screenshots/cookie_reuse_proof.txt)
+after logout, and logout now redirects to the home page "/" per the
+assignment spec, with a "You have been logged out." banner shown there.
+Full copy + explanation: screenshots/cookie_reuse_proof.txt)
 
 Note: an earlier attempt at this same test accidentally showed the *first*
 curl (immediately after login) already returning 302 instead of 200 --
@@ -68,7 +66,7 @@ location: /login?expired=1
 set-cookie: session=null; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; httponly; samesite=lax; secure
 (PASS -- idle session expired on its own after the timeout window and was
 rejected; note the redirect target, /login?expired=1, is distinct from
-/login?logged_out=1 used by an explicit logout.)
+/?logged_out=1 used by an explicit logout.)
 
 --- Existing recall-notices app/API still works after the HW3 merge ---
 $ curl -s -o /dev/null -w "GET /notices -> HTTP %{http_code}\n" http://127.0.0.1:8675/notices
@@ -81,7 +79,6 @@ GET /api/notices -> HTTP 200
 4_dashboard_logged_in.png, 5_home_logged_in.png, 6_after_logout.png,
 7_templates_directory.png
 
-================================================================================
 ===== PART 2 — Retrieval pipeline run (real run, 2026-09-20) =====
 
 $ pip install -r requirements.txt
@@ -91,7 +88,9 @@ $ python3 scripts/summarize_metrics.py
 $ python3 scripts/verify_hw03.py
 Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
 [2026-09-20 17:11:12] Loading embedding model: sentence-transformers/all-MiniLM-L6-v2
-Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 10315.26it/s]
+
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 103/103 [00:00<00:00, 10315.26it/s]
 Loaded 39 corpus documents from /Users/atharvamundada/Downloads/data260-7875/corpus (263.4 KB total)
 Loaded 6 questions from questions.yaml
 
