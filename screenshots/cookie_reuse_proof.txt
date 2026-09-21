@@ -8,17 +8,16 @@ $ curl -s -o /dev/null -c cookies.txt -X POST http://127.0.0.1:8675/login -d "us
 $ curl -s -o /dev/null -w "HTTP %{http_code}\n" -b cookies.txt http://127.0.0.1:8675/dashboard
 HTTP 200
 
---- 2) log out (revokes this cookie server-side) ---
+--- 2) log out (revokes this cookie server-side, redirects to the home page) ---
 $ curl -s -D - -o /dev/null -b cookies.txt http://127.0.0.1:8675/logout
 HTTP/1.1 302 Found
-location: /login?logged_out=1
+location: /?logged_out=1
 set-cookie: session=null; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; httponly; samesite=lax; secure
 
 --- 3) try reusing the SAME cookie against dashboard again ---
 $ curl -s -D - -o /dev/null -b cookies.txt http://127.0.0.1:8675/dashboard
 HTTP/1.1 302 Found
 location: /login
-set-cookie: session=eyJ1c2VyIjogImFkbWluIiwgInNpZCI6ICI4MGI0NWExNi02ODI2LTQxZGMtOGNkNi00NmEzMDI3YmM5ODAiLCAibGFzdF9zZWVuIjogMTc4OTk1NDg3MS4xMzU1Nzg5fQ==.arCLNw.YvAve_UV6jxtWmRXLFILi4ycNiQ; path=/; Max-Age=3600; httponly; samesite=lax; secure
 
 RESULT: PASS -- the exact same cookie that returned HTTP 200 immediately after
 login returns 302 (redirect back to /login) after logout, even though it's
@@ -27,9 +26,16 @@ the identical cookie value. This is because logout adds that session's random
 is a signed, client-side value, so clearing browser state alone would not be
 enough; the server has to remember it was revoked.
 
-BONUS (unplanned, but real): an earlier run of this same test showed step 1
-returning 302 instead of 200, because about 6.5 minutes had passed between
-logging in and running the test (during normal back-and-forth), which
-exceeded the app's 5-minute idle timeout (IDLE_TIMEOUT_SECONDS=300) on its
-own -- an accidental, live demonstration that idle timeout also works as
-intended, in addition to the logout/replay protection tested above.
+Note: logout redirects to "/" (the home page), per the assignment spec
+("Destroy the session and redirect the user to the home page"), with a
+"You have been logged out." banner shown there (see screenshots/6_after_logout.png).
+An earlier draft of this app redirected to /login?logged_out=1 instead --
+that was fixed to match the spec before this final run.
+
+BONUS (unplanned, but real, from an earlier run of this same test): an
+earlier attempt showed step 1 returning 302 instead of 200, because about
+6.5 minutes had passed between logging in and running the test (during
+normal back-and-forth), which exceeded the app's 5-minute idle timeout
+(IDLE_TIMEOUT_SECONDS=300) on its own -- an accidental, live demonstration
+that idle timeout also works as intended, in addition to the logout/replay
+protection tested above.
