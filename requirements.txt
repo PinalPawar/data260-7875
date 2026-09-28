@@ -19,3 +19,10 @@ pyyaml
 # HW3 Part 2: corpus-gathering script (scripts/fetch_corpus.py)
 requests
 beautifulsoup4
+
+# HW4 Part 2: MySQL persistence + server-side sessions
+sqlalchemy
+pymysql
+python-dotenv
+bcrypt
+email-validator
