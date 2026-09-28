@@ -1,0 +1,361 @@
+[
+  {
+    "question_id": "Q1",
+    "question": "What pathogen was linked to the 2021 spinach recall?",
+    "category": "one_chunk",
+    "must_refuse": false,
+    "config": "no_rag",
+    "answer": "The 2021 spinach recall was linked to **E. coli O157:H7**. This pathogen was found in contaminated spinach, leading to multiple cases of foodborne illness.",
+    "latency_ms": 3871.5,
+    "refused": false,
+    "sources_used": [],
+    "correct_retrieval": null,
+    "dropped_chunks": null
+  },
+  {
+    "question_id": "Q1",
+    "question": "What pathogen was linked to the 2021 spinach recall?",
+    "category": "one_chunk",
+    "must_refuse": false,
+    "config": "basic_rag",
+    "answer": "The pathogen linked to the 2021 spinach recall was **E. coli O157:H7**. This strain of Escherichia coli is known for causing severe foodborne illness, often associated with contaminated leafy greens like spinach.",
+    "latency_ms": 7305.3,
+    "refused": false,
+    "sources_used": [
+      "fda_outbreak_ecoli_spinach_2021.txt",
+      "fda_outbreak_ecoli_spinach_2021.txt",
+      "fda_outbreak_ecoli_spinach_2021.txt"
+    ],
+    "correct_retrieval": true,
+    "dropped_chunks": null
+  },
+  {
+    "question_id": "Q1",
+    "question": "What pathogen was linked to the 2021 spinach recall?",
+    "category": "one_chunk",
+    "must_refuse": false,
+    "config": "context_engineered",
+    "answer": "The pathogen linked to the 2021 spinach recall was Escherichia coli O157:H7 [1].",
+    "latency_ms": 6369.8,
+    "refused": false,
+    "sources_used": [
+      "fda_outbreak_ecoli_spinach_2021.txt",
+      "fda_outbreak_ecoli_spinach_2021.txt",
+      "fda_outbreak_ecoli_spinach_2021.txt"
+    ],
+    "correct_retrieval": true,
+    "dropped_chunks": [
+      {
+        "chunk_id": "0ba46825-937c-4c17-9d89-851f4b8dfeed",
+        "source_file": "openfda_enforcement_bulk_records.txt",
+        "reason": "context budget (kept top 3 only)"
+      },
+      {
+        "chunk_id": "c53aeb0f-79a9-41d2-893a-c5afeaa41b23",
+        "source_file": "openfda_enforcement_bulk_records.txt",
+        "reason": "context budget (kept top 3 only)"
+      }
+    ]
+  },
+  {
+    "question_id": "Q2",
+    "question": "Name two infant formula products recalled due to Clostridium botulinum contamination, and the year each was recalled.",
+    "category": "two_chunks",
+    "must_refuse": false,
+    "config": "no_rag",
+    "answer": "In 2012, two infant formula products were recalled due to contamination with **Clostridium botulinum**:\n\n1. **Similac** (specifically the **Similac NeoLactase** formula) was recalled in 2012 due to the presence of **C. botulinum** spores.\n\n2. **PediaCare** (specifically the **PediaCare 100% Breast Milk** formula) was also recalled in 2012 due to similar contamination.\n\nThese recalls were part of a larger investigation into the occurrence of **C. botulinum** in infant formula.",
+    "latency_ms": 6820.6,
+    "refused": false,
+    "sources_used": [],
+    "correct_retrieval": null,
+    "dropped_chunks": null
+  },
+  {
+    "question_id": "Q2",
+    "question": "Name two infant formula products recalled due to Clostridium botulinum contamination, and the year each was recalled.",
+    "category": "two_chunks",
+    "must_refuse": false,
+    "config": "basic_rag",
+    "answer": "Based on the provided context, the two infant formula products recalled due to **Clostridium botulinum** contamination are:\n\n1. **ByHeart Whole Nutrition Infant Formula** \u2013 Recalled in **November 2025** (as mentioned in the FDA alert).\n\n2. **Nara Organics Whole Milk Infant Formula** \u2013 Recalled in **June 2026** (as mentioned in the CDC and FDA recall notices).\n\n**Answer:**\n- **ByHeart Whole Nutrition Infant Formula** \u2013 Recalled in **November 2025**\n- **Nara Organics Whole Milk Infant Formula** \u2013 Recalled in **June 2026**",
+    "latency_ms": 10608.4,
+    "refused": false,
+    "sources_used": [
+      "fda_recall_byheart_infant_formula_2025.txt",
+      "cdc_outbreak_infant_botulism_formula_2026.txt",
+      "fda_recall_nara_organics_infant_formula_2026.txt"
+    ],
+    "correct_retrieval": true,
+    "dropped_chunks": null
+  },
+  {
+    "question_id": "Q2",
+    "question": "Name two infant formula products recalled due to Clostridium botulinum contamination, and the year each was recalled.",
+    "category": "two_chunks",
+    "must_refuse": false,
+    "config": "context_engineered",
+    "answer": "The two infant formula products recalled due to Clostridium botulinum contamination are:\n\n1. **ByHeart Whole Nutrition Infant Formula** - Recalled in November 2025 [1].\n2. **Nara Organics Whole Milk Infant Formula** - Recalled in June 2026 [2][3].\n\nThus, the answer is:\n\n1. ByHeart Whole Nutrition Infant Formula - November 2025  \n2. Nara Organics Whole Milk Infant Formula - June 2026",
+    "latency_ms": 9345.2,
+    "refused": false,
+    "sources_used": [
+      "fda_recall_byheart_infant_formula_2025.txt",
+      "cdc_outbreak_infant_botulism_formula_2026.txt",
+      "fda_recall_nara_organics_infant_formula_2026.txt"
+    ],
+    "correct_retrieval": true,
+    "dropped_chunks": [
+      {
+        "chunk_id": "b587b034-4089-4829-99d6-90ae87f070b3",
+        "source_file": "fda_outbreak_infant_botulism_formula_2026.txt",
+        "reason": "context budget (kept top 3 only)"
+      },
+      {
+        "chunk_id": "d1ff8783-abf0-4e87-a8f0-6cc33e89b1ba",
+        "source_file": "fda_recall_a2platinum_infant_formula_2026.txt",
+        "reason": "context budget (kept top 3 only)"
+      }
+    ]
+  },
+  {
+    "question_id": "Q3",
+    "question": "Which groups are considered highest-risk for severe Listeria infection?",
+    "category": "similar_across_docs",
+    "must_refuse": false,
+    "config": "no_rag",
+    "answer": "The groups considered highest-risk for severe **Listeria** infection are:\n\n1. **Pregnant women**  \n2. **Newborns**  \n3. **Elderly individuals**  \n4. **Individuals with weakened immune systems** (e.g., those with chronic illnesses, organ transplant recipients, or those on immunosuppressive medications)  \n5. **People with certain medical conditions** (e.g., diabetes, cancer, or those with chronic lung disease)  \n6. **Persons who consume raw or undercooked foods** (e.g., deli meats, unpasteurized dairy products, sprouts, or ready-to-eat foods)  \n\nThese groups are at increased risk due to factors such as compromised immune function, pregnancy-related changes, or exposure to contaminated food.",
+    "latency_ms": 7963.5,
+    "refused": false,
+    "sources_used": [],
+    "correct_retrieval": null,
+    "dropped_chunks": null
+  },
+  {
+    "question_id": "Q3",
+    "question": "Which groups are considered highest-risk for severe Listeria infection?",
+    "category": "similar_across_docs",
+    "must_refuse": false,
+    "config": "basic_rag",
+    "answer": "The highest-risk groups for severe Listeria infection, as outlined in the provided sources, are:\n\n1. **Pregnant women**  \n2. **Newborns**  \n3. **Adults 65 years of age or older**  \n4. **Immunocompromised individuals** (those with weakened immune systems)\n\nThese groups are at significantly higher risk for severe illness, including life-threatening conditions such as sepsis, meningitis, and neonatal complications like stillbirth or life-threatening infection of the newborn. \n\nOther populations, while possibly infected with Listeria, generally do not develop severe illness.",
+    "latency_ms": 9580.6,
+    "refused": false,
+    "sources_used": [
+      "cdc_about_listeria.txt",
+      "fsis_chicken_caesar_wrap_listeria.txt",
+      "cdc_outbreak_deli_meats_listeria.txt"
+    ],
+    "correct_retrieval": true,
+    "dropped_chunks": null
+  },
+  {
+    "question_id": "Q3",
+    "question": "Which groups are considered highest-risk for severe Listeria infection?",
+    "category": "similar_across_docs",
+    "must_refuse": false,
+    "config": "context_engineered",
+    "answer": "The groups considered highest-risk for severe Listeria infection are pregnant women, newborns, adults 65 years of age and older, and individuals with weakened immune systems [1].",
+    "latency_ms": 5460.0,
+    "refused": false,
+    "sources_used": [
+      "cdc_about_listeria.txt",
+      "fsis_chicken_caesar_wrap_listeria.txt",
+      "cdc_outbreak_deli_meats_listeria.txt"
+    ],
+    "correct_retrieval": true,
+    "dropped_chunks": [
+      {
+        "chunk_id": "c560ee6b-60be-4347-909b-709bdb0f95e1",
+        "source_file": "openfda_enforcement_bulk_records.txt",
+        "reason": "context budget (kept top 3 only)"
+      },
+      {
+        "chunk_id": "721231f5-1ecb-41a9-98e3-e357391f2487",
+        "source_file": "fda_outbreaks_investigations_index.txt",
+        "reason": "context budget (kept top 3 only)"
+      }
+    ]
+  },
+  {
+    "question_id": "Q4",
+    "question": "What product was recalled in 2026 due to contamination?",
+    "category": "ambiguous",
+    "must_refuse": false,
+    "config": "no_rag",
+    "answer": "The product recalled in 2026 due to contamination was **Kleenex tissues**. This recall was initiated by the U.S. Food and Drug Administration (FDA) in July 2026 following reports of contamination with **E. coli** in some batches of the product.",
+    "latency_ms": 3067.3,
+    "refused": false,
+    "sources_used": [],
+    "correct_retrieval": null,
+    "dropped_chunks": null
+  },
+  {
+    "question_id": "Q4",
+    "question": "What product was recalled in 2026 due to contamination?",
+    "category": "ambiguous",
+    "must_refuse": false,
+    "config": "basic_rag",
+    "answer": "Based on the provided information, there is **no mention of a product being recalled in 2026** due to contamination. The recall information provided spans from **November 2023** to **November 2027**, but **no product recall in 2026** is listed in the context.\n\nTherefore, **there is no product recalled in 2026** based on the given data.",
+    "latency_ms": 9653.5,
+    "refused": false,
+    "sources_used": [
+      "fda_outbreak_salmonella_cantaloupes_2023.txt",
+      "openfda_enforcement_bulk_records.txt",
+      "openfda_enforcement_bulk_records.txt"
+    ],
+    "correct_retrieval": null,
+    "dropped_chunks": null
+  },
+  {
+    "question_id": "Q4",
+    "question": "What product was recalled in 2026 due to contamination?",
+    "category": "ambiguous",
+    "must_refuse": false,
+    "config": "context_engineered",
+    "answer": "I cannot answer this question from the provided documents.",
+    "latency_ms": 5999.3,
+    "refused": true,
+    "sources_used": [
+      "fda_outbreak_salmonella_cantaloupes_2023.txt",
+      "openfda_enforcement_bulk_records.txt",
+      "openfda_enforcement_bulk_records.txt"
+    ],
+    "correct_retrieval": null,
+    "dropped_chunks": [
+      {
+        "chunk_id": "31ce82dd-fab4-428f-b776-2bacb61b34c1",
+        "source_file": "openfda_enforcement_bulk_records.txt",
+        "reason": "context budget (kept top 3 only)"
+      },
+      {
+        "chunk_id": "10be0484-b88b-43d4-a74c-44af41a83489",
+        "source_file": "openfda_enforcement_bulk_records.txt",
+        "reason": "context budget (kept top 3 only)"
+      }
+    ]
+  },
+  {
+    "question_id": "Q5",
+    "question": "How much revenue did J.M. Smucker Company lose due to the 2022 peanut butter recall?",
+    "category": "not_in_documents",
+    "must_refuse": true,
+    "config": "no_rag",
+    "answer": "J.M. Smucker Company did not lose any revenue due to the 2022 peanut butter recall. The recall involved a product line of its own brand, and while the recall led to a temporary decline in sales, it did not result in a financial loss. The company reported a net loss of $186 million in 2022, but this loss was attributed to various factors, including legal expenses, inventory write-offs, and other operational challenges, not specifically to the peanut butter recall.",
+    "latency_ms": 5650.1,
+    "refused": false,
+    "sources_used": [],
+    "correct_retrieval": null,
+    "dropped_chunks": null
+  },
+  {
+    "question_id": "Q5",
+    "question": "How much revenue did J.M. Smucker Company lose due to the 2022 peanut butter recall?",
+    "category": "not_in_documents",
+    "must_refuse": true,
+    "config": "basic_rag",
+    "answer": "The question asks for the **revenue lost** by J.M. Smucker Company due to the 2022 peanut butter recall. However, **no financial data** is provided in the given context, including the recall details, product information, or financial impact.\n\nTherefore, **the answer is not possible to determine from the provided information**.\n\nIf you have access to additional financial reports, news articles, or official records from the FDA or J.M. Smucker Company, you would need to consult those sources to find the exact revenue impact.",
+    "latency_ms": 11034.4,
+    "refused": false,
+    "sources_used": [
+      "fda_recall_peanut_butter_smucker_2022.txt",
+      "openfda_enforcement_bulk_records.txt",
+      "fda_recall_peanut_butter_smucker_2022.txt"
+    ],
+    "correct_retrieval": true,
+    "dropped_chunks": null
+  },
+  {
+    "question_id": "Q5",
+    "question": "How much revenue did J.M. Smucker Company lose due to the 2022 peanut butter recall?",
+    "category": "not_in_documents",
+    "must_refuse": true,
+    "config": "context_engineered",
+    "answer": "I cannot answer this question from the provided documents.",
+    "latency_ms": 6023.9,
+    "refused": true,
+    "sources_used": [
+      "fda_recall_peanut_butter_smucker_2022.txt",
+      "openfda_enforcement_bulk_records.txt",
+      "fda_recall_peanut_butter_smucker_2022.txt"
+    ],
+    "correct_retrieval": true,
+    "dropped_chunks": [
+      {
+        "chunk_id": "1aa2588b-801f-4775-847c-c40641ec2d51",
+        "source_file": "openfda_enforcement_bulk_records.txt",
+        "reason": "context budget (kept top 3 only)"
+      },
+      {
+        "chunk_id": "3494f2e8-ab2b-4cd3-b9c4-a18d9ff17da5",
+        "source_file": "openfda_enforcement_bulk_records.txt",
+        "reason": "context budget (kept top 3 only)"
+      }
+    ]
+  },
+  {
+    "question_id": "Q6",
+    "question": "What is the current price of Tesla stock?",
+    "category": "unrelated",
+    "must_refuse": true,
+    "config": "no_rag",
+    "answer": "As of the latest update before this response, Tesla's stock price fluctuates based on market conditions, company performance, and economic factors. For the most accurate and up-to-date information, I recommend checking a financial platform like Yahoo Finance, Bloomberg, or a stock market tracking service. If you'd like, I can provide a general trend or recent performance, but I cannot access real-time data.",
+    "latency_ms": 4263.8,
+    "refused": false,
+    "sources_used": [],
+    "correct_retrieval": null,
+    "dropped_chunks": null
+  },
+  {
+    "question_id": "Q6",
+    "question": "What is the current price of Tesla stock?",
+    "category": "unrelated",
+    "must_refuse": true,
+    "config": "basic_rag",
+    "answer": "The question asked about the current price of Tesla stock, but the provided text does not contain any information about stock prices. The text is related to food recalls, outbreaks, and regulatory actions by the FDA. There is no mention of financial data, stock prices, or any financial instruments in the given context.\n\nTherefore, the answer is:\n\n**The current price of Tesla stock cannot be determined from the provided text.**",
+    "latency_ms": 8270.6,
+    "refused": false,
+    "sources_used": [
+      "openfda_enforcement_bulk_records.txt",
+      "fda_recall_peanut_butter_smucker_2022.txt",
+      "fda_outbreaks_investigations_index.txt"
+    ],
+    "correct_retrieval": true,
+    "dropped_chunks": null
+  },
+  {
+    "question_id": "Q6",
+    "question": "What is the current price of Tesla stock?",
+    "category": "unrelated",
+    "must_refuse": true,
+    "config": "context_engineered",
+    "answer": "I cannot answer this question from the provided documents",
+    "latency_ms": 848.9,
+    "refused": true,
+    "sources_used": [],
+    "correct_retrieval": true,
+    "dropped_chunks": [
+      {
+        "chunk_id": "a4ba5612-a213-4900-98e6-5de47eb17130",
+        "source_file": "openfda_enforcement_bulk_records.txt",
+        "reason": "irrelevant (score 0.1506 < 0.35)"
+      },
+      {
+        "chunk_id": "fa5ba9df-a25c-4496-916b-1e2055489f31",
+        "source_file": "fda_recall_peanut_butter_smucker_2022.txt",
+        "reason": "irrelevant (score 0.1439 < 0.35)"
+      },
+      {
+        "chunk_id": "ff15623a-764b-49d1-bc72-467861badd6e",
+        "source_file": "fda_outbreaks_investigations_index.txt",
+        "reason": "irrelevant (score 0.1397 < 0.35)"
+      },
+      {
+        "chunk_id": "857a9f9d-ea6c-4504-aedb-c8bd2f302fc8",
+        "source_file": "fda_recall_byheart_infant_formula_2025.txt",
+        "reason": "irrelevant (score 0.1375 < 0.35)"
+      },
+      {
+        "chunk_id": "775cd9d6-008f-4f20-ba2f-2ebfcb534481",
+        "source_file": "openfda_enforcement_bulk_records.txt",
+        "reason": "irrelevant (score 0.1361 < 0.35)"
+      }
+    ]
+  }
+]

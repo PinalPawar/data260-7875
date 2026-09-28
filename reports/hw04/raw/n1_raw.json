@@ -1,0 +1,1442 @@
+[
+  {
+    "page_size": 10,
+    "version": "naive",
+    "request_index": 0,
+    "latency_ms": 15.632,
+    "sql_query_count": 11,
+    "rows_returned": 10
+  },
+  {
+    "page_size": 10,
+    "version": "naive",
+    "request_index": 1,
+    "latency_ms": 10.137,
+    "sql_query_count": 11,
+    "rows_returned": 10
+  },
+  {
+    "page_size": 10,
+    "version": "naive",
+    "request_index": 2,
+    "latency_ms": 9.979,
+    "sql_query_count": 11,
+    "rows_returned": 10
+  },
+  {
+    "page_size": 10,
+    "version": "naive",
+    "request_index": 3,
+    "latency_ms": 13.814,
+    "sql_query_count": 11,
+    "rows_returned": 10
+  },
+  {
+    "page_size": 10,
+    "version": "naive",
+    "request_index": 4,
+    "latency_ms": 9.219,
+    "sql_query_count": 11,
+    "rows_returned": 10
+  },
+  {
+    "page_size": 10,
+    "version": "naive",
+    "request_index": 5,
+    "latency_ms": 9.432,
+    "sql_query_count": 11,
+    "rows_returned": 10
+  },
+  {
+    "page_size": 10,
+    "version": "naive",
+    "request_index": 6,
+    "latency_ms": 9.487,
+    "sql_query_count": 11,
+    "rows_returned": 10
+  },
+  {
+    "page_size": 10,
+    "version": "naive",
+    "request_index": 7,
+    "latency_ms": 11.012,
+    "sql_query_count": 11,
+    "rows_returned": 10
+  },
+  {
+    "page_size": 10,
+    "version": "naive",
+    "request_index": 8,
+    "latency_ms": 11.631,
+    "sql_query_count": 11,
+    "rows_returned": 10
+  },
+  {
+    "page_size": 10,
+    "version": "naive",
+    "request_index": 9,
+    "latency_ms": 9.694,
+    "sql_query_count": 11,
+    "rows_returned": 10
+  },
+  {
+    "page_size": 10,
+    "version": "naive",
+    "request_index": 10,
+    "latency_ms": 9.473,
+    "sql_query_count": 11,
+    "rows_returned": 10
+  },
+  {
+    "page_size": 10,
+    "version": "naive",
+    "request_index": 11,
+    "latency_ms": 10.851,
+    "sql_query_count": 11,
+    "rows_returned": 10
+  },
+  {
+    "page_size": 10,
+    "version": "naive",
+    "request_index": 12,
+    "latency_ms": 8.571,
+    "sql_query_count": 11,
+    "rows_returned": 10
+  },
+  {
+    "page_size": 10,
+    "version": "naive",
+    "request_index": 13,
+    "latency_ms": 8.668,
+    "sql_query_count": 11,
+    "rows_returned": 10
+  },
+  {
+    "page_size": 10,
+    "version": "naive",
+    "request_index": 14,
+    "latency_ms": 9.089,
+    "sql_query_count": 11,
+    "rows_returned": 10
+  },
+  {
+    "page_size": 10,
+    "version": "naive",
+    "request_index": 15,
+    "latency_ms": 9.887,
+    "sql_query_count": 11,
+    "rows_returned": 10
+  },
+  {
+    "page_size": 10,
+    "version": "naive",
+    "request_index": 16,
+    "latency_ms": 10.111,
+    "sql_query_count": 11,
+    "rows_returned": 10
+  },
+  {
+    "page_size": 10,
+    "version": "naive",
+    "request_index": 17,
+    "latency_ms": 9.167,
+    "sql_query_count": 11,
+    "rows_returned": 10
+  },
+  {
+    "page_size": 10,
+    "version": "naive",
+    "request_index": 18,
+    "latency_ms": 10.184,
+    "sql_query_count": 11,
+    "rows_returned": 10
+  },
+  {
+    "page_size": 10,
+    "version": "naive",
+    "request_index": 19,
+    "latency_ms": 9.228,
+    "sql_query_count": 11,
+    "rows_returned": 10
+  },
+  {
+    "page_size": 10,
+    "version": "naive",
+    "request_index": 20,
+    "latency_ms": 10.337,
+    "sql_query_count": 11,
+    "rows_returned": 10
+  },
+  {
+    "page_size": 10,
+    "version": "naive",
+    "request_index": 21,
+    "latency_ms": 8.852,
+    "sql_query_count": 11,
+    "rows_returned": 10
+  },
+  {
+    "page_size": 10,
+    "version": "naive",
+    "request_index": 22,
+    "latency_ms": 9.282,
+    "sql_query_count": 11,
+    "rows_returned": 10
+  },
+  {
+    "page_size": 10,
+    "version": "naive",
+    "request_index": 23,
+    "latency_ms": 8.053,
+    "sql_query_count": 11,
+    "rows_returned": 10
+  },
+  {
+    "page_size": 10,
+    "version": "naive",
+    "request_index": 24,
+    "latency_ms": 8.406,
+    "sql_query_count": 11,
+    "rows_returned": 10
+  },
+  {
+    "page_size": 10,
+    "version": "naive",
+    "request_index": 25,
+    "latency_ms": 8.284,
+    "sql_query_count": 11,
+    "rows_returned": 10
+  },
+  {
+    "page_size": 10,
+    "version": "naive",
+    "request_index": 26,
+    "latency_ms": 9.084,
+    "sql_query_count": 11,
+    "rows_returned": 10
+  },
+  {
+    "page_size": 10,
+    "version": "naive",
+    "request_index": 27,
+    "latency_ms": 9.915,
+    "sql_query_count": 11,
+    "rows_returned": 10
+  },
+  {
+    "page_size": 10,
+    "version": "naive",
+    "request_index": 28,
+    "latency_ms": 8.719,
+    "sql_query_count": 11,
+    "rows_returned": 10
+  },
+  {
+    "page_size": 10,
+    "version": "naive",
+    "request_index": 29,
+    "latency_ms": 10.866,
+    "sql_query_count": 11,
+    "rows_returned": 10
+  },
+  {
+    "page_size": 10,
+    "version": "fixed",
+    "request_index": 0,
+    "latency_ms": 8.996,
+    "sql_query_count": 1,
+    "rows_returned": 10
+  },
+  {
+    "page_size": 10,
+    "version": "fixed",
+    "request_index": 1,
+    "latency_ms": 5.36,
+    "sql_query_count": 1,
+    "rows_returned": 10
+  },
+  {
+    "page_size": 10,
+    "version": "fixed",
+    "request_index": 2,
+    "latency_ms": 4.653,
+    "sql_query_count": 1,
+    "rows_returned": 10
+  },
+  {
+    "page_size": 10,
+    "version": "fixed",
+    "request_index": 3,
+    "latency_ms": 5.043,
+    "sql_query_count": 1,
+    "rows_returned": 10
+  },
+  {
+    "page_size": 10,
+    "version": "fixed",
+    "request_index": 4,
+    "latency_ms": 4.588,
+    "sql_query_count": 1,
+    "rows_returned": 10
+  },
+  {
+    "page_size": 10,
+    "version": "fixed",
+    "request_index": 5,
+    "latency_ms": 4.426,
+    "sql_query_count": 1,
+    "rows_returned": 10
+  },
+  {
+    "page_size": 10,
+    "version": "fixed",
+    "request_index": 6,
+    "latency_ms": 3.928,
+    "sql_query_count": 1,
+    "rows_returned": 10
+  },
+  {
+    "page_size": 10,
+    "version": "fixed",
+    "request_index": 7,
+    "latency_ms": 5.23,
+    "sql_query_count": 1,
+    "rows_returned": 10
+  },
+  {
+    "page_size": 10,
+    "version": "fixed",
+    "request_index": 8,
+    "latency_ms": 4.371,
+    "sql_query_count": 1,
+    "rows_returned": 10
+  },
+  {
+    "page_size": 10,
+    "version": "fixed",
+    "request_index": 9,
+    "latency_ms": 4.551,
+    "sql_query_count": 1,
+    "rows_returned": 10
+  },
+  {
+    "page_size": 10,
+    "version": "fixed",
+    "request_index": 10,
+    "latency_ms": 4.766,
+    "sql_query_count": 1,
+    "rows_returned": 10
+  },
+  {
+    "page_size": 10,
+    "version": "fixed",
+    "request_index": 11,
+    "latency_ms": 4.042,
+    "sql_query_count": 1,
+    "rows_returned": 10
+  },
+  {
+    "page_size": 10,
+    "version": "fixed",
+    "request_index": 12,
+    "latency_ms": 4.59,
+    "sql_query_count": 1,
+    "rows_returned": 10
+  },
+  {
+    "page_size": 10,
+    "version": "fixed",
+    "request_index": 13,
+    "latency_ms": 4.347,
+    "sql_query_count": 1,
+    "rows_returned": 10
+  },
+  {
+    "page_size": 10,
+    "version": "fixed",
+    "request_index": 14,
+    "latency_ms": 4.73,
+    "sql_query_count": 1,
+    "rows_returned": 10
+  },
+  {
+    "page_size": 10,
+    "version": "fixed",
+    "request_index": 15,
+    "latency_ms": 4.491,
+    "sql_query_count": 1,
+    "rows_returned": 10
+  },
+  {
+    "page_size": 10,
+    "version": "fixed",
+    "request_index": 16,
+    "latency_ms": 4.348,
+    "sql_query_count": 1,
+    "rows_returned": 10
+  },
+  {
+    "page_size": 10,
+    "version": "fixed",
+    "request_index": 17,
+    "latency_ms": 4.229,
+    "sql_query_count": 1,
+    "rows_returned": 10
+  },
+  {
+    "page_size": 10,
+    "version": "fixed",
+    "request_index": 18,
+    "latency_ms": 4.354,
+    "sql_query_count": 1,
+    "rows_returned": 10
+  },
+  {
+    "page_size": 10,
+    "version": "fixed",
+    "request_index": 19,
+    "latency_ms": 4.222,
+    "sql_query_count": 1,
+    "rows_returned": 10
+  },
+  {
+    "page_size": 10,
+    "version": "fixed",
+    "request_index": 20,
+    "latency_ms": 4.285,
+    "sql_query_count": 1,
+    "rows_returned": 10
+  },
+  {
+    "page_size": 10,
+    "version": "fixed",
+    "request_index": 21,
+    "latency_ms": 4.381,
+    "sql_query_count": 1,
+    "rows_returned": 10
+  },
+  {
+    "page_size": 10,
+    "version": "fixed",
+    "request_index": 22,
+    "latency_ms": 4.573,
+    "sql_query_count": 1,
+    "rows_returned": 10
+  },
+  {
+    "page_size": 10,
+    "version": "fixed",
+    "request_index": 23,
+    "latency_ms": 4.176,
+    "sql_query_count": 1,
+    "rows_returned": 10
+  },
+  {
+    "page_size": 10,
+    "version": "fixed",
+    "request_index": 24,
+    "latency_ms": 4.202,
+    "sql_query_count": 1,
+    "rows_returned": 10
+  },
+  {
+    "page_size": 10,
+    "version": "fixed",
+    "request_index": 25,
+    "latency_ms": 4.144,
+    "sql_query_count": 1,
+    "rows_returned": 10
+  },
+  {
+    "page_size": 10,
+    "version": "fixed",
+    "request_index": 26,
+    "latency_ms": 4.432,
+    "sql_query_count": 1,
+    "rows_returned": 10
+  },
+  {
+    "page_size": 10,
+    "version": "fixed",
+    "request_index": 27,
+    "latency_ms": 4.098,
+    "sql_query_count": 1,
+    "rows_returned": 10
+  },
+  {
+    "page_size": 10,
+    "version": "fixed",
+    "request_index": 28,
+    "latency_ms": 4.446,
+    "sql_query_count": 1,
+    "rows_returned": 10
+  },
+  {
+    "page_size": 10,
+    "version": "fixed",
+    "request_index": 29,
+    "latency_ms": 4.946,
+    "sql_query_count": 1,
+    "rows_returned": 10
+  },
+  {
+    "page_size": 50,
+    "version": "naive",
+    "request_index": 0,
+    "latency_ms": 33.596,
+    "sql_query_count": 51,
+    "rows_returned": 50
+  },
+  {
+    "page_size": 50,
+    "version": "naive",
+    "request_index": 1,
+    "latency_ms": 28.686,
+    "sql_query_count": 51,
+    "rows_returned": 50
+  },
+  {
+    "page_size": 50,
+    "version": "naive",
+    "request_index": 2,
+    "latency_ms": 27.985,
+    "sql_query_count": 51,
+    "rows_returned": 50
+  },
+  {
+    "page_size": 50,
+    "version": "naive",
+    "request_index": 3,
+    "latency_ms": 29.547,
+    "sql_query_count": 51,
+    "rows_returned": 50
+  },
+  {
+    "page_size": 50,
+    "version": "naive",
+    "request_index": 4,
+    "latency_ms": 29.181,
+    "sql_query_count": 51,
+    "rows_returned": 50
+  },
+  {
+    "page_size": 50,
+    "version": "naive",
+    "request_index": 5,
+    "latency_ms": 29.82,
+    "sql_query_count": 51,
+    "rows_returned": 50
+  },
+  {
+    "page_size": 50,
+    "version": "naive",
+    "request_index": 6,
+    "latency_ms": 32.937,
+    "sql_query_count": 51,
+    "rows_returned": 50
+  },
+  {
+    "page_size": 50,
+    "version": "naive",
+    "request_index": 7,
+    "latency_ms": 33.116,
+    "sql_query_count": 51,
+    "rows_returned": 50
+  },
+  {
+    "page_size": 50,
+    "version": "naive",
+    "request_index": 8,
+    "latency_ms": 32.556,
+    "sql_query_count": 51,
+    "rows_returned": 50
+  },
+  {
+    "page_size": 50,
+    "version": "naive",
+    "request_index": 9,
+    "latency_ms": 32.595,
+    "sql_query_count": 51,
+    "rows_returned": 50
+  },
+  {
+    "page_size": 50,
+    "version": "naive",
+    "request_index": 10,
+    "latency_ms": 32.455,
+    "sql_query_count": 51,
+    "rows_returned": 50
+  },
+  {
+    "page_size": 50,
+    "version": "naive",
+    "request_index": 11,
+    "latency_ms": 34.716,
+    "sql_query_count": 51,
+    "rows_returned": 50
+  },
+  {
+    "page_size": 50,
+    "version": "naive",
+    "request_index": 12,
+    "latency_ms": 32.379,
+    "sql_query_count": 51,
+    "rows_returned": 50
+  },
+  {
+    "page_size": 50,
+    "version": "naive",
+    "request_index": 13,
+    "latency_ms": 32.622,
+    "sql_query_count": 51,
+    "rows_returned": 50
+  },
+  {
+    "page_size": 50,
+    "version": "naive",
+    "request_index": 14,
+    "latency_ms": 27.885,
+    "sql_query_count": 51,
+    "rows_returned": 50
+  },
+  {
+    "page_size": 50,
+    "version": "naive",
+    "request_index": 15,
+    "latency_ms": 29.887,
+    "sql_query_count": 51,
+    "rows_returned": 50
+  },
+  {
+    "page_size": 50,
+    "version": "naive",
+    "request_index": 16,
+    "latency_ms": 29.027,
+    "sql_query_count": 51,
+    "rows_returned": 50
+  },
+  {
+    "page_size": 50,
+    "version": "naive",
+    "request_index": 17,
+    "latency_ms": 28.964,
+    "sql_query_count": 51,
+    "rows_returned": 50
+  },
+  {
+    "page_size": 50,
+    "version": "naive",
+    "request_index": 18,
+    "latency_ms": 33.259,
+    "sql_query_count": 51,
+    "rows_returned": 50
+  },
+  {
+    "page_size": 50,
+    "version": "naive",
+    "request_index": 19,
+    "latency_ms": 29.17,
+    "sql_query_count": 51,
+    "rows_returned": 50
+  },
+  {
+    "page_size": 50,
+    "version": "naive",
+    "request_index": 20,
+    "latency_ms": 30.88,
+    "sql_query_count": 51,
+    "rows_returned": 50
+  },
+  {
+    "page_size": 50,
+    "version": "naive",
+    "request_index": 21,
+    "latency_ms": 32.675,
+    "sql_query_count": 51,
+    "rows_returned": 50
+  },
+  {
+    "page_size": 50,
+    "version": "naive",
+    "request_index": 22,
+    "latency_ms": 33.761,
+    "sql_query_count": 51,
+    "rows_returned": 50
+  },
+  {
+    "page_size": 50,
+    "version": "naive",
+    "request_index": 23,
+    "latency_ms": 31.359,
+    "sql_query_count": 51,
+    "rows_returned": 50
+  },
+  {
+    "page_size": 50,
+    "version": "naive",
+    "request_index": 24,
+    "latency_ms": 29.85,
+    "sql_query_count": 51,
+    "rows_returned": 50
+  },
+  {
+    "page_size": 50,
+    "version": "naive",
+    "request_index": 25,
+    "latency_ms": 30.773,
+    "sql_query_count": 51,
+    "rows_returned": 50
+  },
+  {
+    "page_size": 50,
+    "version": "naive",
+    "request_index": 26,
+    "latency_ms": 32.35,
+    "sql_query_count": 51,
+    "rows_returned": 50
+  },
+  {
+    "page_size": 50,
+    "version": "naive",
+    "request_index": 27,
+    "latency_ms": 28.839,
+    "sql_query_count": 51,
+    "rows_returned": 50
+  },
+  {
+    "page_size": 50,
+    "version": "naive",
+    "request_index": 28,
+    "latency_ms": 23.505,
+    "sql_query_count": 51,
+    "rows_returned": 50
+  },
+  {
+    "page_size": 50,
+    "version": "naive",
+    "request_index": 29,
+    "latency_ms": 24.411,
+    "sql_query_count": 51,
+    "rows_returned": 50
+  },
+  {
+    "page_size": 50,
+    "version": "fixed",
+    "request_index": 0,
+    "latency_ms": 5.035,
+    "sql_query_count": 1,
+    "rows_returned": 50
+  },
+  {
+    "page_size": 50,
+    "version": "fixed",
+    "request_index": 1,
+    "latency_ms": 4.423,
+    "sql_query_count": 1,
+    "rows_returned": 50
+  },
+  {
+    "page_size": 50,
+    "version": "fixed",
+    "request_index": 2,
+    "latency_ms": 4.66,
+    "sql_query_count": 1,
+    "rows_returned": 50
+  },
+  {
+    "page_size": 50,
+    "version": "fixed",
+    "request_index": 3,
+    "latency_ms": 4.43,
+    "sql_query_count": 1,
+    "rows_returned": 50
+  },
+  {
+    "page_size": 50,
+    "version": "fixed",
+    "request_index": 4,
+    "latency_ms": 4.401,
+    "sql_query_count": 1,
+    "rows_returned": 50
+  },
+  {
+    "page_size": 50,
+    "version": "fixed",
+    "request_index": 5,
+    "latency_ms": 4.457,
+    "sql_query_count": 1,
+    "rows_returned": 50
+  },
+  {
+    "page_size": 50,
+    "version": "fixed",
+    "request_index": 6,
+    "latency_ms": 4.648,
+    "sql_query_count": 1,
+    "rows_returned": 50
+  },
+  {
+    "page_size": 50,
+    "version": "fixed",
+    "request_index": 7,
+    "latency_ms": 4.47,
+    "sql_query_count": 1,
+    "rows_returned": 50
+  },
+  {
+    "page_size": 50,
+    "version": "fixed",
+    "request_index": 8,
+    "latency_ms": 4.791,
+    "sql_query_count": 1,
+    "rows_returned": 50
+  },
+  {
+    "page_size": 50,
+    "version": "fixed",
+    "request_index": 9,
+    "latency_ms": 4.944,
+    "sql_query_count": 1,
+    "rows_returned": 50
+  },
+  {
+    "page_size": 50,
+    "version": "fixed",
+    "request_index": 10,
+    "latency_ms": 5.126,
+    "sql_query_count": 1,
+    "rows_returned": 50
+  },
+  {
+    "page_size": 50,
+    "version": "fixed",
+    "request_index": 11,
+    "latency_ms": 4.945,
+    "sql_query_count": 1,
+    "rows_returned": 50
+  },
+  {
+    "page_size": 50,
+    "version": "fixed",
+    "request_index": 12,
+    "latency_ms": 4.762,
+    "sql_query_count": 1,
+    "rows_returned": 50
+  },
+  {
+    "page_size": 50,
+    "version": "fixed",
+    "request_index": 13,
+    "latency_ms": 5.171,
+    "sql_query_count": 1,
+    "rows_returned": 50
+  },
+  {
+    "page_size": 50,
+    "version": "fixed",
+    "request_index": 14,
+    "latency_ms": 4.921,
+    "sql_query_count": 1,
+    "rows_returned": 50
+  },
+  {
+    "page_size": 50,
+    "version": "fixed",
+    "request_index": 15,
+    "latency_ms": 5.361,
+    "sql_query_count": 1,
+    "rows_returned": 50
+  },
+  {
+    "page_size": 50,
+    "version": "fixed",
+    "request_index": 16,
+    "latency_ms": 5.983,
+    "sql_query_count": 1,
+    "rows_returned": 50
+  },
+  {
+    "page_size": 50,
+    "version": "fixed",
+    "request_index": 17,
+    "latency_ms": 5.355,
+    "sql_query_count": 1,
+    "rows_returned": 50
+  },
+  {
+    "page_size": 50,
+    "version": "fixed",
+    "request_index": 18,
+    "latency_ms": 6.091,
+    "sql_query_count": 1,
+    "rows_returned": 50
+  },
+  {
+    "page_size": 50,
+    "version": "fixed",
+    "request_index": 19,
+    "latency_ms": 5.479,
+    "sql_query_count": 1,
+    "rows_returned": 50
+  },
+  {
+    "page_size": 50,
+    "version": "fixed",
+    "request_index": 20,
+    "latency_ms": 5.499,
+    "sql_query_count": 1,
+    "rows_returned": 50
+  },
+  {
+    "page_size": 50,
+    "version": "fixed",
+    "request_index": 21,
+    "latency_ms": 5.568,
+    "sql_query_count": 1,
+    "rows_returned": 50
+  },
+  {
+    "page_size": 50,
+    "version": "fixed",
+    "request_index": 22,
+    "latency_ms": 5.591,
+    "sql_query_count": 1,
+    "rows_returned": 50
+  },
+  {
+    "page_size": 50,
+    "version": "fixed",
+    "request_index": 23,
+    "latency_ms": 5.554,
+    "sql_query_count": 1,
+    "rows_returned": 50
+  },
+  {
+    "page_size": 50,
+    "version": "fixed",
+    "request_index": 24,
+    "latency_ms": 5.543,
+    "sql_query_count": 1,
+    "rows_returned": 50
+  },
+  {
+    "page_size": 50,
+    "version": "fixed",
+    "request_index": 25,
+    "latency_ms": 5.305,
+    "sql_query_count": 1,
+    "rows_returned": 50
+  },
+  {
+    "page_size": 50,
+    "version": "fixed",
+    "request_index": 26,
+    "latency_ms": 5.217,
+    "sql_query_count": 1,
+    "rows_returned": 50
+  },
+  {
+    "page_size": 50,
+    "version": "fixed",
+    "request_index": 27,
+    "latency_ms": 5.289,
+    "sql_query_count": 1,
+    "rows_returned": 50
+  },
+  {
+    "page_size": 50,
+    "version": "fixed",
+    "request_index": 28,
+    "latency_ms": 5.39,
+    "sql_query_count": 1,
+    "rows_returned": 50
+  },
+  {
+    "page_size": 50,
+    "version": "fixed",
+    "request_index": 29,
+    "latency_ms": 5.025,
+    "sql_query_count": 1,
+    "rows_returned": 50
+  },
+  {
+    "page_size": 200,
+    "version": "naive",
+    "request_index": 0,
+    "latency_ms": 120.769,
+    "sql_query_count": 201,
+    "rows_returned": 200
+  },
+  {
+    "page_size": 200,
+    "version": "naive",
+    "request_index": 1,
+    "latency_ms": 121.822,
+    "sql_query_count": 201,
+    "rows_returned": 200
+  },
+  {
+    "page_size": 200,
+    "version": "naive",
+    "request_index": 2,
+    "latency_ms": 122.842,
+    "sql_query_count": 201,
+    "rows_returned": 200
+  },
+  {
+    "page_size": 200,
+    "version": "naive",
+    "request_index": 3,
+    "latency_ms": 132.598,
+    "sql_query_count": 201,
+    "rows_returned": 200
+  },
+  {
+    "page_size": 200,
+    "version": "naive",
+    "request_index": 4,
+    "latency_ms": 141.677,
+    "sql_query_count": 201,
+    "rows_returned": 200
+  },
+  {
+    "page_size": 200,
+    "version": "naive",
+    "request_index": 5,
+    "latency_ms": 158.556,
+    "sql_query_count": 201,
+    "rows_returned": 200
+  },
+  {
+    "page_size": 200,
+    "version": "naive",
+    "request_index": 6,
+    "latency_ms": 134.199,
+    "sql_query_count": 201,
+    "rows_returned": 200
+  },
+  {
+    "page_size": 200,
+    "version": "naive",
+    "request_index": 7,
+    "latency_ms": 141.113,
+    "sql_query_count": 201,
+    "rows_returned": 200
+  },
+  {
+    "page_size": 200,
+    "version": "naive",
+    "request_index": 8,
+    "latency_ms": 131.444,
+    "sql_query_count": 201,
+    "rows_returned": 200
+  },
+  {
+    "page_size": 200,
+    "version": "naive",
+    "request_index": 9,
+    "latency_ms": 143.778,
+    "sql_query_count": 201,
+    "rows_returned": 200
+  },
+  {
+    "page_size": 200,
+    "version": "naive",
+    "request_index": 10,
+    "latency_ms": 149.755,
+    "sql_query_count": 201,
+    "rows_returned": 200
+  },
+  {
+    "page_size": 200,
+    "version": "naive",
+    "request_index": 11,
+    "latency_ms": 141.651,
+    "sql_query_count": 201,
+    "rows_returned": 200
+  },
+  {
+    "page_size": 200,
+    "version": "naive",
+    "request_index": 12,
+    "latency_ms": 120.112,
+    "sql_query_count": 201,
+    "rows_returned": 200
+  },
+  {
+    "page_size": 200,
+    "version": "naive",
+    "request_index": 13,
+    "latency_ms": 114.794,
+    "sql_query_count": 201,
+    "rows_returned": 200
+  },
+  {
+    "page_size": 200,
+    "version": "naive",
+    "request_index": 14,
+    "latency_ms": 106.795,
+    "sql_query_count": 201,
+    "rows_returned": 200
+  },
+  {
+    "page_size": 200,
+    "version": "naive",
+    "request_index": 15,
+    "latency_ms": 102.782,
+    "sql_query_count": 201,
+    "rows_returned": 200
+  },
+  {
+    "page_size": 200,
+    "version": "naive",
+    "request_index": 16,
+    "latency_ms": 109.124,
+    "sql_query_count": 201,
+    "rows_returned": 200
+  },
+  {
+    "page_size": 200,
+    "version": "naive",
+    "request_index": 17,
+    "latency_ms": 107.463,
+    "sql_query_count": 201,
+    "rows_returned": 200
+  },
+  {
+    "page_size": 200,
+    "version": "naive",
+    "request_index": 18,
+    "latency_ms": 105.115,
+    "sql_query_count": 201,
+    "rows_returned": 200
+  },
+  {
+    "page_size": 200,
+    "version": "naive",
+    "request_index": 19,
+    "latency_ms": 104.179,
+    "sql_query_count": 201,
+    "rows_returned": 200
+  },
+  {
+    "page_size": 200,
+    "version": "naive",
+    "request_index": 20,
+    "latency_ms": 107.174,
+    "sql_query_count": 201,
+    "rows_returned": 200
+  },
+  {
+    "page_size": 200,
+    "version": "naive",
+    "request_index": 21,
+    "latency_ms": 96.713,
+    "sql_query_count": 201,
+    "rows_returned": 200
+  },
+  {
+    "page_size": 200,
+    "version": "naive",
+    "request_index": 22,
+    "latency_ms": 91.408,
+    "sql_query_count": 201,
+    "rows_returned": 200
+  },
+  {
+    "page_size": 200,
+    "version": "naive",
+    "request_index": 23,
+    "latency_ms": 94.322,
+    "sql_query_count": 201,
+    "rows_returned": 200
+  },
+  {
+    "page_size": 200,
+    "version": "naive",
+    "request_index": 24,
+    "latency_ms": 96.564,
+    "sql_query_count": 201,
+    "rows_returned": 200
+  },
+  {
+    "page_size": 200,
+    "version": "naive",
+    "request_index": 25,
+    "latency_ms": 94.618,
+    "sql_query_count": 201,
+    "rows_returned": 200
+  },
+  {
+    "page_size": 200,
+    "version": "naive",
+    "request_index": 26,
+    "latency_ms": 94.108,
+    "sql_query_count": 201,
+    "rows_returned": 200
+  },
+  {
+    "page_size": 200,
+    "version": "naive",
+    "request_index": 27,
+    "latency_ms": 94.48,
+    "sql_query_count": 201,
+    "rows_returned": 200
+  },
+  {
+    "page_size": 200,
+    "version": "naive",
+    "request_index": 28,
+    "latency_ms": 97.351,
+    "sql_query_count": 201,
+    "rows_returned": 200
+  },
+  {
+    "page_size": 200,
+    "version": "naive",
+    "request_index": 29,
+    "latency_ms": 94.93,
+    "sql_query_count": 201,
+    "rows_returned": 200
+  },
+  {
+    "page_size": 200,
+    "version": "fixed",
+    "request_index": 0,
+    "latency_ms": 9.732,
+    "sql_query_count": 1,
+    "rows_returned": 200
+  },
+  {
+    "page_size": 200,
+    "version": "fixed",
+    "request_index": 1,
+    "latency_ms": 7.823,
+    "sql_query_count": 1,
+    "rows_returned": 200
+  },
+  {
+    "page_size": 200,
+    "version": "fixed",
+    "request_index": 2,
+    "latency_ms": 7.985,
+    "sql_query_count": 1,
+    "rows_returned": 200
+  },
+  {
+    "page_size": 200,
+    "version": "fixed",
+    "request_index": 3,
+    "latency_ms": 8.222,
+    "sql_query_count": 1,
+    "rows_returned": 200
+  },
+  {
+    "page_size": 200,
+    "version": "fixed",
+    "request_index": 4,
+    "latency_ms": 8.029,
+    "sql_query_count": 1,
+    "rows_returned": 200
+  },
+  {
+    "page_size": 200,
+    "version": "fixed",
+    "request_index": 5,
+    "latency_ms": 8.081,
+    "sql_query_count": 1,
+    "rows_returned": 200
+  },
+  {
+    "page_size": 200,
+    "version": "fixed",
+    "request_index": 6,
+    "latency_ms": 8.854,
+    "sql_query_count": 1,
+    "rows_returned": 200
+  },
+  {
+    "page_size": 200,
+    "version": "fixed",
+    "request_index": 7,
+    "latency_ms": 8.817,
+    "sql_query_count": 1,
+    "rows_returned": 200
+  },
+  {
+    "page_size": 200,
+    "version": "fixed",
+    "request_index": 8,
+    "latency_ms": 9.579,
+    "sql_query_count": 1,
+    "rows_returned": 200
+  },
+  {
+    "page_size": 200,
+    "version": "fixed",
+    "request_index": 9,
+    "latency_ms": 8.522,
+    "sql_query_count": 1,
+    "rows_returned": 200
+  },
+  {
+    "page_size": 200,
+    "version": "fixed",
+    "request_index": 10,
+    "latency_ms": 9.445,
+    "sql_query_count": 1,
+    "rows_returned": 200
+  },
+  {
+    "page_size": 200,
+    "version": "fixed",
+    "request_index": 11,
+    "latency_ms": 9.321,
+    "sql_query_count": 1,
+    "rows_returned": 200
+  },
+  {
+    "page_size": 200,
+    "version": "fixed",
+    "request_index": 12,
+    "latency_ms": 9.542,
+    "sql_query_count": 1,
+    "rows_returned": 200
+  },
+  {
+    "page_size": 200,
+    "version": "fixed",
+    "request_index": 13,
+    "latency_ms": 8.957,
+    "sql_query_count": 1,
+    "rows_returned": 200
+  },
+  {
+    "page_size": 200,
+    "version": "fixed",
+    "request_index": 14,
+    "latency_ms": 9.519,
+    "sql_query_count": 1,
+    "rows_returned": 200
+  },
+  {
+    "page_size": 200,
+    "version": "fixed",
+    "request_index": 15,
+    "latency_ms": 9.402,
+    "sql_query_count": 1,
+    "rows_returned": 200
+  },
+  {
+    "page_size": 200,
+    "version": "fixed",
+    "request_index": 16,
+    "latency_ms": 8.187,
+    "sql_query_count": 1,
+    "rows_returned": 200
+  },
+  {
+    "page_size": 200,
+    "version": "fixed",
+    "request_index": 17,
+    "latency_ms": 8.333,
+    "sql_query_count": 1,
+    "rows_returned": 200
+  },
+  {
+    "page_size": 200,
+    "version": "fixed",
+    "request_index": 18,
+    "latency_ms": 7.988,
+    "sql_query_count": 1,
+    "rows_returned": 200
+  },
+  {
+    "page_size": 200,
+    "version": "fixed",
+    "request_index": 19,
+    "latency_ms": 9.152,
+    "sql_query_count": 1,
+    "rows_returned": 200
+  },
+  {
+    "page_size": 200,
+    "version": "fixed",
+    "request_index": 20,
+    "latency_ms": 8.546,
+    "sql_query_count": 1,
+    "rows_returned": 200
+  },
+  {
+    "page_size": 200,
+    "version": "fixed",
+    "request_index": 21,
+    "latency_ms": 9.468,
+    "sql_query_count": 1,
+    "rows_returned": 200
+  },
+  {
+    "page_size": 200,
+    "version": "fixed",
+    "request_index": 22,
+    "latency_ms": 9.667,
+    "sql_query_count": 1,
+    "rows_returned": 200
+  },
+  {
+    "page_size": 200,
+    "version": "fixed",
+    "request_index": 23,
+    "latency_ms": 9.478,
+    "sql_query_count": 1,
+    "rows_returned": 200
+  },
+  {
+    "page_size": 200,
+    "version": "fixed",
+    "request_index": 24,
+    "latency_ms": 34.717,
+    "sql_query_count": 1,
+    "rows_returned": 200
+  },
+  {
+    "page_size": 200,
+    "version": "fixed",
+    "request_index": 25,
+    "latency_ms": 10.325,
+    "sql_query_count": 1,
+    "rows_returned": 200
+  },
+  {
+    "page_size": 200,
+    "version": "fixed",
+    "request_index": 26,
+    "latency_ms": 9.512,
+    "sql_query_count": 1,
+    "rows_returned": 200
+  },
+  {
+    "page_size": 200,
+    "version": "fixed",
+    "request_index": 27,
+    "latency_ms": 9.302,
+    "sql_query_count": 1,
+    "rows_returned": 200
+  },
+  {
+    "page_size": 200,
+    "version": "fixed",
+    "request_index": 28,
+    "latency_ms": 9.429,
+    "sql_query_count": 1,
+    "rows_returned": 200
+  },
+  {
+    "page_size": 200,
+    "version": "fixed",
+    "request_index": 29,
+    "latency_ms": 9.594,
+    "sql_query_count": 1,
+    "rows_returned": 200
+  }
+]

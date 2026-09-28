@@ -1,0 +1,9 @@
+--- EXPLAIN BEFORE adding index ---
+Query: SELECT * FROM related_info WHERE notice_id = 4242
+{'EXPLAIN': '-> Filter: (related_info.notice_id = 4242)  (cost=20.2 rows=20)\n    -> Table scan on related_info  (cost=20.2 rows=200)\n'}
+
+--- EXPLAIN AFTER adding index idx_related_info_notice_id ---
+Query: SELECT * FROM related_info WHERE notice_id = 4242
+{'EXPLAIN': '-> Index lookup on related_info using idx_related_info_notice_id (notice_id = 4242)  (cost=0.35 rows=1)\n'}
+
+What changed: before the index, MySQL has no fast way to find rows where notice_id = 4242 other than scanning the related_info table row by row ('type: ALL', a full table scan, rows ~= total row count). After creating idx_related_info_notice_id, MySQL can jump straight to the matching row(s) using the index ('type: ref' or 'const', with rows close to the actual number of matches -- 0 or 1 here, since only 200 of the 5,000 notices have a related row). This is exactly the query the naive list-naive endpoint runs once per notice on the page, so this index is what would make even the naive N+1 version scale better per-query -- though it still doesn't fix the real problem, which is running that query N times instead of once via a JOIN.

@@ -1,0 +1,452 @@
+[
+  {
+    "question_id": "Q1",
+    "question": "What pathogen was linked to the 2021 spinach recall?",
+    "k": 1,
+    "chunks": [
+      {
+        "chunk_id": "88fa1cb1-abae-4a9b-8e6c-4006c71b1a59",
+        "score": 0.7047,
+        "source_file": "fda_outbreak_ecoli_spinach_2021.txt",
+        "preview": "multistate outbreak of E. coli O157:H7. According to the CDC, as of November 15, 2021, 10 people infected with the outbreak strain of E. coli O157:H7 have been "
+      }
+    ]
+  },
+  {
+    "question_id": "Q1",
+    "question": "What pathogen was linked to the 2021 spinach recall?",
+    "k": 3,
+    "chunks": [
+      {
+        "chunk_id": "88fa1cb1-abae-4a9b-8e6c-4006c71b1a59",
+        "score": 0.7047,
+        "source_file": "fda_outbreak_ecoli_spinach_2021.txt",
+        "preview": "multistate outbreak of E. coli O157:H7. According to the CDC, as of November 15, 2021, 10 people infected with the outbreak strain of E. coli O157:H7 have been "
+      },
+      {
+        "chunk_id": "f586e651-32d4-4705-85b8-5c5e90791985",
+        "score": 0.6641,
+        "source_file": "fda_outbreak_ecoli_spinach_2021.txt",
+        "preview": "MI (1), MN (2), MO (1), NE (1), OH (1), PA (1) SD (2) Useful Links Food Safety Tips for Retailers and Consumers During an Outbreak Food Safety Resources for Pro"
+      },
+      {
+        "chunk_id": "441e4a02-4178-444f-8ca1-55ce3dc13e67",
+        "score": 0.6639,
+        "source_file": "fda_outbreak_ecoli_spinach_2021.txt",
+        "preview": "Source: https://www.fda.gov/food/outbreaks-foodborne-illness/outbreak-investigation-e-coli-o157h7-spinach-november-2021 Accessed: 2026-09-20 Title: outbreak inv"
+      }
+    ]
+  },
+  {
+    "question_id": "Q1",
+    "question": "What pathogen was linked to the 2021 spinach recall?",
+    "k": 5,
+    "chunks": [
+      {
+        "chunk_id": "88fa1cb1-abae-4a9b-8e6c-4006c71b1a59",
+        "score": 0.7047,
+        "source_file": "fda_outbreak_ecoli_spinach_2021.txt",
+        "preview": "multistate outbreak of E. coli O157:H7. According to the CDC, as of November 15, 2021, 10 people infected with the outbreak strain of E. coli O157:H7 have been "
+      },
+      {
+        "chunk_id": "f586e651-32d4-4705-85b8-5c5e90791985",
+        "score": 0.6641,
+        "source_file": "fda_outbreak_ecoli_spinach_2021.txt",
+        "preview": "MI (1), MN (2), MO (1), NE (1), OH (1), PA (1) SD (2) Useful Links Food Safety Tips for Retailers and Consumers During an Outbreak Food Safety Resources for Pro"
+      },
+      {
+        "chunk_id": "441e4a02-4178-444f-8ca1-55ce3dc13e67",
+        "score": 0.6639,
+        "source_file": "fda_outbreak_ecoli_spinach_2021.txt",
+        "preview": "Source: https://www.fda.gov/food/outbreaks-foodborne-illness/outbreak-investigation-e-coli-o157h7-spinach-november-2021 Accessed: 2026-09-20 Title: outbreak inv"
+      },
+      {
+        "chunk_id": "0ba46825-937c-4c17-9d89-851f4b8dfeed",
+        "score": 0.5676,
+        "source_file": "openfda_enforcement_bulk_records.txt",
+        "preview": "Product Codes 81-82-84-90-92-95-98-99 from Production Week 32 (production week start date: 08/04/2021) | Reason: Products contain onions purchased from ProSourc"
+      },
+      {
+        "chunk_id": "c53aeb0f-79a9-41d2-893a-c5afeaa41b23",
+        "score": 0.5591,
+        "source_file": "openfda_enforcement_bulk_records.txt",
+        "preview": "bags, UPC 39186-60101 Produce of Mexico. Packed by Alsum Farms & Product, Inc., Friesland, WI 53935. | Reason: Onions are being recalled by Keeler Family Farms "
+      }
+    ]
+  },
+  {
+    "question_id": "Q2",
+    "question": "Name two infant formula products recalled due to Clostridium botulinum contamination, and the year each was recalled.",
+    "k": 1,
+    "chunks": [
+      {
+        "chunk_id": "857a9f9d-ea6c-4504-aedb-c8bd2f302fc8",
+        "score": 0.7649,
+        "source_file": "fda_recall_byheart_infant_formula_2025.txt",
+        "preview": "Source: https://www.fda.gov/safety/recalls-market-withdrawals-safety-alerts/response-broader-fda-investigation-byheart-initiates-voluntary-recall-two-batches-in"
+      }
+    ]
+  },
+  {
+    "question_id": "Q2",
+    "question": "Name two infant formula products recalled due to Clostridium botulinum contamination, and the year each was recalled.",
+    "k": 3,
+    "chunks": [
+      {
+        "chunk_id": "857a9f9d-ea6c-4504-aedb-c8bd2f302fc8",
+        "score": 0.7649,
+        "source_file": "fda_recall_byheart_infant_formula_2025.txt",
+        "preview": "Source: https://www.fda.gov/safety/recalls-market-withdrawals-safety-alerts/response-broader-fda-investigation-byheart-initiates-voluntary-recall-two-batches-in"
+      },
+      {
+        "chunk_id": "2221e5f7-20d3-4baf-921c-f7a53f17361e",
+        "score": 0.7275,
+        "source_file": "cdc_outbreak_infant_botulism_formula_2026.txt",
+        "preview": "Source: https://www.cdc.gov/botulism/outbreaks-investigations/infant-formula-june-2026/index.html Accessed: 2026-09-20 Title: CDC: Infant Botulism Outbreak Link"
+      },
+      {
+        "chunk_id": "88f80961-67a4-4321-9e0f-b0a7ca07619b",
+        "score": 0.7025,
+        "source_file": "fda_recall_nara_organics_infant_formula_2026.txt",
+        "preview": "Source: https://www.fda.gov/safety/recalls-market-withdrawals-safety-alerts/nara-organics-recalls-all-lots-nara-infant-formula-because-possible-health-risk Acce"
+      }
+    ]
+  },
+  {
+    "question_id": "Q2",
+    "question": "Name two infant formula products recalled due to Clostridium botulinum contamination, and the year each was recalled.",
+    "k": 5,
+    "chunks": [
+      {
+        "chunk_id": "857a9f9d-ea6c-4504-aedb-c8bd2f302fc8",
+        "score": 0.7649,
+        "source_file": "fda_recall_byheart_infant_formula_2025.txt",
+        "preview": "Source: https://www.fda.gov/safety/recalls-market-withdrawals-safety-alerts/response-broader-fda-investigation-byheart-initiates-voluntary-recall-two-batches-in"
+      },
+      {
+        "chunk_id": "2221e5f7-20d3-4baf-921c-f7a53f17361e",
+        "score": 0.7275,
+        "source_file": "cdc_outbreak_infant_botulism_formula_2026.txt",
+        "preview": "Source: https://www.cdc.gov/botulism/outbreaks-investigations/infant-formula-june-2026/index.html Accessed: 2026-09-20 Title: CDC: Infant Botulism Outbreak Link"
+      },
+      {
+        "chunk_id": "88f80961-67a4-4321-9e0f-b0a7ca07619b",
+        "score": 0.7025,
+        "source_file": "fda_recall_nara_organics_infant_formula_2026.txt",
+        "preview": "Source: https://www.fda.gov/safety/recalls-market-withdrawals-safety-alerts/nara-organics-recalls-all-lots-nara-infant-formula-because-possible-health-risk Acce"
+      },
+      {
+        "chunk_id": "b587b034-4089-4829-99d6-90ae87f070b3",
+        "score": 0.6802,
+        "source_file": "fda_outbreak_infant_botulism_formula_2026.txt",
+        "preview": "Source: https://www.fda.gov/food/outbreaks-foodborne-illness/outbreak-investigation-infant-botulism-powdered-infant-formula-june-2026 Accessed: 2026-09-20 Title"
+      },
+      {
+        "chunk_id": "d1ff8783-abf0-4e87-a8f0-6cc33e89b1ba",
+        "score": 0.6566,
+        "source_file": "fda_recall_a2platinum_infant_formula_2026.txt",
+        "preview": "Source: https://www.fda.gov/safety/recalls-market-withdrawals-safety-alerts/a2-platinum-usa-label-infant-formula-recalled-because-possible-health-risk Accessed:"
+      }
+    ]
+  },
+  {
+    "question_id": "Q3",
+    "question": "Which groups are considered highest-risk for severe Listeria infection?",
+    "k": 1,
+    "chunks": [
+      {
+        "chunk_id": "bbc48b4c-164a-4434-bbbd-5ac6a38d8369",
+        "score": 0.7049,
+        "source_file": "cdc_about_listeria.txt",
+        "preview": "Source: https://www.cdc.gov/listeria/about/index.html Accessed: 2026-09-20 Title: CDC: About Listeria Listeria are bacteria (germs) that can contaminate many fo"
+      }
+    ]
+  },
+  {
+    "question_id": "Q3",
+    "question": "Which groups are considered highest-risk for severe Listeria infection?",
+    "k": 3,
+    "chunks": [
+      {
+        "chunk_id": "bbc48b4c-164a-4434-bbbd-5ac6a38d8369",
+        "score": 0.7049,
+        "source_file": "cdc_about_listeria.txt",
+        "preview": "Source: https://www.cdc.gov/listeria/about/index.html Accessed: 2026-09-20 Title: CDC: About Listeria Listeria are bacteria (germs) that can contaminate many fo"
+      },
+      {
+        "chunk_id": "64bf2454-9141-424b-9288-40f2681a2203",
+        "score": 0.5867,
+        "source_file": "fsis_chicken_caesar_wrap_listeria.txt",
+        "preview": "convenience stores in Minnesota and Wisconsin. The problem was discovered during routine FSIS product testing when a sample confirmed positive for the presence "
+      },
+      {
+        "chunk_id": "2242f2b9-94ea-4dd4-8629-25bc90dfb3ba",
+        "score": 0.5853,
+        "source_file": "cdc_outbreak_deli_meats_listeria.txt",
+        "preview": "Source: https://www.cdc.gov/listeria/outbreaks/delimeats-7-24/index.html Accessed: 2026-09-20 Title: CDC: Listeria Outbreak Linked to Meats Sliced at Delis This"
+      }
+    ]
+  },
+  {
+    "question_id": "Q3",
+    "question": "Which groups are considered highest-risk for severe Listeria infection?",
+    "k": 5,
+    "chunks": [
+      {
+        "chunk_id": "bbc48b4c-164a-4434-bbbd-5ac6a38d8369",
+        "score": 0.7049,
+        "source_file": "cdc_about_listeria.txt",
+        "preview": "Source: https://www.cdc.gov/listeria/about/index.html Accessed: 2026-09-20 Title: CDC: About Listeria Listeria are bacteria (germs) that can contaminate many fo"
+      },
+      {
+        "chunk_id": "64bf2454-9141-424b-9288-40f2681a2203",
+        "score": 0.5867,
+        "source_file": "fsis_chicken_caesar_wrap_listeria.txt",
+        "preview": "convenience stores in Minnesota and Wisconsin. The problem was discovered during routine FSIS product testing when a sample confirmed positive for the presence "
+      },
+      {
+        "chunk_id": "2242f2b9-94ea-4dd4-8629-25bc90dfb3ba",
+        "score": 0.5853,
+        "source_file": "cdc_outbreak_deli_meats_listeria.txt",
+        "preview": "Source: https://www.cdc.gov/listeria/outbreaks/delimeats-7-24/index.html Accessed: 2026-09-20 Title: CDC: Listeria Outbreak Linked to Meats Sliced at Delis This"
+      },
+      {
+        "chunk_id": "c560ee6b-60be-4347-909b-709bdb0f95e1",
+        "score": 0.5778,
+        "source_file": "openfda_enforcement_bulk_records.txt",
+        "preview": "#F-0533-2016 | Class I | Firm: Ocean Group Inc. (Los Angeles, CA) | Initiated: 20151216 | Product: Masago Lake Smelt Roe 6 oz. UPC Code:4866010101 | Reason: Pro"
+      },
+      {
+        "chunk_id": "721231f5-1ecb-41a9-98e3-e357391f2487",
+        "score": 0.5602,
+        "source_file": "fda_outbreaks_investigations_index.txt",
+        "preview": "Meals See Advisory Closed Ended See Advisory See Advisory \u2714 \u2714 \u2714 3/13/2025 1286 Listeria monocytogenes Not Identified 30 Closed Ended See Advice \u2714 \u2714 3/5/2025 129"
+      }
+    ]
+  },
+  {
+    "question_id": "Q4",
+    "question": "What product was recalled in 2026 due to contamination?",
+    "k": 1,
+    "chunks": [
+      {
+        "chunk_id": "7efbade7-3628-4cc1-83d7-61361bc82220",
+        "score": 0.6339,
+        "source_file": "fda_outbreak_salmonella_cantaloupes_2023.txt",
+        "preview": "recall of fresh-cut fruit cup and tray products containing cantaloupe with sell-by dates of November 4, 2023 through December 3, 2023 because cantaloupes recall"
+      }
+    ]
+  },
+  {
+    "question_id": "Q4",
+    "question": "What product was recalled in 2026 due to contamination?",
+    "k": 3,
+    "chunks": [
+      {
+        "chunk_id": "7efbade7-3628-4cc1-83d7-61361bc82220",
+        "score": 0.6339,
+        "source_file": "fda_outbreak_salmonella_cantaloupes_2023.txt",
+        "preview": "recall of fresh-cut fruit cup and tray products containing cantaloupe with sell-by dates of November 4, 2023 through December 3, 2023 because cantaloupes recall"
+      },
+      {
+        "chunk_id": "ff6c77a7-9942-4f00-9e0d-b12ce6016ad6",
+        "score": 0.6322,
+        "source_file": "openfda_enforcement_bulk_records.txt",
+        "preview": "| Initiated: 20120913 | Product: SYSCO Imperial 6520795 1/5# FRUIT MIX CHUNKS 3/4\" 130249 & 130250 BEST BY 9/15/12 & 9/16/12, UPC# 1007 4865393314. | Reason: G."
+      },
+      {
+        "chunk_id": "c4db477d-2f1e-4d48-93cb-7f87c70b84c7",
+        "score": 0.6224,
+        "source_file": "openfda_enforcement_bulk_records.txt",
+        "preview": "| Distribution: The recalled Halva were distributed through Mediterranean food stores and wholesalers in Michigan, Illinois, Missouri, New York, Ohio, North Car"
+      }
+    ]
+  },
+  {
+    "question_id": "Q4",
+    "question": "What product was recalled in 2026 due to contamination?",
+    "k": 5,
+    "chunks": [
+      {
+        "chunk_id": "7efbade7-3628-4cc1-83d7-61361bc82220",
+        "score": 0.6339,
+        "source_file": "fda_outbreak_salmonella_cantaloupes_2023.txt",
+        "preview": "recall of fresh-cut fruit cup and tray products containing cantaloupe with sell-by dates of November 4, 2023 through December 3, 2023 because cantaloupes recall"
+      },
+      {
+        "chunk_id": "ff6c77a7-9942-4f00-9e0d-b12ce6016ad6",
+        "score": 0.6322,
+        "source_file": "openfda_enforcement_bulk_records.txt",
+        "preview": "| Initiated: 20120913 | Product: SYSCO Imperial 6520795 1/5# FRUIT MIX CHUNKS 3/4\" 130249 & 130250 BEST BY 9/15/12 & 9/16/12, UPC# 1007 4865393314. | Reason: G."
+      },
+      {
+        "chunk_id": "c4db477d-2f1e-4d48-93cb-7f87c70b84c7",
+        "score": 0.6224,
+        "source_file": "openfda_enforcement_bulk_records.txt",
+        "preview": "| Distribution: The recalled Halva were distributed through Mediterranean food stores and wholesalers in Michigan, Illinois, Missouri, New York, Ohio, North Car"
+      },
+      {
+        "chunk_id": "31ce82dd-fab4-428f-b776-2bacb61b34c1",
+        "score": 0.6201,
+        "source_file": "openfda_enforcement_bulk_records.txt",
+        "preview": "LTD (Nof Ha-Galil, ) | Initiated: 20220428 | Product: ELITE PESEK ZMAN WAFER ROLL UPC: 815871011495 NET WT. 1.4 oz (40g) | Reason: Potential contamination with "
+      },
+      {
+        "chunk_id": "10be0484-b88b-43d4-a74c-44af41a83489",
+        "score": 0.6158,
+        "source_file": "openfda_enforcement_bulk_records.txt",
+        "preview": "8.2 Oz. Single Serving, Keep refrigerated | Reason: On 02/03/2023, FRESH IDEATION FOOD GROUP, LLC dba Fresh Creative Cuisine of Baltimore, MD is initiating a re"
+      }
+    ]
+  },
+  {
+    "question_id": "Q5",
+    "question": "How much revenue did J.M. Smucker Company lose due to the 2022 peanut butter recall?",
+    "k": 1,
+    "chunks": [
+      {
+        "chunk_id": "44f37a38-05f4-4880-8c96-89327b19f830",
+        "score": 0.6282,
+        "source_file": "fda_recall_peanut_butter_smucker_2022.txt",
+        "preview": "is available at https://www.fda.gov/food/outbreaks-foodborne-illness/outbreak-investigation-salmonella-peanut-butter-may-2022 . The table below includes recalls"
+      }
+    ]
+  },
+  {
+    "question_id": "Q5",
+    "question": "How much revenue did J.M. Smucker Company lose due to the 2022 peanut butter recall?",
+    "k": 3,
+    "chunks": [
+      {
+        "chunk_id": "44f37a38-05f4-4880-8c96-89327b19f830",
+        "score": 0.6282,
+        "source_file": "fda_recall_peanut_butter_smucker_2022.txt",
+        "preview": "is available at https://www.fda.gov/food/outbreaks-foodborne-illness/outbreak-investigation-salmonella-peanut-butter-may-2022 . The table below includes recalls"
+      },
+      {
+        "chunk_id": "1616a294-41df-45bd-81cc-e8dfe689b83b",
+        "score": 0.6001,
+        "source_file": "openfda_enforcement_bulk_records.txt",
+        "preview": "Sunland, Inc. is conducting a voluntary limited recall of its Almond, Peanut, and Cashew Butter products and Tahini and Roasted Blanched Peanut Products, manufa"
+      },
+      {
+        "chunk_id": "81c4ecd9-34f4-4812-a3c9-47a37f4ac600",
+        "score": 0.5918,
+        "source_file": "fda_recall_peanut_butter_smucker_2022.txt",
+        "preview": "Source: https://www.fda.gov/safety/major-product-recalls/2022-recalls-food-products-associated-peanut-butter-jm-smucker-company-due-potential-risk-salmonella Ac"
+      }
+    ]
+  },
+  {
+    "question_id": "Q5",
+    "question": "How much revenue did J.M. Smucker Company lose due to the 2022 peanut butter recall?",
+    "k": 5,
+    "chunks": [
+      {
+        "chunk_id": "44f37a38-05f4-4880-8c96-89327b19f830",
+        "score": 0.6282,
+        "source_file": "fda_recall_peanut_butter_smucker_2022.txt",
+        "preview": "is available at https://www.fda.gov/food/outbreaks-foodborne-illness/outbreak-investigation-salmonella-peanut-butter-may-2022 . The table below includes recalls"
+      },
+      {
+        "chunk_id": "1616a294-41df-45bd-81cc-e8dfe689b83b",
+        "score": 0.6001,
+        "source_file": "openfda_enforcement_bulk_records.txt",
+        "preview": "Sunland, Inc. is conducting a voluntary limited recall of its Almond, Peanut, and Cashew Butter products and Tahini and Roasted Blanched Peanut Products, manufa"
+      },
+      {
+        "chunk_id": "81c4ecd9-34f4-4812-a3c9-47a37f4ac600",
+        "score": 0.5918,
+        "source_file": "fda_recall_peanut_butter_smucker_2022.txt",
+        "preview": "Source: https://www.fda.gov/safety/major-product-recalls/2022-recalls-food-products-associated-peanut-butter-jm-smucker-company-due-potential-risk-salmonella Ac"
+      },
+      {
+        "chunk_id": "1aa2588b-801f-4775-847c-c40641ec2d51",
+        "score": 0.5644,
+        "source_file": "openfda_enforcement_bulk_records.txt",
+        "preview": "who have an allergy or severe sensitivity to tree nuts run the risk of serious or life-threatening allergic reaction if they consume these products. | Distribut"
+      },
+      {
+        "chunk_id": "3494f2e8-ab2b-4cd3-b9c4-a18d9ff17da5",
+        "score": 0.5532,
+        "source_file": "openfda_enforcement_bulk_records.txt",
+        "preview": "slaw, spread and dip products sold under various brands and code dates manufactured prior to November 06, 2013 because they may be contaminated with Listeria mo"
+      }
+    ]
+  },
+  {
+    "question_id": "Q6",
+    "question": "What is the current price of Tesla stock?",
+    "k": 1,
+    "chunks": [
+      {
+        "chunk_id": "a4ba5612-a213-4900-98e6-5de47eb17130",
+        "score": 0.1506,
+        "source_file": "openfda_enforcement_bulk_records.txt",
+        "preview": "within 3 days. Distributed by Sysco Corporation, Houston, Texas 77077. | Reason: Findings and potential for Cronobacter sakazakii and Clostridium botulinum. | D"
+      }
+    ]
+  },
+  {
+    "question_id": "Q6",
+    "question": "What is the current price of Tesla stock?",
+    "k": 3,
+    "chunks": [
+      {
+        "chunk_id": "a4ba5612-a213-4900-98e6-5de47eb17130",
+        "score": 0.1506,
+        "source_file": "openfda_enforcement_bulk_records.txt",
+        "preview": "within 3 days. Distributed by Sysco Corporation, Houston, Texas 77077. | Reason: Findings and potential for Cronobacter sakazakii and Clostridium botulinum. | D"
+      },
+      {
+        "chunk_id": "fa5ba9df-a25c-4496-916b-1e2055489f31",
+        "score": 0.1439,
+        "source_file": "fda_recall_peanut_butter_smucker_2022.txt",
+        "preview": "Companies 05/24/2022 Coblentz Chocolate Company Various chocolate products containing peanut butter Coblentz Chocolate Company FDA Enforcement Report 05/24/2022"
+      },
+      {
+        "chunk_id": "ff15623a-764b-49d1-bc72-467861badd6e",
+        "score": 0.1397,
+        "source_file": "fda_outbreaks_investigations_index.txt",
+        "preview": "(ref #1411) linked to sprouts from Evergreen Fresh Sprouts LLC., FDA has initiated sampling. For the outbreak of Salmonella Newport (ref #1403), the case count "
+      }
+    ]
+  },
+  {
+    "question_id": "Q6",
+    "question": "What is the current price of Tesla stock?",
+    "k": 5,
+    "chunks": [
+      {
+        "chunk_id": "a4ba5612-a213-4900-98e6-5de47eb17130",
+        "score": 0.1506,
+        "source_file": "openfda_enforcement_bulk_records.txt",
+        "preview": "within 3 days. Distributed by Sysco Corporation, Houston, Texas 77077. | Reason: Findings and potential for Cronobacter sakazakii and Clostridium botulinum. | D"
+      },
+      {
+        "chunk_id": "fa5ba9df-a25c-4496-916b-1e2055489f31",
+        "score": 0.1439,
+        "source_file": "fda_recall_peanut_butter_smucker_2022.txt",
+        "preview": "Companies 05/24/2022 Coblentz Chocolate Company Various chocolate products containing peanut butter Coblentz Chocolate Company FDA Enforcement Report 05/24/2022"
+      },
+      {
+        "chunk_id": "ff15623a-764b-49d1-bc72-467861badd6e",
+        "score": 0.1397,
+        "source_file": "fda_outbreaks_investigations_index.txt",
+        "preview": "(ref #1411) linked to sprouts from Evergreen Fresh Sprouts LLC., FDA has initiated sampling. For the outbreak of Salmonella Newport (ref #1403), the case count "
+      },
+      {
+        "chunk_id": "857a9f9d-ea6c-4504-aedb-c8bd2f302fc8",
+        "score": 0.1375,
+        "source_file": "fda_recall_byheart_infant_formula_2025.txt",
+        "preview": "Source: https://www.fda.gov/safety/recalls-market-withdrawals-safety-alerts/response-broader-fda-investigation-byheart-initiates-voluntary-recall-two-batches-in"
+      },
+      {
+        "chunk_id": "775cd9d6-008f-4f20-ba2f-2ebfcb534481",
+        "score": 0.1361,
+        "source_file": "openfda_enforcement_bulk_records.txt",
+        "preview": "Potato, Sodium Metabisulfite | Reason: Sodium metabisulfite not declared on product label. | Distribution: Distributed to food service locations in Kansas, Nebr"
+      }
+    ]
+  }
+]
