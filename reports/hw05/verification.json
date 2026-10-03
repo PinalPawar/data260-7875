@@ -1,0 +1,100 @@
+{
+  "homework": 5,
+  "sid4": 7875,
+  "port_base": 8675,
+  "prefix": "s7875",
+  "domain_id": 3,
+  "seed": 7875,
+  "verify_seed": 267875,
+  "commit_hash": "not a git checkout -- see the hw5 tag on GitHub",
+  "model": "qwen3:1.7b (local, via Ollama)",
+  "generated_at": "2026-10-02T01:42:00",
+  "summary": "17/17 checks passed",
+  "checks": [
+    {
+      "name": "backend responds on PORT_BASE",
+      "passed": true,
+      "detail": "port 8675, HTTP 401"
+    },
+    {
+      "name": "anonymous request is refused",
+      "passed": true,
+      "detail": "HTTP 401"
+    },
+    {
+      "name": "login works",
+      "passed": true,
+      "detail": "HTTP 200"
+    },
+    {
+      "name": "manufacturers list is paginated",
+      "passed": true,
+      "detail": "total=10"
+    },
+    {
+      "name": "relationship endpoint returns notices",
+      "passed": true,
+      "detail": "HTTP 200"
+    },
+    {
+      "name": "unknown manufacturer returns 404",
+      "passed": true,
+      "detail": "HTTP 404"
+    },
+    {
+      "name": "meals MCP server starts with 4 tools",
+      "passed": true,
+      "detail": "search_meals_by_name, meals_by_ingredient, meal_details, random_meal"
+    },
+    {
+      "name": "meals MCP server answers a tool call",
+      "passed": true,
+      "detail": "search_meals_by_name"
+    },
+    {
+      "name": "domain MCP server starts with exactly 3 tools",
+      "passed": true,
+      "detail": "search_notices, get_notice_detail, recall_stats"
+    },
+    {
+      "name": "domain tool call returns the {ok, data, error} envelope",
+      "passed": true,
+      "detail": "ok=True"
+    },
+    {
+      "name": "execute_tool rejects an invalid input without raising",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "execute_tool enforces the safety rule",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "offline test suite passes",
+      "passed": true,
+      "detail": "10/10 tests passed"
+    },
+    {
+      "name": "150 fault-injection call records (3 rates x 50)",
+      "passed": true,
+      "detail": "150 rows"
+    },
+    {
+      "name": "agent log has at least 4 runs with a stop reason",
+      "passed": true,
+      "detail": "6 runs: ['completed', 'max_steps', 'safety_block']"
+    },
+    {
+      "name": "raw/mcp_inspector_meals_server.json present",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "raw/mcp_inspector_recall_server.json present",
+      "passed": true,
+      "detail": ""
+    }
+  ]
+}

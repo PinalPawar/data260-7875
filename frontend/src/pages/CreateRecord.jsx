@@ -1,37 +1,26 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { createNotice } from "../features/notices/noticesSlice.js";
+import NoticeForm, { EMPTY_NOTICE, toPayload } from "./NoticeForm.jsx";
 
-const CATEGORIES = [
-  "supplyShortage",
-  "bacterialContamination",
-  "foreignMaterial",
-  "mislabelling",
-];
-
-// HW4 Part 1, Section II: rendered on /create. "primary field" = product,
-// "secondary field" = manufacturer (per the spec's wording); email/
-// description/category are the extra fields this domain already had from
-// HW1/HW2 (DOMAIN_SCHEMA.md), so a real recall notice can be created.
-export default function CreateRecord({ onAdd }) {
-  const [form, setForm] = useState({
-    product: "",
-    manufacturer: "",
-    email: "",
-    description: "",
-    category: CATEGORIES[0],
-  });
+// HW5 Part 1.III.4: on submit, dispatch the createNotice thunk. If it
+// succeeds, the slice has already added the new notice to Redux state, so
+// going back to Home shows it without re-fetching.
+export default function CreateRecord() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [form, setForm] = useState(EMPTY_NOTICE);
   const [error, setError] = useState("");
-
-  function set(field) {
-    return (e) => setForm({ ...form, [field]: e.target.value });
-  }
 
   async function handleSubmit(e) {
     e.preventDefault();
     setError("");
     try {
-      await onAdd(form); // parent (App.jsx) calls the API + redirects to "/"
-    } catch (err) {
-      setError("Could not create the notice. Check the backend logs.");
+      await dispatch(createNotice(toPayload(form))).unwrap();
+      navigate("/");
+    } catch (message) {
+      setError(message); // e.g. "Notice code RCL-... already exists"
     }
   }
 
@@ -40,46 +29,14 @@ export default function CreateRecord({ onAdd }) {
       <div className="card-header">
         <div className="page-title">Report a Recall</div>
       </div>
-
       <div className="card-body">
-        <form className="form" onSubmit={handleSubmit}>
-          <label>
-            Product (primary field)
-            <input value={form.product} onChange={set("product")} required />
-          </label>
-
-          <label>
-            Manufacturer (secondary field)
-            <input value={form.manufacturer} onChange={set("manufacturer")} required />
-          </label>
-
-          <label>
-            Contact email
-            <input type="email" value={form.email} onChange={set("email")} required />
-          </label>
-
-          <label>
-            Description
-            <textarea value={form.description} onChange={set("description")} required />
-          </label>
-
-          <label>
-            Category
-            <select value={form.category} onChange={set("category")}>
-              {CATEGORIES.map((c) => (
-                <option key={c} value={c}>
-                  {c}
-                </option>
-              ))}
-            </select>
-          </label>
-
-          {error && <div className="notice error">{error}</div>}
-
-          <button className="btn primary" type="submit">
-            Submit Recall Notice
-          </button>
-        </form>
+        <NoticeForm
+          form={form}
+          setForm={setForm}
+          onSubmit={handleSubmit}
+          submitLabel="Submit Recall Notice"
+          error={error}
+        />
       </div>
     </div>
   );

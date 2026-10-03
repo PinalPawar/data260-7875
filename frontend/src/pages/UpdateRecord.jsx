@@ -1,100 +1,92 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchNoticeById } from "../api.js";
+import { updateNotice } from "../features/notices/noticesSlice.js";
+import NoticeForm, { toPayload } from "./NoticeForm.jsx";
 
-const CATEGORIES = [
-  "supplyShortage",
-  "bacterialContamination",
-  "foreignMaterial",
-  "mislabelling",
-];
-
-// HW4 Part 1, Section III: rendered on /update. Uses /update/:id (the id
-// comes from the URL, via the "Update" link on Home.jsx) rather than a bare
-// /update -- that way refreshing the page or sharing the link still works,
-// instead of relying on data only passed in memory. Talking point if asked
-// "why not just /update": React state passed between pages disappears on a
-// page refresh; the id in the URL doesn't.
-export default function UpdateRecord({ onUpdate }) {
+// HW5 Part 1.III.4: "a form to update an existing record (select by ID)".
+// Type an ID and press Load (or arrive from Home's Update link, which puts
+// the ID in the URL). On submit, dispatch the updateNotice thunk.
+export default function UpdateRecord() {
   const { id } = useParams();
-  const noticeId = Number(id);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const items = useSelector((state) => state.notices.items);
 
+  const [idInput, setIdInput] = useState(id || "");
   const [form, setForm] = useState(null);
   const [error, setError] = useState("");
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const notice = await fetchNoticeById(noticeId);
-        setForm(notice);
-      } catch (err) {
-        setError("Could not load that notice.");
-      }
-    })();
-  }, [noticeId]);
-
-  function set(field) {
-    return (e) => setForm({ ...form, [field]: e.target.value });
+  async function load(rawId) {
+    const noticeId = Number(rawId);
+    setError("");
+    setForm(null);
+    if (!noticeId) return;
+    // Use the copy already in Redux state if we have it; otherwise ask the API.
+    const cached = items.find((n) => n.id === noticeId);
+    try {
+      setForm(cached || (await fetchNoticeById(noticeId)));
+    } catch {
+      setError(`Notice ${noticeId} not found.`);
+    }
   }
+
+  useEffect(() => {
+    if (id) load(id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id]);
 
   async function handleSubmit(e) {
     e.preventDefault();
     setError("");
     try {
-      await onUpdate(noticeId, form);
-    } catch (err) {
-      setError("Could not update the notice.");
+      await dispatch(updateNotice({ id: form.id, payload: toPayload(form) })).unwrap();
+      navigate("/");
+    } catch (message) {
+      setError(message);
     }
   }
-
-  if (error) return <div className="notice error">{error}</div>;
-  if (!form) return <div className="notice">Loading...</div>;
 
   return (
     <div className="card">
       <div className="card-header">
-        <div className="page-title">Update Recall Notice (ID: {noticeId})</div>
+        <div className="page-title">Update Recall Notice</div>
       </div>
 
       <div className="card-body">
-        <form className="form" onSubmit={handleSubmit}>
+        <div className="form">
           <label>
-            Product (primary field)
-            <input value={form.product} onChange={set("product")} required />
+            Notice ID
+            <input
+              type="number"
+              min="1"
+              value={idInput}
+              onChange={(e) => setIdInput(e.target.value)}
+              placeholder="e.g. 5001"
+            />
           </label>
-
-          <label>
-            Manufacturer (secondary field)
-            <input value={form.manufacturer} onChange={set("manufacturer")} required />
-          </label>
-
-          <label>
-            Contact email
-            <input type="email" value={form.email} onChange={set("email")} required />
-          </label>
-
-          <label>
-            Description
-            <textarea value={form.description} onChange={set("description")} required />
-          </label>
-
-          <label>
-            Category
-            <select value={form.category} onChange={set("category")}>
-              {CATEGORIES.map((c) => (
-                <option key={c} value={c}>
-                  {c}
-                </option>
-              ))}
-            </select>
-          </label>
-
-          {error && <div className="notice error">{error}</div>}
-
-          <button className="btn primary" type="submit">
-            Save Changes
+          <button className="btn" type="button" onClick={() => load(idInput)}>
+            Load
           </button>
-        </form>
+        </div>
+
+        {!form && error && <div className="notice error">{error}</div>}
+
+        {form && (
+          <>
+            <p>
+              Editing notice <strong>{form.id}</strong> ({form.notice_code})
+            </p>
+            <NoticeForm
+              form={form}
+              setForm={setForm}
+              onSubmit={handleSubmit}
+              submitLabel="Save Changes"
+              error={error}
+            />
+          </>
+        )}
       </div>
     </div>
   );

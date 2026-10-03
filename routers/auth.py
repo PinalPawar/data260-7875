@@ -79,7 +79,7 @@ def home(request: Request, logged_out: Optional[str] = None):
     """
     _status, user = _session_status(request)
     return templates.TemplateResponse(
-        "home.html", {"request": request, "user": user, "logged_out": logged_out}
+        request, "home.html", {"user": user, "logged_out": logged_out}
     )
 
 
@@ -88,7 +88,7 @@ def login_page(request: Request, expired: Optional[str] = None):
     """Displays the login form, with a Bootstrap alert if we got redirected here
     because an idle session expired."""
     error = "Your session timed out from inactivity. Please log in again." if expired else None
-    return templates.TemplateResponse("login.html", {"request": request, "error": error})
+    return templates.TemplateResponse(request, "login.html", {"error": error})
 
 
 @router.post("/login")
@@ -106,8 +106,9 @@ def login(request: Request, username: str = Form(...), password: str = Form(...)
         return RedirectResponse(url="/dashboard", status_code=HTTP_302_FOUND)
 
     return templates.TemplateResponse(
+        request,
         "login.html",
-        {"request": request, "error": "Invalid username or password."},
+        {"error": "Invalid username or password."},
         status_code=401,
     )
 
@@ -124,7 +125,7 @@ def dashboard(request: Request):
     if status != "ok":
         return RedirectResponse(url="/login", status_code=HTTP_302_FOUND)
 
-    return templates.TemplateResponse("dashboard.html", {"request": request, "user": user})
+    return templates.TemplateResponse(request, "dashboard.html", {"user": user})
 
 
 @router.get("/logout")

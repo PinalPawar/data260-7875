@@ -1,6 +1,6 @@
 import os
 
-from fastapi import FastAPI, HTTPException, Depends
+from fastapi import FastAPI, HTTPException, Depends, Query, Response
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from sqlalchemy.orm import Session
@@ -13,6 +13,7 @@ from sqlalchemy import event
 from routers.auth import router as auth_router
 from routers.session_auth import router as session_auth_router, require_session
 from routers.n1_demo import router as n1_demo_router
+from routers.manufacturers import router as manufacturers_router
 from database import Base, engine, get_db_session_basede26
 import crud
 import schemas
@@ -29,8 +30,9 @@ def _count_sql_queries(conn, cursor, statement, parameters, context, executemany
 
 app = FastAPI(title="Grocery Recall Notices API")
 
-# HW4 Part 2: create notices/related_info/users/sessions tables in MySQL
-# (s7875_rel) if they don't exist yet. Safe to call every startup.
+# Create any missing tables in MySQL (s7875_rel). Safe to call every startup.
+# It never ALTERs an existing table -- the HW4 -> HW5 change to `notices`
+# is done once by scripts/migrate_hw05.py.
 Base.metadata.create_all(bind=engine)
 
 # React dev server (Vite) origin. allow_credentials=True is required for the
@@ -73,6 +75,9 @@ app.include_router(session_auth_router)
 # HW4 Part 3: /api/notices/list-naive and /api/notices/list-fixed
 app.include_router(n1_demo_router)
 
+# HW5 Part 1: related entity CRUD + relationship query
+app.include_router(manufacturers_router)
+
 
 @app.get("/notices")
 def notices_app():
@@ -85,26 +90,21 @@ def notices_app():
     """
     return FileResponse("index.html")
 
-# --- HW4 Part 2: domain entity CRUD, backed by MySQL, gated on login ------
-# All five endpoints below depend on require_session: an anonymous request
-# gets a 401 with "Login required" before any DB query runs, which is what
-# lets the React app show "Login required" / hide "Add Record" instead of
-# silently returning data to a logged-out user.
+# --- Domain entity CRUD (HW4 Part 2, extended in HW5 Part 1) ---------------
+# All endpoints depend on require_session: an anonymous request gets a 401
+# "Login required" before any DB query runs. HW5 adds: pagination on the
+# list, 409 on duplicate notice_code, 404 when manufacturer_id doesn't exist.
 
 @app.get("/api/notices", response_model=List[schemas.NoticeOut])
 def get_notices(
     q: Optional[str] = None,
+    skip: int = Query(0, ge=0),
+    limit: int = Query(50, ge=1, le=200),
     db_session_basede26: Session = Depends(get_db_session_basede26),
     _user: User = Depends(require_session),
 ):
-    records = crud.list_notices(db_session_basede26)
-    if q:
-        q_lower = q.lower()
-        records = [
-            n for n in records
-            if q_lower in n.product.lower() or q_lower in n.manufacturer.lower()
-        ]
-    return records
+    return crud.list_notices(db_session_basede26, q=q, skip=skip, limit=limit)
+
 
 @app.get("/api/notices/{notice_id}", response_model=schemas.NoticeOut)
 def get_notice_by_id(
@@ -112,10 +112,11 @@ def get_notice_by_id(
     db_session_basede26: Session = Depends(get_db_session_basede26),
     _user: User = Depends(require_session),
 ):
-    notice = crud.get_notice(db_session_basede26, notice_id)
-    if not notice:
-        raise HTTPException(status_code=404, detail="Notice not found")
-    return notice
+    try:
+        return crud.get_notice(db_session_basede26, notice_id)
+    except crud.NotFound as exc:
+        raise HTTPException(status_code=404, detail=str(exc))
+
 
 @app.post("/api/notices", response_model=schemas.NoticeOut, status_code=201)
 def create_notice(
@@ -123,7 +124,13 @@ def create_notice(
     db_session_basede26: Session = Depends(get_db_session_basede26),
     _user: User = Depends(require_session),
 ):
-    return crud.create_notice(db_session_basede26, notice)
+    try:
+        return crud.create_notice(db_session_basede26, notice)
+    except crud.NotFound as exc:
+        raise HTTPException(status_code=404, detail=str(exc))
+    except crud.Conflict as exc:
+        raise HTTPException(status_code=409, detail=str(exc))
+
 
 @app.put("/api/notices/{notice_id}", response_model=schemas.NoticeOut)
 def update_notice(
@@ -132,21 +139,26 @@ def update_notice(
     db_session_basede26: Session = Depends(get_db_session_basede26),
     _user: User = Depends(require_session),
 ):
-    updated = crud.update_notice(db_session_basede26, notice_id, notice)
-    if not updated:
-        raise HTTPException(status_code=404, detail="Notice not found")
-    return updated
+    try:
+        return crud.update_notice(db_session_basede26, notice_id, notice)
+    except crud.NotFound as exc:
+        raise HTTPException(status_code=404, detail=str(exc))
+    except crud.Conflict as exc:
+        raise HTTPException(status_code=409, detail=str(exc))
 
-@app.delete("/api/notices/{notice_id}", response_model=schemas.NoticeOut)
+
+@app.delete("/api/notices/{notice_id}", status_code=204)
 def delete_notice(
     notice_id: int,
     db_session_basede26: Session = Depends(get_db_session_basede26),
     _user: User = Depends(require_session),
 ):
-    deleted = crud.delete_notice(db_session_basede26, notice_id)
-    if not deleted:
-        raise HTTPException(status_code=404, detail="Notice not found")
-    return deleted
+    try:
+        crud.delete_notice(db_session_basede26, notice_id)
+    except crud.NotFound as exc:
+        raise HTTPException(status_code=404, detail=str(exc))
+    return Response(status_code=204)
+
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8675)

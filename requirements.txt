@@ -26,3 +26,7 @@ pymysql
 python-dotenv
 bcrypt
 email-validator
+
+# HW5 Part 2: MCP servers (FastMCP is the version 1 SDK) and TheMealDB calls
+mcp[cli]<2
+httpx

@@ -1,0 +1,408 @@
+[
+  {
+    "id": "2b18c701-9563-45c5-911c-d077edb366ad",
+    "timestamp": "2026-10-02T08:12:01.494Z",
+    "direction": "request",
+    "origin": "client",
+    "message": {
+      "method": "initialize",
+      "params": {
+        "protocolVersion": "2025-11-25",
+        "capabilities": {
+          "sampling": {},
+          "elicitation": {
+            "form": {},
+            "url": {}
+          },
+          "roots": {
+            "listChanged": true
+          },
+          "tasks": {
+            "list": {},
+            "cancel": {},
+            "requests": {
+              "sampling": {
+                "createMessage": {}
+              },
+              "elicitation": {
+                "create": {}
+              }
+            }
+          },
+          "extensions": {
+            "io.modelcontextprotocol/tasks": {},
+            "io.modelcontextprotocol/ui": {
+              "mimeTypes": [
+                "text/html;profile=mcp-app"
+              ],
+              "elicitation": {}
+            },
+            "io.modelcontextprotocol/skills": {}
+          }
+        },
+        "clientInfo": {
+          "name": "mcp-inspector",
+          "version": "2.9.0"
+        }
+      },
+      "jsonrpc": "2.0",
+      "id": 0
+    },
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 0,
+      "result": {
+        "protocolVersion": "2025-11-25",
+        "capabilities": {
+          "experimental": {},
+          "prompts": {
+            "listChanged": false
+          },
+          "resources": {
+            "subscribe": false,
+            "listChanged": false
+          },
+          "tools": {
+            "listChanged": false
+          }
+        },
+        "serverInfo": {
+          "name": "meals",
+          "version": "1.30.0"
+        }
+      }
+    },
+    "duration": 682
+  },
+  {
+    "id": "970a6bde-a15a-4baf-94d0-c47f46de799d",
+    "timestamp": "2026-10-02T08:12:02.194Z",
+    "direction": "notification",
+    "origin": "client",
+    "message": {
+      "jsonrpc": "2.0",
+      "method": "notifications/initialized"
+    }
+  },
+  {
+    "id": "167442b7-c351-4a19-84ca-af5edb79d897",
+    "timestamp": "2026-10-02T08:12:02.219Z",
+    "direction": "request",
+    "origin": "client",
+    "message": {
+      "method": "resources/list",
+      "jsonrpc": "2.0",
+      "id": 1,
+      "params": {
+        "_meta": {
+          "progressToken": 1
+        }
+      }
+    },
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 1,
+      "result": {
+        "resources": []
+      }
+    },
+    "duration": 130
+  },
+  {
+    "id": "4174ca21-1bf5-4123-a2fb-e31e0bce58e3",
+    "timestamp": "2026-10-02T08:12:02.219Z",
+    "direction": "request",
+    "origin": "client",
+    "message": {
+      "method": "tools/list",
+      "jsonrpc": "2.0",
+      "id": 2,
+      "params": {
+        "_meta": {
+          "progressToken": 2
+        }
+      }
+    },
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 2,
+      "result": {
+        "tools": [
+          {
+            "name": "search_meals_by_name",
+            "description": "Search meals by name. Returns up to `limit` meals as {id, name, area, category, thumb}.",
+            "inputSchema": {
+              "properties": {
+                "query": {
+                  "description": "Meal name to search for, e.g. Arrabiata",
+                  "minLength": 1,
+                  "title": "Query",
+                  "type": "string"
+                },
+                "limit": {
+                  "default": 5,
+                  "description": "Maximum meals to return (1-25)",
+                  "maximum": 25,
+                  "minimum": 1,
+                  "title": "Limit",
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "query"
+              ],
+              "title": "search_meals_by_nameArguments",
+              "type": "object"
+            }
+          },
+          {
+            "name": "meals_by_ingredient",
+            "description": "Filter meals by main ingredient. Returns small cards {id, name, thumb}.",
+            "inputSchema": {
+              "properties": {
+                "ingredient": {
+                  "description": "Main ingredient, e.g. chicken",
+                  "minLength": 1,
+                  "title": "Ingredient",
+                  "type": "string"
+                },
+                "limit": {
+                  "default": 12,
+                  "description": "Maximum meals to return (1-25)",
+                  "maximum": 25,
+                  "minimum": 1,
+                  "title": "Limit",
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "ingredient"
+              ],
+              "title": "meals_by_ingredientArguments",
+              "type": "object"
+            }
+          },
+          {
+            "name": "meal_details",
+            "description": "Look up one meal by id and return its full recipe.",
+            "inputSchema": {
+              "properties": {
+                "id": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "integer"
+                    }
+                  ],
+                  "description": "TheMealDB meal id, e.g. 52771",
+                  "title": "Id"
+                }
+              },
+              "required": [
+                "id"
+              ],
+              "title": "meal_detailsArguments",
+              "type": "object"
+            }
+          },
+          {
+            "name": "random_meal",
+            "description": "Return one random meal, in the same shape as meal_details.",
+            "inputSchema": {
+              "properties": {},
+              "title": "random_mealArguments",
+              "type": "object"
+            }
+          }
+        ]
+      }
+    },
+    "duration": 180
+  },
+  {
+    "id": "c31b71b8-879d-49ac-be3c-e20d1235e477",
+    "timestamp": "2026-10-02T08:12:02.219Z",
+    "direction": "request",
+    "origin": "client",
+    "message": {
+      "method": "prompts/list",
+      "jsonrpc": "2.0",
+      "id": 3,
+      "params": {
+        "_meta": {
+          "progressToken": 3
+        }
+      }
+    },
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 3,
+      "result": {
+        "prompts": []
+      }
+    },
+    "duration": 202
+  },
+  {
+    "id": "2d1e842f-dd72-4f48-b1c3-ec391caca577",
+    "timestamp": "2026-10-02T08:12:02.219Z",
+    "direction": "request",
+    "origin": "client",
+    "message": {
+      "method": "resources/templates/list",
+      "jsonrpc": "2.0",
+      "id": 4,
+      "params": {
+        "_meta": {
+          "progressToken": 4
+        }
+      }
+    },
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 4,
+      "result": {
+        "resourceTemplates": []
+      }
+    },
+    "duration": 220
+  },
+  {
+    "id": "89ae4481-f71f-462e-8d45-419ba3e5f9b5",
+    "timestamp": "2026-10-02T08:12:35.552Z",
+    "direction": "request",
+    "origin": "client",
+    "message": {
+      "method": "tools/call",
+      "params": {
+        "name": "search_meals_by_name",
+        "arguments": {
+          "limit": 5,
+          "query": "Arrabiata"
+        },
+        "_meta": {
+          "progressToken": 5
+        }
+      },
+      "jsonrpc": "2.0",
+      "id": 5
+    },
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 5,
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"count\": 1,\n  \"meals\": [\n    {\n      \"id\": \"52771\",\n      \"name\": \"Spicy Arrabiata Penne\",\n      \"area\": \"Italian\",\n      \"category\": \"Vegetarian\",\n      \"thumb\": \"https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg\"\n    }\n  ],\n  \"message\": \"ok\"\n}"
+          }
+        ],
+        "isError": false
+      }
+    },
+    "duration": 470
+  },
+  {
+    "id": "481be02a-b91d-4fe1-9678-58dbd33e9c6f",
+    "timestamp": "2026-10-02T08:12:48.084Z",
+    "direction": "request",
+    "origin": "client",
+    "message": {
+      "method": "tools/call",
+      "params": {
+        "name": "meals_by_ingredient",
+        "arguments": {
+          "limit": 12,
+          "ingredient": "chicken"
+        },
+        "_meta": {
+          "progressToken": 6
+        }
+      },
+      "jsonrpc": "2.0",
+      "id": 6
+    },
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 6,
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"count\": 12,\n  \"meals\": [\n    {\n      \"id\": \"52940\",\n      \"name\": \"Brown Stew Chicken\",\n      \"thumb\": \"https://www.themealdb.com/images/media/meals/sypxpx1515365095.jpg\"\n    },\n    {\n      \"id\": \"53161\",\n      \"name\": \"Chicken & chorizo rice pot\",\n      \"thumb\": \"https://www.themealdb.com/images/media/meals/fk80jp1763280767.jpg\"\n    },\n    {\n      \"id\": \"52846\",\n      \"name\": \"Chicken & mushroom Hotpot\",\n      \"thumb\": \"https://www.themealdb.com/images/media/meals/uuuspp1511297945.jpg\"\n    },\n    {\n      \"id\": \"52796\",\n      \"name\": \"Chicken Alfredo Primavera\",\n      \"thumb\": \"https://www.themealdb.com/images/media/meals/syqypv1486981727.jpg\"\n    },\n    {\n      \"id\": \"52934\",\n      \"name\": \"Chicken Basquaise\",\n      \"thumb\": \"https://www.themealdb.com/images/media/meals/wruvqv1511880994.jpg\"\n    },\n    {\n      \"id\": \"52956\",\n      \"name\": \"Chicken Congee\",\n      \"thumb\": \"https://www.themealdb.com/images/media/meals/1529446352.jpg\"\n    },\n    {\n      \"id\": \"52795\",\n      \"name\": \"Chicken Handi\",\n      \"thumb\": \"https://www.themealdb.com/images/media/meals/wyxwsp1486979827.jpg\"\n    },\n    {\n      \"id\": \"52831\",\n      \"name\": \"Chicken Karaage\",\n      \"thumb\": \"https://www.themealdb.com/images/media/meals/tyywsw1505930373.jpg\"\n    },\n    {\n      \"id\": \"53358\",\n      \"name\": \"Chicken Mandi\",\n      \"thumb\": \"https://www.themealdb.com/images/media/meals/er4d081765186828.jpg\"\n    },\n    {\n      \"id\": \"53186\",\n      \"name\": \"Chicken with saffron, raisins & pine nuts\",\n      \"thumb\": \"https://www.themealdb.com/images/media/meals/4mhr3u1763481087.jpg\"\n    },\n    {\n      \"id\": \"53220\",\n      \"name\": \"kabse\",\n      \"thumb\": \"https://www.themealdb.com/images/media/meals/utqnjv1763598650.jpg\"\n    },\n    {\n      \"id\": \"52813\",\n      \"name\": \"Kentucky Fried Chicken\",\n      \"thumb\": \"https://www.themealdb.com/images/media/meals/40r49m1763197022.jpg\"\n    }\n  ],\n  \"message\": \"ok\"\n}"
+          }
+        ],
+        "isError": false
+      }
+    },
+    "duration": 273
+  },
+  {
+    "id": "7c6b5527-d8d8-4cc4-aa0b-e75b3cab69d4",
+    "timestamp": "2026-10-02T08:13:01.951Z",
+    "direction": "request",
+    "origin": "client",
+    "message": {
+      "method": "tools/call",
+      "params": {
+        "name": "meal_details",
+        "arguments": {
+          "id": 52771
+        },
+        "_meta": {
+          "progressToken": 7
+        }
+      },
+      "jsonrpc": "2.0",
+      "id": 7
+    },
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 7,
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"id\": \"52771\",\n  \"name\": \"Spicy Arrabiata Penne\",\n  \"category\": \"Vegetarian\",\n  \"area\": \"Italian\",\n  \"instructions\": \"Bring a large pot of water to a boil. Add kosher salt to the boiling water, then add the pasta. Cook according to the package instructions, about 9 minutes.\\r\\nIn a large skillet over medium-high heat, add the olive oil and heat until the oil starts to shimmer. Add the garlic and cook, stirring, until fragrant, 1 to 2 minutes. Add the chopped tomatoes, red chile flakes, Italian seasoning and salt and pepper to taste. Bring to a boil and cook for 5 minutes. Remove from the heat and add the chopped basil.\\r\\nDrain the pasta and add it to the sauce. Garnish with Parmigiano-Reggiano flakes and more basil and serve warm.\",\n  \"image\": \"https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg\",\n  \"source\": null,\n  \"youtube\": \"https://www.youtube.com/watch?v=1IszT_guI08\",\n  \"ingredients\": [\n    {\n      \"name\": \"penne rigate\",\n      \"measure\": \"1 pound\"\n    },\n    {\n      \"name\": \"olive oil\",\n      \"measure\": \"1/4 cup\"\n    },\n    {\n      \"name\": \"garlic\",\n      \"measure\": \"3 cloves\"\n    },\n    {\n      \"name\": \"chopped tomatoes\",\n      \"measure\": \"1 tin\"\n    },\n    {\n      \"name\": \"red chilli flakes\",\n      \"measure\": \"1/2 teaspoon\"\n    },\n    {\n      \"name\": \"italian seasoning\",\n      \"measure\": \"1/2 teaspoon\"\n    },\n    {\n      \"name\": \"basil\",\n      \"measure\": \"6 leaves\"\n    },\n    {\n      \"name\": \"Parmigiano-Reggiano\",\n      \"measure\": \"sprinkling\"\n    }\n  ]\n}"
+          }
+        ],
+        "isError": false
+      }
+    },
+    "duration": 277
+  },
+  {
+    "id": "76aef01e-09c7-405b-94aa-686d52cb3e91",
+    "timestamp": "2026-10-02T08:13:04.800Z",
+    "direction": "request",
+    "origin": "client",
+    "message": {
+      "method": "tools/call",
+      "params": {
+        "name": "random_meal",
+        "arguments": {},
+        "_meta": {
+          "progressToken": 8
+        }
+      },
+      "jsonrpc": "2.0",
+      "id": 8
+    },
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 8,
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"id\": \"53459\",\n  \"name\": \"Chicken and Potato Roti\",\n  \"category\": \"Chicken\",\n  \"area\": null,\n  \"instructions\": \"Add a pint of chicken stock to the simmer and put three tablespoons of sugar into a large saucepan on high; cook until the sugar caramelizes, then add the cubed chicken breasts and stir until the chicken browns.\\r\\nAdd chopped onions, garlic, parsley, thyme, jerk seasoning, salt, and the whole scotch bonnet pepper – do not cut up the pepper! Reduce the heat to low and let this simmer for 25 minutes.\\r\\nIn a large mixing bowl, sift the flour, and add a pinch of salt to taste.\\r\\nNow add the first tablespoon of shortening, and with your fingers, rub the flour into the shortening until it forms a breadcrumb-like consistency.\\r\\nThen add the second tablespoon of shortening and rub against the flour until it looks like breadcrumbs.\\r\\nNow add the third tablespoon of shortening and repeat the process.\\r\\nYou should by now have used all the flour. Your bowl should be all breadcrumb-like; if you still have fresh flour, use another tablespoon of shortening until your fresh flour is all used up.\\r\\nAdd a small amount of water and mix with a butter knife; keep adding small amounts until your mixture forms a soft dough.\\r\\nNow dust your surface with flour and roll out your pastry; you want to roll wafer-thin rounds – this mixture should make at least 12 roti skins.\\r\\nCover with a tea towel while returning to the pot.\\r\\nNow peel the potatoes and cube them into small bite-size pieces.\\r\\nAfter 25 minutes of simmering, add 1/2 pint of water and the potatoes to the pool.\\r\\nNow cover and cook for 30 minutes on low heat.\\r\\nTurn a flat baking tray upside down, lightly cover with foil, and place on the stovetop on high; cook each roti skin for 1 minute on each side until brown but not crisp.\\r\\nNow pile up your cooked roti skins, remove the pot after 30 minutes, and remove the whole scotch bonnet.\\r\\nTake the entire pot to the table with a pile of plates; each person assumes the roti skin, lays it flat on the scale, spoons some filling into the middle of the roti skin, and folds around the filling eats enjoy.\",\n  \"image\": \"https://www.themealdb.com/images/media/meals/mp9z0i1782238092.jpg\",\n  \"source\": \"https://www.totallybarbados.com/articles/barbados-recipes/chicken-potato-roti-recipe/\",\n  \"youtube\": \"https://www.youtube.com/watch?v=2ehdHb1rcAQ\",\n  \"ingredients\": [\n    {\n      \"name\": \"Flour\",\n      \"measure\": \"1 lb\"\n    },\n    {\n      \"name\": \"Shortening\",\n      \"measure\": \"3  tablespoons\"\n    },\n    {\n      \"name\": \"Salt\",\n      \"measure\": \"Pinch\"\n    },\n    {\n      \"name\": \"Water\",\n      \"measure\": \"Splash\"\n    },\n    {\n      \"name\": \"Chicken Breast\",\n      \"measure\": \"6\"\n    },\n    {\n      \"name\": \"Parsley\",\n      \"measure\": \"Pinch\"\n    },\n    {\n      \"name\": \"Thyme\",\n      \"measure\": \"Pinch\"\n    },\n    {\n      \"name\": \"Jerk\",\n      \"measure\": \"Pinch\"\n    },\n    {\n      \"name\": \"Salt\",\n      \"measure\": \"Pinch\"\n    },\n    {\n      \"name\": \"Sugar\",\n      \"measure\": \"Pinch\"\n    },\n    {\n      \"name\": \"Black Pepper\",\n      \"measure\": \"Pinch\"\n    },\n    {\n      \"name\": \"Onion\",\n      \"measure\": \"2 large\"\n    },\n    {\n      \"name\": \"Garlic\",\n      \"measure\": \"4 cloves\"\n    },\n    {\n      \"name\": \"Scotch Bonnet\",\n      \"measure\": \"1\"\n    },\n    {\n      \"name\": \"Potatoes\",\n      \"measure\": \"1/2 lb\"\n    }\n  ]\n}"
+          }
+        ],
+        "isError": false
+      }
+    },
+    "duration": 411
+  }
+]

@@ -1,0 +1,42 @@
+{
+  "verify_seed": 267875,
+  "policy": {
+    "max_attempts": 3,
+    "timeout_s": 2.0,
+    "base_delay_s": 0.1,
+    "max_delay_s": 1.0
+  },
+  "generated_at": "2026-10-02T00:57:48",
+  "results": [
+    {
+      "injected_failure_rate": "0%",
+      "calls": 50,
+      "success_rate": "100%",
+      "mean_latency_ms": 2.7,
+      "p99_latency_ms": 7.6,
+      "attempts_total": 50,
+      "same_seed_same_sequence": true,
+      "first_12_attempt_outcomes": "............"
+    },
+    {
+      "injected_failure_rate": "20%",
+      "calls": 50,
+      "success_rate": "96%",
+      "mean_latency_ms": 21.3,
+      "p99_latency_ms": 308.5,
+      "attempts_total": 57,
+      "same_seed_same_sequence": true,
+      "first_12_attempt_outcomes": "....F...FFF."
+    },
+    {
+      "injected_failure_rate": "50%",
+      "calls": 50,
+      "success_rate": "90%",
+      "mean_latency_ms": 94.9,
+      "p99_latency_ms": 317.9,
+      "attempts_total": 84,
+      "same_seed_same_sequence": true,
+      "first_12_attempt_outcomes": "F.FFF.F.FFFF"
+    }
+  ]
+}

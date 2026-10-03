@@ -16,19 +16,13 @@ export const logout = () => api.post("/api/auth/logout").then((r) => r.data);
 
 export const me = () => api.get("/api/auth/me").then((r) => r.data);
 
-// --- Notices (the domain entity) ---
-export const fetchNotices = () => api.get("/api/notices").then((r) => r.data);
-
+// --- Helpers used by the forms (HW5) ---
+// The notice list/create/update/delete calls now live in the Redux thunks
+// (features/notices/noticesSlice.js). These two are simple lookups.
 export const fetchNoticeById = (id) =>
   api.get(`/api/notices/${id}`).then((r) => r.data);
 
-export const createNotice = (payload) =>
-  api.post("/api/notices", payload).then((r) => r.data);
-
-export const updateNotice = (id, payload) =>
-  api.put(`/api/notices/${id}`, payload).then((r) => r.data);
-
-export const deleteNotice = (id) =>
-  api.delete(`/api/notices/${id}`).then((r) => r.data);
+export const fetchManufacturers = () =>
+  api.get("/api/manufacturers", { params: { page: 1, page_size: 100 } }).then((r) => r.data.items);
 
 export default api;

@@ -29,7 +29,7 @@ def _serialize(notice: Notice, related_rows):
     return {
         "id": notice.id,
         "product": notice.product,
-        "manufacturer": notice.manufacturer,
+        "manufacturer_id": notice.manufacturer_id,
         "related": [{"id": r.id, "note": r.note} for r in related_rows],
     }
 

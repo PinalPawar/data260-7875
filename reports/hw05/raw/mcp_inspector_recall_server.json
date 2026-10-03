@@ -1,0 +1,460 @@
+[
+  {
+    "id": "b3f46acb-84ba-4382-9b48-0831d04b1866",
+    "timestamp": "2026-10-02T07:38:16.818Z",
+    "direction": "request",
+    "origin": "client",
+    "message": {
+      "method": "initialize",
+      "params": {
+        "protocolVersion": "2025-11-25",
+        "capabilities": {
+          "sampling": {},
+          "elicitation": {
+            "form": {},
+            "url": {}
+          },
+          "roots": {
+            "listChanged": true
+          },
+          "tasks": {
+            "list": {},
+            "cancel": {},
+            "requests": {
+              "sampling": {
+                "createMessage": {}
+              },
+              "elicitation": {
+                "create": {}
+              }
+            }
+          },
+          "extensions": {
+            "io.modelcontextprotocol/tasks": {},
+            "io.modelcontextprotocol/ui": {
+              "mimeTypes": [
+                "text/html;profile=mcp-app"
+              ],
+              "elicitation": {}
+            },
+            "io.modelcontextprotocol/skills": {}
+          }
+        },
+        "clientInfo": {
+          "name": "mcp-inspector",
+          "version": "2.9.0"
+        }
+      },
+      "jsonrpc": "2.0",
+      "id": 0
+    },
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 0,
+      "result": {
+        "protocolVersion": "2025-11-25",
+        "capabilities": {
+          "experimental": {},
+          "prompts": {
+            "listChanged": false
+          },
+          "resources": {
+            "subscribe": false,
+            "listChanged": false
+          },
+          "tools": {
+            "listChanged": false
+          }
+        },
+        "serverInfo": {
+          "name": "s7875-recalls",
+          "version": "1.30.0"
+        }
+      }
+    },
+    "duration": 770
+  },
+  {
+    "id": "ede65e73-785e-48fe-83db-2973a6f4e3b2",
+    "timestamp": "2026-10-02T07:38:17.604Z",
+    "direction": "notification",
+    "origin": "client",
+    "message": {
+      "jsonrpc": "2.0",
+      "method": "notifications/initialized"
+    }
+  },
+  {
+    "id": "0a9ee255-1baf-4154-9e85-aadff618b3f2",
+    "timestamp": "2026-10-02T07:38:17.631Z",
+    "direction": "request",
+    "origin": "client",
+    "message": {
+      "method": "resources/list",
+      "jsonrpc": "2.0",
+      "id": 1,
+      "params": {
+        "_meta": {
+          "progressToken": 1
+        }
+      }
+    },
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 1,
+      "result": {
+        "resources": []
+      }
+    },
+    "duration": 138
+  },
+  {
+    "id": "e38173e5-4ccc-4633-be88-60c9fdb09eda",
+    "timestamp": "2026-10-02T07:38:17.631Z",
+    "direction": "request",
+    "origin": "client",
+    "message": {
+      "method": "tools/list",
+      "jsonrpc": "2.0",
+      "id": 2,
+      "params": {
+        "_meta": {
+          "progressToken": 2
+        }
+      }
+    },
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 2,
+      "result": {
+        "tools": [
+          {
+            "name": "search_notices",
+            "description": "Search recall notices by product or manufacturer name.\n    query: at least 2 characters. category (optional): supplyShortage,\n    bacterialContamination, foreignMaterial or mislabelling. limit: 1-20.",
+            "inputSchema": {
+              "properties": {
+                "query": {
+                  "title": "Query",
+                  "type": "string"
+                },
+                "category": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Category"
+                },
+                "limit": {
+                  "default": 5,
+                  "title": "Limit",
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "query"
+              ],
+              "title": "search_noticesArguments",
+              "type": "object"
+            }
+          },
+          {
+            "name": "get_notice_detail",
+            "description": "Look up one recall notice by its code (format RCL-2026-00001) and return all its fields.",
+            "inputSchema": {
+              "properties": {
+                "notice_code": {
+                  "title": "Notice Code",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "notice_code"
+              ],
+              "title": "get_notice_detailArguments",
+              "type": "object"
+            }
+          },
+          {
+            "name": "recall_stats",
+            "description": "Aggregate: notice count and total units affected per group.\n    group_by must be \"category\" or \"manufacturer\".",
+            "inputSchema": {
+              "properties": {
+                "group_by": {
+                  "title": "Group By",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "group_by"
+              ],
+              "title": "recall_statsArguments",
+              "type": "object"
+            }
+          }
+        ]
+      }
+    },
+    "duration": 175
+  },
+  {
+    "id": "2f56e903-39ee-407f-952f-41f1f947a044",
+    "timestamp": "2026-10-02T07:38:17.631Z",
+    "direction": "request",
+    "origin": "client",
+    "message": {
+      "method": "prompts/list",
+      "jsonrpc": "2.0",
+      "id": 3,
+      "params": {
+        "_meta": {
+          "progressToken": 3
+        }
+      }
+    },
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 3,
+      "result": {
+        "prompts": []
+      }
+    },
+    "duration": 217
+  },
+  {
+    "id": "15a68847-efa6-4c02-9b6a-c2a41cc19f29",
+    "timestamp": "2026-10-02T07:38:17.631Z",
+    "direction": "request",
+    "origin": "client",
+    "message": {
+      "method": "resources/templates/list",
+      "jsonrpc": "2.0",
+      "id": 4,
+      "params": {
+        "_meta": {
+          "progressToken": 4
+        }
+      }
+    },
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 4,
+      "result": {
+        "resourceTemplates": []
+      }
+    },
+    "duration": 236
+  },
+  {
+    "id": "6ebe853c-838e-4ddc-87b1-6163bd801a0f",
+    "timestamp": "2026-10-02T07:40:27.136Z",
+    "direction": "request",
+    "origin": "client",
+    "message": {
+      "method": "tools/call",
+      "params": {
+        "name": "search_notices",
+        "arguments": {
+          "category": null,
+          "limit": 5,
+          "query": "spinach"
+        },
+        "_meta": {
+          "progressToken": 5
+        }
+      },
+      "jsonrpc": "2.0",
+      "id": 5
+    },
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 5,
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"ok\": true,\n  \"data\": {\n    \"count\": 5,\n    \"notices\": [\n      {\n        \"notice_code\": \"RCL-2026-05001\",\n        \"product\": \"Frozen Spinach\",\n        \"manufacturer\": \"GreenFields Co\",\n        \"category\": \"bacterialContamination\",\n        \"units_affected\": 2919\n      },\n      {\n        \"notice_code\": \"RCL-2026-04994\",\n        \"product\": \"Frozen Spinach (batch 4994)\",\n        \"manufacturer\": \"ACME Foods\",\n        \"category\": \"foreignMaterial\",\n        \"units_affected\": 2486\n      },\n      {\n        \"notice_code\": \"RCL-2026-04912\",\n        \"product\": \"Frozen Spinach (batch 4912)\",\n        \"manufacturer\": \"Northgate Dairy\",\n        \"category\": \"foreignMaterial\",\n        \"units_affected\": 3128\n      },\n      {\n        \"notice_code\": \"RCL-2026-04887\",\n        \"product\": \"Frozen Spinach (batch 4887)\",\n        \"manufacturer\": \"ACME Foods\",\n        \"category\": \"supplyShortage\",\n        \"units_affected\": 153\n      },\n      {\n        \"notice_code\": \"RCL-2026-04880\",\n        \"product\": \"Frozen Spinach (batch 4880)\",\n        \"manufacturer\": \"Golden Acres\",\n        \"category\": \"mislabelling\",\n        \"units_affected\": 4720\n      }\n    ]\n  },\n  \"error\": null\n}"
+          }
+        ],
+        "isError": false
+      }
+    },
+    "duration": 379
+  },
+  {
+    "id": "05599317-df20-42dc-a3ad-544c3bcaa68c",
+    "timestamp": "2026-10-02T07:41:33.516Z",
+    "direction": "request",
+    "origin": "client",
+    "message": {
+      "method": "tools/call",
+      "params": {
+        "name": "search_notices",
+        "arguments": {
+          "category": null,
+          "limit": 500,
+          "query": "spinach"
+        },
+        "_meta": {
+          "progressToken": 6
+        }
+      },
+      "jsonrpc": "2.0",
+      "id": 6
+    },
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 6,
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"ok\": false,\n  \"data\": null,\n  \"error\": \"invalid input -- limit: Input should be less than or equal to 20\"\n}"
+          }
+        ],
+        "isError": false
+      }
+    },
+    "duration": 87
+  },
+  {
+    "id": "d8bcd5ca-ed4a-4b40-ba9d-973452a52e94",
+    "timestamp": "2026-10-02T07:42:34.149Z",
+    "direction": "request",
+    "origin": "client",
+    "message": {
+      "method": "tools/call",
+      "params": {
+        "name": "get_notice_detail",
+        "arguments": {
+          "notice_code": "RCL-2026-00003"
+        },
+        "_meta": {
+          "progressToken": 7
+        }
+      },
+      "jsonrpc": "2.0",
+      "id": 7
+    },
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 7,
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"ok\": true,\n  \"data\": {\n    \"notice_code\": \"RCL-2026-00003\",\n    \"product\": \"Peanut Butter (batch 3)\",\n    \"category\": \"supplyShortage\",\n    \"units_affected\": 3757,\n    \"description\": \"Routine testing detected a packaging shortage causing incorrect fill levels in lot #L10003.\",\n    \"contact_email\": \"qa3@valleyfresh.com\",\n    \"manufacturer\": {\n      \"code\": \"MFR-0010\",\n      \"name\": \"Valley Fresh\",\n      \"headquarters\": \"Boise, ID\"\n    },\n    \"created_at\": \"2026-10-01T22:22:25\",\n    \"updated_at\": \"2026-10-01T22:22:25\"\n  },\n  \"error\": null\n}"
+          }
+        ],
+        "isError": false
+      }
+    },
+    "duration": 95
+  },
+  {
+    "id": "dcc878c3-436f-4251-a2b7-b4c70b0e3627",
+    "timestamp": "2026-10-02T07:43:38.032Z",
+    "direction": "request",
+    "origin": "client",
+    "message": {
+      "method": "tools/call",
+      "params": {
+        "name": "get_notice_detail",
+        "arguments": {
+          "notice_code": "ABC-123"
+        },
+        "_meta": {
+          "progressToken": 8
+        }
+      },
+      "jsonrpc": "2.0",
+      "id": 8
+    },
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 8,
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"ok\": false,\n  \"data\": null,\n  \"error\": \"invalid input -- notice_code: String should match pattern '^RCL-\\\\d{4}-\\\\d{5}$'\"\n}"
+          }
+        ],
+        "isError": false
+      }
+    },
+    "duration": 99
+  },
+  {
+    "id": "48786717-d37b-4843-a3ac-6f0c872a243d",
+    "timestamp": "2026-10-02T07:44:49.983Z",
+    "direction": "request",
+    "origin": "client",
+    "message": {
+      "method": "tools/call",
+      "params": {
+        "name": "recall_stats",
+        "arguments": {
+          "group_by": "category"
+        },
+        "_meta": {
+          "progressToken": 9
+        }
+      },
+      "jsonrpc": "2.0",
+      "id": 9
+    },
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 9,
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"ok\": true,\n  \"data\": {\n    \"group_by\": \"category\",\n    \"groups\": [\n      {\n        \"group\": \"supplyShortage\",\n        \"notice_count\": 1274,\n        \"total_units_affected\": 3130931\n      },\n      {\n        \"group\": \"foreignMaterial\",\n        \"notice_count\": 1271,\n        \"total_units_affected\": 3147116\n      },\n      {\n        \"group\": \"mislabelling\",\n        \"notice_count\": 1246,\n        \"total_units_affected\": 3133276\n      },\n      {\n        \"group\": \"bacterialContamination\",\n        \"notice_count\": 1210,\n        \"total_units_affected\": 3089096\n      }\n    ],\n    \"total_notices\": 5001,\n    \"total_units_affected\": 12500419\n  },\n  \"error\": null\n}"
+          }
+        ],
+        "isError": false
+      }
+    },
+    "duration": 103
+  },
+  {
+    "id": "9e3c8d6e-db32-4e80-8e65-5e5acd2f6599",
+    "timestamp": "2026-10-02T07:45:56.218Z",
+    "direction": "request",
+    "origin": "client",
+    "message": {
+      "method": "tools/call",
+      "params": {
+        "name": "recall_stats",
+        "arguments": {
+          "group_by": "color"
+        },
+        "_meta": {
+          "progressToken": 10
+        }
+      },
+      "jsonrpc": "2.0",
+      "id": 10
+    },
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 10,
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"ok\": false,\n  \"data\": null,\n  \"error\": \"invalid input -- group_by: Input should be 'category' or 'manufacturer'\"\n}"
+          }
+        ],
+        "isError": false
+      }
+    },
+    "duration": 91
+  }
+]

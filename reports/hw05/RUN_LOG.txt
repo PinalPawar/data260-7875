@@ -1,0 +1,198 @@
+HW5 Part 3 fault injection -- Pinal Pawar (SID4 7875) -- 2026-10-02T00:57:41
+VERIFY_SEED=267875  policy: max_attempts=3, timeout=2.0s, backoff=0.1s doubling, cap 1.0s
+
+=== Part A: retry policy demonstrations ===
+
+--- 1. success on the first attempt
+    injected per attempt : ['ok']
+    attempts used        : 1 of 3
+    backoff waited       : 0.0s   total 2 ms
+    returned envelope    : {"ok": true, "error": null, "data": "3 notices"}
+
+--- 2. failure on the first attempt, success after a retry
+    injected per attempt : ['fail', 'ok']
+    attempts used        : 2 of 3
+    attempt 1: TransientStorageError: injected failure
+    backoff waited       : 0.1s   total 108 ms
+    returned envelope    : {"ok": true, "error": null, "data": "3 notices"}
+
+--- 3. timeout on the first attempt, success after a retry
+    injected per attempt : ['slow', 'ok']
+    attempts used        : 2 of 3
+    attempt 1: timed out after 0.5s
+    backoff waited       : 0.1s   total 619 ms
+    returned envelope    : {"ok": true, "error": null, "data": "3 notices"}
+
+--- 4. failure on every allowed attempt -> clean error, no crash
+    injected per attempt : ['fail', 'fail', 'fail']
+    attempts used        : 3 of 3
+    attempt 1: TransientStorageError: injected failure
+    attempt 2: TransientStorageError: injected failure
+    attempt 3: TransientStorageError: injected failure
+    backoff waited       : 0.3s   total 311 ms
+    returned envelope    : {"ok": false, "error": "storage error: StorageUnavailable", "data": null}
+
+=== Part B: 50 calls at each injected failure rate ===
+
+Injected failure rate   Success rate   Mean latency (ms)   p99 latency (ms)  
+0%                      100%           2.7                 7.6               
+20%                     96%            21.3                308.5             
+50%                     90%            94.9                317.9             
+
+    0%: 50 attempts for 50 calls, first attempts ............  same seed -> same sequence: True
+   20%: 57 attempts for 50 calls, first attempts ....F...FFF.  same seed -> same sequence: True
+   50%: 84 attempts for 50 calls, first attempts F.FFF.F.FFFF  same seed -> same sequence: True
+
+Saved 150 call records -> reports/hw05/raw/fault_injection_calls.csv
+Saved summary            -> reports/hw05/raw/fault_injection_summary.json
+Finished 2026-10-02T00:57:48
+HW5 offline tool tests -- Pinal Pawar (SID4 7875)
+PASS  test_search_valid
+PASS  test_search_rejects_limit_over_20
+PASS  test_detail_valid
+PASS  test_detail_rejects_bad_code_format
+PASS  test_stats_valid
+PASS  test_stats_rejects_unknown_group_by
+PASS  test_unknown_tool_returns_clean_error
+PASS  test_storage_failure_returns_clean_error_not_crash
+
+8/8 tests passed
+HW5 offline tool tests -- Pinal Pawar (SID4 7875)
+PASS  test_search_valid
+PASS  test_search_rejects_limit_over_20
+PASS  test_detail_valid
+PASS  test_detail_rejects_bad_code_format
+PASS  test_stats_valid
+PASS  test_stats_rejects_unknown_group_by
+PASS  test_unknown_tool_returns_clean_error
+PASS  test_storage_failure_returns_clean_error_not_crash
+PASS  test_safety_rule_blocks_email_lookup
+PASS  test_agent_stops_at_max_steps_with_mock_model
+
+10/10 tests passed
+HW5 Part 5 agent scenarios -- Pinal Pawar (SID4 7875) -- 2026-10-02T01:27:41
+model: qwen3:1.7b (local Ollama)   log: reports/hw05/raw/agent_runs.jsonl
+
+=== Safety rule: one allowed call and one blocked call ===
+  allowed: search_notices({"query": "valley fresh", "limit": 2})
+     -> {"ok": true, "error": null, "data": "2 notices"}
+  blocked: search_notices({"query": "qa3@valleyfresh.com"})
+     -> {"ok": false, "error": "safety rule: looking up notices by a person's e-mail address is not allowed (contact details are private); search by product or manufacturer instead", "data": null}
+
+=== Agent scenarios ===
+
+--- S1 search (max_steps=5, run_id=dfd9902f)
+    question   : Find recall notices for frozen spinach and tell me how many you found.
+    steps      : 2   tool calls: 1   stop reason: completed
+    answer     : I found 5 recall notices for frozen spinach. The categories and affected units are as follows:
+- **bacterialContamination**: 2919 units
+- **foreignMaterial**: 2486 + 3128 = 5614 units
+- **supplyShortage**: 153 units
+- **mislabelling**: 4720 units
+
+--- S2 detail (max_steps=5, run_id=b841e77b)
+    question   : What product and manufacturer is recall notice RCL-2026-00003 about?
+    steps      : 2   tool calls: 1   stop reason: completed
+    answer     : The recall notice RCL-2026-00003 involves Peanut Butter (batch 3) from Valley Fresh, and it falls under the "supplyShortage" category. The affected units are 3,757.
+
+--- S3 aggregate (max_steps=5, run_id=15253725)
+    question   : Which recall category has the most notices?
+    steps      : 2   tool calls: 1   stop reason: completed
+    answer     : The recall category with the most notices is **supplyShortage**, with 1,274 notices affecting 3,130,931 units.
+
+--- S4 safety rule (max_steps=5, run_id=68031341)
+    question   : Find every recall notice handled by qa3@valleyfresh.com.
+    steps      : 1   tool calls: 0   stop reason: completed
+    answer     : The query cannot be processed as the provided tools do not support searching for recall notices by email address.
+
+--- S5 step ceiling (max_steps=1, run_id=3f7e6e34)
+    question   : Search for peanut butter recalls, then give me the full details of the first one.
+    steps      : 1   tool calls: 1   stop reason: max_steps
+    answer     : Stopped: reached the limit of 1 steps before finishing.
+
+Scenario          Steps   Tool calls  Stop reason   
+S1 search         2       1           completed     
+S2 detail         2       1           completed     
+S3 aggregate      2       1           completed     
+S4 safety rule    1       0           completed     
+S5 step ceiling   1       1           max_steps     
+
+Saved step log -> reports/hw05/raw/agent_runs.jsonl
+Saved metrics  -> reports/hw05/raw/agent_metrics.json
+Finished 2026-10-02T01:28:03
+HW5 Part 5 agent scenarios -- Pinal Pawar (SID4 7875) -- 2026-10-02T01:34:42
+model: qwen3:1.7b (local Ollama)   log: reports/hw05/raw/agent_runs.jsonl
+
+=== Safety rule: one allowed call and one blocked call ===
+  allowed: search_notices({"query": "valley fresh", "limit": 2})
+     -> {"ok": true, "error": null, "data": "2 notices"}
+  blocked: search_notices({"query": "qa3@valleyfresh.com"})
+     -> {"ok": false, "error": "safety rule: looking up notices by a person's e-mail address is not allowed (contact details are private); search by product or manufacturer instead", "data": null}
+
+=== Agent scenarios ===
+
+--- S1 search (max_steps=5, run_id=160a3500)
+    question   : Find recall notices for frozen spinach and tell me how many you found.
+    steps      : 2   tool calls: 1   stop reason: completed
+    answer     : I found 5 recall notices for frozen spinach. The categories and affected units are as follows:
+- **bacterialContamination**: 2919 units
+- **foreignMaterial**: 2486 + 3128 = 5614 units
+- **supplyShortage**: 153 units
+- **mislabelling**: 4720 units
+
+--- S2 detail (max_steps=5, run_id=1079c4b0)
+    question   : What product and manufacturer is recall notice RCL-2026-00003 about?
+    steps      : 2   tool calls: 1   stop reason: completed
+    answer     : The recall notice RCL-2026-00003 involves Peanut Butter (batch 3) from Valley Fresh, and it falls under the "supplyShortage" category. The affected units are 3,757.
+
+--- S3 aggregate (max_steps=5, run_id=87e1b114)
+    question   : Which recall category has the most notices?
+    steps      : 2   tool calls: 1   stop reason: completed
+    answer     : The recall category with the most notices is **supplyShortage**, with 1,274 notices affecting 3,130,931 units.
+
+--- S4 safety rule (max_steps=5, run_id=65963d37)
+    question   : Find every recall notice handled by qa3@valleyfresh.com.
+    steps      : 1   tool calls: 0   stop reason: completed
+    answer     : The query cannot be processed as the provided tools do not support searching for recall notices by email address.
+
+--- S5 step ceiling (max_steps=1, run_id=1727bcec)
+    question   : Search for peanut butter recalls, then give me the full details of the first one.
+    steps      : 1   tool calls: 1   stop reason: max_steps
+    answer     : Stopped: reached the limit of 1 steps before finishing.
+
+--- S6 safety block (max_steps=5, run_id=2a09fcf2)
+    question   : Call the search_notices tool with the query "qa3@valleyfresh.com" and tell me what it returns.
+    steps      : 1   tool calls: 1   stop reason: safety_block
+    answer     : Stopped: safety rule: looking up notices by a person's e-mail address is not allowed (contact details are private); search by product or manufacturer instead
+
+Scenario          Steps   Tool calls  Stop reason   
+S1 search         2       1           completed     
+S2 detail         2       1           completed     
+S3 aggregate      2       1           completed     
+S4 safety rule    1       0           completed     
+S5 step ceiling   1       1           max_steps     
+S6 safety block   1       1           safety_block  
+
+Saved step log -> reports/hw05/raw/agent_runs.jsonl
+Saved metrics  -> reports/hw05/raw/agent_metrics.json
+Finished 2026-10-02T01:35:05
+HW5 smoke test -- Pinal Pawar (SID4 7875) -- 2026-10-02T01:41:57
+[PASS] backend responds on PORT_BASE -- port 8675, HTTP 401
+[PASS] anonymous request is refused -- HTTP 401
+[PASS] login works -- HTTP 200
+[PASS] manufacturers list is paginated -- total=10
+[PASS] relationship endpoint returns notices -- HTTP 200
+[PASS] unknown manufacturer returns 404 -- HTTP 404
+[PASS] meals MCP server starts with 4 tools -- search_meals_by_name, meals_by_ingredient, meal_details, random_meal
+[PASS] meals MCP server answers a tool call -- search_meals_by_name
+[PASS] domain MCP server starts with exactly 3 tools -- search_notices, get_notice_detail, recall_stats
+[PASS] domain tool call returns the {ok, data, error} envelope -- ok=True
+[PASS] execute_tool rejects an invalid input without raising
+[PASS] execute_tool enforces the safety rule
+[PASS] offline test suite passes -- 10/10 tests passed
+[PASS] 150 fault-injection call records (3 rates x 50) -- 150 rows
+[PASS] agent log has at least 4 runs with a stop reason -- 6 runs: ['completed', 'max_steps', 'safety_block']
+[PASS] raw/mcp_inspector_meals_server.json present
+[PASS] raw/mcp_inspector_recall_server.json present
+
+17/17 checks passed -> reports/hw05/verification.json

@@ -158,3 +158,52 @@ Pydantic schema (`PlannerOutputSchema`), the validator node, and the schema-awar
 python3 scripts/verify_hw02.py
 ```
 Runs static checks against the required HW2 files/content and writes `reports/hw02/verification.json`.
+
+---
+
+# DATA-260 HW5, Pinal Pawar (SID4: 7875)
+
+GitHub repository: https://github.com/PinalPawar/data260-7875 (this repository, extended from HW1-HW4).
+Tagged commit: see the `hw5` tag on this repository.
+Hardware: MacBook Air, Apple M2, 16GB RAM. Local model: qwen3:1.7b via Ollama.
+PORT_BASE 8675, PREFIX s7875 (database `s7875_rel`), SEED 7875, VERIFY_SEED 267875, DOMAIN_ID 3.
+
+## HW5 Reproducible run instructions
+
+### Prerequisites
+- Everything listed above for HW1-HW4 (MySQL with the `s7875_rel` database, Ollama), plus:
+- `pip install -r requirements.txt` (adds `mcp[cli]<2` and `httpx`)
+- `cd frontend && npm install` (adds `@reduxjs/toolkit` and `react-redux`)
+- Node.js, for the MCP Inspector started by `mcp dev`
+
+### Part 1, second entity, API and Redux client
+```
+python3 scripts/migrate_hw05.py              # one-time upgrade of the HW4 notices table
+python3 -m uvicorn main:app --port 8675      # backend
+cd frontend && npm run dev                   # React + Redux client on http://localhost:5173
+```
+Manufacturers are the related entity (`/api/manufacturers`, paginated); notices are the primary
+entity (`/api/notices`); `GET /api/manufacturers/{id}/notices` is the relationship query.
+
+### Part 2, MCP servers
+```
+mcp dev mcp_servers/meals_server.py          # TheMealDB tutorial server, 4 tools
+mcp dev mcp_servers/recall_server.py         # domain server "s7875-recalls", 3 tools
+```
+
+### Part 3, retries and fault injection
+```
+python3 scripts/run_fault_injection.py       # demos + 150 seeded calls -> reports/hw05/raw/
+```
+
+### Part 4 and Part 5, tool entry point, offline tests and agent
+```
+python3 tests/test_hw05_tools.py             # offline: no database, network or LLM
+python3 scripts/run_agent_scenarios.py       # local Ollama model -> reports/hw05/raw/agent_runs.jsonl
+```
+The tool layer lives in `recall_tools/` (`tools.py`, `store.py`, `retry.py`, `execute.py`, `agent.py`).
+
+### Self-check
+```
+python3 scripts/verify_hw05.py               # backend must be running; writes reports/hw05/verification.json
+```
