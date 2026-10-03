@@ -6,7 +6,7 @@
   "domain_id": 3,
   "seed": 7875,
   "verify_seed": 267875,
-  "commit_hash": "not a git checkout -- see the hw5 tag on GitHub",
+  "commit_hash": "d3fe5d294b3d1ba2b7a65eed3d02e02fdbd00b65",
   "model": "qwen3:1.7b (local, via Ollama)",
   "generated_at": "2026-10-02T01:42:00",
   "summary": "17/17 checks passed",
