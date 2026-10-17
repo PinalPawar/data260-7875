@@ -1,0 +1,62 @@
+# HW6 Part 3 - memory probes (written before any Part 3 run).
+# Asked in the same session right after the 30-message conversation
+# (reports/hw06/memory_conversation.yaml). Each probe targets facts the user
+# stated at a known turn, so small short-term windows have to rely on the
+# long-term summaries and episodic memory to answer.
+#
+# Scoring: each probe lists the key facts a correct answer must contain
+# (`expected`). A key fact counts as present if any of its synonyms appears in
+# the answer (case-insensitive). The score follows the rubric below from the
+# share of key facts recalled. `wrong_if_present` lists distractor facts from
+# the conversation; if one appears, the answer is flagged for a manual check.
+
+rubric:
+  5: "All key facts correct and complete."
+  4: "Most key facts correct (at least two thirds), nothing important wrong."
+  3: "About half of the key facts correct."
+  2: "Only a small part correct (about one third)."
+  1: "No key fact recalled, or the model says it does not know / invents an answer."
+
+score_formula: "score = 1 + round(4 * key_facts_found / key_facts_total)"
+
+probes:
+  - id: P1
+    question: "What is my name, and which city do I live in?"
+    tests: "Identity facts from turn 1 (oldest information in the conversation)."
+    expected:
+      - ["pinal"]
+      - ["san jose"]
+    wrong_if_present: ["fresno"]          # the sister's city (turn 13)
+
+  - id: P2
+    question: "What food allergies do I and my son have?"
+    tests: "Safety-critical facts from turns 2-3."
+    expected:
+      - ["peanut"]
+      - ["egg"]
+    wrong_if_present: ["shellfish"]
+
+  - id: P3
+    question: "Which store do I shop at, and on which day of the week?"
+    tests: "Preference from turn 5, with a distractor store in turn 6."
+    expected:
+      - ["safeway"]
+      - ["saturday"]
+    wrong_if_present: ["costco"]          # the neighbour's store (turn 6)
+
+  - id: P4
+    question: "Which foods did I tell you I currently have at home?"
+    tests: "A list spread over turns 9, 10 and 19."
+    expected:
+      - ["spinach"]
+      - ["blueberr"]
+      - ["cantaloupe", "melon"]
+    wrong_if_present: []
+
+  - id: P5
+    question: "Which product did I return last week, and why?"
+    tests: "A single event from turn 15 (middle of the conversation)."
+    expected:
+      - ["turkey", "deli meat"]
+      - ["listeria"]
+    wrong_if_present: []

@@ -1,0 +1,201 @@
+{
+  "homework": 6,
+  "sid4": 7875,
+  "port_base": 8675,
+  "prefix": "s7875",
+  "domain_id": 3,
+  "seed": 7875,
+  "verify_seed": 267875,
+  "commit_hash": "not a git checkout -- see the hw6 tag on GitHub",
+  "model": "qwen3:1.7b (local, via Ollama); embeddings sentence-transformers/all-MiniLM-L6-v2",
+  "config": {
+    "SHORT_TERM_N": 12,
+    "SUMMARIZE_EVERY_USER_MSGS": 4,
+    "EPISODIC_TOP_K": 3,
+    "mongo_db": "s7875_doc"
+  },
+  "generated_at": "2026-10-16T12:44:58",
+  "summary": "36/36 checks passed",
+  "checks": [
+    {
+      "name": "backend responds on PORT_BASE",
+      "passed": true,
+      "detail": "port 8675, HTTP 200"
+    },
+    {
+      "name": "POST /api/doc/notices creates a notice with default status",
+      "passed": true,
+      "detail": "HTTP 201"
+    },
+    {
+      "name": "GET /api/doc/notices/{id} returns it",
+      "passed": true,
+      "detail": "HTTP 200"
+    },
+    {
+      "name": "PUT updates the notice",
+      "passed": true,
+      "detail": "HTTP 200"
+    },
+    {
+      "name": "DELETE removes it (204)",
+      "passed": true,
+      "detail": "HTTP 204"
+    },
+    {
+      "name": "deleted notice returns 404",
+      "passed": true,
+      "detail": "HTTP 404"
+    },
+    {
+      "name": "invalid enum value is rejected with 422",
+      "passed": true,
+      "detail": "HTTP 422"
+    },
+    {
+      "name": "missing required fields are rejected with 422",
+      "passed": true,
+      "detail": "HTTP 422"
+    },
+    {
+      "name": "invalid id format returns 400",
+      "passed": true,
+      "detail": "HTTP 400"
+    },
+    {
+      "name": "s7875_doc has the four collections",
+      "passed": true,
+      "detail": "episodes, messages, recall_notices, summaries"
+    },
+    {
+      "name": "POST /api/chat returns a reply",
+      "passed": true,
+      "detail": "HTTP 200"
+    },
+    {
+      "name": "chat response shows memory used (short-term, summaries, episodic facts)",
+      "passed": true,
+      "detail": "short_term, session_summary, lifetime_summary, episodic_facts"
+    },
+    {
+      "name": "chat response reports tokens per prompt part",
+      "passed": true,
+      "detail": "{'system_primer': 122, 'long_term_summary': 0, 'episodic_facts': 0, 'short_term_window': 0, 'current_message': 15}"
+    },
+    {
+      "name": "GET /api/memory/{user_id} works",
+      "passed": true,
+      "detail": "HTTP 200"
+    },
+    {
+      "name": "GET /api/aggregate/{user_id} returns daily counts",
+      "passed": true,
+      "detail": "HTTP 200"
+    },
+    {
+      "name": "an episodic fact was stored with an embedding",
+      "passed": true,
+      "detail": "'User is allergic to peanuts', 384 dims"
+    },
+    {
+      "name": "the Part 2 test conversation is still stored",
+      "passed": true,
+      "detail": "24 messages for user pinal"
+    },
+    {
+      "name": "memory_probes.yaml has 5 probes and a 1-5 rubric",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "raw per-turn data: 4 settings x (30 turns + 5 probes)",
+      "passed": true,
+      "detail": "{'n4': 35, 'n12': 35, 'n30': 35, 'n12_compress': 35}"
+    },
+    {
+      "name": "each row logs tokens per prompt part and latency",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "larger window costs more prompt tokens (N=4 < N=12 < N=30)",
+      "passed": true,
+      "detail": "{'n4': 475.3, 'n12': 802.8, 'n30': 1380.4, 'n12_compress': 555.8}"
+    },
+    {
+      "name": "compression policy saves tokens vs N=12",
+      "passed": true,
+      "detail": "{'n4': 475.3, 'n12': 802.8, 'n30': 1380.4, 'n12_compress': 555.8}"
+    },
+    {
+      "name": "manual probe review present",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "METRICS.md has the memory-cost table",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "AGENT.md has >= 5 instructions in >= 3 categories",
+      "passed": true,
+      "detail": "17 instructions, 5 categories"
+    },
+    {
+      "name": "MEMORY.md exists and loads",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "test MEMORY.md has 55 lines",
+      "passed": true,
+      "detail": "55"
+    },
+    {
+      "name": "55-line file triggers consolidation",
+      "passed": true,
+      "detail": "['55 lines > 40', 'last consolidated 145.7 h ago > 24 h']"
+    },
+    {
+      "name": "consolidation reduces it below 40 lines",
+      "passed": true,
+      "detail": "55 -> 39"
+    },
+    {
+      "name": "duplicates merged and contradictions resolved explicitly",
+      "passed": true,
+      "detail": "7 merged, 3 resolved, 2 flagged"
+    },
+    {
+      "name": "committed consolidated file is below 40 lines",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "file-memory tests pass",
+      "passed": true,
+      "detail": "7/7 tests passed"
+    },
+    {
+      "name": "AGENT.md rule check passes",
+      "passed": true,
+      "detail": "Saved reports/hw06/raw/agent_rules_check.json"
+    },
+    {
+      "name": "reports/hw06/RUN_LOG.txt present",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "reports/hw06/METRICS.md present",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "reports/hw06/AI_USE.md present",
+      "passed": true,
+      "detail": ""
+    }
+  ]
+}

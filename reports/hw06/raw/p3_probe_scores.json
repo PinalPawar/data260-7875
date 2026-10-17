@@ -1,0 +1,208 @@
+[
+ {
+  "setting": "n4",
+  "probe_id": "P1",
+  "question": "What is my name, and which city do I live in?",
+  "answer": "I don’t have access to your personal information. You can check your name and city by looking at your grocery receipt or contacting the store where you purchased the item. Let me know if you need help with anything else!",
+  "key_facts_found": 0,
+  "key_facts_total": 2,
+  "score": 1,
+  "flags": []
+ },
+ {
+  "setting": "n4",
+  "probe_id": "P2",
+  "question": "What food allergies do I and my son have?",
+  "answer": "You and your son are allergic to eggs and peanuts. Always check food labels carefully, especially for these allergens. If you have any questions about recalls or food safety, feel free to ask!",
+  "key_facts_found": 2,
+  "key_facts_total": 2,
+  "score": 5,
+  "flags": []
+ },
+ {
+  "setting": "n4",
+  "probe_id": "P3",
+  "question": "Which store do I shop at, and on which day of the week?",
+  "answer": "You shop at Safeway every Saturday morning. Let me know if you need help with anything else!",
+  "key_facts_found": 2,
+  "key_facts_total": 2,
+  "score": 5,
+  "flags": []
+ },
+ {
+  "setting": "n4",
+  "probe_id": "P4",
+  "question": "Which foods did I tell you I currently have at home?",
+  "answer": "You currently have organic baby spinach in your fridge. Let me know if you need help with anything else!",
+  "key_facts_found": 1,
+  "key_facts_total": 3,
+  "score": 2,
+  "flags": []
+ },
+ {
+  "setting": "n4",
+  "probe_id": "P5",
+  "question": "Which product did I return last week, and why?",
+  "answer": "You returned a deli turkey pack due to a Listeria recall from Safeway. Let me know if you need help with anything else!",
+  "key_facts_found": 2,
+  "key_facts_total": 2,
+  "score": 5,
+  "flags": []
+ },
+ {
+  "setting": "n12",
+  "probe_id": "P1",
+  "question": "What is my name, and which city do I live in?",
+  "answer": "I don't have access to your personal information. You can share your name and city with me, and I'll do my best to assist you based on that.",
+  "key_facts_found": 0,
+  "key_facts_total": 2,
+  "score": 1,
+  "flags": []
+ },
+ {
+  "setting": "n12",
+  "probe_id": "P2",
+  "question": "What food allergies do I and my son have?",
+  "answer": "You and your son have food allergies. You are allergic to **eggs** and **peanuts**. Your son is also allergic to **eggs**. Both of you check product labels carefully. If you have any questions about food recalls or safe handling, feel free to ask!",
+  "key_facts_found": 2,
+  "key_facts_total": 2,
+  "score": 5,
+  "flags": []
+ },
+ {
+  "setting": "n12",
+  "probe_id": "P3",
+  "question": "Which store do I shop at, and on which day of the week?",
+  "answer": "You shop at **Safeway** every Saturday morning and also visit **Costco**. Let me know if you need help with anything related to these stores!",
+  "key_facts_found": 2,
+  "key_facts_total": 2,
+  "score": 5,
+  "flags": [
+   "costco"
+  ]
+ },
+ {
+  "setting": "n12",
+  "probe_id": "P4",
+  "question": "Which foods did I tell you I currently have at home?",
+  "answer": "You currently have **organic baby spinach** and **frozen blueberries** in your fridge. Let me know if you need help with anything else!",
+  "key_facts_found": 2,
+  "key_facts_total": 3,
+  "score": 4,
+  "flags": []
+ },
+ {
+  "setting": "n12",
+  "probe_id": "P5",
+  "question": "Which product did I return last week, and why?",
+  "answer": "You returned a pack of deli turkey to Safeway due to a **Listeria recall**. This recall involved contaminated products, and the store offered refunds, replacements, or disposal for affected items. Let me know if you need help with anything else!",
+  "key_facts_found": 2,
+  "key_facts_total": 2,
+  "score": 5,
+  "flags": []
+ },
+ {
+  "setting": "n30",
+  "probe_id": "P1",
+  "question": "What is my name, and which city do I live in?",
+  "answer": "I don't have access to your personal information. You can share your name and city with me if you'd like help with anything else!",
+  "key_facts_found": 0,
+  "key_facts_total": 2,
+  "score": 1,
+  "flags": []
+ },
+ {
+  "setting": "n30",
+  "probe_id": "P2",
+  "question": "What food allergies do I and my son have?",
+  "answer": "You and your son have food allergies. You are allergic to **eggs** and **peanuts**. Your son is also allergic to **eggs**. Both of you check product labels carefully. If you're concerned about a specific product, check the FDA's recall database for any alerts or recalls.",
+  "key_facts_found": 2,
+  "key_facts_total": 2,
+  "score": 5,
+  "flags": []
+ },
+ {
+  "setting": "n30",
+  "probe_id": "P3",
+  "question": "Which store do I shop at, and on which day of the week?",
+  "answer": "You shop at **Safeway** and **Costco**, and you shop every **Saturday morning**. Let me know if you need help with anything else!",
+  "key_facts_found": 2,
+  "key_facts_total": 2,
+  "score": 5,
+  "flags": [
+   "costco"
+  ]
+ },
+ {
+  "setting": "n30",
+  "probe_id": "P4",
+  "question": "Which foods did I tell you I currently have at home?",
+  "answer": "You currently have the following foods at home:  \n- **Organic baby spinach**  \n- **Frozen blueberries**  \n\nLet me know if you need help with anything else!",
+  "key_facts_found": 2,
+  "key_facts_total": 3,
+  "score": 4,
+  "flags": []
+ },
+ {
+  "setting": "n30",
+  "probe_id": "P5",
+  "question": "Which product did I return last week, and why?",
+  "answer": "You returned a pack of deli turkey to Safeway due to a **Listeria recall**. This recall involved contaminated products, and the store replaced them with safer alternatives. Let me know if you need help with anything else!",
+  "key_facts_found": 2,
+  "key_facts_total": 2,
+  "score": 5,
+  "flags": []
+ },
+ {
+  "setting": "n12_compress",
+  "probe_id": "P1",
+  "question": "What is my name, and which city do I live in?",
+  "answer": "You are Pinal, and you live in San Jose, California.",
+  "key_facts_found": 2,
+  "key_facts_total": 2,
+  "score": 5,
+  "flags": []
+ },
+ {
+  "setting": "n12_compress",
+  "probe_id": "P2",
+  "question": "What food allergies do I and my son have?",
+  "answer": "You are allergic to peanuts and eggs. Your son, Arjun, is also allergic to peanuts. Always check labels carefully for allergen warnings.",
+  "key_facts_found": 2,
+  "key_facts_total": 2,
+  "score": 5,
+  "flags": []
+ },
+ {
+  "setting": "n12_compress",
+  "probe_id": "P3",
+  "question": "Which store do I shop at, and on which day of the week?",
+  "answer": "You shop at Safeway every Saturday morning and also at Costco.",
+  "key_facts_found": 2,
+  "key_facts_total": 2,
+  "score": 5,
+  "flags": [
+   "costco"
+  ]
+ },
+ {
+  "setting": "n12_compress",
+  "probe_id": "P4",
+  "question": "Which foods did I tell you I currently have at home?",
+  "answer": "You have organic baby spinach in your fridge.",
+  "key_facts_found": 1,
+  "key_facts_total": 3,
+  "score": 2,
+  "flags": []
+ },
+ {
+  "setting": "n12_compress",
+  "probe_id": "P5",
+  "question": "Which product did I return last week, and why?",
+  "answer": "You returned a pack of deli turkey to Safeway due to a Listeria recall.",
+  "key_facts_found": 2,
+  "key_facts_total": 2,
+  "score": 5,
+  "flags": []
+ }
+]

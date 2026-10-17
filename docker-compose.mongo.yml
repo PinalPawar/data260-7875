@@ -1,0 +1,15 @@
+# HW6: local MongoDB for the s7875_doc database.
+# Start:  docker compose -f docker-compose.mongo.yml up -d
+# Stop:   docker compose -f docker-compose.mongo.yml down
+services:
+  mongodb:
+    image: mongo:7.0
+    container_name: s7875_mongo
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - s7875_mongo_data:/data/db
+
+volumes:
+  s7875_mongo_data:

@@ -1,0 +1,17 @@
+{
+ "baseline": "n12",
+ "policy": "n12_compress",
+ "mean_prompt_tokens_baseline": 802.8,
+ "mean_prompt_tokens_policy": 555.8,
+ "prompt_tokens_saved_per_turn": 247.0,
+ "prompt_tokens_saved_pct": 30.8,
+ "window_tokens_baseline": 449.5,
+ "window_tokens_policy": 199.2,
+ "probe_score_baseline": 3.2,
+ "probe_score_policy": 3.4,
+ "probe_score_change": 0.2,
+ "probe_score_auto_baseline": 4,
+ "probe_score_auto_policy": 4.4,
+ "mean_request_latency_baseline_ms": 10314.0,
+ "mean_request_latency_policy_ms": 7330.3
+}

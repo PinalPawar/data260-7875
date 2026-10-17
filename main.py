@@ -14,6 +14,10 @@ from routers.auth import router as auth_router
 from routers.session_auth import router as session_auth_router, require_session
 from routers.n1_demo import router as n1_demo_router
 from routers.manufacturers import router as manufacturers_router
+from mongo_doc.routes.notice_docs import router as notice_docs_router
+from mongo_doc.db import init_collection as init_mongo_collection
+from mongo_doc.db import init_memory_collections
+from mongo_doc.routes.chat import router as chat_router
 from database import Base, engine, get_db_session_basede26
 import crud
 import schemas
@@ -77,6 +81,33 @@ app.include_router(n1_demo_router)
 
 # HW5 Part 1: related entity CRUD + relationship query
 app.include_router(manufacturers_router)
+
+# HW6 Part 1: MongoDB document API (database s7875_doc, collection
+# recall_notices). Lives in mongo_doc/ with its own config, db, schemas
+# and routes files. FastAPI parses JSON request bodies automatically.
+app.include_router(notice_docs_router)
+
+
+@app.on_event("startup")
+def _hw6_init_mongo():
+    # Install the MongoDB $jsonSchema validator. If MongoDB is down, the rest
+    # of the app still starts and the Mongo routes answer 503 instead.
+    try:
+        init_mongo_collection()
+        init_memory_collections()
+    except Exception as exc:
+        print(f"[HW6] MongoDB init skipped: {exc}")
+
+
+# HW6 Part 2: chat with short-term, long-term and episodic memory
+# (collections messages / summaries / episodes in the same s7875_doc database)
+app.include_router(chat_router)
+
+
+@app.get("/chat")
+def chat_page():
+    """Mini chat interface that calls POST /api/chat."""
+    return FileResponse("chat.html")
 
 
 @app.get("/notices")

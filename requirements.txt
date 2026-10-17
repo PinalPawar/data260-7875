@@ -30,3 +30,9 @@ email-validator
 # HW5 Part 2: MCP servers (FastMCP is the version 1 SDK) and TheMealDB calls
 mcp[cli]<2
 httpx
+
+# HW6 Part 1-2: MongoDB (PyMongo) document API + chat memory
+pymongo
+ollama
+# HW6 Part 3: Qwen tokenizer for per-part token counts
+transformers

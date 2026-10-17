@@ -1,0 +1,34 @@
+# HW6 Part 3 - the fixed 30-message conversation replayed for every setting.
+# Personal facts (marked "fact") are planted early and in the middle; the
+# general questions in between push them out of small short-term windows.
+messages:
+  - "Hi, I'm Pinal. I live in San Jose, California."                                   # 1  fact
+  - "I'm allergic to peanuts, so I read every label carefully."                        # 2  fact
+  - "My son Arjun is 4 years old and he is allergic to eggs."                          # 3  fact
+  - "What does it mean when a product is recalled for undeclared allergens?"           # 4
+  - "I do my grocery shopping at Safeway every Saturday morning."                      # 5  fact
+  - "My neighbor shops at Costco, but I prefer Safeway because it is closer."          # 6  distractor
+  - "How do stores find out that a product has been recalled?"                         # 7
+  - "What is the difference between a Class I and a Class II recall?"                  # 8
+  - "Right now I have a bag of organic baby spinach in my fridge."                     # 9  fact
+  - "I also keep frozen blueberries in the freezer for Arjun's breakfast."             # 10 fact
+  - "What are the usual signs of a Listeria infection?"                                # 11
+  - "Who is most at risk from Listeria?"                                               # 12
+  - "My sister Meera lives in Fresno and she is pregnant."                             # 13 distractor
+  - "Should pregnant women avoid any foods because of Listeria?"                       # 14
+  - "Last week I returned a pack of deli turkey to Safeway because of a Listeria recall." # 15 fact
+  - "Do stores always give a refund for recalled products?"                            # 16
+  - "How long can I keep cooked leftovers in the fridge?"                              # 17
+  - "What temperature should my fridge be set to?"                                     # 18
+  - "I just bought a whole cantaloupe for the weekend."                                # 19 fact
+  - "Are cantaloupes ever linked to Salmonella outbreaks?"                             # 20
+  - "How should I wash melons before cutting them?"                                    # 21
+  - "What does 'foreign material' mean in a recall notice?"                            # 22
+  - "Can a supply shortage make stores sell substitute brands?"                        # 23
+  - "How can I sign up for recall alerts by email?"                                    # 24
+  - "Is it safe to eat food a few days after its best-by date?"                        # 25
+  - "What is the safest way to thaw frozen meat?"                                      # 26
+  - "Can freezing food kill bacteria like E. coli?"                                    # 27
+  - "What should I do if someone in my family gets sick after eating recalled food?"   # 28
+  - "Should I keep grocery receipts in case of a recall?"                              # 29
+  - "Thanks, that is very helpful."                                                    # 30

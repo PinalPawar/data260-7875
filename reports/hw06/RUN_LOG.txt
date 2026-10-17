@@ -1,0 +1,366 @@
+DATA-260 HW6 - RUN_LOG.txt
+Pinal Pawar | SID4 7875 | PORT_BASE 8675 | PREFIX s7875 | model qwen3:1.7b (Ollama, local)
+Machine: Apple MacBook Air (macOS), conda environment data260, Python 3.11
+
+Real console output copied from the Terminal sessions that produced the reported results.
+Uvicorn's access log does not print a time on each line, so the time of each run is
+given in the section headers below. Message-level timestamps (created_at) for every chat
+turn are stored in MongoDB and are visible in GET /api/memory/pinal and in Compass.
+
+======================================================================
+PART 1 - MongoDB document API (s7875_doc.recall_notices)
+Run: 2026-10-15, about 17:06-17:24 PDT (createdAt 2026-10-16T00:06:49Z to 00:21:24Z UTC)
+======================================================================
+INFO:     Started server process [81927]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8675 (Press CTRL+C to quit)
+INFO:     127.0.0.1:54845 - "GET /docs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54845 - "GET /openapi.json HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54864 - "POST /api/doc/notices HTTP/1.1" 201 Created
+INFO:     127.0.0.1:54883 - "POST /api/doc/notices HTTP/1.1" 201 Created
+INFO:     127.0.0.1:54902 - "POST /api/doc/notices HTTP/1.1" 201 Created
+INFO:     127.0.0.1:54909 - "POST /api/doc/notices HTTP/1.1" 201 Created
+INFO:     127.0.0.1:54920 - "GET /api/doc/notices HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54932 - "GET /api/doc/notices/6ad16a99619d8fb7309bf861 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54947 - "PUT /api/doc/notices/6ad16a99619d8fb7309bf861 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54957 - "DELETE /api/doc/notices/6ad16ba2619d8fb7309bf864 HTTP/1.1" 204 No Content
+INFO:     127.0.0.1:54964 - "DELETE /api/doc/notices/6ad16ba2619d8fb7309bf864 HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54978 - "POST /api/doc/notices HTTP/1.1" 422 Unprocessable Entity
+INFO:     127.0.0.1:54991 - "POST /api/doc/notices HTTP/1.1" 422 Unprocessable Entity
+INFO:     127.0.0.1:54997 - "POST /api/doc/notices HTTP/1.1" 422 Unprocessable Entity
+INFO:     127.0.0.1:55007 - "POST /api/doc/notices HTTP/1.1" 422 Unprocessable Entity
+INFO:     127.0.0.1:55026 - "GET /api/doc/notices/abc HTTP/1.1" 400 Bad Request
+
+======================================================================
+PART 2 - chat memory (messages / summaries / episodes)
+Includes the failed attempt (model call hung on turn 8), the clean-up, the fix,
+and the final clean 12-message run that the report uses.
+Final run: 2026-10-15, 19:48-20:01 PDT (created_at 2026-10-16T02:48:56Z to 03:00:48Z UTC),
+session 175142d3577b
+======================================================================
+Last login: Thu Oct 15 17:54:53 on ttys012
+(base) atharvamundada@Atharvas-MacBook-Air data260-7875-main % ollama ps
+NAME          ID              SIZE      PROCESSOR    CONTEXT    UNTIL       
+qwen3:1.7b    8f68893c685c    1.9 GB    100% GPU     4096       Stopping...    
+(base) atharvamundada@Atharvas-MacBook-Air data260-7875-main % PROMPT="Pinal Pawar %~ $ "
+conda activate data260
+(data260) Pinal Pawar ~/Downloads/data260-7875-main $ cd ~/Downloads/data260-7875-main
+unzip -o ~/Downloads/hw6_part2_fix2.zip -d .
+Archive:  /Users/atharvamundada/Downloads/hw6_part2_fix2.zip
+  inflating: ./src/model_client.py   
+  inflating: ./mongo_doc/memory.py   
+  inflating: ./mongo_doc/routes/chat.py  
+(data260) Pinal Pawar ~/Downloads/data260-7875-main $ docker exec s7875_mongo mongosh s7875_doc --quiet --eval 'const m=db.messages.findOne({user_id:"pinal",content:/^Can I just cook/}); if(m){const t=m.created_at; printjson({messages:db.messages.deleteMany({user_id:"pinal",created_at:{$gte:t}}).deletedCount, summaries:db.summaries.deleteMany({user_id:"pinal",created_at:{$gte:t}}).deletedCount, episodes:db.episodes.deleteMany({user_id:"pinal",created_at:{$gte:t}}).deletedCount})} else print("not found")'
+{
+  messages: 2,
+  summaries: 0,
+  episodes: 0
+}
+(data260) Pinal Pawar ~/Downloads/data260-7875-main $ osascript -e 'quit app "Ollama"'
+open -a Ollama
+python main.py
+0:17: execution error: Ollama got an error: User canceled. (-128)
+/Users/atharvamundada/Downloads/data260-7875-main/main.py:91: DeprecationWarning: 
+        on_event is deprecated, use lifespan event handlers instead.
+
+        Read more about it in the
+        [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+        
+  @app.on_event("startup")
+INFO:     Started server process [89672]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8675 (Press CTRL+C to quit)
+INFO:     127.0.0.1:56784 - "GET /chat HTTP/1.1" 200 OK
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights: 100%|█████████████████████| 103/103 [00:00<00:00, 5397.47it/s]
+INFO:     127.0.0.1:56810 - "POST /api/chat HTTP/1.1" 200 OK
+^CINFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [89672]
+(data260) Pinal Pawar ~/Downloads/data260-7875-main $ unzip -o ~/Downloads/hw6_part2_fix3.zip -d .
+Archive:  /Users/atharvamundada/Downloads/hw6_part2_fix3.zip
+  inflating: ./src/model_client.py   
+  inflating: ./mongo_doc/memory.py   
+  inflating: ./mongo_doc/routes/chat.py  
+(data260) Pinal Pawar ~/Downloads/data260-7875-main $ docker exec s7875_mongo mongosh s7875_doc --quiet --eval 'printjson({messages: db.messages.deleteMany({}).deletedCount, summaries: db.summaries.deleteMany({}).deletedCount, episodes: db.episodes.deleteMany({}).deletedCount})'
+{
+  messages: 18,
+  summaries: 4,
+  episodes: 6
+}
+(data260) Pinal Pawar ~/Downloads/data260-7875-main $ python main.py
+/Users/atharvamundada/Downloads/data260-7875-main/main.py:91: DeprecationWarning: 
+        on_event is deprecated, use lifespan event handlers instead.
+
+        Read more about it in the
+        [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+        
+  @app.on_event("startup")
+INFO:     Started server process [90297]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8675 (Press CTRL+C to quit)
+INFO:     127.0.0.1:56908 - "GET /chat HTTP/1.1" 200 OK
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights: 100%|█████████████████████| 103/103 [00:00<00:00, 6825.18it/s]
+INFO:     127.0.0.1:56910 - "POST /api/chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56956 - "POST /api/chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56974 - "POST /api/chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56990 - "POST /api/chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57022 - "POST /api/chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57047 - "POST /api/chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57063 - "POST /api/chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57079 - "POST /api/chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57123 - "POST /api/chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57123 - "POST /api/chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57155 - "POST /api/chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57192 - "POST /api/chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57232 - "GET /api/memory/pinal HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57255 - "GET /api/aggregate/pinal HTTP/1.1" 200 OK
+
+
+======================================================================
+PART 2 - the hung turn-8 request (before the fix), 2026-10-15 about 18:50-19:28 PDT.
+Server console when the stuck request was stopped with Ctrl+C: seven turns returned
+200, turn 8 never returned and was cancelled (500). See AI_USE.md.
+======================================================================
+OST /api/chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56064 - "POST /api/chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56086 - "POST /api/chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56116 - "POST /api/chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56159 - "POST /api/chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56193 - "POST /api/chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56248 - "POST /api/chat HTTP/1.1" 200 OK
+^CINFO:     Shutting down
+INFO:     Waiting for connections to close. (CTRL+C to force quit)
+^CINFO:     Finished server process [86186]
+ERROR:    Traceback (most recent call last):
+  File "/opt/anaconda3/envs/data260/lib/python3.11/site-packages/starlette/routing.py", line 747, in lifespan
+    await receive()
+  File "/opt/anaconda3/envs/data260/lib/python3.11/site-packages/uvicorn/lifespan/on.py", line 137, in receive
+    return await self.receive_queue.get()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/data260/lib/python3.11/asyncio/queues.py", line 158, in get
+    await getter
+asyncio.exceptions.CancelledError
+
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/opt/anaconda3/envs/data260/lib/python3.11/site-packages/uvicorn/protocols/http/httptools_impl.py", line 419, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/data260/lib/python3.11/site-packages/uvicorn/middleware/proxy_headers.py", line 84, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/data260/lib/python3.11/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/opt/anaconda3/envs/data260/lib/python3.11/site-packages/starlette/applications.py", line 123, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/opt/anaconda3/envs/data260/lib/python3.11/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/opt/anaconda3/envs/data260/lib/python3.11/site-packages/starlette/middleware/sessions.py", line 83, in __call__
+    await self.app(scope, receive, send_wrapper)
+  File "/opt/anaconda3/envs/data260/lib/python3.11/site-packages/starlette/middleware/cors.py", line 91, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "/opt/anaconda3/envs/data260/lib/python3.11/site-packages/starlette/middleware/cors.py", line 146, in simple_response
+    await self.app(scope, receive, send)
+  File "/opt/anaconda3/envs/data260/lib/python3.11/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/opt/anaconda3/envs/data260/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    await app(scope, receive, sender)
+  File "/opt/anaconda3/envs/data260/lib/python3.11/site-packages/starlette/routing.py", line 762, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/opt/anaconda3/envs/data260/lib/python3.11/site-packages/starlette/routing.py", line 782, in app
+    await route.handle(scope, receive, send)
+  File "/opt/anaconda3/envs/data260/lib/python3.11/site-packages/starlette/routing.py", line 297, in handle
+    await self.app(scope, receive, send)
+  File "/opt/anaconda3/envs/data260/lib/python3.11/site-packages/starlette/routing.py", line 77, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/opt/anaconda3/envs/data260/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    await app(scope, receive, sender)
+  File "/opt/anaconda3/envs/data260/lib/python3.11/site-packages/starlette/routing.py", line 72, in app
+    response = await func(request)
+               ^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/data260/lib/python3.11/site-packages/fastapi/routing.py", line 294, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/data260/lib/python3.11/site-packages/fastapi/routing.py", line 193, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/data260/lib/python3.11/site-packages/starlette/concurrency.py", line 40, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/data260/lib/python3.11/site-packages/anyio/to_thread.py", line 65, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/data260/lib/python3.11/site-packages/anyio/_backends/_asyncio.py", line 2641, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+asyncio.exceptions.CancelledError
+INFO:     127.0.0.1:56285 - "POST /api/chat HTTP/1.1" 500 Internal Server Error
+^C
+
+======================================================================
+PART 3 - What memory costs (scripts/run_memory_experiment.py)
+Run: 2026-10-15, 21:30:34-21:53:48 PDT. Every line below carries its own timestamp.
+Quality values here are the automatic keyword scores; the manual review
+(raw/p3_probe_manual_review.json) is applied in METRICS.md.
+======================================================================
+[2026-10-15 21:30:34] HW6 Part 3 start: 30 messages, 5 probes, server http://localhost:8675
+[2026-10-15 21:30:34] === SHORT_TERM_N=4  (user_id=p3_n4, short_term_n=4, policy=none) ===
+[2026-10-15 21:30:55]    turn  1  window= 0  prompt=  154  completion= 55  reply=   9320 ms  request=  21096 ms
+[2026-10-15 21:31:01]    turn  2  window= 2  prompt=  247  completion= 51  reply=   3885 ms  request=   5681 ms
+[2026-10-15 21:31:07]    turn  3  window= 4  prompt=  330  completion= 63  reply=   4443 ms  request=   6168 ms
+[2026-10-15 21:31:22]    turn  4  window= 4  prompt=  345  completion= 88  reply=   6891 ms  request=  14390 ms  [session summary]
+[2026-10-15 21:31:32]    turn  5  window= 4  prompt=  475  completion= 80  reply=   7153 ms  request=  10056 ms
+[2026-10-15 21:31:41]    turn  6  window= 4  prompt=  495  completion= 83  reply=   5817 ms  request=   8716 ms
+[2026-10-15 21:31:46]    turn  7  window= 4  prompt=  484  completion= 65  reply=   5074 ms  request=   5914 ms
+[2026-10-15 21:32:03]    turn  8  window= 4  prompt=  474  completion= 68  reply=   4951 ms  request=  16245 ms  [session summary]  [lifetime summary]
+[2026-10-15 21:32:10]    turn  9  window= 4  prompt=  507  completion= 53  reply=   4838 ms  request=   7344 ms
+[2026-10-15 21:32:18]    turn 10  window= 4  prompt=  498  completion= 56  reply=   5068 ms  request=   7515 ms
+[2026-10-15 21:32:23]    turn 11  window= 4  prompt=  484  completion= 72  reply=   5206 ms  request=   5517 ms
+[2026-10-15 21:32:34]    turn 12  window= 4  prompt=  499  completion= 38  reply=   3544 ms  request=  11221 ms  [session summary]
+[2026-10-15 21:32:45]    turn 13  window= 4  prompt=  480  completion= 71  reply=   5685 ms  request=  10536 ms
+[2026-10-15 21:32:51]    turn 14  window= 4  prompt=  475  completion= 67  reply=   5448 ms  request=   6238 ms
+[2026-10-15 21:33:01]    turn 15  window= 4  prompt=  523  completion= 64  reply=   5326 ms  request=   9484 ms
+[2026-10-15 21:33:18]    turn 16  window= 4  prompt=  520  completion= 45  reply=   4622 ms  request=  17766 ms  [session summary]  [lifetime summary]
+[2026-10-15 21:33:25]    turn 17  window= 4  prompt=  522  completion= 44  reply=   5020 ms  request=   6630 ms
+[2026-10-15 21:33:31]    turn 18  window= 4  prompt=  480  completion= 51  reply=   4473 ms  request=   5614 ms
+[2026-10-15 21:33:37]    turn 19  window= 4  prompt=  494  completion= 52  reply=   4082 ms  request=   5824 ms
+[2026-10-15 21:33:48]    turn 20  window= 4  prompt=  500  completion= 64  reply=   4662 ms  request=  11732 ms  [session summary]
+[2026-10-15 21:33:54]    turn 21  window= 4  prompt=  510  completion= 58  reply=   4744 ms  request=   5995 ms
+[2026-10-15 21:34:00]    turn 22  window= 4  prompt=  516  completion= 71  reply=   4894 ms  request=   6059 ms
+[2026-10-15 21:34:04]    turn 23  window= 4  prompt=  512  completion= 37  reply=   2877 ms  request=   3911 ms
+[2026-10-15 21:34:23]    turn 24  window= 4  prompt=  502  completion= 62  reply=   5187 ms  request=  18714 ms  [session summary]  [lifetime summary]
+[2026-10-15 21:34:31]    turn 25  window= 4  prompt=  519  completion= 62  reply=   6471 ms  request=   7925 ms
+[2026-10-15 21:34:37]    turn 26  window= 4  prompt=  552  completion= 68  reply=   4984 ms  request=   6393 ms
+[2026-10-15 21:34:43]    turn 27  window= 4  prompt=  557  completion= 55  reply=   4807 ms  request=   5900 ms
+[2026-10-15 21:34:59]    turn 28  window= 4  prompt=  540  completion= 62  reply=   5943 ms  request=  15971 ms  [session summary]
+[2026-10-15 21:35:05]    turn 29  window= 4  prompt=  543  completion= 47  reply=   4340 ms  request=   5984 ms
+[2026-10-15 21:35:08]    turn 30  window= 4  prompt=  521  completion= 26  reply=   2491 ms  request=   2887 ms
+[2026-10-15 21:35:13]    probe P1  score=1/5 (0/2 facts)  -> 'I don’t have access to your personal information. You can check your name and city by looking at your grocery '
+[2026-10-15 21:35:30]    probe P2  score=5/5 (2/2 facts)  -> 'You and your son are allergic to eggs and peanuts. Always check food labels carefully, especially for these al'
+[2026-10-15 21:35:35]    probe P3  score=5/5 (2/2 facts)  -> 'You shop at Safeway every Saturday morning. Let me know if you need help with anything else!'
+[2026-10-15 21:35:38]    probe P4  score=2/5 (1/3 facts)  -> 'You currently have organic baby spinach in your fridge. Let me know if you need help with anything else!'
+[2026-10-15 21:35:40]    probe P5  score=5/5 (2/2 facts)  -> 'You returned a deli turkey pack due to a Listeria recall from Safeway. Let me know if you need help with anyth'
+[2026-10-15 21:35:40] === n4 done in 306 s ===
+[2026-10-15 21:35:40] === SHORT_TERM_N=12  (user_id=p3_n12, short_term_n=12, policy=none) ===
+[2026-10-15 21:35:46]    turn  1  window= 0  prompt=  154  completion= 55  reply=   3814 ms  request=   5413 ms
+[2026-10-15 21:35:51]    turn  2  window= 2  prompt=  247  completion= 51  reply=   3781 ms  request=   5150 ms
+[2026-10-15 21:35:57]    turn  3  window= 4  prompt=  330  completion= 63  reply=   4745 ms  request=   6274 ms
+[2026-10-15 21:36:10]    turn  4  window= 6  prompt=  424  completion= 91  reply=   7119 ms  request=  13298 ms  [session summary]
+[2026-10-15 21:36:19]    turn  5  window= 8  prompt=  623  completion= 66  reply=   6214 ms  request=   8989 ms
+[2026-10-15 21:36:30]    turn  6  window=10  prompt=  717  completion= 59  reply=   6104 ms  request=  10610 ms
+[2026-10-15 21:36:38]    turn  7  window=12  prompt=  794  completion= 61  reply=   6745 ms  request=   7737 ms
+[2026-10-15 21:37:02]    turn  8  window=12  prompt=  802  completion=114  reply=  10714 ms  request=  23737 ms  [session summary]  [lifetime summary]
+[2026-10-15 21:37:12]    turn  9  window=12  prompt=  944  completion= 61  reply=   7527 ms  request=  10217 ms
+[2026-10-15 21:37:23]    turn 10  window=12  prompt=  941  completion= 86  reply=   8705 ms  request=  11387 ms
+[2026-10-15 21:37:30]    turn 11  window=12  prompt=  933  completion= 72  reply=   6802 ms  request=   7117 ms
+[2026-10-15 21:37:45]    turn 12  window=12  prompt=  937  completion= 68  reply=   6720 ms  request=  15068 ms  [session summary]
+[2026-10-15 21:37:57]    turn 13  window=12  prompt=  944  completion= 71  reply=   8101 ms  request=  12027 ms
+[2026-10-15 21:38:06]    turn 14  window=12  prompt=  950  completion= 73  reply=   7926 ms  request=   9005 ms
+[2026-10-15 21:38:17]    turn 15  window=12  prompt=  924  completion= 77  reply=   7828 ms  request=  10731 ms
+[2026-10-15 21:38:37]    turn 16  window=12  prompt=  942  completion= 51  reply=   5615 ms  request=  19511 ms  [session summary]  [lifetime summary]
+[2026-10-15 21:38:46]    turn 17  window=12  prompt=  941  completion= 61  reply=   7449 ms  request=   8901 ms
+[2026-10-15 21:38:53]    turn 18  window=12  prompt=  917  completion= 63  reply=   5909 ms  request=   7227 ms
+[2026-10-15 21:39:02]    turn 19  window=12  prompt=  920  completion= 68  reply=   7037 ms  request=   8644 ms
+[2026-10-15 21:39:17]    turn 20  window=12  prompt=  914  completion= 70  reply=   6439 ms  request=  15922 ms  [session summary]
+[2026-10-15 21:39:25]    turn 21  window=12  prompt=  906  completion= 64  reply=   6240 ms  request=   7753 ms
+[2026-10-15 21:39:35]    turn 22  window=12  prompt=  885  completion= 71  reply=   7942 ms  request=   9423 ms
+[2026-10-15 21:39:42]    turn 23  window=12  prompt=  896  completion= 54  reply=   5663 ms  request=   7011 ms
+[2026-10-15 21:40:00]    turn 24  window=12  prompt=  899  completion= 48  reply=   5735 ms  request=  18752 ms  [session summary]  [lifetime summary]
+[2026-10-15 21:40:10]    turn 25  window=12  prompt=  878  completion= 70  reply=   7844 ms  request=   9088 ms
+[2026-10-15 21:40:17]    turn 26  window=12  prompt=  885  completion= 59  reply=   6337 ms  request=   7683 ms
+[2026-10-15 21:40:25]    turn 27  window=12  prompt=  872  completion= 60  reply=   6254 ms  request=   7413 ms
+[2026-10-15 21:40:39]    turn 28  window=12  prompt=  863  completion= 67  reply=   6282 ms  request=  14707 ms  [session summary]
+[2026-10-15 21:40:46]    turn 29  window=12  prompt=  860  completion= 51  reply=   5072 ms  request=   6821 ms
+[2026-10-15 21:40:50]    turn 30  window=12  prompt=  843  completion= 26  reply=   3318 ms  request=   3805 ms
+[2026-10-15 21:40:56]    probe P1  score=1/5 (0/2 facts)  -> "I don't have access to your personal information. You can share your name and city with me, and I'll do my bes"
+[2026-10-15 21:41:15]    probe P2  score=5/5 (2/2 facts)  -> 'You and your son have food allergies. You are allergic to **eggs** and **peanuts**. Your son is also allergic '
+[2026-10-15 21:41:20]    probe P3  score=5/5 (2/2 facts)  FLAG: ['costco']  -> 'You shop at **Safeway** every Saturday morning and also visit **Costco**. Let me know if you need help with an'
+[2026-10-15 21:41:25]    probe P4  score=4/5 (2/3 facts)  -> 'You currently have **organic baby spinach** and **frozen blueberries** in your fridge. Let me know if you need'
+[2026-10-15 21:41:31]    probe P5  score=5/5 (2/2 facts)  -> 'You returned a pack of deli turkey to Safeway due to a **Listeria recall**. This recall involved contaminated '
+[2026-10-15 21:41:31] === n12 done in 350 s ===
+[2026-10-15 21:41:31] === SHORT_TERM_N=30  (user_id=p3_n30, short_term_n=30, policy=none) ===
+[2026-10-15 21:41:37]    turn  1  window= 0  prompt=  154  completion= 55  reply=   4388 ms  request=   6307 ms
+[2026-10-15 21:41:42]    turn  2  window= 2  prompt=  247  completion= 51  reply=   3531 ms  request=   4960 ms
+[2026-10-15 21:41:48]    turn  3  window= 4  prompt=  330  completion= 63  reply=   4927 ms  request=   6524 ms
+[2026-10-15 21:42:01]    turn  4  window= 6  prompt=  424  completion= 91  reply=   7056 ms  request=  12635 ms  [session summary]
+[2026-10-15 21:42:10]    turn  5  window= 8  prompt=  623  completion= 66  reply=   6490 ms  request=   8834 ms
+[2026-10-15 21:42:18]    turn  6  window=10  prompt=  717  completion= 59  reply=   5464 ms  request=   8554 ms
+[2026-10-15 21:42:25]    turn  7  window=12  prompt=  794  completion= 61  reply=   6038 ms  request=   6991 ms
+[2026-10-15 21:42:45]    turn  8  window=14  prompt=  881  completion= 93  reply=   7899 ms  request=  19328 ms  [session summary]  [lifetime summary]
+[2026-10-15 21:42:56]    turn  9  window=16  prompt= 1075  completion= 79  reply=   8383 ms  request=  10885 ms
+[2026-10-15 21:43:05]    turn 10  window=18  prompt= 1178  completion= 64  reply=   7346 ms  request=   9681 ms
+[2026-10-15 21:43:15]    turn 11  window=20  prompt= 1263  completion= 63  reply=   9574 ms  request=   9884 ms
+[2026-10-15 21:43:32]    turn 12  window=22  prompt= 1345  completion= 75  reply=   9826 ms  request=  17112 ms  [session summary]
+[2026-10-15 21:43:47]    turn 13  window=24  prompt= 1443  completion= 77  reply=  10989 ms  request=  14423 ms
+[2026-10-15 21:44:00]    turn 14  window=26  prompt= 1537  completion= 83  reply=  11891 ms  request=  12816 ms
+[2026-10-15 21:44:14]    turn 15  window=28  prompt= 1658  completion= 68  reply=  11003 ms  request=  14544 ms
+[2026-10-15 21:44:39]    turn 16  window=30  prompt= 1751  completion= 80  reply=  12175 ms  request=  24925 ms  [session summary]  [lifetime summary]
+[2026-10-15 21:44:55]    turn 17  window=30  prompt= 1794  completion= 90  reply=  14250 ms  request=  15741 ms
+[2026-10-15 21:45:08]    turn 18  window=30  prompt= 1819  completion= 67  reply=  11735 ms  request=  13009 ms
+[2026-10-15 21:45:22]    turn 19  window=30  prompt= 1825  completion= 73  reply=  12743 ms  request=  14620 ms
+[2026-10-15 21:45:44]    turn 20  window=30  prompt= 1801  completion= 77  reply=  12403 ms  request=  21295 ms  [session summary]
+[2026-10-15 21:46:01]    turn 21  window=30  prompt= 1807  completion=121  reply=  15640 ms  request=  17334 ms
+[2026-10-15 21:46:17]    turn 22  window=30  prompt= 1866  completion= 86  reply=  14121 ms  request=  15495 ms
+[2026-10-15 21:46:30]    turn 23  window=30  prompt= 1880  completion= 71  reply=  12186 ms  request=  13573 ms
+[2026-10-15 21:46:56]    turn 24  window=30  prompt= 1865  completion= 72  reply=  12202 ms  request=  26176 ms  [session summary]  [lifetime summary]
+[2026-10-15 21:47:11]    turn 25  window=30  prompt= 1861  completion= 80  reply=  12894 ms  request=  14467 ms
+[2026-10-15 21:47:25]    turn 26  window=30  prompt= 1880  completion= 83  reply=  12826 ms  request=  14356 ms
+[2026-10-15 21:47:39]    turn 27  window=30  prompt= 1898  completion= 66  reply=  12222 ms  request=  13358 ms
+[2026-10-15 21:48:04]    turn 28  window=30  prompt= 1884  completion=121  reply=  16120 ms  request=  25803 ms  [session summary]
+[2026-10-15 21:48:18]    turn 29  window=30  prompt= 1929  completion= 52  reply=  11457 ms  request=  13444 ms
+[2026-10-15 21:48:27]    turn 30  window=30  prompt= 1882  completion= 27  reply=   8827 ms  request=   9514 ms
+[2026-10-15 21:48:38]    probe P1  score=1/5 (0/2 facts)  -> "I don't have access to your personal information. You can share your name and city with me if you'd like help "
+[2026-10-15 21:49:04]    probe P2  score=5/5 (2/2 facts)  -> 'You and your son have food allergies. You are allergic to **eggs** and **peanuts**. Your son is also allergic '
+[2026-10-15 21:49:15]    probe P3  score=5/5 (2/2 facts)  FLAG: ['costco']  -> 'You shop at **Safeway** and **Costco**, and you shop every **Saturday morning**. Let me know if you need help '
+[2026-10-15 21:49:26]    probe P4  score=4/5 (2/3 facts)  -> 'You currently have the following foods at home:  \n- **Organic baby spinach**  \n- **Frozen blueberries**  \n\nLet'
+[2026-10-15 21:49:37]    probe P5  score=5/5 (2/2 facts)  -> 'You returned a pack of deli turkey to Safeway due to a **Listeria recall**. This recall involved contaminated '
+[2026-10-15 21:49:37] === n30 done in 486 s ===
+[2026-10-15 21:49:37] === Compression policy (N=12, assistant turns compressed)  (user_id=p3_n12_compress, short_term_n=12, policy=compress) ===
+[2026-10-15 21:49:43]    turn  1  window= 0  prompt=  154  completion= 55  reply=   3846 ms  request=   6164 ms
+[2026-10-15 21:49:48]    turn  2  window= 2  prompt=  198  completion= 37  reply=   3088 ms  request=   4652 ms
+[2026-10-15 21:49:53]    turn  3  window= 4  prompt=  241  completion= 48  reply=   3558 ms  request=   5290 ms
+[2026-10-15 21:50:05]    turn  4  window= 6  prompt=  282  completion= 74  reply=   4907 ms  request=  11891 ms  [session summary]
+[2026-10-15 21:50:11]    turn  5  window= 8  prompt=  425  completion= 37  reply=   4064 ms  request=   6310 ms
+[2026-10-15 21:50:18]    turn  6  window=10  prompt=  464  completion= 49  reply=   4136 ms  request=   7273 ms
+[2026-10-15 21:50:22]    turn  7  window=12  prompt=  489  completion= 33  reply=   2820 ms  request=   3869 ms
+[2026-10-15 21:50:38]    turn  8  window=12  prompt=  499  completion= 45  reply=   4105 ms  request=  15992 ms  [session summary]  [lifetime summary]
+[2026-10-15 21:50:45]    turn  9  window=12  prompt=  589  completion= 53  reply=   4809 ms  request=   7224 ms
+[2026-10-15 21:50:51]    turn 10  window=12  prompt=  597  completion= 29  reply=   2753 ms  request=   5056 ms
+[2026-10-15 21:50:55]    turn 11  window=12  prompt=  590  completion= 46  reply=   4173 ms  request=   4467 ms
+[2026-10-15 21:51:05]    turn 12  window=12  prompt=  600  completion= 24  reply=   3094 ms  request=   9820 ms  [session summary]
+[2026-10-15 21:51:12]    turn 13  window=12  prompt=  615  completion= 48  reply=   4233 ms  request=   7551 ms
+[2026-10-15 21:51:17]    turn 14  window=12  prompt=  617  completion= 47  reply=   3956 ms  request=   4933 ms
+[2026-10-15 21:51:23]    turn 15  window=12  prompt=  640  completion= 36  reply=   3394 ms  request=   6040 ms
+[2026-10-15 21:51:42]    turn 16  window=12  prompt=  633  completion= 32  reply=   3749 ms  request=  18206 ms  [session summary]  [lifetime summary]
+[2026-10-15 21:51:47]    turn 17  window=12  prompt=  653  completion= 32  reply=   3973 ms  request=   5570 ms
+[2026-10-15 21:51:51]    turn 18  window=12  prompt=  636  completion= 22  reply=   2722 ms  request=   4046 ms
+[2026-10-15 21:51:57]    turn 19  window=12  prompt=  642  completion= 41  reply=   3946 ms  request=   5402 ms
+[2026-10-15 21:52:09]    turn 20  window=12  prompt=  630  completion= 38  reply=   4129 ms  request=  12449 ms  [session summary]
+[2026-10-15 21:52:14]    turn 21  window=12  prompt=  602  completion= 34  reply=   3463 ms  request=   4952 ms
+[2026-10-15 21:52:19]    turn 22  window=12  prompt=  616  completion= 44  reply=   3752 ms  request=   5158 ms
+[2026-10-15 21:52:23]    turn 23  window=12  prompt=  636  completion= 20  reply=   2724 ms  request=   3836 ms
+[2026-10-15 21:52:40]    turn 24  window=12  prompt=  647  completion= 33  reply=   3282 ms  request=  16601 ms  [session summary]  [lifetime summary]
+[2026-10-15 21:52:46]    turn 25  window=12  prompt=  665  completion= 52  reply=   4548 ms  request=   6023 ms
+[2026-10-15 21:52:51]    turn 26  window=12  prompt=  677  completion= 40  reply=   4012 ms  request=   5052 ms
+[2026-10-15 21:52:56]    turn 27  window=12  prompt=  670  completion= 39  reply=   4021 ms  request=   5024 ms
+[2026-10-15 21:53:09]    turn 28  window=12  prompt=  660  completion= 43  reply=   4073 ms  request=  12730 ms  [session summary]
+[2026-10-15 21:53:14]    turn 29  window=12  prompt=  656  completion= 32  reply=   3801 ms  request=   5485 ms
+[2026-10-15 21:53:17]    turn 30  window=12  prompt=  651  completion= 22  reply=   2470 ms  request=   2842 ms
+[2026-10-15 21:53:20]    probe P1  score=5/5 (2/2 facts)  -> 'You are Pinal, and you live in San Jose, California.'
+[2026-10-15 21:53:37]    probe P2  score=5/5 (2/2 facts)  -> 'You are allergic to peanuts and eggs. Your son, Arjun, is also allergic to peanuts. Always check labels carefu'
+[2026-10-15 21:53:42]    probe P3  score=5/5 (2/2 facts)  FLAG: ['costco']  -> 'You shop at Safeway every Saturday morning and also at Costco.'
+[2026-10-15 21:53:45]    probe P4  score=2/5 (1/3 facts)  -> 'You have organic baby spinach in your fridge.'
+[2026-10-15 21:53:48]    probe P5  score=5/5 (2/2 facts)  -> 'You returned a pack of deli turkey to Safeway due to a Listeria recall.'
+[2026-10-15 21:53:48] === n12_compress done in 251 s ===
+[2026-10-15 21:53:48] Results:
+[2026-10-15 21:53:48]    SHORT_TERM_N=4                                          prompt/turn=  475.3  latency=  9114.1 ms  quality=3.6
+[2026-10-15 21:53:48]    SHORT_TERM_N=12                                         prompt/turn=  802.8  latency= 10314.0 ms  quality=4
+[2026-10-15 21:53:48]    SHORT_TERM_N=30                                         prompt/turn= 1380.4  latency= 13886.2 ms  quality=4
+[2026-10-15 21:53:48]    Compression policy (N=12, assistant turns compressed)   prompt/turn=  555.8  latency=  7330.3 ms  quality=4.4
+[2026-10-15 21:53:48] Done. Tables written to reports/hw06/METRICS.md

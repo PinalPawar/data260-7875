@@ -1,0 +1,557 @@
+{
+ "functions": [
+  {
+   "file": "file_memory/consolidate.py",
+   "function": "parse_memory",
+   "lines": 24,
+   "checks": {
+    "type hints on all parameters": true,
+    "return type hint": true,
+    "docstring": true,
+    "snake_case name": true,
+    "at most 40 lines": true,
+    "no print() in library code": true,
+    "no bare except": true
+   }
+  },
+  {
+   "file": "file_memory/consolidate.py",
+   "function": "_stem",
+   "lines": 13,
+   "checks": {
+    "type hints on all parameters": true,
+    "return type hint": true,
+    "docstring": true,
+    "snake_case name": true,
+    "at most 40 lines": true,
+    "no print() in library code": true,
+    "no bare except": true
+   }
+  },
+  {
+   "file": "file_memory/consolidate.py",
+   "function": "normalize",
+   "lines": 4,
+   "checks": {
+    "type hints on all parameters": true,
+    "return type hint": true,
+    "docstring": true,
+    "snake_case name": true,
+    "at most 40 lines": true,
+    "no print() in library code": true,
+    "no bare except": true
+   }
+  },
+  {
+   "file": "file_memory/consolidate.py",
+   "function": "same_meaning",
+   "lines": 12,
+   "checks": {
+    "type hints on all parameters": true,
+    "return type hint": true,
+    "docstring": true,
+    "snake_case name": true,
+    "at most 40 lines": true,
+    "no print() in library code": true,
+    "no bare except": true
+   }
+  },
+  {
+   "file": "file_memory/consolidate.py",
+   "function": "merge_duplicates",
+   "lines": 20,
+   "checks": {
+    "type hints on all parameters": true,
+    "return type hint": true,
+    "docstring": true,
+    "snake_case name": true,
+    "at most 40 lines": true,
+    "no print() in library code": true,
+    "no bare except": true
+   }
+  },
+  {
+   "file": "file_memory/consolidate.py",
+   "function": "combine_lists",
+   "lines": 18,
+   "checks": {
+    "type hints on all parameters": true,
+    "return type hint": true,
+    "docstring": true,
+    "snake_case name": true,
+    "at most 40 lines": true,
+    "no print() in library code": true,
+    "no bare except": true
+   }
+  },
+  {
+   "file": "file_memory/consolidate.py",
+   "function": "_rank",
+   "lines": 3,
+   "checks": {
+    "type hints on all parameters": true,
+    "return type hint": true,
+    "docstring": true,
+    "snake_case name": true,
+    "at most 40 lines": true,
+    "no print() in library code": true,
+    "no bare except": true
+   }
+  },
+  {
+   "file": "file_memory/consolidate.py",
+   "function": "resolve_key",
+   "lines": 19,
+   "checks": {
+    "type hints on all parameters": true,
+    "return type hint": true,
+    "docstring": true,
+    "snake_case name": true,
+    "at most 40 lines": true,
+    "no print() in library code": true,
+    "no bare except": true
+   }
+  },
+  {
+   "file": "file_memory/consolidate.py",
+   "function": "resolve_contradictions",
+   "lines": 15,
+   "checks": {
+    "type hints on all parameters": true,
+    "return type hint": true,
+    "docstring": true,
+    "snake_case name": true,
+    "at most 40 lines": true,
+    "no print() in library code": true,
+    "no bare except": true
+   }
+  },
+  {
+   "file": "file_memory/consolidate.py",
+   "function": "render",
+   "lines": 11,
+   "checks": {
+    "type hints on all parameters": true,
+    "return type hint": true,
+    "docstring": true,
+    "snake_case name": true,
+    "at most 40 lines": true,
+    "no print() in library code": true,
+    "no bare except": true
+   }
+  },
+  {
+   "file": "file_memory/consolidate.py",
+   "function": "consolidate",
+   "lines": 19,
+   "checks": {
+    "type hints on all parameters": true,
+    "return type hint": true,
+    "docstring": true,
+    "snake_case name": true,
+    "at most 40 lines": true,
+    "no print() in library code": true,
+    "no bare except": true
+   }
+  },
+  {
+   "file": "file_memory/consolidate.py",
+   "function": "format_report",
+   "lines": 13,
+   "checks": {
+    "type hints on all parameters": true,
+    "return type hint": true,
+    "docstring": true,
+    "snake_case name": true,
+    "at most 40 lines": true,
+    "no print() in library code": true,
+    "no bare except": true
+   }
+  },
+  {
+   "file": "file_memory/consolidate.py",
+   "function": "line",
+   "lines": 6,
+   "checks": {
+    "type hints on all parameters": true,
+    "return type hint": true,
+    "docstring": true,
+    "snake_case name": true,
+    "at most 40 lines": true,
+    "no print() in library code": true,
+    "no bare except": true
+   }
+  },
+  {
+   "file": "file_memory/dream.py",
+   "function": "build_dream_prompt",
+   "lines": 13,
+   "checks": {
+    "type hints on all parameters": true,
+    "return type hint": true,
+    "docstring": true,
+    "snake_case name": true,
+    "at most 40 lines": true,
+    "no print() in library code": true,
+    "no bare except": true
+   }
+  },
+  {
+   "file": "file_memory/dream.py",
+   "function": "parse_dream_reply",
+   "lines": 18,
+   "checks": {
+    "type hints on all parameters": true,
+    "return type hint": true,
+    "docstring": true,
+    "snake_case name": true,
+    "at most 40 lines": true,
+    "no print() in library code": true,
+    "no bare except": true
+   }
+  },
+  {
+   "file": "file_memory/dream.py",
+   "function": "new_facts_only",
+   "lines": 8,
+   "checks": {
+    "type hints on all parameters": true,
+    "return type hint": true,
+    "docstring": true,
+    "snake_case name": true,
+    "at most 40 lines": true,
+    "no print() in library code": true,
+    "no bare except": true
+   }
+  },
+  {
+   "file": "file_memory/dream.py",
+   "function": "append_facts",
+   "lines": 13,
+   "checks": {
+    "type hints on all parameters": true,
+    "return type hint": true,
+    "docstring": true,
+    "snake_case name": true,
+    "at most 40 lines": true,
+    "no print() in library code": true,
+    "no bare except": true
+   }
+  },
+  {
+   "file": "file_memory/dream.py",
+   "function": "dream",
+   "lines": 7,
+   "checks": {
+    "type hints on all parameters": true,
+    "return type hint": true,
+    "docstring": true,
+    "snake_case name": true,
+    "at most 40 lines": true,
+    "no print() in library code": true,
+    "no bare except": true
+   }
+  },
+  {
+   "file": "file_memory/memory_files.py",
+   "function": "read_text",
+   "lines": 3,
+   "checks": {
+    "type hints on all parameters": true,
+    "return type hint": true,
+    "docstring": true,
+    "snake_case name": true,
+    "at most 40 lines": true,
+    "no print() in library code": true,
+    "no bare except": true
+   }
+  },
+  {
+   "file": "file_memory/memory_files.py",
+   "function": "load_agent_md",
+   "lines": 3,
+   "checks": {
+    "type hints on all parameters": true,
+    "return type hint": true,
+    "docstring": true,
+    "snake_case name": true,
+    "at most 40 lines": true,
+    "no print() in library code": true,
+    "no bare except": true
+   }
+  },
+  {
+   "file": "file_memory/memory_files.py",
+   "function": "load_memory_md",
+   "lines": 3,
+   "checks": {
+    "type hints on all parameters": true,
+    "return type hint": true,
+    "docstring": true,
+    "snake_case name": true,
+    "at most 40 lines": true,
+    "no print() in library code": true,
+    "no bare except": true
+   }
+  },
+  {
+   "file": "file_memory/memory_files.py",
+   "function": "write_memory_md",
+   "lines": 3,
+   "checks": {
+    "type hints on all parameters": true,
+    "return type hint": true,
+    "docstring": true,
+    "snake_case name": true,
+    "at most 40 lines": true,
+    "no print() in library code": true,
+    "no bare except": true
+   }
+  },
+  {
+   "file": "file_memory/memory_files.py",
+   "function": "content_lines",
+   "lines": 14,
+   "checks": {
+    "type hints on all parameters": true,
+    "return type hint": true,
+    "docstring": true,
+    "snake_case name": true,
+    "at most 40 lines": true,
+    "no print() in library code": true,
+    "no bare except": true
+   }
+  },
+  {
+   "file": "file_memory/memory_files.py",
+   "function": "count_memory_lines",
+   "lines": 3,
+   "checks": {
+    "type hints on all parameters": true,
+    "return type hint": true,
+    "docstring": true,
+    "snake_case name": true,
+    "at most 40 lines": true,
+    "no print() in library code": true,
+    "no bare except": true
+   }
+  },
+  {
+   "file": "file_memory/memory_files.py",
+   "function": "read_last_consolidated",
+   "lines": 10,
+   "checks": {
+    "type hints on all parameters": true,
+    "return type hint": true,
+    "docstring": true,
+    "snake_case name": true,
+    "at most 40 lines": true,
+    "no print() in library code": true,
+    "no bare except": true
+   }
+  },
+  {
+   "file": "file_memory/memory_files.py",
+   "function": "set_last_consolidated",
+   "lines": 7,
+   "checks": {
+    "type hints on all parameters": true,
+    "return type hint": true,
+    "docstring": true,
+    "snake_case name": true,
+    "at most 40 lines": true,
+    "no print() in library code": true,
+    "no bare except": true
+   }
+  },
+  {
+   "file": "file_memory/memory_files.py",
+   "function": "needs_consolidation",
+   "lines": 19,
+   "checks": {
+    "type hints on all parameters": true,
+    "return type hint": true,
+    "docstring": true,
+    "snake_case name": true,
+    "at most 40 lines": true,
+    "no print() in library code": true,
+    "no bare except": true
+   }
+  },
+  {
+   "file": "file_memory/memory_files.py",
+   "function": "build_system_prompt",
+   "lines": 15,
+   "checks": {
+    "type hints on all parameters": true,
+    "return type hint": true,
+    "docstring": true,
+    "snake_case name": true,
+    "at most 40 lines": true,
+    "no print() in library code": true,
+    "no bare except": true
+   }
+  },
+  {
+   "file": "file_memory_chat.py",
+   "function": "ask_model",
+   "lines": 5,
+   "checks": {
+    "type hints on all parameters": true,
+    "return type hint": true,
+    "docstring": true,
+    "snake_case name": true,
+    "at most 40 lines": true,
+    "no print() in library code": true,
+    "no bare except": true
+   }
+  },
+  {
+   "file": "file_memory_chat.py",
+   "function": "consolidate_file",
+   "lines": 6,
+   "checks": {
+    "type hints on all parameters": true,
+    "return type hint": true,
+    "docstring": true,
+    "snake_case name": true,
+    "at most 40 lines": true,
+    "no print() in library code": true,
+    "no bare except": true
+   }
+  },
+  {
+   "file": "file_memory_chat.py",
+   "function": "show_memory",
+   "lines": 8,
+   "checks": {
+    "type hints on all parameters": true,
+    "return type hint": true,
+    "docstring": true,
+    "snake_case name": true,
+    "at most 40 lines": true,
+    "no print() in library code": true,
+    "no bare except": true
+   }
+  },
+  {
+   "file": "file_memory_chat.py",
+   "function": "compact",
+   "lines": 13,
+   "checks": {
+    "type hints on all parameters": true,
+    "return type hint": true,
+    "docstring": true,
+    "snake_case name": true,
+    "at most 40 lines": true,
+    "no print() in library code": true,
+    "no bare except": true
+   }
+  },
+  {
+   "file": "file_memory_chat.py",
+   "function": "run_dream",
+   "lines": 10,
+   "checks": {
+    "type hints on all parameters": true,
+    "return type hint": true,
+    "docstring": true,
+    "snake_case name": true,
+    "at most 40 lines": true,
+    "no print() in library code": true,
+    "no bare except": true
+   }
+  },
+  {
+   "file": "file_memory_chat.py",
+   "function": "startup_check",
+   "lines": 12,
+   "checks": {
+    "type hints on all parameters": true,
+    "return type hint": true,
+    "docstring": true,
+    "snake_case name": true,
+    "at most 40 lines": true,
+    "no print() in library code": true,
+    "no bare except": true
+   }
+  },
+  {
+   "file": "file_memory_chat.py",
+   "function": "main",
+   "lines": 31,
+   "checks": {
+    "type hints on all parameters": true,
+    "return type hint": true,
+    "docstring": true,
+    "snake_case name": true,
+    "at most 40 lines": true,
+    "no print() in library code": true,
+    "no bare except": true
+   }
+  },
+  {
+   "file": "scripts/consolidate_memory.py",
+   "function": "main",
+   "lines": 21,
+   "checks": {
+    "type hints on all parameters": true,
+    "return type hint": true,
+    "docstring": true,
+    "snake_case name": true,
+    "at most 40 lines": true,
+    "no print() in library code": true,
+    "no bare except": true
+   }
+  }
+ ],
+ "files": [
+  {
+   "file": "file_memory/__init__.py",
+   "checks": {
+    "no hardcoded secrets": true,
+    "no paid model SDK imported": true
+   }
+  },
+  {
+   "file": "file_memory/consolidate.py",
+   "checks": {
+    "no hardcoded secrets": true,
+    "no paid model SDK imported": true
+   }
+  },
+  {
+   "file": "file_memory/dream.py",
+   "checks": {
+    "no hardcoded secrets": true,
+    "no paid model SDK imported": true
+   }
+  },
+  {
+   "file": "file_memory/memory_files.py",
+   "checks": {
+    "no hardcoded secrets": true,
+    "no paid model SDK imported": true
+   }
+  },
+  {
+   "file": "file_memory_chat.py",
+   "checks": {
+    "no hardcoded secrets": true,
+    "no paid model SDK imported": true
+   }
+  },
+  {
+   "file": "scripts/consolidate_memory.py",
+   "checks": {
+    "no hardcoded secrets": true,
+    "no paid model SDK imported": true
+   }
+  }
+ ],
+ "tests": {
+  "offline test script in tests/": true,
+  "needs_consolidation is tested": true
+ },
+ "violations": []
+}

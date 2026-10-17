@@ -1,0 +1,28 @@
+{
+ "method": "Manual check of all 20 probe answers against memory_probes.yaml. Truth: user = Pinal, San Jose; user allergic to peanuts, son Arjun allergic to eggs; shops at Safeway on Saturday (Costco is the neighbour's store); has spinach, frozen blueberries and a cantaloupe at home; returned deli turkey because of a Listeria recall. Rule: start from the automatic keyword score; subtract 1 for each wrong or invented minor detail; subtract 2 for a wrong safety-critical fact (allergy given to the wrong person); minimum 1. The automatic score only checks that key words appear, so it cannot see wrong attributions or invented details.",
+ "reviews": [
+  {"setting": "n4", "probe_id": "P1", "auto": 1, "manual": 1, "reason": "Says it has no access to personal information; name and city not recalled."},
+  {"setting": "n4", "probe_id": "P2", "auto": 5, "manual": 3, "reason": "'You and your son are allergic to eggs and peanuts' gives both allergies to both people (safety-critical, -2)."},
+  {"setting": "n4", "probe_id": "P3", "auto": 5, "manual": 5, "reason": "Safeway, Saturday morning; no distractor."},
+  {"setting": "n4", "probe_id": "P4", "auto": 2, "manual": 2, "reason": "Only spinach; blueberries and cantaloupe missing."},
+  {"setting": "n4", "probe_id": "P5", "auto": 5, "manual": 5, "reason": "Deli turkey, Listeria recall; correct."},
+
+  {"setting": "n12", "probe_id": "P1", "auto": 1, "manual": 1, "reason": "Says it has no access to personal information."},
+  {"setting": "n12", "probe_id": "P2", "auto": 5, "manual": 3, "reason": "States the user is allergic to eggs as well as peanuts (safety-critical, -2); son's egg allergy correct."},
+  {"setting": "n12", "probe_id": "P3", "auto": 5, "manual": 4, "reason": "Safeway and Saturday correct, but adds Costco, the neighbour's store (-1)."},
+  {"setting": "n12", "probe_id": "P4", "auto": 4, "manual": 4, "reason": "Spinach and blueberries; cantaloupe missing."},
+  {"setting": "n12", "probe_id": "P5", "auto": 5, "manual": 4, "reason": "Correct product and reason, but invents that the store offered refunds/replacements (-1)."},
+
+  {"setting": "n30", "probe_id": "P1", "auto": 1, "manual": 1, "reason": "Says it has no access to personal information."},
+  {"setting": "n30", "probe_id": "P2", "auto": 5, "manual": 3, "reason": "Same error as n12: user given an egg allergy (safety-critical, -2)."},
+  {"setting": "n30", "probe_id": "P3", "auto": 5, "manual": 4, "reason": "'Safeway and Costco' - Costco is the neighbour's store (-1)."},
+  {"setting": "n30", "probe_id": "P4", "auto": 4, "manual": 4, "reason": "Spinach and blueberries; cantaloupe missing."},
+  {"setting": "n30", "probe_id": "P5", "auto": 5, "manual": 4, "reason": "Invents that the store replaced the product with safer alternatives (-1)."},
+
+  {"setting": "n12_compress", "probe_id": "P1", "auto": 5, "manual": 5, "reason": "Pinal, San Jose, California; correct."},
+  {"setting": "n12_compress", "probe_id": "P2", "auto": 5, "manual": 1, "reason": "Gives the user eggs and the son peanuts: the son's egg allergy is lost (1/2 facts, 3) and allergies are swapped (safety-critical, -2)."},
+  {"setting": "n12_compress", "probe_id": "P3", "auto": 5, "manual": 4, "reason": "Adds Costco (-1)."},
+  {"setting": "n12_compress", "probe_id": "P4", "auto": 2, "manual": 2, "reason": "Only spinach."},
+  {"setting": "n12_compress", "probe_id": "P5", "auto": 5, "manual": 5, "reason": "Deli turkey, Listeria recall; nothing invented."}
+ ]
+}
