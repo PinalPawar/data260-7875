@@ -6,7 +6,7 @@
   "domain_id": 3,
   "seed": 7875,
   "verify_seed": 267875,
-  "commit_hash": "not a git checkout -- see the hw6 tag on GitHub",
+  "commit_hash": "5ded9db3c3210ac3c34629b6a473998274e19049",
   "model": "qwen3:1.7b (local, via Ollama); embeddings sentence-transformers/all-MiniLM-L6-v2",
   "config": {
     "SHORT_TERM_N": 12,
@@ -14,7 +14,7 @@
     "EPISODIC_TOP_K": 3,
     "mongo_db": "s7875_doc"
   },
-  "generated_at": "2026-10-16T12:44:58",
+  "generated_at": "2026-10-17T19:02:28",
   "summary": "36/36 checks passed",
   "checks": [
     {
@@ -155,7 +155,7 @@
     {
       "name": "55-line file triggers consolidation",
       "passed": true,
-      "detail": "['55 lines > 40', 'last consolidated 145.7 h ago > 24 h']"
+      "detail": "['55 lines > 40', 'last consolidated 176.0 h ago > 24 h']"
     },
     {
       "name": "consolidation reduces it below 40 lines",
