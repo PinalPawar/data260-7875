@@ -3,7 +3,7 @@ HW7 Part 1 demo - Pinal Pawar (SID4 7875) - 2026-10-25 15:51:21 PDT
 ===== 1. Login: valid credentials -> 200 + JWT, invalid -> 401 =====
 $ curl -X POST http://localhost:8675/auth/login -d username=writer1&password=***
 HTTP 200  <- valid login (writer1)
-{"access_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ3cml0ZXIxIiwicm9sZSI6IndyaXRlciIsImV4cCI6MTc5Mjk3MDQ4Mn0.OFS9JLLTLUekrijVATftj1wYF_IduTZKAycQZaaD544","token_type":"bearer"}
+{"access_token":"<JWT redacted - expired demo token>","token_type":"bearer"}
 $ curl -X POST http://localhost:8675/auth/login -d username=writer1&password=***
 HTTP 401  <- invalid login
 {"detail":"Incorrect username or password"}

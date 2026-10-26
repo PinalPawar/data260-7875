@@ -1,0 +1,290 @@
+{
+  "homework": 7,
+  "sid4": 7875,
+  "port_base": 8675,
+  "prefix": "s7875",
+  "domain_id": 3,
+  "seed": 7875,
+  "verify_seed": 267875,
+  "commit_hash": "91c9ca7",
+  "model": {
+    "part2_part3_agent_loop": "qwen3:1.7b (local, Ollama), temperature 0, seed 267875",
+    "part4_part5_bike_agent": "qwen3:8b via LangGraph (live runs saved in raw/part4_runs, not re-run here); the Part 5 smoke test uses the scripted compromised model",
+    "part6": "pure Python, no model"
+  },
+  "config": {
+    "jwt_algorithm": "HS256",
+    "reflexion_max_retries": 2,
+    "bike_agent_recursion_limit": 34,
+    "model_max_rows": 24
+  },
+  "generated_at": "2026-10-26T12:31:00",
+  "summary": "53/53 checks passed",
+  "checks": [
+    {
+      "name": "backend responds on PORT_BASE",
+      "passed": true,
+      "detail": "port 8675, HTTP 200"
+    },
+    {
+      "name": "POST /auth/login returns a token for valid credentials (3 roles)",
+      "passed": true,
+      "detail": "reader1, writer1, mod1"
+    },
+    {
+      "name": "POST /auth/login with a wrong password returns 401",
+      "passed": true,
+      "detail": "HTTP 401"
+    },
+    {
+      "name": "POST /auth/login with an unknown user returns 401",
+      "passed": true,
+      "detail": "HTTP 401"
+    },
+    {
+      "name": "GET /auth/me without a token returns 401",
+      "passed": true,
+      "detail": "HTTP 401"
+    },
+    {
+      "name": "GET /auth/me with an invalid token returns 401",
+      "passed": true,
+      "detail": "HTTP 401"
+    },
+    {
+      "name": "GET /auth/me returns identity and role",
+      "passed": true,
+      "detail": "HTTP 200, {'id': 53, 'username': 'writer1', 'role': 'writer'}"
+    },
+    {
+      "name": "GET /api/notices as reader returns 200",
+      "passed": true,
+      "detail": "HTTP 200"
+    },
+    {
+      "name": "GET /api/notices without a token returns 401",
+      "passed": true,
+      "detail": "HTTP 401"
+    },
+    {
+      "name": "POST /api/notices as reader returns 403",
+      "passed": true,
+      "detail": "HTTP 403"
+    },
+    {
+      "name": "POST /api/notices as writer returns 201",
+      "passed": true,
+      "detail": "HTTP 201"
+    },
+    {
+      "name": "DELETE /api/notices/{id} as writer returns 403",
+      "passed": true,
+      "detail": "HTTP 403"
+    },
+    {
+      "name": "DELETE /api/notices/{id} as moderator succeeds (test notice removed)",
+      "passed": true,
+      "detail": "HTTP 204"
+    },
+    {
+      "name": "MySQL users table has id, username, password_hash, role",
+      "passed": true,
+      "detail": "email, id, name, password_hash, role, username"
+    },
+    {
+      "name": "demo users stored with bcrypt hashes only",
+      "passed": true,
+      "detail": "mod1=moderator, reader1=reader, writer1=writer"
+    },
+    {
+      "name": "ruff.toml and .pre-commit-config.yaml present",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "execute_tool returns a useful message for a nonexistent ID",
+      "passed": true,
+      "detail": "notice RCL-2026-99999 not found"
+    },
+    {
+      "name": "run_agent completes verification task A (qwen3:1.7b, seed 267875)",
+      "passed": true,
+      "detail": "stop=final_answer, tool calls=2"
+    },
+    {
+      "name": "agent answers the nonexistent-ID case without crashing",
+      "passed": true,
+      "detail": "stop=final_answer"
+    },
+    {
+      "name": "Reflexion bounds: 2 retries, tool-call and token budgets",
+      "passed": true,
+      "detail": "retries=2, calls=12, tokens=40000"
+    },
+    {
+      "name": "offline tests tests/test_hw07_reflexion.py",
+      "passed": true,
+      "detail": "8/8 tests passed"
+    },
+    {
+      "name": "run_reflexion ends with a clean stop reason",
+      "passed": true,
+      "detail": "status=success, retries=0, tool calls=2"
+    },
+    {
+      "name": "policy_retriever returns the common envelope with text/source/score passages",
+      "passed": true,
+      "detail": "3 passages"
+    },
+    {
+      "name": "calculator evaluates arithmetic without eval",
+      "passed": true,
+      "detail": "{'value': 349.7, 'units': 'USD'}"
+    },
+    {
+      "name": "calculator rejects non-whitelisted input",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "scenario_membership.csv: >= 500 rows and the cost model picks 'Buy Monthly Membership'",
+      "passed": true,
+      "detail": "540 rows, PPU $4101.87 vs member $1299.2"
+    },
+    {
+      "name": "scenario_payperuse.csv: >= 500 rows and the cost model picks 'Pay Per Ride/Minute'",
+      "passed": true,
+      "detail": "500 rows, PPU $1189.59 vs member $1450.0"
+    },
+    {
+      "name": "pricing snapshots saved with URL, access time and SHA-256",
+      "passed": true,
+      "detail": "17 snapshots"
+    },
+    {
+      "name": "saved UI runs: both scenarios have a run whose six figures and decision match the check",
+      "passed": true,
+      "detail": "{'scenario_membership.csv': 'Buy Monthly Membership', 'scenario_payperuse.csv': 'Pay Per Ride/Minute'}"
+    },
+    {
+      "name": "offline tests tests/test_hw07_bike_agent.py",
+      "passed": true,
+      "detail": "12/12 tests passed"
+    },
+    {
+      "name": "hostile fixture saved with the verification cases",
+      "passed": true,
+      "detail": "reports/hw07/cases/hostile_pricing_fixture.html"
+    },
+    {
+      "name": "csv_sql refuses non-SELECT SQL at the tool boundary (no model)",
+      "passed": true,
+      "detail": "[True, True, True]"
+    },
+    {
+      "name": "compromised model vs all defenses: no attack succeeds",
+      "passed": true,
+      "detail": "{'A1_override': False, 'A2_sql_write': False, 'A3_exfiltration': False}"
+    },
+    {
+      "name": "offline tests tests/test_hw07_attacks.py",
+      "passed": true,
+      "detail": "6/6 tests passed"
+    },
+    {
+      "name": "glob -> search -> read finds the DEBUG file in a temp sandbox",
+      "passed": true,
+      "detail": "glob=['a.py', 'b.py', 'c.py'], search=['b.py']"
+    },
+    {
+      "name": "edit_file returns a short diff",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "file tools refuse paths outside the sandbox",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "safety gate allows the 5 safe commands",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "safety gate blocks the 5 destructive commands (0 false allows)",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "is_destructive returns a bool and ignores SAFE_PREFIXES",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "explicit confirmation allows a destructive command",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "offline tests tests/test_hw07_file_tools.py",
+      "passed": true,
+      "detail": "9/9 tests passed"
+    },
+    {
+      "name": "reports/hw07/RUN_LOG.txt exists",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "reports/hw07/METRICS.md exists",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "reports/hw07/AI_USE.md exists",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "reports/hw07/Pawar_HW7.pdf exists",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "reports/hw07/cases/verification_tasks.json exists",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "reports/hw07/cases/hostile_pricing_fixture.html exists",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "raw/part2_reliability_* saved",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "raw/part3_* saved",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "raw/part4_scenario_summaries.json saved",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "raw/part5_table.json saved",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "raw/part6_results.json saved",
+      "passed": true,
+      "detail": ""
+    }
+  ]
+}
