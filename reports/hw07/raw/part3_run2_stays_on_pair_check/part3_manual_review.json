@@ -1,0 +1,15 @@
+{
+  "9-0": "incorrect",
+  "9-1": "incorrect",
+  "9-2": "incorrect",
+  "15-0": "correct",
+  "15-1": "incorrect",
+  "_notes": {
+    "reviewer": "Pinal Pawar (with AI assistant), read each rejected answer against the task",
+    "9-0": "Answers about manufacturer-wide totals from recall_stats; never compares RCL-2026-04983 vs RCL-2026-04978.",
+    "9-1": "Same drift after the reflection; still no comparison of the two notices.",
+    "9-2": "No answer: stopped by the tool-call budget.",
+    "15-0": "Borderline, counted as a verifier false rejection: it lists all five notices, but it does state the requested facts for the pair (RCL-2026-04983 377 units GreenFields Co; RCL-2026-04978 782 units Harvest Point) and names RCL-2026-04978 as the larger. The answer_stays_on_pair check rejects it only for mentioning the other three codes.",
+    "15-1": "No answer: stopped by the tool-call budget."
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "9-0": "incorrect",
+  "_notes": {
+    "reviewer": "Pinal Pawar (with AI assistant): every rejected answer read against task C",
+    "9-0": "Reports manufacturer-wide totals from recall_stats; never gives the two notices' units. (Accepted retry 9-1 was also read: correct, 377 vs 782 units, GreenFields Co vs Harvest Point.)"
+  }
+}

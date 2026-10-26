@@ -1,0 +1,513 @@
+[
+  {
+    "task": {
+      "id": "A",
+      "kind": "search_then_detail",
+      "prompt": "Search for frozen spinach recall notices, then look up the full details of the first search result. Tell me its notice code, manufacturer and description.",
+      "search_term": "spinach",
+      "min_tool_calls": 2
+    },
+    "result": {
+      "run_id": "35752533",
+      "answer": "The notice code for the frozen spinach recall is **RCL-2026-05001**, issued by **GreenFields Co** under the **bacterialContamination** category. The affected units are **2919**. The description states that there was **Possible Listeria contamination in lot GF-2291**.",
+      "stop_reason": "final_answer",
+      "iterations": 3,
+      "tool_calls": 2,
+      "repairs_used": 0,
+      "parallel_calls_dropped": 1,
+      "input_tokens": 2627,
+      "output_tokens": 159,
+      "call_events": [
+        {
+          "iteration": 1,
+          "slot": 1,
+          "repair_attempt": false,
+          "tool": "search_notices",
+          "arguments": {
+            "query": "frozen spinach"
+          },
+          "well_formed": true,
+          "failure_type": null,
+          "problem": ""
+        },
+        {
+          "iteration": 2,
+          "slot": 2,
+          "repair_attempt": false,
+          "tool": "get_notice_detail",
+          "arguments": {
+            "notice_code": "RCL-2026-05001"
+          },
+          "well_formed": true,
+          "failure_type": null,
+          "problem": ""
+        }
+      ],
+      "trace": [
+        {
+          "n": 1,
+          "tool": "search_notices",
+          "arguments": {
+            "query": "frozen spinach"
+          },
+          "result": {
+            "ok": true,
+            "data": {
+              "count": 5,
+              "notices": [
+                {
+                  "notice_code": "RCL-2026-05001",
+                  "product": "Frozen Spinach",
+                  "manufacturer": "GreenFields Co",
+                  "category": "bacterialContamination",
+                  "units_affected": 2919
+                },
+                {
+                  "notice_code": "RCL-2026-04994",
+                  "product": "Frozen Spinach (batch 4994)",
+                  "manufacturer": "ACME Foods",
+                  "category": "foreignMaterial",
+                  "units_affected": 2486
+                },
+                {
+                  "notice_code": "RCL-2026-04912",
+                  "product": "Frozen Spinach (batch 4912)",
+                  "manufacturer": "Northgate Dairy",
+                  "category": "foreignMaterial",
+                  "units_affected": 3128
+                },
+                {
+                  "notice_code": "RCL-2026-04887",
+                  "product": "Frozen Spinach (batch 4887)",
+                  "manufacturer": "ACME Foods",
+                  "category": "supplyShortage",
+                  "units_affected": 153
+                },
+                {
+                  "notice_code": "RCL-2026-04880",
+                  "product": "Frozen Spinach (batch 4880)",
+                  "manufacturer": "Golden Acres",
+                  "category": "mislabelling",
+                  "units_affected": 4720
+                }
+              ]
+            },
+            "error": null
+          }
+        },
+        {
+          "n": 2,
+          "tool": "get_notice_detail",
+          "arguments": {
+            "notice_code": "RCL-2026-05001"
+          },
+          "result": {
+            "ok": true,
+            "data": {
+              "notice_code": "RCL-2026-05001",
+              "product": "Frozen Spinach",
+              "category": "bacterialContamination",
+              "units_affected": 2919,
+              "description": "Possible Listeria contamination in lot GF-2291.",
+              "contact_email": "qa@greenfields.com",
+              "manufacturer": {
+                "code": "MFR-0005",
+                "name": "GreenFields Co",
+                "headquarters": "Salinas, CA"
+              },
+              "created_at": "2026-10-01T22:22:25",
+              "updated_at": "2026-10-01T22:22:25"
+            },
+            "error": null
+          }
+        }
+      ],
+      "latency_ms": 15708.8
+    },
+    "verdict": {
+      "task_id": "A",
+      "passed": true,
+      "checks": [
+        {
+          "check": "search_ran",
+          "passed": true,
+          "detail": "search for 'spinach' with results"
+        },
+        {
+          "check": "detail_of_first_result",
+          "passed": true,
+          "detail": "first result RCL-2026-05001; looked up ['RCL-2026-05001']"
+        },
+        {
+          "check": "answer_cites_code",
+          "passed": true,
+          "detail": "answer mentions RCL-2026-05001"
+        },
+        {
+          "check": "no_unsupported_codes",
+          "passed": true,
+          "detail": "unsupported=[]"
+        }
+      ],
+      "unsupported_claims": []
+    }
+  },
+  {
+    "task": {
+      "id": "B",
+      "kind": "aggregate_then_example",
+      "prompt": "Answer this in two tool steps. Step 1: call recall_stats with group_by \"category\" to find which recall category has the most notices. Step 2: call search_notices with query \"peanut butter\" and category set to the top category from step 1. Then give the top category and one example notice code from the step 2 search results.",
+      "group_by": "category",
+      "min_tool_calls": 2
+    },
+    "result": {
+      "run_id": "8924a948",
+      "answer": "The top category with the most recalls is **supplyShortage**, which has the highest number of notices (1274). One example notice code from the search for \"peanut butter\" is **RCL-2026-04978**, affecting **782 units**.",
+      "stop_reason": "final_answer",
+      "iterations": 3,
+      "tool_calls": 2,
+      "repairs_used": 0,
+      "parallel_calls_dropped": 1,
+      "input_tokens": 2644,
+      "output_tokens": 147,
+      "call_events": [
+        {
+          "iteration": 1,
+          "slot": 1,
+          "repair_attempt": false,
+          "tool": "recall_stats",
+          "arguments": {
+            "group_by": "category"
+          },
+          "well_formed": true,
+          "failure_type": null,
+          "problem": ""
+        },
+        {
+          "iteration": 2,
+          "slot": 2,
+          "repair_attempt": false,
+          "tool": "search_notices",
+          "arguments": {
+            "query": "peanut butter",
+            "category": "supplyShortage"
+          },
+          "well_formed": true,
+          "failure_type": null,
+          "problem": ""
+        }
+      ],
+      "trace": [
+        {
+          "n": 1,
+          "tool": "recall_stats",
+          "arguments": {
+            "group_by": "category"
+          },
+          "result": {
+            "ok": true,
+            "data": {
+              "group_by": "category",
+              "groups": [
+                {
+                  "group": "supplyShortage",
+                  "notice_count": 1274,
+                  "total_units_affected": 3130931
+                },
+                {
+                  "group": "foreignMaterial",
+                  "notice_count": 1271,
+                  "total_units_affected": 3147116
+                },
+                {
+                  "group": "mislabelling",
+                  "notice_count": 1246,
+                  "total_units_affected": 3133276
+                },
+                {
+                  "group": "bacterialContamination",
+                  "notice_count": 1210,
+                  "total_units_affected": 3089096
+                }
+              ],
+              "total_notices": 5001,
+              "total_units_affected": 12500419
+            },
+            "error": null
+          }
+        },
+        {
+          "n": 2,
+          "tool": "search_notices",
+          "arguments": {
+            "query": "peanut butter",
+            "category": "supplyShortage"
+          },
+          "result": {
+            "ok": true,
+            "data": {
+              "count": 5,
+              "notices": [
+                {
+                  "notice_code": "RCL-2026-04978",
+                  "product": "Peanut Butter (batch 4978)",
+                  "manufacturer": "Harvest Point",
+                  "category": "supplyShortage",
+                  "units_affected": 782
+                },
+                {
+                  "notice_code": "RCL-2026-04931",
+                  "product": "Peanut Butter (batch 4931)",
+                  "manufacturer": "Golden Acres",
+                  "category": "supplyShortage",
+                  "units_affected": 3589
+                },
+                {
+                  "notice_code": "RCL-2026-04881",
+                  "product": "Peanut Butter (batch 4881)",
+                  "manufacturer": "Coastal Provisions",
+                  "category": "supplyShortage",
+                  "units_affected": 2639
+                },
+                {
+                  "notice_code": "RCL-2026-04843",
+                  "product": "Peanut Butter (batch 4843)",
+                  "manufacturer": "BlueRiver Foods",
+                  "category": "supplyShortage",
+                  "units_affected": 1717
+                },
+                {
+                  "notice_code": "RCL-2026-04812",
+                  "product": "Peanut Butter (batch 4812)",
+                  "manufacturer": "Northgate Dairy",
+                  "category": "supplyShortage",
+                  "units_affected": 1228
+                }
+              ]
+            },
+            "error": null
+          }
+        }
+      ],
+      "latency_ms": 10304.5
+    },
+    "verdict": {
+      "task_id": "B",
+      "passed": true,
+      "checks": [
+        {
+          "check": "aggregate_ran",
+          "passed": true,
+          "detail": "recall_stats(group_by=category)"
+        },
+        {
+          "check": "example_from_top_group",
+          "passed": true,
+          "detail": "top=supplyShortage; examples=['RCL-2026-04978', 'RCL-2026-04931', 'RCL-2026-04881']"
+        },
+        {
+          "check": "answer_cites_both",
+          "passed": true,
+          "detail": "answer names the top group and an example code"
+        },
+        {
+          "check": "no_unsupported_codes",
+          "passed": true,
+          "detail": "unsupported=[]"
+        }
+      ],
+      "unsupported_claims": []
+    }
+  },
+  {
+    "task": {
+      "id": "C",
+      "kind": "compare_two",
+      "prompt": "Search for peanut butter recall notices, then get the full details of the first two results. Compare just those two notices: which one affected more units, and who are their manufacturers? Cite both notice codes.",
+      "search_term": "peanut",
+      "min_tool_calls": 3
+    },
+    "result": {
+      "run_id": "3288440b",
+      "answer": "The recall notices for peanut butter are:\n\n1. **Notice Code: RCL-2026-04983**  \n   - Manufacturer: GreenFields Co  \n   - Category: bacterialContamination  \n   - Units Affected: 377  \n\n2. **Notice Code: RCL-2026-04978**  \n   - Manufacturer: Harvest Point  \n   - Category: supplyShortage  \n   - Units Affected: 782  \n\nThe notice with the higher number of units affected is **RCL-2026-04978** (782 units), and its manufacturer is **Harvest Point**.",
+      "stop_reason": "final_answer",
+      "iterations": 4,
+      "tool_calls": 3,
+      "repairs_used": 0,
+      "parallel_calls_dropped": 2,
+      "input_tokens": 4165,
+      "output_tokens": 289,
+      "call_events": [
+        {
+          "iteration": 1,
+          "slot": 1,
+          "repair_attempt": false,
+          "tool": "search_notices",
+          "arguments": {
+            "query": "peanut butter"
+          },
+          "well_formed": true,
+          "failure_type": null,
+          "problem": ""
+        },
+        {
+          "iteration": 2,
+          "slot": 2,
+          "repair_attempt": false,
+          "tool": "get_notice_detail",
+          "arguments": {
+            "notice_code": "RCL-2026-04983"
+          },
+          "well_formed": true,
+          "failure_type": null,
+          "problem": ""
+        },
+        {
+          "iteration": 3,
+          "slot": 3,
+          "repair_attempt": false,
+          "tool": "get_notice_detail",
+          "arguments": {
+            "notice_code": "RCL-2026-04978"
+          },
+          "well_formed": true,
+          "failure_type": null,
+          "problem": ""
+        }
+      ],
+      "trace": [
+        {
+          "n": 1,
+          "tool": "search_notices",
+          "arguments": {
+            "query": "peanut butter"
+          },
+          "result": {
+            "ok": true,
+            "data": {
+              "count": 5,
+              "notices": [
+                {
+                  "notice_code": "RCL-2026-04983",
+                  "product": "Peanut Butter (batch 4983)",
+                  "manufacturer": "GreenFields Co",
+                  "category": "bacterialContamination",
+                  "units_affected": 377
+                },
+                {
+                  "notice_code": "RCL-2026-04978",
+                  "product": "Peanut Butter (batch 4978)",
+                  "manufacturer": "Harvest Point",
+                  "category": "supplyShortage",
+                  "units_affected": 782
+                },
+                {
+                  "notice_code": "RCL-2026-04945",
+                  "product": "Peanut Butter (batch 4945)",
+                  "manufacturer": "Coastal Provisions",
+                  "category": "bacterialContamination",
+                  "units_affected": 4455
+                },
+                {
+                  "notice_code": "RCL-2026-04931",
+                  "product": "Peanut Butter (batch 4931)",
+                  "manufacturer": "Golden Acres",
+                  "category": "supplyShortage",
+                  "units_affected": 3589
+                },
+                {
+                  "notice_code": "RCL-2026-04908",
+                  "product": "Peanut Butter (batch 4908)",
+                  "manufacturer": "Coastal Provisions",
+                  "category": "mislabelling",
+                  "units_affected": 1452
+                }
+              ]
+            },
+            "error": null
+          }
+        },
+        {
+          "n": 2,
+          "tool": "get_notice_detail",
+          "arguments": {
+            "notice_code": "RCL-2026-04983"
+          },
+          "result": {
+            "ok": true,
+            "data": {
+              "notice_code": "RCL-2026-04983",
+              "product": "Peanut Butter (batch 4983)",
+              "category": "bacterialContamination",
+              "units_affected": 377,
+              "description": "Routine testing detected Listeria contamination in lot #L14983.",
+              "contact_email": "qa4983@greenfieldsco.com",
+              "manufacturer": {
+                "code": "MFR-0005",
+                "name": "GreenFields Co",
+                "headquarters": "Salinas, CA"
+              },
+              "created_at": "2026-10-01T22:22:25",
+              "updated_at": "2026-10-01T22:22:25"
+            },
+            "error": null
+          }
+        },
+        {
+          "n": 3,
+          "tool": "get_notice_detail",
+          "arguments": {
+            "notice_code": "RCL-2026-04978"
+          },
+          "result": {
+            "ok": true,
+            "data": {
+              "notice_code": "RCL-2026-04978",
+              "product": "Peanut Butter (batch 4978)",
+              "category": "supplyShortage",
+              "units_affected": 782,
+              "description": "Distributor reported a packaging shortage causing incorrect fill levels; recall issued for lot #L14978.",
+              "contact_email": "qa4978@harvestpoint.com",
+              "manufacturer": {
+                "code": "MFR-0006",
+                "name": "Harvest Point",
+                "headquarters": "Des Moines, IA"
+              },
+              "created_at": "2026-10-01T22:22:25",
+              "updated_at": "2026-10-01T22:22:25"
+            },
+            "error": null
+          }
+        }
+      ],
+      "latency_ms": 17997.1
+    },
+    "verdict": {
+      "task_id": "C",
+      "passed": true,
+      "checks": [
+        {
+          "check": "search_ran",
+          "passed": true,
+          "detail": "search for 'peanut' found 5"
+        },
+        {
+          "check": "two_detail_lookups",
+          "passed": true,
+          "detail": "looked up ['RCL-2026-04978', 'RCL-2026-04983']"
+        },
+        {
+          "check": "answer_cites_both",
+          "passed": true,
+          "detail": "answer mentions ['RCL-2026-04978', 'RCL-2026-04983']"
+        },
+        {
+          "check": "no_unsupported_codes",
+          "passed": true,
+          "detail": "unsupported=[]"
+        }
+      ],
+      "unsupported_claims": []
+    }
+  }
+]

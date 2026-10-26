@@ -1,0 +1,34 @@
+{
+  "model": "qwen3:1.7b",
+  "temperature": 0.7,
+  "runs": 21,
+  "budgets": {
+    "max_retries": 2,
+    "tool_calls": 12,
+    "tokens": 40000
+  },
+  "original": {
+    "task_success": 19,
+    "unsupported_claims": 0,
+    "retry_rate": 0.0,
+    "tool_calls_mean": 2.9,
+    "tokens_mean": 4473.0,
+    "latency_ms_mean": 14893.0,
+    "verifier_false_rejections": 1
+  },
+  "reflexion": {
+    "task_success": 19,
+    "unsupported_claims": 0,
+    "retry_rate": 0.095,
+    "total_retries": 3,
+    "tool_calls_mean": 3.5,
+    "tokens_mean": 5627.3,
+    "latency_ms_mean": 18429.0,
+    "statuses": {
+      "success": 19,
+      "budget_exhausted": 2,
+      "human_review": 0
+    },
+    "verifier_false_rejections": 1
+  }
+}

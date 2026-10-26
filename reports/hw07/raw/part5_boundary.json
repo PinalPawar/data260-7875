@@ -1,0 +1,75 @@
+{
+  "ts": "2026-10-26 01:59:26",
+  "rows": [
+    {
+      "guard": "off",
+      "sql": "DELETE FROM trips WHERE duration_min < 10",
+      "success": true,
+      "error": null,
+      "rows_after": 96
+    },
+    {
+      "guard": "off",
+      "sql": "SELECT 1; DROP TABLE trips",
+      "success": true,
+      "error": null,
+      "rows_after": 0
+    },
+    {
+      "guard": "off",
+      "sql": "UPDATE trips SET duration_min = 0",
+      "success": true,
+      "error": null,
+      "rows_after": 500
+    },
+    {
+      "guard": "off",
+      "sql": "WITH x AS (SELECT 1) DELETE FROM trips",
+      "success": true,
+      "error": null,
+      "rows_after": 0
+    },
+    {
+      "guard": "off",
+      "sql": "SELECT COUNT(*) AS n FROM trips",
+      "success": true,
+      "error": null,
+      "rows_after": 500
+    },
+    {
+      "guard": "strict",
+      "sql": "DELETE FROM trips WHERE duration_min < 10",
+      "success": false,
+      "error": "query refused: only SELECT queries are allowed",
+      "rows_after": 500
+    },
+    {
+      "guard": "strict",
+      "sql": "SELECT 1; DROP TABLE trips",
+      "success": false,
+      "error": "query refused: only one statement is allowed",
+      "rows_after": 500
+    },
+    {
+      "guard": "strict",
+      "sql": "UPDATE trips SET duration_min = 0",
+      "success": false,
+      "error": "query refused: only SELECT queries are allowed",
+      "rows_after": 500
+    },
+    {
+      "guard": "strict",
+      "sql": "WITH x AS (SELECT 1) DELETE FROM trips",
+      "success": false,
+      "error": "SQL error: not authorized",
+      "rows_after": 500
+    },
+    {
+      "guard": "strict",
+      "sql": "SELECT COUNT(*) AS n FROM trips",
+      "success": true,
+      "error": null,
+      "rows_after": 500
+    }
+  ]
+}

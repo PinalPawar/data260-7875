@@ -1,0 +1,65 @@
+{
+  "source": "https://s3.amazonaws.com/baywheels-data/",
+  "note": "real trips sampled per month; no rider id in the data",
+  "scenario_membership": {
+    "file": "data/bikeshare/scenario_membership.csv",
+    "rows": 540,
+    "months": 12,
+    "first_month": "202510",
+    "last_month": "202609",
+    "seed": 7875,
+    "columns": [
+      "ride_id",
+      "rideable_type",
+      "started_at",
+      "ended_at",
+      "start_station_name",
+      "start_station_id",
+      "end_station_name",
+      "end_station_id",
+      "start_lat",
+      "start_lng",
+      "end_lat",
+      "end_lng",
+      "member_casual"
+    ],
+    "rideable_type_counts": {
+      "electric_bike": 324,
+      "classic_bike": 216
+    },
+    "minutes_mean": 19.35,
+    "minutes_median": 15.74,
+    "trips_over_45_min": 36,
+    "built_on": "2026-10-25"
+  },
+  "scenario_payperuse": {
+    "file": "data/bikeshare/scenario_payperuse.csv",
+    "rows": 500,
+    "months": 50,
+    "first_month": "202208",
+    "last_month": "202609",
+    "seed": 7875,
+    "columns": [
+      "ride_id",
+      "rideable_type",
+      "started_at",
+      "ended_at",
+      "start_station_name",
+      "start_station_id",
+      "end_station_name",
+      "end_station_id",
+      "start_lat",
+      "start_lng",
+      "end_lat",
+      "end_lng",
+      "member_casual"
+    ],
+    "rideable_type_counts": {
+      "classic_bike": 500
+    },
+    "minutes_mean": 7.26,
+    "minutes_median": 7.12,
+    "trips_over_45_min": 0,
+    "built_on": "2026-10-25"
+  }
+}

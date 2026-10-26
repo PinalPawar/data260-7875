@@ -1,0 +1,41 @@
+{
+  "original": {
+    "task_success": 20,
+    "unsupported_claims": 0,
+    "retry_rate": 0.0,
+    "tool_calls_mean": 2.9,
+    "tokens_mean": 4473.0,
+    "latency_ms_mean": 14933.8,
+    "verifier_false_rejections": 0
+  },
+  "reflexion_model": {
+    "task_success": 20,
+    "unsupported_claims": 0,
+    "retry_rate": 0.048,
+    "total_retries": 2,
+    "tool_calls_mean": 3.3,
+    "tokens_mean": 5222.6,
+    "latency_ms_mean": 17561.2,
+    "statuses": {
+      "success": 20,
+      "budget_exhausted": 0,
+      "human_review": 1
+    },
+    "verifier_false_rejections": 0
+  },
+  "reflexion_grounded": {
+    "task_success": 21,
+    "unsupported_claims": 0,
+    "retry_rate": 0.048,
+    "total_retries": 1,
+    "tool_calls_mean": 3.0,
+    "tokens_mean": 4706.7,
+    "latency_ms_mean": 15705.3,
+    "statuses": {
+      "success": 21,
+      "budget_exhausted": 0,
+      "human_review": 0
+    },
+    "verifier_false_rejections": 0
+  }
+}

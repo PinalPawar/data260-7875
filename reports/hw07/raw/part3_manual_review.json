@@ -1,0 +1,11 @@
+{
+  "9-0": "incorrect",
+  "9-1": "incorrect",
+  "9-2": "incorrect",
+  "_notes": {
+    "reviewer": "Pinal Pawar (with AI assistant): every rejected answer read against task C",
+    "9-0": "Reports manufacturer-wide totals from recall_stats; never gives the two notices' units.",
+    "9-1": "Attaches manufacturer totals to the two codes (GreenFields Co 1,185,610 units); never compares 377 vs 782.",
+    "9-2": "Same drift; also brings in RCL-2026-04945 and manufacturer totals."
+  }
+}

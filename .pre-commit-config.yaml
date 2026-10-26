@@ -1,0 +1,8 @@
+# HW7 Part 1: run Ruff on staged Python files before every commit.
+# Install once with: pre-commit install
+repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.15.6
+    hooks:
+      - id: ruff-check
+        args: [--fix]

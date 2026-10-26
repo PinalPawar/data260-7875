@@ -1,0 +1,28 @@
+{
+  "model": "qwen3:1.7b",
+  "temperature": 0.7,
+  "seeds": "7875+attempt",
+  "attempts": 21,
+  "intended_calls": 49,
+  "well_formed_before_repair": 49,
+  "well_formed_before_repair_pct": 100.0,
+  "well_formed_after_repair": 49,
+  "well_formed_after_repair_pct": 100.0,
+  "failures": {
+    "malformed_arguments": 0,
+    "unknown_tool": 0,
+    "text_instead_of_tool": 0,
+    "lost_multi_step_chain": 7
+  },
+  "attempts_passed": 13,
+  "outcomes": {
+    "success": 13,
+    "lost_multi_step_chain": 7,
+    "answer_check_failed": 1
+  },
+  "per_task_passed": {
+    "A": 7,
+    "B": 0,
+    "C": 6
+  }
+}

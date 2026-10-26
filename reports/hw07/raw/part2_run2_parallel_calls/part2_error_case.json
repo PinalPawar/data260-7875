@@ -1,0 +1,76 @@
+[
+  {
+    "task": {
+      "id": "E",
+      "kind": "nonexistent_id",
+      "prompt": "Give me the full details of recall notice RCL-2026-99999.",
+      "notice_code": "RCL-2026-99999"
+    },
+    "result": {
+      "run_id": "2571ed9e",
+      "answer": "The recall notice RCL-2026-99999 was not found in the system. Please provide a valid notice code to retrieve the details.",
+      "stop_reason": "final_answer",
+      "iterations": 2,
+      "tool_calls": 1,
+      "repairs_used": 0,
+      "input_tokens": 940,
+      "output_tokens": 69,
+      "latency_ms": 7618.4,
+      "call_events": [
+        {
+          "iteration": 1,
+          "slot": 1,
+          "repair_attempt": false,
+          "tool": "get_notice_detail",
+          "arguments": {
+            "notice_code": "RCL-2026-99999"
+          },
+          "well_formed": true,
+          "failure_type": null,
+          "problem": ""
+        }
+      ],
+      "trace": [
+        {
+          "n": 1,
+          "tool": "get_notice_detail",
+          "arguments": {
+            "notice_code": "RCL-2026-99999"
+          },
+          "result": {
+            "ok": false,
+            "data": null,
+            "error": "notice RCL-2026-99999 not found"
+          }
+        }
+      ]
+    },
+    "verdict": {
+      "task_id": "E",
+      "passed": true,
+      "checks": [
+        {
+          "check": "lookup_attempted",
+          "passed": true,
+          "detail": "get_notice_detail(RCL-2026-99999)"
+        },
+        {
+          "check": "useful_error_returned",
+          "passed": true,
+          "detail": "error='notice RCL-2026-99999 not found'"
+        },
+        {
+          "check": "clean_stop",
+          "passed": true,
+          "detail": "stop=final_answer"
+        },
+        {
+          "check": "no_unsupported_codes",
+          "passed": true,
+          "detail": "unsupported=[]"
+        }
+      ],
+      "unsupported_claims": []
+    }
+  }
+]
