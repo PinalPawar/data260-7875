@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Text
-from sqlalchemy.orm import relationship, foreign
+from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 
 from database import Base
@@ -85,6 +85,8 @@ class User(Base):
     name = Column(String(255), nullable=False)
     email = Column(String(255), nullable=False, unique=True, index=True)
     password_hash = Column(String(255), nullable=False)  # bcrypt hash, never plain text
+    username = Column(String(64), nullable=True, unique=True, index=True)
+    role = Column(String(16), nullable=False, server_default="reader")  # reader/writer/moderator
 
 
 class SessionToken(Base):

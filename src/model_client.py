@@ -31,6 +31,8 @@ def complete(messages, tools=None, model=None, base_url=None, temperature=0.0,
     if num_ctx is not None:       # HW6 Part 3: room for a 30-message window
         options["num_ctx"] = num_ctx
     extra = {"think": think} if think is not None else {}
+    if tools:                     # HW7 Part 2: native tool calling
+        extra["tools"] = tools
     response = client.chat(
         model=model or DEFAULT_MODEL,
         messages=messages,
@@ -48,4 +50,23 @@ def complete(messages, tools=None, model=None, base_url=None, temperature=0.0,
         "input_tokens": input_tokens,
         "output_tokens": output_tokens,
         "total_tokens": input_tokens + output_tokens,
+        # HW7 Part 2: tool calls the model asked for, as plain dicts. Empty list
+        # when no tools were offered, so earlier callers are unaffected.
+        "tool_calls": _normalize_tool_calls(_get(message, "tool_calls")),
     }
+
+
+def _normalize_tool_calls(raw_calls) -> list:
+    """Turn Ollama's tool_calls into [{"name": str, "arguments": <as sent>}].
+
+    Arguments are passed through unchanged (normally a dict; a JSON string or
+    anything else is left for the caller to report as malformed).
+    """
+    calls = []
+    for call in raw_calls or []:
+        function = _get(call, "function") or {}
+        arguments = _get(function, "arguments")
+        if arguments is not None and not isinstance(arguments, (dict, str, list)):
+            arguments = dict(arguments)  # Mapping-like object from the ollama package
+        calls.append({"name": _get(function, "name", "") or "", "arguments": arguments})
+    return calls

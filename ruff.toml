@@ -1,0 +1,6 @@
+# HW7 Part 1: Ruff lint settings (used by `ruff check` and the pre-commit hook).
+line-length = 100
+
+[lint]
+# pycodestyle errors/warnings + pyflakes (unused imports/variables, undefined names).
+select = ["E", "F", "W"]

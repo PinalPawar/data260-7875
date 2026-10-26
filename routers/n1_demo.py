@@ -10,7 +10,7 @@ Two versions of the same "list notices with their related info" endpoint:
   using SQLAlchemy's joinedload() (a SQL LEFT JOIN under the hood), so the
   total stays at 1 query no matter how big the page is.
 
-Both are protected by require_session, same as the regular /api/notices
+Both are protected by JWT (any role), same as the regular /api/notices
 CRUD, since this is still "your CRUD app" being measured, not a separate
 public endpoint.
 """
@@ -20,7 +20,7 @@ from sqlalchemy.orm import Session, joinedload
 import query_counter
 from database import get_db_session_basede26
 from models import Notice, User
-from routers.session_auth import require_session
+from routers.jwt_auth import get_current_user
 
 router = APIRouter(prefix="/api/notices", tags=["n1-demo"])
 
@@ -39,7 +39,7 @@ def list_naive(
     page: int = 1,
     page_size: int = 10,
     db_session_basede26: Session = Depends(get_db_session_basede26),
-    _user: User = Depends(require_session),
+    _user: User = Depends(get_current_user),
 ):
     from models import RelatedInfo  # local import avoids a circular import with models.py
 
@@ -73,7 +73,7 @@ def list_fixed(
     page: int = 1,
     page_size: int = 10,
     db_session_basede26: Session = Depends(get_db_session_basede26),
-    _user: User = Depends(require_session),
+    _user: User = Depends(get_current_user),
 ):
     query_counter.reset()
 

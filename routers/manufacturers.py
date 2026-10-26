@@ -11,7 +11,7 @@ import crud
 import schemas
 from database import get_db_session_basede26
 from models import User
-from routers.session_auth import require_session
+from routers.jwt_auth import get_current_user, require_roles
 
 router = APIRouter(prefix="/api/manufacturers", tags=["manufacturers"])
 
@@ -20,7 +20,7 @@ router = APIRouter(prefix="/api/manufacturers", tags=["manufacturers"])
 def create_manufacturer(
     payload: schemas.ManufacturerCreate,
     db_session_basede26: Session = Depends(get_db_session_basede26),
-    _user: User = Depends(require_session),
+    _user: User = Depends(require_roles("writer", "moderator")),
 ):
     try:
         return crud.create_manufacturer(db_session_basede26, payload)
@@ -33,7 +33,7 @@ def list_manufacturers(
     page: int = Query(1, ge=1),
     page_size: int = Query(10, ge=1, le=100),
     db_session_basede26: Session = Depends(get_db_session_basede26),
-    _user: User = Depends(require_session),
+    _user: User = Depends(get_current_user),
 ):
     items, total = crud.list_manufacturers(db_session_basede26, page, page_size)
     return {"items": items, "total": total, "page": page, "page_size": page_size}
@@ -43,7 +43,7 @@ def list_manufacturers(
 def get_manufacturer(
     manufacturer_id: int,
     db_session_basede26: Session = Depends(get_db_session_basede26),
-    _user: User = Depends(require_session),
+    _user: User = Depends(get_current_user),
 ):
     try:
         return crud.get_manufacturer(db_session_basede26, manufacturer_id)
@@ -56,7 +56,7 @@ def update_manufacturer(
     manufacturer_id: int,
     payload: schemas.ManufacturerCreate,
     db_session_basede26: Session = Depends(get_db_session_basede26),
-    _user: User = Depends(require_session),
+    _user: User = Depends(require_roles("writer", "moderator")),
 ):
     try:
         return crud.update_manufacturer(db_session_basede26, manufacturer_id, payload)
@@ -70,7 +70,7 @@ def update_manufacturer(
 def delete_manufacturer(
     manufacturer_id: int,
     db_session_basede26: Session = Depends(get_db_session_basede26),
-    _user: User = Depends(require_session),
+    _user: User = Depends(require_roles("moderator")),
 ):
     try:
         crud.delete_manufacturer(db_session_basede26, manufacturer_id)
@@ -88,7 +88,7 @@ def notices_for_manufacturer(
     skip: int = Query(0, ge=0),
     limit: int = Query(50, ge=1, le=200),
     db_session_basede26: Session = Depends(get_db_session_basede26),
-    _user: User = Depends(require_session),
+    _user: User = Depends(get_current_user),
 ):
     """Relationship query: every notice issued by one manufacturer."""
     try:

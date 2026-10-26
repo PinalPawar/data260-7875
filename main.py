@@ -11,9 +11,10 @@ import uvicorn
 from sqlalchemy import event
 
 from routers.auth import router as auth_router
-from routers.session_auth import router as session_auth_router, require_session
+from routers.jwt_auth import router as jwt_router, get_current_user, require_roles
 from routers.n1_demo import router as n1_demo_router
 from routers.manufacturers import router as manufacturers_router
+from routers.bike_agent import router as bike_agent_router
 from mongo_doc.routes.notice_docs import router as notice_docs_router
 from mongo_doc.db import init_collection as init_mongo_collection
 from mongo_doc.db import init_memory_collections
@@ -72,15 +73,22 @@ app.add_middleware(
 # this is the HW3 signed-cookie template demo, unchanged.
 app.include_router(auth_router)
 
-# HW4 email+password / opaque-session-token auth used by the React client
-# and by the protected /api/notices endpoints below.
-app.include_router(session_auth_router)
+# HW4 email+password / opaque-session-token auth (/api/auth/*) is no longer mounted:
+# HW7 uses JWT only, and the session version is kept as history at the hw4 tag.
+# routers/session_auth.py stays only for its bcrypt hash_password/verify_password helpers.
+
+# HW7 Part 1: JWT bearer auth (/auth/login, /auth/me). All domain routes now use
+# JWT roles instead of the HW4 session (the session version is kept at the hw4 tag).
+app.include_router(jwt_router)
 
 # HW4 Part 3: /api/notices/list-naive and /api/notices/list-fixed
 app.include_router(n1_demo_router)
 
 # HW5 Part 1: related entity CRUD + relationship query
 app.include_router(manufacturers_router)
+
+# HW7 Part 4: Bay Wheels plan advisor (LangGraph ReAct agent) at /bike
+app.include_router(bike_agent_router)
 
 # HW6 Part 1: MongoDB document API (database s7875_doc, collection
 # recall_notices). Lives in mongo_doc/ with its own config, db, schemas
@@ -122,8 +130,9 @@ def notices_app():
     return FileResponse("index.html")
 
 # --- Domain entity CRUD (HW4 Part 2, extended in HW5 Part 1) ---------------
-# All endpoints depend on require_session: an anonymous request gets a 401
-# "Login required" before any DB query runs. HW5 adds: pagination on the
+# HW7: every endpoint needs a JWT bearer token (401 without a valid one).
+# Read: any role. Create/update: writer or moderator. Delete: moderator (else 403).
+# HW5 adds: pagination on the
 # list, 409 on duplicate notice_code, 404 when manufacturer_id doesn't exist.
 
 @app.get("/api/notices", response_model=List[schemas.NoticeOut])
@@ -132,7 +141,7 @@ def get_notices(
     skip: int = Query(0, ge=0),
     limit: int = Query(50, ge=1, le=200),
     db_session_basede26: Session = Depends(get_db_session_basede26),
-    _user: User = Depends(require_session),
+    _user: User = Depends(get_current_user),
 ):
     return crud.list_notices(db_session_basede26, q=q, skip=skip, limit=limit)
 
@@ -141,7 +150,7 @@ def get_notices(
 def get_notice_by_id(
     notice_id: int,
     db_session_basede26: Session = Depends(get_db_session_basede26),
-    _user: User = Depends(require_session),
+    _user: User = Depends(get_current_user),
 ):
     try:
         return crud.get_notice(db_session_basede26, notice_id)
@@ -153,7 +162,7 @@ def get_notice_by_id(
 def create_notice(
     notice: schemas.NoticeCreate,
     db_session_basede26: Session = Depends(get_db_session_basede26),
-    _user: User = Depends(require_session),
+    _user: User = Depends(require_roles("writer", "moderator")),
 ):
     try:
         return crud.create_notice(db_session_basede26, notice)
@@ -168,7 +177,7 @@ def update_notice(
     notice_id: int,
     notice: schemas.NoticeCreate,
     db_session_basede26: Session = Depends(get_db_session_basede26),
-    _user: User = Depends(require_session),
+    _user: User = Depends(require_roles("writer", "moderator")),
 ):
     try:
         return crud.update_notice(db_session_basede26, notice_id, notice)
@@ -182,7 +191,7 @@ def update_notice(
 def delete_notice(
     notice_id: int,
     db_session_basede26: Session = Depends(get_db_session_basede26),
-    _user: User = Depends(require_session),
+    _user: User = Depends(require_roles("moderator")),
 ):
     try:
         crud.delete_notice(db_session_basede26, notice_id)

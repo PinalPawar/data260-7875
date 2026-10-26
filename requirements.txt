@@ -36,3 +36,11 @@ pymongo
 ollama
 # HW6 Part 3: Qwen tokenizer for per-part token counts
 transformers
+
+# HW7: JWT auth, LangGraph ReAct agent (Parts 4-6), Ruff + pre-commit
+PyJWT
+langgraph
+langchain-core
+langchain-ollama
+ruff
+pre-commit
