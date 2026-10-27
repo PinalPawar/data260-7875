@@ -6,7 +6,7 @@
   "domain_id": 3,
   "seed": 7875,
   "verify_seed": 267875,
-  "commit_hash": "59f221d",
+  "commit_hash": "58c8954",
   "model": {
     "agents": "qwen3:1.7b via Ollama, temperature 0, seed 7875, thinking off",
     "part1_worker": "no model (pure Python)"
@@ -27,7 +27,7 @@
     "commit_mode": "after",
     "idempotency": "on (key = message_id or correlation_id)"
   },
-  "generated_at": "2026-10-27T12:24:12",
+  "generated_at": "2026-10-27T12:51:40",
   "summary": "30/30 checks passed",
   "checks": [
     {
@@ -68,7 +68,7 @@
     {
       "name": "CREATE_NOTICE over Kafka succeeds and returns a UUID notice_id",
       "passed": true,
-      "detail": "notice_id=680202c7-6057-4aa8-a7e7-f6e11301ff11"
+      "detail": "notice_id=3129b1cf-8731-42bc-b434-1b257e7191bb"
     },
     {
       "name": "CREATE_NOTICE response echoes the correlation_id unchanged",
@@ -88,7 +88,7 @@
     {
       "name": "replayed CREATE (same correlation_id) creates no second notice",
       "passed": true,
-      "detail": "first=680202c7-6057-4aa8-a7e7-f6e11301ff11 replay=680202c7-6057-4aa8-a7e7-f6e11301ff11"
+      "detail": "first=3129b1cf-8731-42bc-b434-1b257e7191bb replay=3129b1cf-8731-42bc-b434-1b257e7191bb"
     },
     {
       "name": "unknown operation is rejected (success=false, clean error, correlation_id kept)",
@@ -128,12 +128,12 @@
     {
       "name": "CREATE -> GET through the FastAPI wrapper (correlation_id kept)",
       "passed": true,
-      "detail": "notice_id=9b281065-151f-4741-afb1-125c7456de4e"
+      "detail": "notice_id=5d55ef89-b30a-4943-b0b6-7f6fffbfe020"
     },
     {
       "name": "planner, writer and reviewer start as separate processes and join Kafka",
       "passed": true,
-      "detail": "planner pid 37623, writer pid 37624, reviewer pid 37625"
+      "detail": "planner pid 38469, writer pid 38470, reviewer pid 38471"
     },
     {
       "name": "question on s7875_inbox reaches s7875_final",

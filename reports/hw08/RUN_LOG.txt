@@ -1082,3 +1082,56 @@ saved reports/hw08/raw/part2_journey_b14cad9d.json
 [PASS] offline HW8 tests pass (tests/test_hw08_kafka.py) -- tests/test_hw08_kafka.py: all 57 checks passed
 
 30/30 checks passed  ->  reports/hw08/verification.json
+python scripts/verify_hw08.py
+===== Pinal Pawar | SID4 7875 | PREFIX s7875 | PORT_BASE 8675 | verify_hw08.py =====
+[PASS] Section 0 values -- PORT_BASE=8675 PREFIX=s7875 VERIFY_SEED=267875
+[PASS] every HW8 topic name carries PREFIX -- s7875_notice_requests, s7875_notice_responses, s7875_inbox, s7875_tasks, s7875_drafts, s7875_final, s7875_dead_letter
+[PASS] Kafka reachable and all 7 s7875 topics exist -- localhost:9092
+[PASS] s7875_tasks has 2 partitions -- partitions=[0, 1]
+[PASS] docker ps: Kafka, worker and FastAPI containers up -- s7875_kafka, s7875_notice_worker, s7875_notice_api
+[PASS] worker log shows 'Consumer is ready and listening...'
+[PASS] API log shows server started at http://127.0.0.1:8675
+2026-10-27T12:51:00.762-07:00 [VERIFY] listening for responses on s7875_notice_responses
+2026-10-27T12:51:00.763-07:00 [VERIFY] SEND            corr=b4941a91-8bdf-4286-9f7b-5443197a1728 topic=s7875_notice_requests {"correlation_id": "b4941a91-8bdf-4286-9f7b-5443197a1728", "reply_to": "s7875_notice_responses", "operation": "CREATE_NOTICE", "data": {"product": "Frozen Wild Blueberries 16oz", "notice_code": "RCL-2026-26787", "units_affected": 1200, "manufacturer_id": 2, "email": "safety@northfarm-foods.com", "description": "Possible hepatitis A contamination in lots B1-B9.", "category": "bacterialContamination"}}
+2026-10-27T12:51:00.777-07:00 [VERIFY] CLIENT-RESPONSE corr=b4941a91-8bdf-4286-9f7b-5443197a1728 topic=s7875_notice_responses p=0 off=29 {"correlation_id": "b4941a91-8bdf-4286-9f7b-5443197a1728", "operation": "CREATE_NOTICE", "success": true, "notice_id": "3129b1cf-8731-42bc-b434-1b257e7191bb", "message": "Notice created"}
+[PASS] CREATE_NOTICE over Kafka succeeds and returns a UUID notice_id -- notice_id=3129b1cf-8731-42bc-b434-1b257e7191bb
+[PASS] CREATE_NOTICE response echoes the correlation_id unchanged
+2026-10-27T12:51:00.777-07:00 [VERIFY] SEND            corr=4b839dda-b307-4747-bd20-b45b652045e9 topic=s7875_notice_requests {"correlation_id": "4b839dda-b307-4747-bd20-b45b652045e9", "reply_to": "s7875_notice_responses", "operation": "GET_NOTICE", "data": {"notice_id": "3129b1cf-8731-42bc-b434-1b257e7191bb"}}
+2026-10-27T12:51:00.786-07:00 [VERIFY] CLIENT-RESPONSE corr=4b839dda-b307-4747-bd20-b45b652045e9 topic=s7875_notice_responses p=0 off=30 {"correlation_id": "4b839dda-b307-4747-bd20-b45b652045e9", "operation": "GET_NOTICE", "success": true, "notice": {"notice_id": "3129b1cf-8731-42bc-b434-1b257e7191bb", "product": "Frozen Wild Blueberries 16oz", "notice_code": "RCL-2026-26787", "units_affected": 1200, "manufacturer_id": 2, "email": "safety@northfarm-foods.com", "description": "Possible hepatitis A contamination in lots B1-B9.", "category": "bacterialContamination"}}
+[PASS] GET_NOTICE round-trips the created notice (all fields equal)
+[PASS] GET_NOTICE response echoes its correlation_id
+2026-10-27T12:51:00.786-07:00 [VERIFY] SEND            corr=b4941a91-8bdf-4286-9f7b-5443197a1728 topic=s7875_notice_requests {"correlation_id": "b4941a91-8bdf-4286-9f7b-5443197a1728", "reply_to": "s7875_notice_responses", "operation": "CREATE_NOTICE", "data": {"product": "Frozen Wild Blueberries 16oz", "notice_code": "RCL-2026-26787", "units_affected": 1200, "manufacturer_id": 2, "email": "safety@northfarm-foods.com", "description": "Possible hepatitis A contamination in lots B1-B9.", "category": "bacterialContamination"}}
+2026-10-27T12:51:00.789-07:00 [VERIFY] CLIENT-RESPONSE corr=b4941a91-8bdf-4286-9f7b-5443197a1728 topic=s7875_notice_responses p=0 off=31 {"correlation_id": "b4941a91-8bdf-4286-9f7b-5443197a1728", "operation": "CREATE_NOTICE", "success": true, "notice_id": "3129b1cf-8731-42bc-b434-1b257e7191bb", "message": "Notice created"}
+[PASS] replayed CREATE (same correlation_id) creates no second notice -- first=3129b1cf-8731-42bc-b434-1b257e7191bb replay=3129b1cf-8731-42bc-b434-1b257e7191bb
+2026-10-27T12:51:00.789-07:00 [VERIFY] SEND            corr=da1c4c4e-6391-4b29-a3b7-05893f6a44a9 topic=s7875_notice_requests {"correlation_id": "da1c4c4e-6391-4b29-a3b7-05893f6a44a9", "reply_to": "s7875_notice_responses", "operation": "FLY_TO_MOON", "data": {}}
+2026-10-27T12:51:00.792-07:00 [VERIFY] CLIENT-RESPONSE corr=da1c4c4e-6391-4b29-a3b7-05893f6a44a9 topic=s7875_notice_responses p=0 off=32 {"correlation_id": "da1c4c4e-6391-4b29-a3b7-05893f6a44a9", "operation": "FLY_TO_MOON", "success": false, "error": "Unknown operation"}
+[PASS] unknown operation is rejected (success=false, clean error, correlation_id kept) -- Unknown operation
+2026-10-27T12:51:00.792-07:00 [VERIFY] SEND            corr=edbd63e1-ed31-4925-b556-cb264af8a0df topic=s7875_notice_requests {"correlation_id": "edbd63e1-ed31-4925-b556-cb264af8a0df", "reply_to": "s7875_notice_responses", "operation": "CREATE_NOTICE", "data": {"notice_code": "RCL-2026-26787", "units_affected": 1200, "manufacturer_id": 2, "email": "safety@northfarm-foods.com", "description": "Possible hepatitis A contamination in lots B1-B9.", "category": "bacterialContamination"}}
+2026-10-27T12:51:00.795-07:00 [VERIFY] CLIENT-RESPONSE corr=edbd63e1-ed31-4925-b556-cb264af8a0df topic=s7875_notice_responses p=0 off=33 {"correlation_id": "edbd63e1-ed31-4925-b556-cb264af8a0df", "operation": "CREATE_NOTICE", "success": false, "error": "Missing required field(s): product"}
+[PASS] missing field is rejected (success=false, clean error, correlation_id kept) -- Missing required field(s): product
+2026-10-27T12:51:00.795-07:00 [VERIFY] SEND            corr=03e705ea-7204-4c6f-af6b-3a304f935d45 topic=s7875_notice_requests {"correlation_id": "03e705ea-7204-4c6f-af6b-3a304f935d45", "reply_to": "s7875_notice_responses", "operation": "CREATE_NOTICE", "data": {"product": "Frozen Wild Blueberries 16oz", "notice_code": "RCL-2026-26787", "units_affected": 1200, "manufacturer_id": 2, "email": "safety@northfarm-foods.com", "description": "  ", "category": "bacterialContamination"}}
+2026-10-27T12:51:00.797-07:00 [VERIFY] CLIENT-RESPONSE corr=03e705ea-7204-4c6f-af6b-3a304f935d45 topic=s7875_notice_responses p=0 off=34 {"correlation_id": "03e705ea-7204-4c6f-af6b-3a304f935d45", "operation": "CREATE_NOTICE", "success": false, "error": "Empty value for field(s): description"}
+[PASS] empty field is rejected (success=false, clean error, correlation_id kept) -- Empty value for field(s): description
+2026-10-27T12:51:00.797-07:00 [VERIFY] SEND            corr=0a25a8e6-fac0-48a3-a0c3-14e7e999e0cd topic=s7875_notice_requests {"correlation_id": "0a25a8e6-fac0-48a3-a0c3-14e7e999e0cd", "reply_to": "s7875_notice_responses", "operation": "CREATE_NOTICE", "data": {"product": "Frozen Wild Blueberries 16oz", "notice_code": "RCL-2026-26787", "units_affected": 1200, "manufacturer_id": 2, "email": "not-an-email", "description": "Possible hepatitis A contamination in lots B1-B9.", "category": "bacterialContamination"}}
+2026-10-27T12:51:00.800-07:00 [VERIFY] CLIENT-RESPONSE corr=0a25a8e6-fac0-48a3-a0c3-14e7e999e0cd topic=s7875_notice_responses p=0 off=35 {"correlation_id": "0a25a8e6-fac0-48a3-a0c3-14e7e999e0cd", "operation": "CREATE_NOTICE", "success": false, "error": "Invalid value(s): email: value is not a valid email address: An email address must have an @-sign."}
+[PASS] invalid email is rejected (success=false, clean error, correlation_id kept) -- Invalid value(s): email: value is not a valid email address: An email address must have an @-sign.
+2026-10-27T12:51:00.800-07:00 [VERIFY] SEND            corr=2003b277-7a77-46f6-82be-b531bdced3d3 topic=s7875_notice_requests {"correlation_id": "2003b277-7a77-46f6-82be-b531bdced3d3", "reply_to": "s7875_notice_responses", "operation": "CREATE_NOTICE", "data": {"product": "Frozen Wild Blueberries 16oz", "notice_code": "RCL-2026-26787", "units_affected": -5, "manufacturer_id": 2, "email": "safety@northfarm-foods.com", "description": "Possible hepatitis A contamination in lots B1-B9.", "category": "bacterialContamination"}}
+2026-10-27T12:51:00.803-07:00 [VERIFY] CLIENT-RESPONSE corr=2003b277-7a77-46f6-82be-b531bdced3d3 topic=s7875_notice_responses p=0 off=36 {"correlation_id": "2003b277-7a77-46f6-82be-b531bdced3d3", "operation": "CREATE_NOTICE", "success": false, "error": "Invalid value(s): units_affected: Input should be greater than or equal to 0"}
+[PASS] negative units_affected is rejected (success=false, clean error, correlation_id kept) -- Invalid value(s): units_affected: Input should be greater than or equal to 0
+2026-10-27T12:51:00.803-07:00 [VERIFY] SEND            corr=e10e6e17-503b-4436-ba1d-6ef889617332 topic=s7875_notice_requests {"correlation_id": "e10e6e17-503b-4436-ba1d-6ef889617332", "reply_to": "s7875_notice_responses", "operation": "GET_NOTICE", "data": {"notice_id": "733f8646-ec1a-4e85-81e4-20c13bfc12fc"}}
+2026-10-27T12:51:00.806-07:00 [VERIFY] CLIENT-RESPONSE corr=e10e6e17-503b-4436-ba1d-6ef889617332 topic=s7875_notice_responses p=0 off=37 {"correlation_id": "e10e6e17-503b-4436-ba1d-6ef889617332", "operation": "GET_NOTICE", "success": false, "error": "Notice not found"}
+[PASS] unknown notice_id gives 'Notice not found' (success=false, clean error, correlation_id kept) -- Notice not found
+[PASS] FastAPI wrapper answers on PORT_BASE 8675 -- 200
+[PASS] CREATE -> GET through the FastAPI wrapper (correlation_id kept) -- notice_id=5d55ef89-b30a-4943-b0b6-7f6fffbfe020
+[PASS] planner, writer and reviewer start as separate processes and join Kafka -- planner pid 38469, writer pid 38470, reviewer pid 38471
+[PASS] question on s7875_inbox reaches s7875_final -- status=approved
+[PASS] final JSON has a status and a non-empty answer
+[PASS] correlation_id preserved and trace shows planner -> writer -> reviewer -- ['planner', 'writer', 'reviewer']
+[PASS] one plan on s7875_tasks and one draft on s7875_drafts for that question -- tasks=1 drafts=1
+[PASS] replayed task (same correlation_id) is skipped: still exactly one draft -- drafts=1
+[PASS] poison message is retried 3 times then lands on s7875_dead_letter -- ValueError: task has no usable plan (expected a non-empty list of steps)
+[PASS] message behind the poison one is still processed
+[PASS] saved Part 3 runs show every fix working (dup, kill, poison, keyed ordering) -- {'duplicate': True, 'kill': True, 'poison': True, 'ordering': True}
+[PASS] offline HW8 tests pass (tests/test_hw08_kafka.py) -- tests/test_hw08_kafka.py: all 57 checks passed
+
+30/30 checks passed  ->  reports/hw08/verification.json
