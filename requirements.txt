@@ -44,3 +44,6 @@ langchain-core
 langchain-ollama
 ruff
 pre-commit
+
+# HW8: Kafka (request/response service + agent pipeline)
+aiokafka==0.14.0

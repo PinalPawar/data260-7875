@@ -1,0 +1,85 @@
+# HW8: Kafka (KRaft, no ZooKeeper) + the notice worker + the FastAPI wrapper.
+#
+#   docker compose -f docker-compose.kafka.yml up -d --build
+#   docker ps
+#   docker logs s7875_notice_worker      # "Consumer is ready and listening..."
+#   docker logs s7875_notice_api         # "FastAPI server started at http://127.0.0.1:8675"
+#   docker compose -f docker-compose.kafka.yml down
+#
+# Two listeners: containers talk to kafka:19092, programs on the Mac talk to localhost:9092.
+# Auto topic creation is off, so every topic is one we created on purpose: kafka-init makes the
+# two Part 1 topics; scripts/hw08_create_topics.sh makes the agent topics (and re-checks these).
+# The API uses PORT_BASE 8675, so stop `python main.py` (HW2-HW7 backend) while this runs.
+name: s7875_hw8
+services:
+  kafka:
+    image: apache/kafka:3.9.2
+    container_name: s7875_kafka
+    ports:
+      - "9092:9092"
+    environment:
+      CLUSTER_ID: "Jg8u461cXg67npht7w-soA"  # any base64 UUID (22 chars)
+      KAFKA_NODE_ID: 1
+      KAFKA_PROCESS_ROLES: broker,controller
+      KAFKA_LISTENERS: INTERNAL://:19092,HOST://:9092,CONTROLLER://:9093
+      KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka:19092,HOST://localhost:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,INTERNAL:PLAINTEXT,HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka:9093
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "false"
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/kafka/bin/kafka-topics.sh --bootstrap-server localhost:9092 --list"]
+      interval: 5s
+      timeout: 10s
+      retries: 20
+
+  kafka-init:
+    image: apache/kafka:3.9.2
+    container_name: s7875_kafka_init
+    depends_on:
+      kafka:
+        condition: service_healthy
+    entrypoint: ["/bin/bash", "-c"]
+    command:
+      - |
+        for t in s7875_notice_requests s7875_notice_responses; do
+          /opt/kafka/bin/kafka-topics.sh --bootstrap-server kafka:19092 --create --if-not-exists \
+            --topic "$$t" --partitions 1 --replication-factor 1
+        done
+        /opt/kafka/bin/kafka-topics.sh --bootstrap-server kafka:19092 --list
+
+  notice-worker:
+    build:
+      context: .
+      dockerfile: Dockerfile.kafka
+    container_name: s7875_notice_worker
+    command: ["python", "-m", "kafka_hw8.worker"]
+    environment:
+      KAFKA_BOOTSTRAP: kafka:19092
+      IDEMPOTENCY: "1"
+    depends_on:
+      kafka-init:
+        condition: service_completed_successfully
+    restart: unless-stopped
+
+  notice-api:
+    build:
+      context: .
+      dockerfile: Dockerfile.kafka
+    container_name: s7875_notice_api
+    command: ["uvicorn", "kafka_hw8.api:app", "--host", "0.0.0.0", "--port", "8675"]
+    environment:
+      KAFKA_BOOTSTRAP: kafka:19092
+    ports:
+      - "8675:8675"
+    depends_on:
+      kafka-init:
+        condition: service_completed_successfully
+      notice-worker:
+        condition: service_started
+    restart: unless-stopped

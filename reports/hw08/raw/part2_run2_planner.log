@@ -1,0 +1,9 @@
+===== Pinal Pawar | SID4 7875 | PREFIX s7875 | PORT_BASE 8675 | planner (planner-36878) =====
+2026-10-27T12:06:54.588-07:00 [PLANNER] in=s7875_inbox group=s7875_planners idempotency=True commit_mode=after max_retries=3 work_delay_s=0.0 dead_letter=s7875_dead_letter
+2026-10-27T12:06:54.633-07:00 [PLANNER] ASSIGNED partitions [0]
+2026-10-27T12:06:54.638-07:00 [PLANNER] planner is ready and listening on s7875_inbox
+2026-10-27T12:07:41.749-07:00 [PLANNER] RECEIVE         corr=b14cad9d-1644-4e33-8e02-9ab712f5e5fb topic=s7875_inbox p=0 off=1 key=b14cad9d-1644-4e33-8e02-9ab712f5e5fb {"correlation_id": "b14cad9d-1644-4e33-8e02-9ab712f5e5fb", "stage": "question", "question": "A store near me posted a Listeria recall for bagged organic baby spinach. I already ate some yesterday. What should I do now?", "asked_at": "2026-10-27T12:07:41.727-07:00", "trace": []}
+2026-10-27T12:07:41.750-07:00 [PLANNER] PROCESS-START   corr=b14cad9d-1644-4e33-8e02-9ab712f5e5fb attempt=1 work_delay_s=0.0
+2026-10-27T12:07:47.687-07:00 [PLANNER] PROCESS-DONE    corr=b14cad9d-1644-4e33-8e02-9ab712f5e5fb steps=1 model=qwen3:1.7b via Ollama
+2026-10-27T12:07:47.688-07:00 [PLANNER] SEND            corr=b14cad9d-1644-4e33-8e02-9ab712f5e5fb topic=s7875_tasks {"correlation_id": "b14cad9d-1644-4e33-8e02-9ab712f5e5fb", "stage": "plan", "question": "A store near me posted a Listeria recall for bagged organic baby spinach. I already ate some yesterday. What should I do now?", "plan": ["Stop using the recalled product and throw it away or return it to the store. Clean surfaces it touched. Watch for illness symptoms and call a doctor if you are pregnant, older, or have a weak immune system."], "trace": [{"agent": "planner", "agent_id": "planner-36878", "read_from": "s7875_inbox", "partition": 0, "offset": 1, "at": "2026-10-27T12:07:47.688-07:00"}]}
+2026-10-27T12:07:47.880-07:00 [PLANNER] COMMIT          corr=b14cad9d-1644-4e33-8e02-9ab712f5e5fb p=0 next_offset=2

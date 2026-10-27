@@ -1,0 +1,10 @@
+===== Pinal Pawar | SID4 7875 | PREFIX s7875 | PORT_BASE 8675 | writer (writer-B) =====
+2026-10-27T12:16:47.336-07:00 [WRITER-B] in=s7875_tasks group=s7875_writers_p3_kill_after_121603 idempotency=True commit_mode=after max_retries=3 work_delay_s=0.0 dead_letter=s7875_dead_letter
+2026-10-27T12:16:55.258-07:00 [WRITER-B] ASSIGNED partitions [0, 1]
+2026-10-27T12:16:55.266-07:00 [WRITER-B] writer is ready and listening on s7875_tasks
+2026-10-27T12:16:55.268-07:00 [WRITER-B] RECEIVE         corr=kill-after-6d291d0c topic=s7875_tasks p=1 off=1 key=kill-after-6d291d0c {"correlation_id": "kill-after-6d291d0c", "stage": "plan", "question": "What should I do with a recalled bag of frozen blueberries in my freezer?", "plan": ["Say what the recall is about", "Give the steps a shopper should take"], "trace": [{"agent": "part3-harness", "at": "2026-10-27T12:16:45.443-07:00"}]}
+2026-10-27T12:16:55.269-07:00 [WRITER-B] PROCESS-START   corr=kill-after-6d291d0c attempt=1 work_delay_s=0.0
+2026-10-27T12:16:55.269-07:00 [WRITER-B] PROCESS-DONE    corr=kill-after-6d291d0c words=51 model=offline stand-in (HW8_FAKE_LLM=1)
+2026-10-27T12:16:55.269-07:00 [WRITER-B] SEND            corr=kill-after-6d291d0c topic=s7875_drafts {"correlation_id": "kill-after-6d291d0c", "question": "What should I do with a recalled bag of frozen blueberries in my freezer?", "plan": ["Say what the recall is about", "Give the steps a shopper should take"], "stage": "draft", "draft": "Check the recall notice for the product name and lot number. If yours matches, do not eat it: throw it away or return it to the store for a refund, and clean any surface it touched. Watch for symptoms such as fever or diarrhea and call a doctor if they appear.", "trace": [{"agent": "part3-harness", "at": "2026-10-27T12:16:45.443-07:00"}, {"agent": "writer", "agent_id": "writer-B", "read_from": "s7875_tasks", "partition": 1, "offset": 1, "at": "2026-10-27T12:16:55.269-07:00"}]}
+2026-10-27T12:16:55.284-07:00 [WRITER-B] COMMIT          corr=kill-after-6d291d0c p=1 next_offset=2
+2026-10-27T12:17:00.521-07:00 [WRITER-B] stopping (signal)

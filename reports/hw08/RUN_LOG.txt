@@ -1,0 +1,1084 @@
+===== Pinal Pawar | SID4 7875 | PREFIX s7875 | PORT_BASE 8675 | homework_demo.py (via kafka) =====
+request topic = s7875_notice_requests   response topic = s7875_notice_responses
+2026-10-27T10:17:36.210-07:00 [CLIENT] listening for responses on s7875_notice_responses
+
+----- Step 1: create one correlation_id for the CREATE_NOTICE request
+correlation_id = f19a50f8-1456-4c5b-9692-12e0e36c6d46
+
+----- Step 2: send CREATE_NOTICE to s7875_notice_requests
+
+----- Step 3: the request message (as written to the request topic)
+{
+  "correlation_id": "f19a50f8-1456-4c5b-9692-12e0e36c6d46",
+  "reply_to": "s7875_notice_responses",
+  "operation": "CREATE_NOTICE",
+  "data": {
+    "product": "Organic Baby Spinach 5oz",
+    "notice_code": "RCL-2026-07875",
+    "units_affected": 4471,
+    "manufacturer_id": 1,
+    "email": "recalls@greenfields-foods.com",
+    "description": "Routine testing found Listeria monocytogenes in lot L4471. Bags were sold in California and Nevada stores.",
+    "category": "bacterialContamination"
+  }
+}
+
+----- Step 4: worker receives and processes it   (see merged log in step 9)
+
+----- Step 5: worker replies on s7875_notice_responses   (see merged log in step 9)
+2026-10-27T10:17:36.210-07:00 [CLIENT] SEND            corr=f19a50f8-1456-4c5b-9692-12e0e36c6d46 topic=s7875_notice_requests {"correlation_id": "f19a50f8-1456-4c5b-9692-12e0e36c6d46", "reply_to": "s7875_notice_responses", "operation": "CREATE_NOTICE", "data": {"product": "Organic Baby Spinach 5oz", "notice_code": "RCL-2026-07875", "units_affected": 4471, "manufacturer_id": 1, "email": "recalls@greenfields-foods.com", "description": "Routine testing found Listeria monocytogenes in lot L4471. Bags were sold in California and Nevada stores.", "category": "bacterialContamination"}}
+2026-10-27T10:17:36.313-07:00 [CLIENT] CLIENT-RESPONSE corr=f19a50f8-1456-4c5b-9692-12e0e36c6d46 topic=s7875_notice_responses p=0 off=0 {"correlation_id": "f19a50f8-1456-4c5b-9692-12e0e36c6d46", "operation": "CREATE_NOTICE", "success": true, "notice_id": "e0df634c-4803-432a-bba6-ad8f0f01bc0a", "message": "Notice created"}
+
+----- Step 6: response received by the client
+{
+  "correlation_id": "f19a50f8-1456-4c5b-9692-12e0e36c6d46",
+  "operation": "CREATE_NOTICE",
+  "success": true,
+  "notice_id": "e0df634c-4803-432a-bba6-ad8f0f01bc0a",
+  "message": "Notice created"
+}
+
+----- Step 7: extract the generated notice_id
+notice_id = e0df634c-4803-432a-bba6-ad8f0f01bc0a
+
+----- Step 8: send GET_NOTICE for that notice_id (new correlation_id for this request)
+correlation_id = 2faee789-8598-497d-9ac6-8cef77c05c4b
+{
+  "correlation_id": "2faee789-8598-497d-9ac6-8cef77c05c4b",
+  "reply_to": "s7875_notice_responses",
+  "operation": "GET_NOTICE",
+  "data": {
+    "notice_id": "e0df634c-4803-432a-bba6-ad8f0f01bc0a"
+  }
+}
+2026-10-27T10:17:36.313-07:00 [CLIENT] SEND            corr=2faee789-8598-497d-9ac6-8cef77c05c4b topic=s7875_notice_requests {"correlation_id": "2faee789-8598-497d-9ac6-8cef77c05c4b", "reply_to": "s7875_notice_responses", "operation": "GET_NOTICE", "data": {"notice_id": "e0df634c-4803-432a-bba6-ad8f0f01bc0a"}}
+2026-10-27T10:17:36.349-07:00 [CLIENT] CLIENT-RESPONSE corr=2faee789-8598-497d-9ac6-8cef77c05c4b topic=s7875_notice_responses p=0 off=1 {"correlation_id": "2faee789-8598-497d-9ac6-8cef77c05c4b", "operation": "GET_NOTICE", "success": true, "notice": {"notice_id": "e0df634c-4803-432a-bba6-ad8f0f01bc0a", "product": "Organic Baby Spinach 5oz", "notice_code": "RCL-2026-07875", "units_affected": 4471, "manufacturer_id": 1, "email": "recalls@greenfields-foods.com", "description": "Routine testing found Listeria monocytogenes in lot L4471. Bags were sold in California and Nevada stores.", "category": "bacterialContamination"}}
+
+----- Extra: error responses keep the correlation_id too
+2026-10-27T10:17:36.349-07:00 [CLIENT] SEND            corr=edbe4781-0f54-4d28-97f0-06444757413b topic=s7875_notice_requests {"correlation_id": "edbe4781-0f54-4d28-97f0-06444757413b", "reply_to": "s7875_notice_responses", "operation": "DELETE_EVERYTHING", "data": {}}
+2026-10-27T10:17:36.354-07:00 [CLIENT] CLIENT-RESPONSE corr=edbe4781-0f54-4d28-97f0-06444757413b topic=s7875_notice_responses p=0 off=2 {"correlation_id": "edbe4781-0f54-4d28-97f0-06444757413b", "operation": "DELETE_EVERYTHING", "success": false, "error": "Unknown operation"}
+  unknown operation    success=False error='Unknown operation' correlation_id preserved=True
+2026-10-27T10:17:36.354-07:00 [CLIENT] SEND            corr=5e68108f-4a83-453f-8490-01985499a700 topic=s7875_notice_requests {"correlation_id": "5e68108f-4a83-453f-8490-01985499a700", "reply_to": "s7875_notice_responses", "operation": "CREATE_NOTICE", "data": {"product": "Organic Baby Spinach 5oz", "notice_code": "RCL-2026-07875", "units_affected": 4471, "manufacturer_id": 1, "description": "Routine testing found Listeria monocytogenes in lot L4471. Bags were sold in California and Nevada stores.", "category": "bacterialContamination"}}
+2026-10-27T10:17:36.359-07:00 [CLIENT] CLIENT-RESPONSE corr=5e68108f-4a83-453f-8490-01985499a700 topic=s7875_notice_responses p=0 off=3 {"correlation_id": "5e68108f-4a83-453f-8490-01985499a700", "operation": "CREATE_NOTICE", "success": false, "error": "Missing required field(s): email"}
+  missing field        success=False error='Missing required field(s): email' correlation_id preserved=True
+2026-10-27T10:17:36.359-07:00 [CLIENT] SEND            corr=1b2af582-a62a-4bd5-93cc-f07c7c7d81ae topic=s7875_notice_requests {"correlation_id": "1b2af582-a62a-4bd5-93cc-f07c7c7d81ae", "reply_to": "s7875_notice_responses", "operation": "CREATE_NOTICE", "data": {"product": "Organic Baby Spinach 5oz", "notice_code": "RCL-26-1", "units_affected": 4471, "manufacturer_id": 1, "email": "recalls@greenfields-foods.com", "description": "Routine testing found Listeria monocytogenes in lot L4471. Bags were sold in California and Nevada stores.", "category": "bacterialContamination"}}
+2026-10-27T10:17:36.364-07:00 [CLIENT] CLIENT-RESPONSE corr=1b2af582-a62a-4bd5-93cc-f07c7c7d81ae topic=s7875_notice_responses p=0 off=4 {"correlation_id": "1b2af582-a62a-4bd5-93cc-f07c7c7d81ae", "operation": "CREATE_NOTICE", "success": false, "error": "Invalid value(s): notice_code: String should match pattern '^RCL-\\d{4}-\\d{5}$'"}
+  invalid notice_code  success=False error="Invalid value(s): notice_code: String should match pattern '^RCL-\\d{4}-\\d{5}$'" correlation_id preserved=True
+2026-10-27T10:17:36.364-07:00 [CLIENT] SEND            corr=6a98c448-5278-4b7d-bc50-aa4c9b963104 topic=s7875_notice_requests {"correlation_id": "6a98c448-5278-4b7d-bc50-aa4c9b963104", "reply_to": "s7875_notice_responses", "operation": "GET_NOTICE", "data": {"notice_id": "00000000-0000-0000-0000-000000000000"}}
+2026-10-27T10:17:36.372-07:00 [CLIENT] CLIENT-RESPONSE corr=6a98c448-5278-4b7d-bc50-aa4c9b963104 topic=s7875_notice_responses p=0 off=5 {"correlation_id": "6a98c448-5278-4b7d-bc50-aa4c9b963104", "operation": "GET_NOTICE", "success": false, "error": "Notice not found"}
+  unknown notice_id    success=False error='Notice not found' correlation_id preserved=True
+
+----- Step 9: full sequence (client + API + worker lines, merged by timestamp)
+
+### CREATE_NOTICE  correlation_id=f19a50f8-1456-4c5b-9692-12e0e36c6d46
+2026-10-27T10:17:36.210-07:00 [CLIENT] SEND            corr=f19a50f8-1456-4c5b-9692-12e0e36c6d46 topic=s7875_notice_requests {"correlation_id": "f19a50f8-1456-4c5b-9692-12e0e36c6d46", "reply_to": "s7875_notice_responses", "operation": "CREATE_NOTICE", "data": {"product": "Organic Baby Spinach 5oz", "notice_code": "RCL-2026-07875", "units_affected": 4471, "manufacturer_id": 1, "email": "recalls@greenfields-foods.com", "description": "Routine testing found Listeria monocytogenes in lot L4471. Bags were sold in California and Nevada stores.", "category": "bacterialContamination"}}
+2026-10-27T17:17:36.298+00:00 [WORKER] RECEIVE         corr=f19a50f8-1456-4c5b-9692-12e0e36c6d46 topic=s7875_notice_requests p=0 off=0 {"correlation_id": "f19a50f8-1456-4c5b-9692-12e0e36c6d46", "reply_to": "s7875_notice_responses", "operation": "CREATE_NOTICE", "data": {"product": "Organic Baby Spinach 5oz", "notice_code": "RCL-2026-07875", "units_affected": 4471, "manufacturer_id": 1, "email": "recalls@greenfields-foods.com", "description": "Routine testing found Listeria monocytogenes in lot L4471. Bags were sold in California and Nevada stores.", "category": "bacterialContamination"}}
+2026-10-27T17:17:36.302+00:00 [WORKER] PROCESS         corr=f19a50f8-1456-4c5b-9692-12e0e36c6d46 operation=CREATE_NOTICE success=True notices_in_store=1
+2026-10-27T17:17:36.302+00:00 [WORKER] REPLY           corr=f19a50f8-1456-4c5b-9692-12e0e36c6d46 topic=s7875_notice_responses {"correlation_id": "f19a50f8-1456-4c5b-9692-12e0e36c6d46", "operation": "CREATE_NOTICE", "success": true, "notice_id": "e0df634c-4803-432a-bba6-ad8f0f01bc0a", "message": "Notice created"}
+2026-10-27T10:17:36.313-07:00 [CLIENT] CLIENT-RESPONSE corr=f19a50f8-1456-4c5b-9692-12e0e36c6d46 topic=s7875_notice_responses p=0 off=0 {"correlation_id": "f19a50f8-1456-4c5b-9692-12e0e36c6d46", "operation": "CREATE_NOTICE", "success": true, "notice_id": "e0df634c-4803-432a-bba6-ad8f0f01bc0a", "message": "Notice created"}
+
+### GET_NOTICE  correlation_id=2faee789-8598-497d-9ac6-8cef77c05c4b
+2026-10-27T10:17:36.313-07:00 [CLIENT] SEND            corr=2faee789-8598-497d-9ac6-8cef77c05c4b topic=s7875_notice_requests {"correlation_id": "2faee789-8598-497d-9ac6-8cef77c05c4b", "reply_to": "s7875_notice_responses", "operation": "GET_NOTICE", "data": {"notice_id": "e0df634c-4803-432a-bba6-ad8f0f01bc0a"}}
+2026-10-27T17:17:36.343+00:00 [WORKER] RECEIVE         corr=2faee789-8598-497d-9ac6-8cef77c05c4b topic=s7875_notice_requests p=0 off=1 {"correlation_id": "2faee789-8598-497d-9ac6-8cef77c05c4b", "reply_to": "s7875_notice_responses", "operation": "GET_NOTICE", "data": {"notice_id": "e0df634c-4803-432a-bba6-ad8f0f01bc0a"}}
+2026-10-27T17:17:36.344+00:00 [WORKER] PROCESS         corr=2faee789-8598-497d-9ac6-8cef77c05c4b operation=GET_NOTICE success=True notices_in_store=1
+2026-10-27T17:17:36.344+00:00 [WORKER] REPLY           corr=2faee789-8598-497d-9ac6-8cef77c05c4b topic=s7875_notice_responses {"correlation_id": "2faee789-8598-497d-9ac6-8cef77c05c4b", "operation": "GET_NOTICE", "success": true, "notice": {"notice_id": "e0df634c-4803-432a-bba6-ad8f0f01bc0a", "product": "Organic Baby Spinach 5oz", "notice_code": "RCL-2026-07875", "units_affected": 4471, "manufacturer_id": 1, "email": "recalls@greenfields-foods.com", "description": "Routine testing found Listeria monocytogenes in lot L4471. Bags were sold in California and Nevada stores.", "category": "bacterialContamination"}}
+2026-10-27T10:17:36.349-07:00 [CLIENT] CLIENT-RESPONSE corr=2faee789-8598-497d-9ac6-8cef77c05c4b topic=s7875_notice_responses p=0 off=1 {"correlation_id": "2faee789-8598-497d-9ac6-8cef77c05c4b", "operation": "GET_NOTICE", "success": true, "notice": {"notice_id": "e0df634c-4803-432a-bba6-ad8f0f01bc0a", "product": "Organic Baby Spinach 5oz", "notice_code": "RCL-2026-07875", "units_affected": 4471, "manufacturer_id": 1, "email": "recalls@greenfields-foods.com", "description": "Routine testing found Listeria monocytogenes in lot L4471. Bags were sold in California and Nevada stores.", "category": "bacterialContamination"}}
+
+----- Step 10: retrieved notice and correlation_id check
+{
+  "correlation_id": "2faee789-8598-497d-9ac6-8cef77c05c4b",
+  "operation": "GET_NOTICE",
+  "success": true,
+  "notice": {
+    "notice_id": "e0df634c-4803-432a-bba6-ad8f0f01bc0a",
+    "product": "Organic Baby Spinach 5oz",
+    "notice_code": "RCL-2026-07875",
+    "units_affected": 4471,
+    "manufacturer_id": 1,
+    "email": "recalls@greenfields-foods.com",
+    "description": "Routine testing found Listeria monocytogenes in lot L4471. Bags were sold in California and Nevada stores.",
+    "category": "bacterialContamination"
+  }
+}
+  [PASS] create_success
+  [PASS] create_correlation_id_preserved
+  [PASS] get_success
+  [PASS] get_correlation_id_preserved
+  [PASS] retrieved_notice_matches_created
+  [PASS] all_error_responses_keep_correlation_id
+
+saved reports/hw08/raw/part1_demo_kafka.json
+===== Pinal Pawar | SID4 7875 | PREFIX s7875 | PORT_BASE 8675 | homework_demo.py (via kafka) =====
+request topic = s7875_notice_requests   response topic = s7875_notice_responses
+2026-10-27T11:46:53.445-07:00 [CLIENT] listening for responses on s7875_notice_responses
+
+----- Step 1: create one correlation_id for the CREATE_NOTICE request
+correlation_id = 007c1cf0-c86c-4024-a84d-fa942ebc9c5f
+
+----- Step 2: send CREATE_NOTICE to s7875_notice_requests
+
+----- Step 3: the request message (as written to the request topic)
+{
+  "correlation_id": "007c1cf0-c86c-4024-a84d-fa942ebc9c5f",
+  "reply_to": "s7875_notice_responses",
+  "operation": "CREATE_NOTICE",
+  "data": {
+    "product": "Organic Baby Spinach 5oz",
+    "notice_code": "RCL-2026-07875",
+    "units_affected": 4471,
+    "manufacturer_id": 1,
+    "email": "recalls@greenfields-foods.com",
+    "description": "Routine testing found Listeria monocytogenes in lot L4471. Bags were sold in California and Nevada stores.",
+    "category": "bacterialContamination"
+  }
+}
+
+----- Step 4: worker receives and processes it   (see merged log in step 9)
+
+----- Step 5: worker replies on s7875_notice_responses   (see merged log in step 9)
+2026-10-27T11:46:53.445-07:00 [CLIENT] SEND            corr=007c1cf0-c86c-4024-a84d-fa942ebc9c5f topic=s7875_notice_requests {"correlation_id": "007c1cf0-c86c-4024-a84d-fa942ebc9c5f", "reply_to": "s7875_notice_responses", "operation": "CREATE_NOTICE", "data": {"product": "Organic Baby Spinach 5oz", "notice_code": "RCL-2026-07875", "units_affected": 4471, "manufacturer_id": 1, "email": "recalls@greenfields-foods.com", "description": "Routine testing found Listeria monocytogenes in lot L4471. Bags were sold in California and Nevada stores.", "category": "bacterialContamination"}}
+2026-10-27T11:46:53.478-07:00 [CLIENT] CLIENT-RESPONSE corr=007c1cf0-c86c-4024-a84d-fa942ebc9c5f topic=s7875_notice_responses p=0 off=6 {"correlation_id": "007c1cf0-c86c-4024-a84d-fa942ebc9c5f", "operation": "CREATE_NOTICE", "success": true, "notice_id": "9264c6ab-d48c-4268-9db1-ee6113f956df", "message": "Notice created"}
+
+----- Step 6: response received by the client
+{
+  "correlation_id": "007c1cf0-c86c-4024-a84d-fa942ebc9c5f",
+  "operation": "CREATE_NOTICE",
+  "success": true,
+  "notice_id": "9264c6ab-d48c-4268-9db1-ee6113f956df",
+  "message": "Notice created"
+}
+
+----- Step 7: extract the generated notice_id
+notice_id = 9264c6ab-d48c-4268-9db1-ee6113f956df
+
+----- Step 8: send GET_NOTICE for that notice_id (new correlation_id for this request)
+correlation_id = 233d96f0-e04d-4442-9132-a4599aed101a
+{
+  "correlation_id": "233d96f0-e04d-4442-9132-a4599aed101a",
+  "reply_to": "s7875_notice_responses",
+  "operation": "GET_NOTICE",
+  "data": {
+    "notice_id": "9264c6ab-d48c-4268-9db1-ee6113f956df"
+  }
+}
+2026-10-27T11:46:53.478-07:00 [CLIENT] SEND            corr=233d96f0-e04d-4442-9132-a4599aed101a topic=s7875_notice_requests {"correlation_id": "233d96f0-e04d-4442-9132-a4599aed101a", "reply_to": "s7875_notice_responses", "operation": "GET_NOTICE", "data": {"notice_id": "9264c6ab-d48c-4268-9db1-ee6113f956df"}}
+2026-10-27T11:46:53.485-07:00 [CLIENT] CLIENT-RESPONSE corr=233d96f0-e04d-4442-9132-a4599aed101a topic=s7875_notice_responses p=0 off=7 {"correlation_id": "233d96f0-e04d-4442-9132-a4599aed101a", "operation": "GET_NOTICE", "success": true, "notice": {"notice_id": "9264c6ab-d48c-4268-9db1-ee6113f956df", "product": "Organic Baby Spinach 5oz", "notice_code": "RCL-2026-07875", "units_affected": 4471, "manufacturer_id": 1, "email": "recalls@greenfields-foods.com", "description": "Routine testing found Listeria monocytogenes in lot L4471. Bags were sold in California and Nevada stores.", "category": "bacterialContamination"}}
+
+----- Extra: error responses keep the correlation_id too
+2026-10-27T11:46:53.485-07:00 [CLIENT] SEND            corr=419ab7ee-5f2a-49dd-93a0-a4706cd3111e topic=s7875_notice_requests {"correlation_id": "419ab7ee-5f2a-49dd-93a0-a4706cd3111e", "reply_to": "s7875_notice_responses", "operation": "DELETE_EVERYTHING", "data": {}}
+2026-10-27T11:46:53.488-07:00 [CLIENT] CLIENT-RESPONSE corr=419ab7ee-5f2a-49dd-93a0-a4706cd3111e topic=s7875_notice_responses p=0 off=8 {"correlation_id": "419ab7ee-5f2a-49dd-93a0-a4706cd3111e", "operation": "DELETE_EVERYTHING", "success": false, "error": "Unknown operation"}
+  unknown operation    success=False error='Unknown operation' correlation_id preserved=True
+2026-10-27T11:46:53.488-07:00 [CLIENT] SEND            corr=67107daa-5244-4016-89a3-c58921ff1bb9 topic=s7875_notice_requests {"correlation_id": "67107daa-5244-4016-89a3-c58921ff1bb9", "reply_to": "s7875_notice_responses", "operation": "CREATE_NOTICE", "data": {"product": "Organic Baby Spinach 5oz", "notice_code": "RCL-2026-07875", "units_affected": 4471, "manufacturer_id": 1, "description": "Routine testing found Listeria monocytogenes in lot L4471. Bags were sold in California and Nevada stores.", "category": "bacterialContamination"}}
+2026-10-27T11:46:53.491-07:00 [CLIENT] CLIENT-RESPONSE corr=67107daa-5244-4016-89a3-c58921ff1bb9 topic=s7875_notice_responses p=0 off=9 {"correlation_id": "67107daa-5244-4016-89a3-c58921ff1bb9", "operation": "CREATE_NOTICE", "success": false, "error": "Missing required field(s): email"}
+  missing field        success=False error='Missing required field(s): email' correlation_id preserved=True
+2026-10-27T11:46:53.491-07:00 [CLIENT] SEND            corr=aadcf4a4-1e14-4fd5-85df-15d4fccad6ae topic=s7875_notice_requests {"correlation_id": "aadcf4a4-1e14-4fd5-85df-15d4fccad6ae", "reply_to": "s7875_notice_responses", "operation": "CREATE_NOTICE", "data": {"product": "Organic Baby Spinach 5oz", "notice_code": "RCL-26-1", "units_affected": 4471, "manufacturer_id": 1, "email": "recalls@greenfields-foods.com", "description": "Routine testing found Listeria monocytogenes in lot L4471. Bags were sold in California and Nevada stores.", "category": "bacterialContamination"}}
+2026-10-27T11:46:53.499-07:00 [CLIENT] CLIENT-RESPONSE corr=aadcf4a4-1e14-4fd5-85df-15d4fccad6ae topic=s7875_notice_responses p=0 off=10 {"correlation_id": "aadcf4a4-1e14-4fd5-85df-15d4fccad6ae", "operation": "CREATE_NOTICE", "success": false, "error": "Invalid value(s): notice_code: String should match pattern '^RCL-\\d{4}-\\d{5}$'"}
+  invalid notice_code  success=False error="Invalid value(s): notice_code: String should match pattern '^RCL-\\d{4}-\\d{5}$'" correlation_id preserved=True
+2026-10-27T11:46:53.499-07:00 [CLIENT] SEND            corr=c6668ec4-e0f7-4737-b71c-0d784352c1aa topic=s7875_notice_requests {"correlation_id": "c6668ec4-e0f7-4737-b71c-0d784352c1aa", "reply_to": "s7875_notice_responses", "operation": "GET_NOTICE", "data": {"notice_id": "00000000-0000-0000-0000-000000000000"}}
+2026-10-27T11:46:53.501-07:00 [CLIENT] CLIENT-RESPONSE corr=c6668ec4-e0f7-4737-b71c-0d784352c1aa topic=s7875_notice_responses p=0 off=11 {"correlation_id": "c6668ec4-e0f7-4737-b71c-0d784352c1aa", "operation": "GET_NOTICE", "success": false, "error": "Notice not found"}
+  unknown notice_id    success=False error='Notice not found' correlation_id preserved=True
+
+----- Step 9: full sequence (client + API + worker lines, merged by timestamp)
+
+### CREATE_NOTICE  correlation_id=007c1cf0-c86c-4024-a84d-fa942ebc9c5f
+2026-10-27T11:46:53.445-07:00 [CLIENT] SEND            corr=007c1cf0-c86c-4024-a84d-fa942ebc9c5f topic=s7875_notice_requests {"correlation_id": "007c1cf0-c86c-4024-a84d-fa942ebc9c5f", "reply_to": "s7875_notice_responses", "operation": "CREATE_NOTICE", "data": {"product": "Organic Baby Spinach 5oz", "notice_code": "RCL-2026-07875", "units_affected": 4471, "manufacturer_id": 1, "email": "recalls@greenfields-foods.com", "description": "Routine testing found Listeria monocytogenes in lot L4471. Bags were sold in California and Nevada stores.", "category": "bacterialContamination"}}
+2026-10-27T18:46:53.468+00:00 [WORKER] RECEIVE         corr=007c1cf0-c86c-4024-a84d-fa942ebc9c5f topic=s7875_notice_requests p=0 off=6 {"correlation_id": "007c1cf0-c86c-4024-a84d-fa942ebc9c5f", "reply_to": "s7875_notice_responses", "operation": "CREATE_NOTICE", "data": {"product": "Organic Baby Spinach 5oz", "notice_code": "RCL-2026-07875", "units_affected": 4471, "manufacturer_id": 1, "email": "recalls@greenfields-foods.com", "description": "Routine testing found Listeria monocytogenes in lot L4471. Bags were sold in California and Nevada stores.", "category": "bacterialContamination"}}
+2026-10-27T18:46:53.470+00:00 [WORKER] PROCESS         corr=007c1cf0-c86c-4024-a84d-fa942ebc9c5f operation=CREATE_NOTICE success=True notices_in_store=2
+2026-10-27T18:46:53.470+00:00 [WORKER] REPLY           corr=007c1cf0-c86c-4024-a84d-fa942ebc9c5f topic=s7875_notice_responses {"correlation_id": "007c1cf0-c86c-4024-a84d-fa942ebc9c5f", "operation": "CREATE_NOTICE", "success": true, "notice_id": "9264c6ab-d48c-4268-9db1-ee6113f956df", "message": "Notice created"}
+2026-10-27T11:46:53.478-07:00 [CLIENT] CLIENT-RESPONSE corr=007c1cf0-c86c-4024-a84d-fa942ebc9c5f topic=s7875_notice_responses p=0 off=6 {"correlation_id": "007c1cf0-c86c-4024-a84d-fa942ebc9c5f", "operation": "CREATE_NOTICE", "success": true, "notice_id": "9264c6ab-d48c-4268-9db1-ee6113f956df", "message": "Notice created"}
+
+### GET_NOTICE  correlation_id=233d96f0-e04d-4442-9132-a4599aed101a
+2026-10-27T11:46:53.478-07:00 [CLIENT] SEND            corr=233d96f0-e04d-4442-9132-a4599aed101a topic=s7875_notice_requests {"correlation_id": "233d96f0-e04d-4442-9132-a4599aed101a", "reply_to": "s7875_notice_responses", "operation": "GET_NOTICE", "data": {"notice_id": "9264c6ab-d48c-4268-9db1-ee6113f956df"}}
+2026-10-27T18:46:53.481+00:00 [WORKER] RECEIVE         corr=233d96f0-e04d-4442-9132-a4599aed101a topic=s7875_notice_requests p=0 off=7 {"correlation_id": "233d96f0-e04d-4442-9132-a4599aed101a", "reply_to": "s7875_notice_responses", "operation": "GET_NOTICE", "data": {"notice_id": "9264c6ab-d48c-4268-9db1-ee6113f956df"}}
+2026-10-27T18:46:53.482+00:00 [WORKER] PROCESS         corr=233d96f0-e04d-4442-9132-a4599aed101a operation=GET_NOTICE success=True notices_in_store=2
+2026-10-27T18:46:53.482+00:00 [WORKER] REPLY           corr=233d96f0-e04d-4442-9132-a4599aed101a topic=s7875_notice_responses {"correlation_id": "233d96f0-e04d-4442-9132-a4599aed101a", "operation": "GET_NOTICE", "success": true, "notice": {"notice_id": "9264c6ab-d48c-4268-9db1-ee6113f956df", "product": "Organic Baby Spinach 5oz", "notice_code": "RCL-2026-07875", "units_affected": 4471, "manufacturer_id": 1, "email": "recalls@greenfields-foods.com", "description": "Routine testing found Listeria monocytogenes in lot L4471. Bags were sold in California and Nevada stores.", "category": "bacterialContamination"}}
+2026-10-27T11:46:53.485-07:00 [CLIENT] CLIENT-RESPONSE corr=233d96f0-e04d-4442-9132-a4599aed101a topic=s7875_notice_responses p=0 off=7 {"correlation_id": "233d96f0-e04d-4442-9132-a4599aed101a", "operation": "GET_NOTICE", "success": true, "notice": {"notice_id": "9264c6ab-d48c-4268-9db1-ee6113f956df", "product": "Organic Baby Spinach 5oz", "notice_code": "RCL-2026-07875", "units_affected": 4471, "manufacturer_id": 1, "email": "recalls@greenfields-foods.com", "description": "Routine testing found Listeria monocytogenes in lot L4471. Bags were sold in California and Nevada stores.", "category": "bacterialContamination"}}
+
+----- Step 10: retrieved notice and correlation_id check
+{
+  "correlation_id": "233d96f0-e04d-4442-9132-a4599aed101a",
+  "operation": "GET_NOTICE",
+  "success": true,
+  "notice": {
+    "notice_id": "9264c6ab-d48c-4268-9db1-ee6113f956df",
+    "product": "Organic Baby Spinach 5oz",
+    "notice_code": "RCL-2026-07875",
+    "units_affected": 4471,
+    "manufacturer_id": 1,
+    "email": "recalls@greenfields-foods.com",
+    "description": "Routine testing found Listeria monocytogenes in lot L4471. Bags were sold in California and Nevada stores.",
+    "category": "bacterialContamination"
+  }
+}
+  [PASS] create_success
+  [PASS] create_correlation_id_preserved
+  [PASS] get_success
+  [PASS] get_correlation_id_preserved
+  [PASS] retrieved_notice_matches_created
+  [PASS] all_error_responses_keep_correlation_id
+
+saved reports/hw08/raw/part1_demo_kafka.json
+===== Pinal Pawar | SID4 7875 | PREFIX s7875 | PORT_BASE 8675 | homework_demo.py (via api) =====
+request topic = s7875_notice_requests   response topic = s7875_notice_responses
+
+----- Step 1: create one correlation_id for the CREATE_NOTICE request
+correlation_id = 52dc8031-f383-4b89-8031-3de65c02d697
+
+----- Step 2: send CREATE_NOTICE to s7875_notice_requests
+
+----- Step 3: the request message (as written to the request topic)
+{
+  "correlation_id": "52dc8031-f383-4b89-8031-3de65c02d697",
+  "reply_to": "s7875_notice_responses",
+  "operation": "CREATE_NOTICE",
+  "data": {
+    "product": "Organic Baby Spinach 5oz",
+    "notice_code": "RCL-2026-07875",
+    "units_affected": 4471,
+    "manufacturer_id": 1,
+    "email": "recalls@greenfields-foods.com",
+    "description": "Routine testing found Listeria monocytogenes in lot L4471. Bags were sold in California and Nevada stores.",
+    "category": "bacterialContamination"
+  }
+}
+
+----- Step 4: worker receives and processes it   (see merged log in step 9)
+
+----- Step 5: worker replies on s7875_notice_responses   (see merged log in step 9)
+2026-10-27T11:50:07.304-07:00 [CLIENT] HTTP-POST       corr=52dc8031-f383-4b89-8031-3de65c02d697 url=http://127.0.0.1:8675/kafka/notices {"correlation_id": "52dc8031-f383-4b89-8031-3de65c02d697", "operation": "CREATE_NOTICE", "data": {"product": "Organic Baby Spinach 5oz", "notice_code": "RCL-2026-07875", "units_affected": 4471, "manufacturer_id": 1, "email": "recalls@greenfields-foods.com", "description": "Routine testing found Listeria monocytogenes in lot L4471. Bags were sold in California and Nevada stores.", "category": "bacterialContamination"}}
+2026-10-27T11:50:07.336-07:00 [CLIENT] HTTP-200        corr=52dc8031-f383-4b89-8031-3de65c02d697 {"correlation_id": "52dc8031-f383-4b89-8031-3de65c02d697", "operation": "CREATE_NOTICE", "success": true, "notice_id": "c40cb0b5-24d7-4c0f-826c-7c417f24282a", "message": "Notice created"}
+
+----- Step 6: response received by the client
+{
+  "correlation_id": "52dc8031-f383-4b89-8031-3de65c02d697",
+  "operation": "CREATE_NOTICE",
+  "success": true,
+  "notice_id": "c40cb0b5-24d7-4c0f-826c-7c417f24282a",
+  "message": "Notice created"
+}
+
+----- Step 7: extract the generated notice_id
+notice_id = c40cb0b5-24d7-4c0f-826c-7c417f24282a
+
+----- Step 8: send GET_NOTICE for that notice_id (new correlation_id for this request)
+correlation_id = f8a5d13c-ade8-4578-a10f-862d2c4ff57a
+{
+  "correlation_id": "f8a5d13c-ade8-4578-a10f-862d2c4ff57a",
+  "reply_to": "s7875_notice_responses",
+  "operation": "GET_NOTICE",
+  "data": {
+    "notice_id": "c40cb0b5-24d7-4c0f-826c-7c417f24282a"
+  }
+}
+2026-10-27T11:50:07.336-07:00 [CLIENT] HTTP-POST       corr=f8a5d13c-ade8-4578-a10f-862d2c4ff57a url=http://127.0.0.1:8675/kafka/notices {"correlation_id": "f8a5d13c-ade8-4578-a10f-862d2c4ff57a", "operation": "GET_NOTICE", "data": {"notice_id": "c40cb0b5-24d7-4c0f-826c-7c417f24282a"}}
+2026-10-27T11:50:07.364-07:00 [CLIENT] HTTP-200        corr=f8a5d13c-ade8-4578-a10f-862d2c4ff57a {"correlation_id": "f8a5d13c-ade8-4578-a10f-862d2c4ff57a", "operation": "GET_NOTICE", "success": true, "notice": {"notice_id": "c40cb0b5-24d7-4c0f-826c-7c417f24282a", "product": "Organic Baby Spinach 5oz", "notice_code": "RCL-2026-07875", "units_affected": 4471, "manufacturer_id": 1, "email": "recalls@greenfields-foods.com", "description": "Routine testing found Listeria monocytogenes in lot L4471. Bags were sold in California and Nevada stores.", "category": "bacterialContamination"}}
+
+----- Extra: error responses keep the correlation_id too
+2026-10-27T11:50:07.364-07:00 [CLIENT] HTTP-POST       corr=6729d321-c33b-498b-8e93-0bde40ff4762 url=http://127.0.0.1:8675/kafka/notices {"correlation_id": "6729d321-c33b-498b-8e93-0bde40ff4762", "operation": "DELETE_EVERYTHING", "data": {}}
+2026-10-27T11:50:07.372-07:00 [CLIENT] HTTP-200        corr=6729d321-c33b-498b-8e93-0bde40ff4762 {"correlation_id": "6729d321-c33b-498b-8e93-0bde40ff4762", "operation": "DELETE_EVERYTHING", "success": false, "error": "Unknown operation"}
+  unknown operation    success=False error='Unknown operation' correlation_id preserved=True
+2026-10-27T11:50:07.372-07:00 [CLIENT] HTTP-POST       corr=aa98f6f5-83fd-4b3f-8854-c8a853180113 url=http://127.0.0.1:8675/kafka/notices {"correlation_id": "aa98f6f5-83fd-4b3f-8854-c8a853180113", "operation": "CREATE_NOTICE", "data": {"product": "Organic Baby Spinach 5oz", "notice_code": "RCL-2026-07875", "units_affected": 4471, "manufacturer_id": 1, "description": "Routine testing found Listeria monocytogenes in lot L4471. Bags were sold in California and Nevada stores.", "category": "bacterialContamination"}}
+2026-10-27T11:50:07.382-07:00 [CLIENT] HTTP-200        corr=aa98f6f5-83fd-4b3f-8854-c8a853180113 {"correlation_id": "aa98f6f5-83fd-4b3f-8854-c8a853180113", "operation": "CREATE_NOTICE", "success": false, "error": "Missing required field(s): email"}
+  missing field        success=False error='Missing required field(s): email' correlation_id preserved=True
+2026-10-27T11:50:07.382-07:00 [CLIENT] HTTP-POST       corr=bc3ef1d1-3f49-4f43-ac4c-e8469ac08f36 url=http://127.0.0.1:8675/kafka/notices {"correlation_id": "bc3ef1d1-3f49-4f43-ac4c-e8469ac08f36", "operation": "CREATE_NOTICE", "data": {"product": "Organic Baby Spinach 5oz", "notice_code": "RCL-26-1", "units_affected": 4471, "manufacturer_id": 1, "email": "recalls@greenfields-foods.com", "description": "Routine testing found Listeria monocytogenes in lot L4471. Bags were sold in California and Nevada stores.", "category": "bacterialContamination"}}
+2026-10-27T11:50:07.397-07:00 [CLIENT] HTTP-200        corr=bc3ef1d1-3f49-4f43-ac4c-e8469ac08f36 {"correlation_id": "bc3ef1d1-3f49-4f43-ac4c-e8469ac08f36", "operation": "CREATE_NOTICE", "success": false, "error": "Invalid value(s): notice_code: String should match pattern '^RCL-\\d{4}-\\d{5}$'"}
+  invalid notice_code  success=False error="Invalid value(s): notice_code: String should match pattern '^RCL-\\d{4}-\\d{5}$'" correlation_id preserved=True
+2026-10-27T11:50:07.398-07:00 [CLIENT] HTTP-POST       corr=c948c39a-45bc-4910-b9fa-e714ba044978 url=http://127.0.0.1:8675/kafka/notices {"correlation_id": "c948c39a-45bc-4910-b9fa-e714ba044978", "operation": "GET_NOTICE", "data": {"notice_id": "00000000-0000-0000-0000-000000000000"}}
+2026-10-27T11:50:07.407-07:00 [CLIENT] HTTP-200        corr=c948c39a-45bc-4910-b9fa-e714ba044978 {"correlation_id": "c948c39a-45bc-4910-b9fa-e714ba044978", "operation": "GET_NOTICE", "success": false, "error": "Notice not found"}
+  unknown notice_id    success=False error='Notice not found' correlation_id preserved=True
+
+----- Step 9: full sequence (client + API + worker lines, merged by timestamp)
+
+### CREATE_NOTICE  correlation_id=52dc8031-f383-4b89-8031-3de65c02d697
+2026-10-27T11:50:07.304-07:00 [CLIENT] HTTP-POST       corr=52dc8031-f383-4b89-8031-3de65c02d697 url=http://127.0.0.1:8675/kafka/notices {"correlation_id": "52dc8031-f383-4b89-8031-3de65c02d697", "operation": "CREATE_NOTICE", "data": {"product": "Organic Baby Spinach 5oz", "notice_code": "RCL-2026-07875", "units_affected": 4471, "manufacturer_id": 1, "email": "recalls@greenfields-foods.com", "description": "Routine testing found Listeria monocytogenes in lot L4471. Bags were sold in California and Nevada stores.", "category": "bacterialContamination"}}
+2026-10-27T18:50:07.316+00:00 [API] HTTP-REQUEST    corr=52dc8031-f383-4b89-8031-3de65c02d697 {"correlation_id": "52dc8031-f383-4b89-8031-3de65c02d697", "operation": "CREATE_NOTICE", "data": {"product": "Organic Baby Spinach 5oz", "notice_code": "RCL-2026-07875", "units_affected": 4471, "manufacturer_id": 1, "email": "recalls@greenfields-foods.com", "description": "Routine testing found Listeria monocytogenes in lot L4471. Bags were sold in California and Nevada stores.", "category": "bacterialContamination"}}
+2026-10-27T18:50:07.316+00:00 [API] SEND            corr=52dc8031-f383-4b89-8031-3de65c02d697 topic=s7875_notice_requests {"correlation_id": "52dc8031-f383-4b89-8031-3de65c02d697", "reply_to": "s7875_notice_responses", "operation": "CREATE_NOTICE", "data": {"product": "Organic Baby Spinach 5oz", "notice_code": "RCL-2026-07875", "units_affected": 4471, "manufacturer_id": 1, "email": "recalls@greenfields-foods.com", "description": "Routine testing found Listeria monocytogenes in lot L4471. Bags were sold in California and Nevada stores.", "category": "bacterialContamination"}}
+2026-10-27T18:50:07.327+00:00 [WORKER] RECEIVE         corr=52dc8031-f383-4b89-8031-3de65c02d697 topic=s7875_notice_requests p=0 off=12 {"correlation_id": "52dc8031-f383-4b89-8031-3de65c02d697", "reply_to": "s7875_notice_responses", "operation": "CREATE_NOTICE", "data": {"product": "Organic Baby Spinach 5oz", "notice_code": "RCL-2026-07875", "units_affected": 4471, "manufacturer_id": 1, "email": "recalls@greenfields-foods.com", "description": "Routine testing found Listeria monocytogenes in lot L4471. Bags were sold in California and Nevada stores.", "category": "bacterialContamination"}}
+2026-10-27T18:50:07.329+00:00 [WORKER] PROCESS         corr=52dc8031-f383-4b89-8031-3de65c02d697 operation=CREATE_NOTICE success=True notices_in_store=3
+2026-10-27T18:50:07.329+00:00 [WORKER] REPLY           corr=52dc8031-f383-4b89-8031-3de65c02d697 topic=s7875_notice_responses {"correlation_id": "52dc8031-f383-4b89-8031-3de65c02d697", "operation": "CREATE_NOTICE", "success": true, "notice_id": "c40cb0b5-24d7-4c0f-826c-7c417f24282a", "message": "Notice created"}
+2026-10-27T18:50:07.331+00:00 [API] CLIENT-RESPONSE corr=52dc8031-f383-4b89-8031-3de65c02d697 topic=s7875_notice_responses p=0 off=12 {"correlation_id": "52dc8031-f383-4b89-8031-3de65c02d697", "operation": "CREATE_NOTICE", "success": true, "notice_id": "c40cb0b5-24d7-4c0f-826c-7c417f24282a", "message": "Notice created"}
+2026-10-27T18:50:07.332+00:00 [API] HTTP-RESPONSE   corr=52dc8031-f383-4b89-8031-3de65c02d697 {"correlation_id": "52dc8031-f383-4b89-8031-3de65c02d697", "operation": "CREATE_NOTICE", "success": true, "notice_id": "c40cb0b5-24d7-4c0f-826c-7c417f24282a", "message": "Notice created"}
+2026-10-27T11:50:07.336-07:00 [CLIENT] HTTP-200        corr=52dc8031-f383-4b89-8031-3de65c02d697 {"correlation_id": "52dc8031-f383-4b89-8031-3de65c02d697", "operation": "CREATE_NOTICE", "success": true, "notice_id": "c40cb0b5-24d7-4c0f-826c-7c417f24282a", "message": "Notice created"}
+
+### GET_NOTICE  correlation_id=f8a5d13c-ade8-4578-a10f-862d2c4ff57a
+2026-10-27T11:50:07.336-07:00 [CLIENT] HTTP-POST       corr=f8a5d13c-ade8-4578-a10f-862d2c4ff57a url=http://127.0.0.1:8675/kafka/notices {"correlation_id": "f8a5d13c-ade8-4578-a10f-862d2c4ff57a", "operation": "GET_NOTICE", "data": {"notice_id": "c40cb0b5-24d7-4c0f-826c-7c417f24282a"}}
+2026-10-27T18:50:07.337+00:00 [API] HTTP-REQUEST    corr=f8a5d13c-ade8-4578-a10f-862d2c4ff57a {"correlation_id": "f8a5d13c-ade8-4578-a10f-862d2c4ff57a", "operation": "GET_NOTICE", "data": {"notice_id": "c40cb0b5-24d7-4c0f-826c-7c417f24282a"}}
+2026-10-27T18:50:07.337+00:00 [API] SEND            corr=f8a5d13c-ade8-4578-a10f-862d2c4ff57a topic=s7875_notice_requests {"correlation_id": "f8a5d13c-ade8-4578-a10f-862d2c4ff57a", "reply_to": "s7875_notice_responses", "operation": "GET_NOTICE", "data": {"notice_id": "c40cb0b5-24d7-4c0f-826c-7c417f24282a"}}
+2026-10-27T18:50:07.338+00:00 [WORKER] RECEIVE         corr=f8a5d13c-ade8-4578-a10f-862d2c4ff57a topic=s7875_notice_requests p=0 off=13 {"correlation_id": "f8a5d13c-ade8-4578-a10f-862d2c4ff57a", "reply_to": "s7875_notice_responses", "operation": "GET_NOTICE", "data": {"notice_id": "c40cb0b5-24d7-4c0f-826c-7c417f24282a"}}
+2026-10-27T18:50:07.339+00:00 [WORKER] PROCESS         corr=f8a5d13c-ade8-4578-a10f-862d2c4ff57a operation=GET_NOTICE success=True notices_in_store=3
+2026-10-27T18:50:07.339+00:00 [WORKER] REPLY           corr=f8a5d13c-ade8-4578-a10f-862d2c4ff57a topic=s7875_notice_responses {"correlation_id": "f8a5d13c-ade8-4578-a10f-862d2c4ff57a", "operation": "GET_NOTICE", "success": true, "notice": {"notice_id": "c40cb0b5-24d7-4c0f-826c-7c417f24282a", "product": "Organic Baby Spinach 5oz", "notice_code": "RCL-2026-07875", "units_affected": 4471, "manufacturer_id": 1, "email": "recalls@greenfields-foods.com", "description": "Routine testing found Listeria monocytogenes in lot L4471. Bags were sold in California and Nevada stores.", "category": "bacterialContamination"}}
+2026-10-27T18:50:07.359+00:00 [API] CLIENT-RESPONSE corr=f8a5d13c-ade8-4578-a10f-862d2c4ff57a topic=s7875_notice_responses p=0 off=13 {"correlation_id": "f8a5d13c-ade8-4578-a10f-862d2c4ff57a", "operation": "GET_NOTICE", "success": true, "notice": {"notice_id": "c40cb0b5-24d7-4c0f-826c-7c417f24282a", "product": "Organic Baby Spinach 5oz", "notice_code": "RCL-2026-07875", "units_affected": 4471, "manufacturer_id": 1, "email": "recalls@greenfields-foods.com", "description": "Routine testing found Listeria monocytogenes in lot L4471. Bags were sold in California and Nevada stores.", "category": "bacterialContamination"}}
+2026-10-27T18:50:07.360+00:00 [API] HTTP-RESPONSE   corr=f8a5d13c-ade8-4578-a10f-862d2c4ff57a {"correlation_id": "f8a5d13c-ade8-4578-a10f-862d2c4ff57a", "operation": "GET_NOTICE", "success": true, "notice": {"notice_id": "c40cb0b5-24d7-4c0f-826c-7c417f24282a", "product": "Organic Baby Spinach 5oz", "notice_code": "RCL-2026-07875", "units_affected": 4471, "manufacturer_id": 1, "email": "recalls@greenfields-foods.com", "description": "Routine testing found Listeria monocytogenes in lot L4471. Bags were sold in California and Nevada stores.", "category": "bacterialContamination"}}
+2026-10-27T11:50:07.364-07:00 [CLIENT] HTTP-200        corr=f8a5d13c-ade8-4578-a10f-862d2c4ff57a {"correlation_id": "f8a5d13c-ade8-4578-a10f-862d2c4ff57a", "operation": "GET_NOTICE", "success": true, "notice": {"notice_id": "c40cb0b5-24d7-4c0f-826c-7c417f24282a", "product": "Organic Baby Spinach 5oz", "notice_code": "RCL-2026-07875", "units_affected": 4471, "manufacturer_id": 1, "email": "recalls@greenfields-foods.com", "description": "Routine testing found Listeria monocytogenes in lot L4471. Bags were sold in California and Nevada stores.", "category": "bacterialContamination"}}
+
+----- Step 10: retrieved notice and correlation_id check
+{
+  "correlation_id": "f8a5d13c-ade8-4578-a10f-862d2c4ff57a",
+  "operation": "GET_NOTICE",
+  "success": true,
+  "notice": {
+    "notice_id": "c40cb0b5-24d7-4c0f-826c-7c417f24282a",
+    "product": "Organic Baby Spinach 5oz",
+    "notice_code": "RCL-2026-07875",
+    "units_affected": 4471,
+    "manufacturer_id": 1,
+    "email": "recalls@greenfields-foods.com",
+    "description": "Routine testing found Listeria monocytogenes in lot L4471. Bags were sold in California and Nevada stores.",
+    "category": "bacterialContamination"
+  }
+}
+  [PASS] create_success
+  [PASS] create_correlation_id_preserved
+  [PASS] get_success
+  [PASS] get_correlation_id_preserved
+  [PASS] retrieved_notice_matches_created
+  [PASS] all_error_responses_keep_correlation_id
+
+saved reports/hw08/raw/part1_demo_api.json
+===== Pinal Pawar | SID4 7875 | PREFIX s7875 | PORT_BASE 8675 | send_question.py =====
+2026-10-27T11:57:43.582-07:00 [SENDER] SEND            corr=d5f6857e-5491-460d-bfff-32802b43b663 topic=s7875_inbox {"correlation_id": "d5f6857e-5491-460d-bfff-32802b43b663", "stage": "question", "question": "A store near me posted a Listeria recall for bagged organic baby spinach. I already ate some yesterday. What should I do now?", "asked_at": "2026-10-27T11:57:43.582-07:00", "trace": []}
+2026-10-27T11:57:43.612-07:00 [SENDER] SENT            corr=d5f6857e-5491-460d-bfff-32802b43b663 topic=s7875_inbox p=0 off=0
+2026-10-27T11:57:43.612-07:00 [SENDER] WAITING         corr=d5f6857e-5491-460d-bfff-32802b43b663 topic=s7875_final timeout_s=600
+2026-10-27T11:58:00.992-07:00 [SENDER] FINAL           corr=d5f6857e-5491-460d-bfff-32802b43b663 topic=s7875_final p=0 off=0 {"correlation_id": "d5f6857e-5491-460d-bfff-32802b43b663", "status": "approved", "answer": "Check the recall details to confirm the specific product and expiration date. If the spinach you ate is from the same batch and within the expiration window, it may still be safe. If the recall is for a different batch or if the spinach is past its expiration date, discard it. Contact the store or recall authority for further guidance.", "review": "The draft answer follows the plan by checking recall details, assessing safety, and providing next steps.", "question": "A store near me posted a Listeria recall for bagged organic baby spinach. I already ate some yesterday. What should I do now?", "plan": ["Check the recall details to confirm the specific product and expiration date.", "Determine if the spinach you ate is still safe to consume.", "If the recall is for a different batch or if the spinach is past its expiration date, consider discarding it.", "Contact the store or recall authority for further guidance."], "model": "qwen3:1.7b via Ollama", "trace": [{"agent": "planner", "agent_id": "planner-36496", "read_from": "s7875_inbox", "partition": 0, "offset": 0, "at": "2026-10-27T11:57:52.112-07:00"}, {"agent": "writer", "agent_id": "writer-36538", "read_from": "s7875_tasks", "partition": 0, "offset": 0, "at": "2026-10-27T11:57:57.888-07:00"}, {"agent": "reviewer", "agent_id": "reviewer-36549", "read_from": "s7875_drafts", "partition": 0, "offset": 0, "at": "2026-10-27T11:58:00.965-07:00"}], "finished_at": "2026-10-27T11:58:00.965-07:00"}
+
+===== Message journey (same correlation_id at every stage) =====
+[question] topic=s7875_inbox p=0 off=0 key=d5f6857e-5491-460d-bfff-32802b43b663 correlation_id=d5f6857e-5491-460d-bfff-32802b43b663
+           {"question": "A store near me posted a Listeria recall for bagged organic baby spinach. I already ate some yesterday. What should I do now?"}
+[    plan] topic=s7875_tasks p=0 off=0 key=d5f6857e-5491-460d-bfff-32802b43b663 correlation_id=d5f6857e-5491-460d-bfff-32802b43b663
+           {"plan": ["Check the recall details to confirm the specific product and expiration date.", "Determine if the spinach you ate is still safe to consume.", "If the recall is for a different batch or if the spinach is past its expiration date, consider discarding it.", "Contact the store or recall authority for further guidance."]}
+[   draft] topic=s7875_drafts p=0 off=0 key=d5f6857e-5491-460d-bfff-32802b43b663 correlation_id=d5f6857e-5491-460d-bfff-32802b43b663
+           {"draft": "Check the recall details to confirm the specific product and expiration date. If the spinach you ate is from the same batch and within the expiration window, it may still be safe. If the recall is for a different batch or if the spinach is past its expiration date, discard it. Contact the store or recall authority for further guidance."}
+[   final] topic=s7875_final p=0 off=0 key=d5f6857e-5491-460d-bfff-32802b43b663 correlation_id=d5f6857e-5491-460d-bfff-32802b43b663
+           {"status": "approved", "review": "The draft answer follows the plan by checking recall details, assessing safety, and providing next steps."}
+
+===== Final JSON (from s7875_final) =====
+{
+  "correlation_id": "d5f6857e-5491-460d-bfff-32802b43b663",
+  "status": "approved",
+  "answer": "Check the recall details to confirm the specific product and expiration date. If the spinach you ate is from the same batch and within the expiration window, it may still be safe. If the recall is for a different batch or if the spinach is past its expiration date, discard it. Contact the store or recall authority for further guidance.",
+  "review": "The draft answer follows the plan by checking recall details, assessing safety, and providing next steps.",
+  "question": "A store near me posted a Listeria recall for bagged organic baby spinach. I already ate some yesterday. What should I do now?",
+  "plan": [
+    "Check the recall details to confirm the specific product and expiration date.",
+    "Determine if the spinach you ate is still safe to consume.",
+    "If the recall is for a different batch or if the spinach is past its expiration date, consider discarding it.",
+    "Contact the store or recall authority for further guidance."
+  ],
+  "model": "qwen3:1.7b via Ollama",
+  "trace": [
+    {
+      "agent": "planner",
+      "agent_id": "planner-36496",
+      "read_from": "s7875_inbox",
+      "partition": 0,
+      "offset": 0,
+      "at": "2026-10-27T11:57:52.112-07:00"
+    },
+    {
+      "agent": "writer",
+      "agent_id": "writer-36538",
+      "read_from": "s7875_tasks",
+      "partition": 0,
+      "offset": 0,
+      "at": "2026-10-27T11:57:57.888-07:00"
+    },
+    {
+      "agent": "reviewer",
+      "agent_id": "reviewer-36549",
+      "read_from": "s7875_drafts",
+      "partition": 0,
+      "offset": 0,
+      "at": "2026-10-27T11:58:00.965-07:00"
+    }
+  ],
+  "finished_at": "2026-10-27T11:58:00.965-07:00"
+}
+
+correlation_id preserved through all 4 topics: True
+saved reports/hw08/raw/part2_journey_d5f6857e.json
+===== Pinal Pawar | SID4 7875 | PREFIX s7875 | PORT_BASE 8675 | send_question.py =====
+2026-10-27T12:07:41.728-07:00 [SENDER] SEND            corr=b14cad9d-1644-4e33-8e02-9ab712f5e5fb topic=s7875_inbox {"correlation_id": "b14cad9d-1644-4e33-8e02-9ab712f5e5fb", "stage": "question", "question": "A store near me posted a Listeria recall for bagged organic baby spinach. I already ate some yesterday. What should I do now?", "asked_at": "2026-10-27T12:07:41.727-07:00", "trace": []}
+2026-10-27T12:07:41.748-07:00 [SENDER] SENT            corr=b14cad9d-1644-4e33-8e02-9ab712f5e5fb topic=s7875_inbox p=0 off=1
+2026-10-27T12:07:41.749-07:00 [SENDER] WAITING         corr=b14cad9d-1644-4e33-8e02-9ab712f5e5fb topic=s7875_final timeout_s=600
+2026-10-27T12:07:57.957-07:00 [SENDER] FINAL           corr=b14cad9d-1644-4e33-8e02-9ab712f5e5fb topic=s7875_final p=0 off=1 {"correlation_id": "b14cad9d-1644-4e33-8e02-9ab712f5e5fb", "status": "approved", "answer": "Stop using the recalled bagged organic baby spinach and throw it away or return it to the store. Clean all surfaces it touched. Watch for illness symptoms and call a doctor if you are pregnant, older, or have a weak immune system. Do not eat the product, regardless of its appearance or smell. Follow food-safety rules to prevent illness.", "review": "The draft answer correctly follows the plan by advising to stop using the recalled product, clean surfaces, and warn about potential illness symptoms, aligning with food-safety rules.", "question": "A store near me posted a Listeria recall for bagged organic baby spinach. I already ate some yesterday. What should I do now?", "plan": ["Stop using the recalled product and throw it away or return it to the store. Clean surfaces it touched. Watch for illness symptoms and call a doctor if you are pregnant, older, or have a weak immune system."], "model": "qwen3:1.7b via Ollama", "trace": [{"agent": "planner", "agent_id": "planner-36878", "read_from": "s7875_inbox", "partition": 0, "offset": 1, "at": "2026-10-27T12:07:47.688-07:00"}, {"agent": "writer", "agent_id": "writer-36885", "read_from": "s7875_tasks", "partition": 1, "offset": 0, "at": "2026-10-27T12:07:53.724-07:00"}, {"agent": "reviewer", "agent_id": "reviewer-36890", "read_from": "s7875_drafts", "partition": 0, "offset": 1, "at": "2026-10-27T12:07:57.915-07:00"}], "finished_at": "2026-10-27T12:07:57.915-07:00"}
+
+===== Message journey (same correlation_id at every stage) =====
+[question] topic=s7875_inbox p=0 off=1 key=b14cad9d-1644-4e33-8e02-9ab712f5e5fb correlation_id=b14cad9d-1644-4e33-8e02-9ab712f5e5fb
+           {"question": "A store near me posted a Listeria recall for bagged organic baby spinach. I already ate some yesterday. What should I do now?"}
+[    plan] topic=s7875_tasks p=1 off=0 key=b14cad9d-1644-4e33-8e02-9ab712f5e5fb correlation_id=b14cad9d-1644-4e33-8e02-9ab712f5e5fb
+           {"plan": ["Stop using the recalled product and throw it away or return it to the store. Clean surfaces it touched. Watch for illness symptoms and call a doctor if you are pregnant, older, or have a weak immune system."]}
+[   draft] topic=s7875_drafts p=0 off=1 key=b14cad9d-1644-4e33-8e02-9ab712f5e5fb correlation_id=b14cad9d-1644-4e33-8e02-9ab712f5e5fb
+           {"draft": "Stop using the recalled bagged organic baby spinach and throw it away or return it to the store. Clean all surfaces it touched. Watch for illness symptoms and call a doctor if you are pregnant, older, or have a weak immune system. Do not eat the product, regardless of its appearance or smell. Follow food-safety rules to prevent illness."}
+[   final] topic=s7875_final p=0 off=1 key=b14cad9d-1644-4e33-8e02-9ab712f5e5fb correlation_id=b14cad9d-1644-4e33-8e02-9ab712f5e5fb
+           {"status": "approved", "review": "The draft answer correctly follows the plan by advising to stop using the recalled product, clean surfaces, and warn about potential illness symptoms, aligning with food-safety rules."}
+
+===== Final JSON (from s7875_final) =====
+{
+  "correlation_id": "b14cad9d-1644-4e33-8e02-9ab712f5e5fb",
+  "status": "approved",
+  "answer": "Stop using the recalled bagged organic baby spinach and throw it away or return it to the store. Clean all surfaces it touched. Watch for illness symptoms and call a doctor if you are pregnant, older, or have a weak immune system. Do not eat the product, regardless of its appearance or smell. Follow food-safety rules to prevent illness.",
+  "review": "The draft answer correctly follows the plan by advising to stop using the recalled product, clean surfaces, and warn about potential illness symptoms, aligning with food-safety rules.",
+  "question": "A store near me posted a Listeria recall for bagged organic baby spinach. I already ate some yesterday. What should I do now?",
+  "plan": [
+    "Stop using the recalled product and throw it away or return it to the store. Clean surfaces it touched. Watch for illness symptoms and call a doctor if you are pregnant, older, or have a weak immune system."
+  ],
+  "model": "qwen3:1.7b via Ollama",
+  "trace": [
+    {
+      "agent": "planner",
+      "agent_id": "planner-36878",
+      "read_from": "s7875_inbox",
+      "partition": 0,
+      "offset": 1,
+      "at": "2026-10-27T12:07:47.688-07:00"
+    },
+    {
+      "agent": "writer",
+      "agent_id": "writer-36885",
+      "read_from": "s7875_tasks",
+      "partition": 1,
+      "offset": 0,
+      "at": "2026-10-27T12:07:53.724-07:00"
+    },
+    {
+      "agent": "reviewer",
+      "agent_id": "reviewer-36890",
+      "read_from": "s7875_drafts",
+      "partition": 0,
+      "offset": 1,
+      "at": "2026-10-27T12:07:57.915-07:00"
+    }
+  ],
+  "finished_at": "2026-10-27T12:07:57.915-07:00"
+}
+
+correlation_id preserved through all 4 topics: True
+saved reports/hw08/raw/part2_journey_b14cad9d.json
+===== Pinal Pawar | SID4 7875 | PREFIX s7875 | PORT_BASE 8675 | run_hw08_part3.py duplicate (run 121517) =====
+
+====================================================================================================
+2026-10-27T12:15:17.371-07:00  DUPLICATE DELIVERY - before fix (IDEMPOTENCY=0)
+====================================================================================================
+2026-10-27T12:15:17.652-07:00 [PART3] started writer-A (pid 37273) group=s7875_writers_p3_duplicate_before_121517 IDEMPOTENCY=0  log=part3_duplicate_before_writer-A.log
+    | ===== Pinal Pawar | SID4 7875 | PREFIX s7875 | PORT_BASE 8675 | writer (writer-A) =====
+    | 2026-10-27T12:15:17.771-07:00 [WRITER-A] in=s7875_tasks group=s7875_writers_p3_duplicate_before_121517 idempotency=False commit_mode=after max_retries=3 work_delay_s=0.0 dead_letter=s7875_de
+    | 2026-10-27T12:15:17.801-07:00 [WRITER-A] ASSIGNED partitions [0, 1]
+    | 2026-10-27T12:15:17.804-07:00 [WRITER-A] writer is ready and listening on s7875_tasks
+2026-10-27T12:15:17.853-07:00 [PART3] send task corr=dup-before-7e612654, then REPLAY the identical message (same correlation_id)
+    | 2026-10-27T12:15:17.867-07:00 [WRITER-A] RECEIVE         corr=dup-before-7e612654 topic=s7875_tasks p=0 off=1 key=dup-before-7e612654 {"correlation_id": "dup-before-7e612654", "stage": "plan
+    | 2026-10-27T12:15:17.867-07:00 [WRITER-A] PROCESS-START   corr=dup-before-7e612654 attempt=1 work_delay_s=0.0
+    | 2026-10-27T12:15:17.867-07:00 [WRITER-A] PROCESS-DONE    corr=dup-before-7e612654 words=51 model=offline stand-in (HW8_FAKE_LLM=1)
+    | 2026-10-27T12:15:17.867-07:00 [WRITER-A] SEND            corr=dup-before-7e612654 topic=s7875_drafts {"correlation_id": "dup-before-7e612654", "question": "What should I do with a recalled b
+2026-10-27T12:15:17.869-07:00 [PART3] both copies written at (partition, offset) = [(0, 1), (0, 2)]
+    | 2026-10-27T12:15:17.877-07:00 [WRITER-A] COMMIT          corr=dup-before-7e612654 p=0 next_offset=2
+    | 2026-10-27T12:15:17.878-07:00 [WRITER-A] RECEIVE         corr=dup-before-7e612654 topic=s7875_tasks p=0 off=2 key=dup-before-7e612654 {"correlation_id": "dup-before-7e612654", "stage": "plan
+    | 2026-10-27T12:15:17.878-07:00 [WRITER-A] PROCESS-START   corr=dup-before-7e612654 attempt=1 work_delay_s=0.0
+    | 2026-10-27T12:15:17.878-07:00 [WRITER-A] PROCESS-DONE    corr=dup-before-7e612654 words=51 model=offline stand-in (HW8_FAKE_LLM=1)
+    | 2026-10-27T12:15:17.878-07:00 [WRITER-A] SEND            corr=dup-before-7e612654 topic=s7875_drafts {"correlation_id": "dup-before-7e612654", "question": "What should I do with a recalled b
+    | 2026-10-27T12:15:17.883-07:00 [WRITER-A] COMMIT          corr=dup-before-7e612654 p=0 next_offset=3
+    | 2026-10-27T12:15:23.206-07:00 [WRITER-A] stopping (signal)
+2026-10-27T12:15:23.242-07:00 [PART3] RESULT before: {"group": "s7875_writers_p3_duplicate_before_121517", "correlation_id": "dup-before-7e612654", "copies_sent": 2, "placed": [[0, 1], [0, 2]], "received": 2, "model_calls": 2, "duplicate_skips": 0, "drafts_on_s7875_drafts": 2, "log": "part3_duplicate_before_writer-A.log"}
+
+====================================================================================================
+2026-10-27T12:15:23.242-07:00  DUPLICATE DELIVERY - after fix (IDEMPOTENCY=1)
+====================================================================================================
+2026-10-27T12:15:23.519-07:00 [PART3] started writer-A (pid 37274) group=s7875_writers_p3_duplicate_after_121517 IDEMPOTENCY=1  log=part3_duplicate_after_writer-A.log
+    | ===== Pinal Pawar | SID4 7875 | PREFIX s7875 | PORT_BASE 8675 | writer (writer-A) =====
+    | 2026-10-27T12:15:23.638-07:00 [WRITER-A] in=s7875_tasks group=s7875_writers_p3_duplicate_after_121517 idempotency=True commit_mode=after max_retries=3 work_delay_s=0.0 dead_letter=s7875_dead
+    | 2026-10-27T12:15:23.660-07:00 [WRITER-A] ASSIGNED partitions [0, 1]
+    | 2026-10-27T12:15:23.664-07:00 [WRITER-A] writer is ready and listening on s7875_tasks
+2026-10-27T12:15:23.721-07:00 [PART3] send task corr=dup-after-10bfa1a2, then REPLAY the identical message (same correlation_id)
+    | 2026-10-27T12:15:23.733-07:00 [WRITER-A] RECEIVE         corr=dup-after-10bfa1a2 topic=s7875_tasks p=0 off=3 key=dup-after-10bfa1a2 {"correlation_id": "dup-after-10bfa1a2", "stage": "plan", 
+    | 2026-10-27T12:15:23.733-07:00 [WRITER-A] PROCESS-START   corr=dup-after-10bfa1a2 attempt=1 work_delay_s=0.0
+    | 2026-10-27T12:15:23.733-07:00 [WRITER-A] PROCESS-DONE    corr=dup-after-10bfa1a2 words=51 model=offline stand-in (HW8_FAKE_LLM=1)
+    | 2026-10-27T12:15:23.733-07:00 [WRITER-A] SEND            corr=dup-after-10bfa1a2 topic=s7875_drafts {"correlation_id": "dup-after-10bfa1a2", "question": "What should I do with a recalled bag
+2026-10-27T12:15:23.736-07:00 [PART3] both copies written at (partition, offset) = [(0, 3), (0, 4)]
+    | 2026-10-27T12:15:23.755-07:00 [WRITER-A] COMMIT          corr=dup-after-10bfa1a2 p=0 next_offset=4
+    | 2026-10-27T12:15:23.757-07:00 [WRITER-A] RECEIVE         corr=dup-after-10bfa1a2 topic=s7875_tasks p=0 off=4 key=dup-after-10bfa1a2 {"correlation_id": "dup-after-10bfa1a2", "stage": "plan", 
+    | 2026-10-27T12:15:23.757-07:00 [WRITER-A] DUPLICATE-SKIP  corr=dup-after-10bfa1a2 key=dup-after-10bfa1a2 note=already processed; no model call, nothing sent
+    | 2026-10-27T12:15:23.758-07:00 [WRITER-A] COMMIT          corr=dup-after-10bfa1a2 p=0 next_offset=5
+    | 2026-10-27T12:15:29.059-07:00 [WRITER-A] stopping (signal)
+2026-10-27T12:15:29.092-07:00 [PART3] RESULT after: {"group": "s7875_writers_p3_duplicate_after_121517", "correlation_id": "dup-after-10bfa1a2", "copies_sent": 2, "placed": [[0, 3], [0, 4]], "received": 2, "model_calls": 1, "duplicate_skips": 1, "drafts_on_s7875_drafts": 1, "log": "part3_duplicate_after_writer-A.log"}
+
+====================================================================================================
+2026-10-27T12:15:29.093-07:00  FAILURE TABLE
+====================================================================================================
+| Failure scenario | Before fix | After fix |
+|---|---|---|
+| Duplicate delivery | same task sent twice -> 2 model calls, 2 drafts (extra side effect) | 1 model call, 1 draft, 1 DUPLICATE-SKIP |
+===== Pinal Pawar | SID4 7875 | PREFIX s7875 | PORT_BASE 8675 | run_hw08_part3.py kill (run 121603) =====
+
+====================================================================================================
+2026-10-27T12:16:03.864-07:00  CONSUMER KILLED MID-WORK - before fix (COMMIT_MODE=before)
+====================================================================================================
+2026-10-27T12:16:04.163-07:00 [PART3] started writer-A (pid 37298) group=s7875_writers_p3_kill_before_121603 COMMIT_MODE=before WORK_DELAY_S=8  log=part3_kill_before_writer-A.log
+    | ===== Pinal Pawar | SID4 7875 | PREFIX s7875 | PORT_BASE 8675 | writer (writer-A) =====
+    | 2026-10-27T12:16:04.288-07:00 [WRITER-A] in=s7875_tasks group=s7875_writers_p3_kill_before_121603 idempotency=True commit_mode=before max_retries=3 work_delay_s=8.0 dead_letter=s7875_dead_le
+    | 2026-10-27T12:16:04.318-07:00 [WRITER-A] ASSIGNED partitions [0, 1]
+    | 2026-10-27T12:16:04.321-07:00 [WRITER-A] writer is ready and listening on s7875_tasks
+2026-10-27T12:16:04.377-07:00 [PART3] sent task corr=kill-before-181768dd at partition=0 offset=5
+    | 2026-10-27T12:16:04.378-07:00 [WRITER-A] RECEIVE         corr=kill-before-181768dd topic=s7875_tasks p=0 off=5 key=kill-before-181768dd {"correlation_id": "kill-before-181768dd", "stage": "p
+    | 2026-10-27T12:16:04.380-07:00 [WRITER-A] COMMIT          corr=kill-before-181768dd p=0 next_offset=6 note=committed BEFORE processing (COMMIT_MODE=before)
+    | 2026-10-27T12:16:04.380-07:00 [WRITER-A] PROCESS-START   corr=kill-before-181768dd attempt=1 work_delay_s=8.0
+2026-10-27T12:16:06.080-07:00 [PART3] kill -9 writer-A (pid 37298) while it is mid-processing
+2026-10-27T12:16:06.107-07:00 [PART3] committed offset for partition 0 right after the kill = 6 (message offset 5: already past it -> it will NOT be read again)
+2026-10-27T12:16:06.107-07:00 [PART3] restart the Writer in the same consumer group
+2026-10-27T12:16:06.110-07:00 [PART3] started writer-B (pid 37301) group=s7875_writers_p3_kill_before_121603 COMMIT_MODE=before WORK_DELAY_S=0  log=part3_kill_before_writer-B.log
+    | ===== Pinal Pawar | SID4 7875 | PREFIX s7875 | PORT_BASE 8675 | writer (writer-B) =====
+    | 2026-10-27T12:16:06.232-07:00 [WRITER-B] in=s7875_tasks group=s7875_writers_p3_kill_before_121603 idempotency=True commit_mode=before max_retries=3 work_delay_s=0.0 dead_letter=s7875_dead_le
+    | 2026-10-27T12:16:14.382-07:00 [WRITER-B] ASSIGNED partitions [0, 1]
+    | 2026-10-27T12:16:14.391-07:00 [WRITER-B] writer is ready and listening on s7875_tasks
+    | 2026-10-27T12:16:44.759-07:00 [WRITER-B] stopping (signal)
+2026-10-27T12:16:44.797-07:00 [PART3] RESULT before: {"group": "s7875_writers_p3_kill_before_121603", "correlation_id": "kill-before-181768dd", "partition": 0, "offset": 5, "writer_A_started_processing": true, "writer_A_finished": false, "committed_offset_at_kill": 6, "redelivered_to_writer_B": false, "drafts_on_s7875_drafts": 0, "committed_offset_at_end": 6, "outcome": "LOST (never completed)", "logs": ["part3_kill_before_writer-A.log", "part3_kill_before_writer-B.log"]}
+
+====================================================================================================
+2026-10-27T12:16:44.797-07:00  CONSUMER KILLED MID-WORK - after fix (COMMIT_MODE=after)
+====================================================================================================
+2026-10-27T12:16:45.041-07:00 [PART3] started writer-A (pid 37314) group=s7875_writers_p3_kill_after_121603 COMMIT_MODE=after WORK_DELAY_S=8  log=part3_kill_after_writer-A.log
+    | ===== Pinal Pawar | SID4 7875 | PREFIX s7875 | PORT_BASE 8675 | writer (writer-A) =====
+    | 2026-10-27T12:16:45.226-07:00 [WRITER-A] in=s7875_tasks group=s7875_writers_p3_kill_after_121603 idempotency=True commit_mode=after max_retries=3 work_delay_s=8.0 dead_letter=s7875_dead_lett
+    | 2026-10-27T12:16:45.249-07:00 [WRITER-A] ASSIGNED partitions [0, 1]
+    | 2026-10-27T12:16:45.253-07:00 [WRITER-A] writer is ready and listening on s7875_tasks
+2026-10-27T12:16:45.456-07:00 [PART3] sent task corr=kill-after-6d291d0c at partition=1 offset=1
+    | 2026-10-27T12:16:45.456-07:00 [WRITER-A] RECEIVE         corr=kill-after-6d291d0c topic=s7875_tasks p=1 off=1 key=kill-after-6d291d0c {"correlation_id": "kill-after-6d291d0c", "stage": "plan
+    | 2026-10-27T12:16:45.456-07:00 [WRITER-A] PROCESS-START   corr=kill-after-6d291d0c attempt=1 work_delay_s=8.0
+2026-10-27T12:16:47.159-07:00 [PART3] kill -9 writer-A (pid 37314) while it is mid-processing
+2026-10-27T12:16:47.209-07:00 [PART3] committed offset for partition 1 right after the kill = 1 (message offset 1: not past it -> it will be read again)
+2026-10-27T12:16:47.209-07:00 [PART3] restart the Writer in the same consumer group
+2026-10-27T12:16:47.214-07:00 [PART3] started writer-B (pid 37319) group=s7875_writers_p3_kill_after_121603 COMMIT_MODE=after WORK_DELAY_S=0  log=part3_kill_after_writer-B.log
+    | ===== Pinal Pawar | SID4 7875 | PREFIX s7875 | PORT_BASE 8675 | writer (writer-B) =====
+    | 2026-10-27T12:16:47.336-07:00 [WRITER-B] in=s7875_tasks group=s7875_writers_p3_kill_after_121603 idempotency=True commit_mode=after max_retries=3 work_delay_s=0.0 dead_letter=s7875_dead_lett
+    | 2026-10-27T12:16:55.258-07:00 [WRITER-B] ASSIGNED partitions [0, 1]
+    | 2026-10-27T12:16:55.266-07:00 [WRITER-B] writer is ready and listening on s7875_tasks
+    | 2026-10-27T12:16:55.268-07:00 [WRITER-B] RECEIVE         corr=kill-after-6d291d0c topic=s7875_tasks p=1 off=1 key=kill-after-6d291d0c {"correlation_id": "kill-after-6d291d0c", "stage": "plan
+    | 2026-10-27T12:16:55.269-07:00 [WRITER-B] PROCESS-START   corr=kill-after-6d291d0c attempt=1 work_delay_s=0.0
+    | 2026-10-27T12:16:55.269-07:00 [WRITER-B] PROCESS-DONE    corr=kill-after-6d291d0c words=51 model=offline stand-in (HW8_FAKE_LLM=1)
+    | 2026-10-27T12:16:55.269-07:00 [WRITER-B] SEND            corr=kill-after-6d291d0c topic=s7875_drafts {"correlation_id": "kill-after-6d291d0c", "question": "What should I do with a recalled b
+    | 2026-10-27T12:16:55.284-07:00 [WRITER-B] COMMIT          corr=kill-after-6d291d0c p=1 next_offset=2
+    | 2026-10-27T12:17:00.521-07:00 [WRITER-B] stopping (signal)
+2026-10-27T12:17:00.563-07:00 [PART3] RESULT after: {"group": "s7875_writers_p3_kill_after_121603", "correlation_id": "kill-after-6d291d0c", "partition": 1, "offset": 1, "writer_A_started_processing": true, "writer_A_finished": false, "committed_offset_at_kill": 1, "redelivered_to_writer_B": true, "drafts_on_s7875_drafts": 1, "committed_offset_at_end": 2, "outcome": "completed after restart", "logs": ["part3_kill_after_writer-A.log", "part3_kill_after_writer-B.log"]}
+
+====================================================================================================
+2026-10-27T12:17:00.565-07:00  FAILURE TABLE
+====================================================================================================
+| Failure scenario | Before fix | After fix |
+|---|---|---|
+| Duplicate delivery | same task sent twice -> 2 model calls, 2 drafts (extra side effect) | 1 model call, 1 draft, 1 DUPLICATE-SKIP |
+| Consumer killed mid-work | offset committed on receipt (committed=6 > msg offset 5); after restart redelivered=False -> LOST (never completed) | commit after send (committed=1 at kill); redelivered=True -> completed after restart |
+===== Pinal Pawar | SID4 7875 | PREFIX s7875 | PORT_BASE 8675 | run_hw08_part3.py poison (run 121747) =====
+
+====================================================================================================
+2026-10-27T12:17:47.738-07:00  POISON MESSAGE - before fix (MAX_RETRIES=0)
+====================================================================================================
+2026-10-27T12:17:48.142-07:00 [PART3] sent poison corr=poison-before-f5a4be62 (plan=null) then good corr=good-before-fc18cd89 at [(0, 6), (0, 7)]
+2026-10-27T12:17:48.149-07:00 [PART3] started writer-run1 (pid 37365) group=s7875_writers_p3_poison_before_121747 MAX_RETRIES=0  log=part3_poison_before_writer-run1.log
+    | ===== Pinal Pawar | SID4 7875 | PREFIX s7875 | PORT_BASE 8675 | writer (writer-run1) =====
+    | 2026-10-27T12:17:48.278-07:00 [WRITER-RUN1] in=s7875_tasks group=s7875_writers_p3_poison_before_121747 idempotency=True commit_mode=after max_retries=0 work_delay_s=0.0 dead_letter=s7875_dea
+    | 2026-10-27T12:17:48.311-07:00 [WRITER-RUN1] ASSIGNED partitions [0, 1]
+    | 2026-10-27T12:17:48.315-07:00 [WRITER-RUN1] writer is ready and listening on s7875_tasks
+    | 2026-10-27T12:17:48.316-07:00 [WRITER-RUN1] RECEIVE         corr=poison-before-f5a4be62 topic=s7875_tasks p=0 off=6 key=poison-before-f5a4be62 {"correlation_id": "poison-before-f5a4be62", "s
+    | 2026-10-27T12:17:48.316-07:00 [WRITER-RUN1] PROCESS-START   corr=poison-before-f5a4be62 attempt=1 work_delay_s=0.0
+    | 2026-10-27T12:17:48.316-07:00 [WRITER-RUN1] CRASH           corr=poison-before-f5a4be62 error=ValueError: task has no usable plan (expected a non-empty list of steps) p=0 off=6 note=no retry
+    | Traceback (most recent call last):
+    |   File "/Users/atharvamundada/Desktop/data260-7875/kafka_hw8/agent_base.py", line 264, in main
+    |     asyncio.run(agent_cls().run())
+    |   File "/opt/anaconda3/envs/data260/lib/python3.11/asyncio/runners.py", line 190, in run
+    |     return runner.run(main)
+    |            ^^^^^^^^^^^^^^^^
+    |   File "/opt/anaconda3/envs/data260/lib/python3.11/asyncio/runners.py", line 118, in run
+    |     return self._loop.run_until_complete(task)
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/opt/anaconda3/envs/data260/lib/python3.11/asyncio/base_events.py", line 654, in run_until_complete
+    |     return future.result()
+    |            ^^^^^^^^^^^^^^^
+    |   File "/Users/atharvamundada/Desktop/data260-7875/kafka_hw8/agent_base.py", line 151, in run
+    |     consume.result()  # re-raise a crash (MAX_RETRIES=0)
+    |     ^^^^^^^^^^^^^^^^
+    |   File "/Users/atharvamundada/Desktop/data260-7875/kafka_hw8/agent_base.py", line 161, in _consume
+    |     await self.process_record(record)
+    |   File "/Users/atharvamundada/Desktop/data260-7875/kafka_hw8/agent_base.py", line 195, in process_record
+    |     outputs = await self.handle(msg, record)
+    |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/Users/atharvamundada/Desktop/data260-7875/kafka_hw8/agents.py", line 139, in handle
+    |     raise ValueError("task has no usable plan (expected a non-empty list of steps)")
+    | ValueError: task has no usable plan (expected a non-empty list of steps)
+2026-10-27T12:17:48.652-07:00 [PART3] writer-run1 exited with code 1 (crash #1); restarting it
+2026-10-27T12:17:48.659-07:00 [PART3] started writer-run2 (pid 37366) group=s7875_writers_p3_poison_before_121747 MAX_RETRIES=0  log=part3_poison_before_writer-run2.log
+    | ===== Pinal Pawar | SID4 7875 | PREFIX s7875 | PORT_BASE 8675 | writer (writer-run2) =====
+    | 2026-10-27T12:17:48.778-07:00 [WRITER-RUN2] in=s7875_tasks group=s7875_writers_p3_poison_before_121747 idempotency=True commit_mode=after max_retries=0 work_delay_s=0.0 dead_letter=s7875_dea
+    | 2026-10-27T12:17:48.809-07:00 [WRITER-RUN2] ASSIGNED partitions [0, 1]
+    | 2026-10-27T12:17:48.812-07:00 [WRITER-RUN2] writer is ready and listening on s7875_tasks
+    | 2026-10-27T12:17:48.813-07:00 [WRITER-RUN2] RECEIVE         corr=poison-before-f5a4be62 topic=s7875_tasks p=0 off=6 key=poison-before-f5a4be62 {"correlation_id": "poison-before-f5a4be62", "s
+    | 2026-10-27T12:17:48.813-07:00 [WRITER-RUN2] PROCESS-START   corr=poison-before-f5a4be62 attempt=1 work_delay_s=0.0
+    | 2026-10-27T12:17:48.813-07:00 [WRITER-RUN2] CRASH           corr=poison-before-f5a4be62 error=ValueError: task has no usable plan (expected a non-empty list of steps) p=0 off=6 note=no retry
+    | Traceback (most recent call last):
+    |   File "/Users/atharvamundada/Desktop/data260-7875/kafka_hw8/agent_base.py", line 264, in main
+    |     asyncio.run(agent_cls().run())
+    |   File "/opt/anaconda3/envs/data260/lib/python3.11/asyncio/runners.py", line 190, in run
+    |     return runner.run(main)
+    |            ^^^^^^^^^^^^^^^^
+    |   File "/opt/anaconda3/envs/data260/lib/python3.11/asyncio/runners.py", line 118, in run
+    |     return self._loop.run_until_complete(task)
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/opt/anaconda3/envs/data260/lib/python3.11/asyncio/base_events.py", line 654, in run_until_complete
+    |     return future.result()
+    |            ^^^^^^^^^^^^^^^
+    |   File "/Users/atharvamundada/Desktop/data260-7875/kafka_hw8/agent_base.py", line 151, in run
+    |     consume.result()  # re-raise a crash (MAX_RETRIES=0)
+    |     ^^^^^^^^^^^^^^^^
+    |   File "/Users/atharvamundada/Desktop/data260-7875/kafka_hw8/agent_base.py", line 161, in _consume
+    |     await self.process_record(record)
+    |   File "/Users/atharvamundada/Desktop/data260-7875/kafka_hw8/agent_base.py", line 195, in process_record
+    |     outputs = await self.handle(msg, record)
+    |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/Users/atharvamundada/Desktop/data260-7875/kafka_hw8/agents.py", line 139, in handle
+    |     raise ValueError("task has no usable plan (expected a non-empty list of steps)")
+    | ValueError: task has no usable plan (expected a non-empty list of steps)
+2026-10-27T12:17:49.162-07:00 [PART3] writer-run2 exited with code 1 (crash #2); restarting it
+2026-10-27T12:17:49.168-07:00 [PART3] started writer-run3 (pid 37367) group=s7875_writers_p3_poison_before_121747 MAX_RETRIES=0  log=part3_poison_before_writer-run3.log
+    | ===== Pinal Pawar | SID4 7875 | PREFIX s7875 | PORT_BASE 8675 | writer (writer-run3) =====
+    | 2026-10-27T12:17:49.282-07:00 [WRITER-RUN3] in=s7875_tasks group=s7875_writers_p3_poison_before_121747 idempotency=True commit_mode=after max_retries=0 work_delay_s=0.0 dead_letter=s7875_dea
+    | 2026-10-27T12:17:49.319-07:00 [WRITER-RUN3] ASSIGNED partitions [0, 1]
+    | 2026-10-27T12:17:49.322-07:00 [WRITER-RUN3] writer is ready and listening on s7875_tasks
+    | 2026-10-27T12:17:49.323-07:00 [WRITER-RUN3] RECEIVE         corr=poison-before-f5a4be62 topic=s7875_tasks p=0 off=6 key=poison-before-f5a4be62 {"correlation_id": "poison-before-f5a4be62", "s
+    | 2026-10-27T12:17:49.323-07:00 [WRITER-RUN3] PROCESS-START   corr=poison-before-f5a4be62 attempt=1 work_delay_s=0.0
+    | 2026-10-27T12:17:49.323-07:00 [WRITER-RUN3] CRASH           corr=poison-before-f5a4be62 error=ValueError: task has no usable plan (expected a non-empty list of steps) p=0 off=6 note=no retry
+    | Traceback (most recent call last):
+    |   File "/Users/atharvamundada/Desktop/data260-7875/kafka_hw8/agent_base.py", line 264, in main
+    |     asyncio.run(agent_cls().run())
+    |   File "/opt/anaconda3/envs/data260/lib/python3.11/asyncio/runners.py", line 190, in run
+    |     return runner.run(main)
+    |            ^^^^^^^^^^^^^^^^
+    |   File "/opt/anaconda3/envs/data260/lib/python3.11/asyncio/runners.py", line 118, in run
+    |     return self._loop.run_until_complete(task)
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/opt/anaconda3/envs/data260/lib/python3.11/asyncio/base_events.py", line 654, in run_until_complete
+    |     return future.result()
+    |            ^^^^^^^^^^^^^^^
+    |   File "/Users/atharvamundada/Desktop/data260-7875/kafka_hw8/agent_base.py", line 151, in run
+    |     consume.result()  # re-raise a crash (MAX_RETRIES=0)
+    |     ^^^^^^^^^^^^^^^^
+    |   File "/Users/atharvamundada/Desktop/data260-7875/kafka_hw8/agent_base.py", line 161, in _consume
+    |     await self.process_record(record)
+    |   File "/Users/atharvamundada/Desktop/data260-7875/kafka_hw8/agent_base.py", line 195, in process_record
+    |     outputs = await self.handle(msg, record)
+    |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/Users/atharvamundada/Desktop/data260-7875/kafka_hw8/agents.py", line 139, in handle
+    |     raise ValueError("task has no usable plan (expected a non-empty list of steps)")
+    | ValueError: task has no usable plan (expected a non-empty list of steps)
+2026-10-27T12:17:49.671-07:00 [PART3] writer-run3 exited with code 1 (crash #3); giving up after 3 runs
+2026-10-27T12:17:58.725-07:00 [PART3] RESULT before: {"group": "s7875_writers_p3_poison_before_121747", "poison_correlation_id": "poison-before-f5a4be62", "good_correlation_id": "good-before-fc18cd89", "placed": [[0, 6], [0, 7]], "max_retries": 0, "writer_crashes": 3, "poison_attempts": 3, "retry_lines": 0, "poison_on_dead_letter": 0, "good_message_processed": false, "committed_offset_partition0": 6, "logs": ["part3_poison_before_writer-run1.log", "part3_poison_before_writer-run2.log", "part3_poison_before_writer-run3.log"]}
+
+====================================================================================================
+2026-10-27T12:17:58.725-07:00  POISON MESSAGE - after fix (MAX_RETRIES=3)
+====================================================================================================
+2026-10-27T12:17:59.104-07:00 [PART3] sent poison corr=poison-after-1794d9d5 (plan=null) then good corr=good-after-9c8f479e at [(0, 8), (0, 9)]
+2026-10-27T12:17:59.108-07:00 [PART3] started writer-A (pid 37376) group=s7875_writers_p3_poison_after_121747 MAX_RETRIES=3 RETRY_BACKOFF_S=0.5  log=part3_poison_after_writer-A.log
+    | ===== Pinal Pawar | SID4 7875 | PREFIX s7875 | PORT_BASE 8675 | writer (writer-A) =====
+    | 2026-10-27T12:17:59.278-07:00 [WRITER-A] in=s7875_tasks group=s7875_writers_p3_poison_after_121747 idempotency=True commit_mode=after max_retries=3 work_delay_s=0.0 dead_letter=s7875_dead_le
+    | 2026-10-27T12:17:59.305-07:00 [WRITER-A] ASSIGNED partitions [0, 1]
+    | 2026-10-27T12:17:59.308-07:00 [WRITER-A] writer is ready and listening on s7875_tasks
+    | 2026-10-27T12:17:59.309-07:00 [WRITER-A] RECEIVE         corr=poison-after-1794d9d5 topic=s7875_tasks p=0 off=8 key=poison-after-1794d9d5 {"correlation_id": "poison-after-1794d9d5", "stage":
+    | 2026-10-27T12:17:59.309-07:00 [WRITER-A] PROCESS-START   corr=poison-after-1794d9d5 attempt=1 work_delay_s=0.0
+    | 2026-10-27T12:17:59.309-07:00 [WRITER-A] RETRY           corr=poison-after-1794d9d5 attempt=1/3 error=ValueError: task has no usable plan (expected a non-empty list of steps)
+    | 2026-10-27T12:17:59.809-07:00 [WRITER-A] PROCESS-START   corr=poison-after-1794d9d5 attempt=2 work_delay_s=0.0
+    | 2026-10-27T12:17:59.809-07:00 [WRITER-A] RETRY           corr=poison-after-1794d9d5 attempt=2/3 error=ValueError: task has no usable plan (expected a non-empty list of steps)
+    | 2026-10-27T12:18:00.811-07:00 [WRITER-A] PROCESS-START   corr=poison-after-1794d9d5 attempt=3 work_delay_s=0.0
+    | 2026-10-27T12:18:00.811-07:00 [WRITER-A] RETRY           corr=poison-after-1794d9d5 attempt=3/3 error=ValueError: task has no usable plan (expected a non-empty list of steps)
+    | 2026-10-27T12:18:00.811-07:00 [WRITER-A] DEAD-LETTER     corr=poison-after-1794d9d5 topic=s7875_dead_letter attempts=3 error=ValueError: task has no usable plan (expected a non-empty list of
+    | 2026-10-27T12:18:00.811-07:00 [WRITER-A] SEND            corr=poison-after-1794d9d5 topic=s7875_dead_letter {"correlation_id": "poison-after-1794d9d5", "failed_agent": "writer", "agent_id": 
+    | 2026-10-27T12:18:00.821-07:00 [WRITER-A] COMMIT          corr=poison-after-1794d9d5 p=0 next_offset=9
+    | 2026-10-27T12:18:00.822-07:00 [WRITER-A] RECEIVE         corr=good-after-9c8f479e topic=s7875_tasks p=0 off=9 key=good-after-9c8f479e {"correlation_id": "good-after-9c8f479e", "stage": "plan
+    | 2026-10-27T12:18:00.822-07:00 [WRITER-A] PROCESS-START   corr=good-after-9c8f479e attempt=1 work_delay_s=0.0
+    | 2026-10-27T12:18:00.822-07:00 [WRITER-A] PROCESS-DONE    corr=good-after-9c8f479e words=51 model=offline stand-in (HW8_FAKE_LLM=1)
+    | 2026-10-27T12:18:00.822-07:00 [WRITER-A] SEND            corr=good-after-9c8f479e topic=s7875_drafts {"correlation_id": "good-after-9c8f479e", "question": "What should I do with a recalled b
+    | 2026-10-27T12:18:00.827-07:00 [WRITER-A] COMMIT          corr=good-after-9c8f479e p=0 next_offset=10
+    | 2026-10-27T12:18:09.995-07:00 [WRITER-A] stopping (signal)
+2026-10-27T12:18:10.032-07:00 [PART3] RESULT after: {"group": "s7875_writers_p3_poison_after_121747", "poison_correlation_id": "poison-after-1794d9d5", "good_correlation_id": "good-after-9c8f479e", "placed": [[0, 8], [0, 9]], "max_retries": 3, "writer_crashes": 0, "poison_attempts": 3, "retry_lines": 3, "poison_on_dead_letter": 1, "good_message_processed": true, "committed_offset_partition0": 10, "logs": ["part3_poison_after_writer-A.log"]}
+
+====================================================================================================
+2026-10-27T12:18:10.034-07:00  FAILURE TABLE
+====================================================================================================
+| Failure scenario | Before fix | After fix |
+|---|---|---|
+| Duplicate delivery | same task sent twice -> 2 model calls, 2 drafts (extra side effect) | 1 model call, 1 draft, 1 DUPLICATE-SKIP |
+| Consumer killed mid-work | offset committed on receipt (committed=6 > msg offset 5); after restart redelivered=False -> LOST (never completed) | commit after send (committed=1 at kill); redelivered=True -> completed after restart |
+| Poison message | Writer crashed 3x on the same offset; good message processed=False (blocked) | 3 attempts -> s7875_dead_letter (1 record); good message processed=True |
+===== Pinal Pawar | SID4 7875 | PREFIX s7875 | PORT_BASE 8675 | run_hw08_part3.py ordering (run 121913) =====
+
+====================================================================================================
+2026-10-27T12:19:13.106-07:00  ORDERING - unkeyed run: 20 messages (VERIFY_SEED=267875) through s7875_tasks (2 partitions), 2 Writers in one consumer group
+====================================================================================================
+2026-10-27T12:19:13.267-07:00 [PART3] started writer-1 (pid 37443) group=s7875_writers_p3_ordering_unkeyed_121913 HW8_ORDER_LOG=/Users/atharvamundada/Desktop/data260-7875/reports/hw08/raw/part3_ordering_unkeyed.jsonl  log=part3_ordering_unkeyed_writer-1.log
+    | ===== Pinal Pawar | SID4 7875 | PREFIX s7875 | PORT_BASE 8675 | writer (writer-1) =====
+    | 2026-10-27T12:19:13.447-07:00 [WRITER-1] in=s7875_tasks group=s7875_writers_p3_ordering_unkeyed_121913 idempotency=True commit_mode=after max_retries=3 work_delay_s=0.0 dead_letter=s7875_dea
+    | 2026-10-27T12:19:13.510-07:00 [WRITER-1] ASSIGNED partitions [0, 1]
+    | 2026-10-27T12:19:13.532-07:00 [WRITER-1] writer is ready and listening on s7875_tasks
+2026-10-27T12:19:13.674-07:00 [PART3] started writer-2 (pid 37444) group=s7875_writers_p3_ordering_unkeyed_121913 HW8_ORDER_LOG=/Users/atharvamundada/Desktop/data260-7875/reports/hw08/raw/part3_ordering_unkeyed.jsonl  log=part3_ordering_unkeyed_writer-2.log
+    | ===== Pinal Pawar | SID4 7875 | PREFIX s7875 | PORT_BASE 8675 | writer (writer-2) =====
+    | 2026-10-27T12:19:13.856-07:00 [WRITER-2] in=s7875_tasks group=s7875_writers_p3_ordering_unkeyed_121913 idempotency=True commit_mode=after max_retries=3 work_delay_s=0.0 dead_letter=s7875_dea
+    | Heartbeat failed for group s7875_writers_p3_ordering_unkeyed_121913 because it is rebalancing
+    | 2026-10-27T12:19:16.517-07:00 [WRITER-1] REVOKED partitions [0, 1]
+    | 2026-10-27T12:19:16.523-07:00 [WRITER-1] ASSIGNED partitions [0]
+    | 2026-10-27T12:19:16.523-07:00 [WRITER-2] ASSIGNED partitions [1]
+    | 2026-10-27T12:19:16.527-07:00 [WRITER-2] writer is ready and listening on s7875_tasks
+2026-10-27T12:19:16.686-07:00 [PART3] assignment: writer-1 -> [0]  writer-2 -> [1]
+    | 2026-10-27T12:19:16.737-07:00 [WRITER-1] RECEIVE         corr=ord-unkeyed-121913-00 topic=s7875_tasks p=0 off=10 key=ord-unkeyed-121913-00 {"kind": "order_test", "run": "unkeyed", "message_i
+    | 2026-10-27T12:19:16.737-07:00 [WRITER-1] PROCESS-START   corr=ord-unkeyed-121913-00 attempt=1 work_delay_s=0.0
+    | 2026-10-27T12:19:16.738-07:00 [WRITER-2] RECEIVE         corr=ord-unkeyed-121913-01 topic=s7875_tasks p=1 off=2 key=ord-unkeyed-121913-01 {"kind": "order_test", "run": "unkeyed", "message_id
+    | 2026-10-27T12:19:16.739-07:00 [WRITER-2] PROCESS-START   corr=ord-unkeyed-121913-01 attempt=1 work_delay_s=0.0
+2026-10-27T12:19:16.757-07:00 [PART3] sent 20 messages (no key, round-robin i%2)
+    | 2026-10-27T12:19:16.884-07:00 [WRITER-2] ORDER-PROCESSED corr=ord-unkeyed-121913-01 entity=RCL-2026-61335 seq=1 p=1 off=2
+    | 2026-10-27T12:19:16.891-07:00 [WRITER-2] COMMIT          corr=ord-unkeyed-121913-01 p=1 next_offset=3
+    | 2026-10-27T12:19:16.894-07:00 [WRITER-2] RECEIVE         corr=ord-unkeyed-121913-03 topic=s7875_tasks p=1 off=3 key=ord-unkeyed-121913-03 {"kind": "order_test", "run": "unkeyed", "message_id
+    | 2026-10-27T12:19:16.894-07:00 [WRITER-2] PROCESS-START   corr=ord-unkeyed-121913-03 attempt=1 work_delay_s=0.0
+    | 2026-10-27T12:19:17.183-07:00 [WRITER-1] ORDER-PROCESSED corr=ord-unkeyed-121913-00 entity=RCL-2026-66434 seq=1 p=0 off=10
+    | 2026-10-27T12:19:17.193-07:00 [WRITER-1] COMMIT          corr=ord-unkeyed-121913-00 p=0 next_offset=11
+    | 2026-10-27T12:19:17.196-07:00 [WRITER-1] RECEIVE         corr=ord-unkeyed-121913-02 topic=s7875_tasks p=0 off=11 key=ord-unkeyed-121913-02 {"kind": "order_test", "run": "unkeyed", "message_i
+    | 2026-10-27T12:19:17.197-07:00 [WRITER-1] PROCESS-START   corr=ord-unkeyed-121913-02 attempt=1 work_delay_s=0.0
+    | 2026-10-27T12:19:17.240-07:00 [WRITER-2] ORDER-PROCESSED corr=ord-unkeyed-121913-03 entity=RCL-2026-59801 seq=2 p=1 off=3
+    | 2026-10-27T12:19:17.247-07:00 [WRITER-2] COMMIT          corr=ord-unkeyed-121913-03 p=1 next_offset=4
+    | 2026-10-27T12:19:17.247-07:00 [WRITER-2] RECEIVE         corr=ord-unkeyed-121913-05 topic=s7875_tasks p=1 off=4 key=ord-unkeyed-121913-05 {"kind": "order_test", "run": "unkeyed", "message_id
+    | 2026-10-27T12:19:17.248-07:00 [WRITER-2] PROCESS-START   corr=ord-unkeyed-121913-05 attempt=1 work_delay_s=0.0
+    | 2026-10-27T12:19:17.461-07:00 [WRITER-1] ORDER-PROCESSED corr=ord-unkeyed-121913-02 entity=RCL-2026-59801 seq=1 p=0 off=11
+    | 2026-10-27T12:19:17.467-07:00 [WRITER-1] COMMIT          corr=ord-unkeyed-121913-02 p=0 next_offset=12
+    | 2026-10-27T12:19:17.467-07:00 [WRITER-1] RECEIVE         corr=ord-unkeyed-121913-04 topic=s7875_tasks p=0 off=12 key=ord-unkeyed-121913-04 {"kind": "order_test", "run": "unkeyed", "message_i
+    | 2026-10-27T12:19:17.468-07:00 [WRITER-1] PROCESS-START   corr=ord-unkeyed-121913-04 attempt=1 work_delay_s=0.0
+    | 2026-10-27T12:19:17.601-07:00 [WRITER-2] ORDER-PROCESSED corr=ord-unkeyed-121913-05 entity=RCL-2026-59801 seq=3 p=1 off=4
+    | 2026-10-27T12:19:17.607-07:00 [WRITER-2] COMMIT          corr=ord-unkeyed-121913-05 p=1 next_offset=5
+    | 2026-10-27T12:19:17.608-07:00 [WRITER-2] RECEIVE         corr=ord-unkeyed-121913-07 topic=s7875_tasks p=1 off=5 key=ord-unkeyed-121913-07 {"kind": "order_test", "run": "unkeyed", "message_id
+    | 2026-10-27T12:19:17.608-07:00 [WRITER-2] PROCESS-START   corr=ord-unkeyed-121913-07 attempt=1 work_delay_s=0.0
+    | 2026-10-27T12:19:17.816-07:00 [WRITER-1] ORDER-PROCESSED corr=ord-unkeyed-121913-04 entity=RCL-2026-74265 seq=1 p=0 off=12
+    | 2026-10-27T12:19:17.819-07:00 [WRITER-1] COMMIT          corr=ord-unkeyed-121913-04 p=0 next_offset=13
+    | 2026-10-27T12:19:17.820-07:00 [WRITER-1] RECEIVE         corr=ord-unkeyed-121913-06 topic=s7875_tasks p=0 off=13 key=ord-unkeyed-121913-06 {"kind": "order_test", "run": "unkeyed", "message_i
+    | 2026-10-27T12:19:17.820-07:00 [WRITER-1] PROCESS-START   corr=ord-unkeyed-121913-06 attempt=1 work_delay_s=0.0
+    | 2026-10-27T12:19:18.100-07:00 [WRITER-2] ORDER-PROCESSED corr=ord-unkeyed-121913-07 entity=RCL-2026-59801 seq=4 p=1 off=5
+    | 2026-10-27T12:19:18.103-07:00 [WRITER-2] COMMIT          corr=ord-unkeyed-121913-07 p=1 next_offset=6
+    | 2026-10-27T12:19:18.103-07:00 [WRITER-2] RECEIVE         corr=ord-unkeyed-121913-09 topic=s7875_tasks p=1 off=6 key=ord-unkeyed-121913-09 {"kind": "order_test", "run": "unkeyed", "message_id
+    | 2026-10-27T12:19:18.103-07:00 [WRITER-2] PROCESS-START   corr=ord-unkeyed-121913-09 attempt=1 work_delay_s=0.0
+    | 2026-10-27T12:19:18.196-07:00 [WRITER-1] ORDER-PROCESSED corr=ord-unkeyed-121913-06 entity=RCL-2026-66434 seq=2 p=0 off=13
+    | 2026-10-27T12:19:18.200-07:00 [WRITER-1] COMMIT          corr=ord-unkeyed-121913-06 p=0 next_offset=14
+    | 2026-10-27T12:19:18.200-07:00 [WRITER-1] RECEIVE         corr=ord-unkeyed-121913-08 topic=s7875_tasks p=0 off=14 key=ord-unkeyed-121913-08 {"kind": "order_test", "run": "unkeyed", "message_i
+    | 2026-10-27T12:19:18.200-07:00 [WRITER-1] PROCESS-START   corr=ord-unkeyed-121913-08 attempt=1 work_delay_s=0.0
+    | 2026-10-27T12:19:18.297-07:00 [WRITER-2] ORDER-PROCESSED corr=ord-unkeyed-121913-09 entity=RCL-2026-61335 seq=2 p=1 off=6
+    | 2026-10-27T12:19:18.301-07:00 [WRITER-2] COMMIT          corr=ord-unkeyed-121913-09 p=1 next_offset=7
+    | 2026-10-27T12:19:18.301-07:00 [WRITER-2] RECEIVE         corr=ord-unkeyed-121913-11 topic=s7875_tasks p=1 off=7 key=ord-unkeyed-121913-11 {"kind": "order_test", "run": "unkeyed", "message_id
+    | 2026-10-27T12:19:18.301-07:00 [WRITER-2] PROCESS-START   corr=ord-unkeyed-121913-11 attempt=1 work_delay_s=0.0
+    | 2026-10-27T12:19:18.327-07:00 [WRITER-1] ORDER-PROCESSED corr=ord-unkeyed-121913-08 entity=RCL-2026-66434 seq=3 p=0 off=14
+    | 2026-10-27T12:19:18.331-07:00 [WRITER-1] COMMIT          corr=ord-unkeyed-121913-08 p=0 next_offset=15
+    | 2026-10-27T12:19:18.331-07:00 [WRITER-1] RECEIVE         corr=ord-unkeyed-121913-10 topic=s7875_tasks p=0 off=15 key=ord-unkeyed-121913-10 {"kind": "order_test", "run": "unkeyed", "message_i
+    | 2026-10-27T12:19:18.331-07:00 [WRITER-1] PROCESS-START   corr=ord-unkeyed-121913-10 attempt=1 work_delay_s=0.0
+    | 2026-10-27T12:19:18.459-07:00 [WRITER-2] ORDER-PROCESSED corr=ord-unkeyed-121913-11 entity=RCL-2026-59801 seq=5 p=1 off=7
+    | 2026-10-27T12:19:18.463-07:00 [WRITER-2] COMMIT          corr=ord-unkeyed-121913-11 p=1 next_offset=8
+    | 2026-10-27T12:19:18.464-07:00 [WRITER-2] RECEIVE         corr=ord-unkeyed-121913-13 topic=s7875_tasks p=1 off=8 key=ord-unkeyed-121913-13 {"kind": "order_test", "run": "unkeyed", "message_id
+    | 2026-10-27T12:19:18.464-07:00 [WRITER-2] PROCESS-START   corr=ord-unkeyed-121913-13 attempt=1 work_delay_s=0.0
+    | 2026-10-27T12:19:18.782-07:00 [WRITER-2] ORDER-PROCESSED corr=ord-unkeyed-121913-13 entity=RCL-2026-61335 seq=4 p=1 off=8
+    | 2026-10-27T12:19:18.841-07:00 [WRITER-1] ORDER-PROCESSED corr=ord-unkeyed-121913-10 entity=RCL-2026-61335 seq=3 p=0 off=15
+    | 2026-10-27T12:19:18.874-07:00 [WRITER-2] COMMIT          corr=ord-unkeyed-121913-13 p=1 next_offset=9
+    | 2026-10-27T12:19:18.874-07:00 [WRITER-1] COMMIT          corr=ord-unkeyed-121913-10 p=0 next_offset=16
+    | 2026-10-27T12:19:18.874-07:00 [WRITER-1] RECEIVE         corr=ord-unkeyed-121913-12 topic=s7875_tasks p=0 off=16 key=ord-unkeyed-121913-12 {"kind": "order_test", "run": "unkeyed", "message_i
+    | 2026-10-27T12:19:18.874-07:00 [WRITER-1] PROCESS-START   corr=ord-unkeyed-121913-12 attempt=1 work_delay_s=0.0
+    | 2026-10-27T12:19:18.874-07:00 [WRITER-2] RECEIVE         corr=ord-unkeyed-121913-15 topic=s7875_tasks p=1 off=9 key=ord-unkeyed-121913-15 {"kind": "order_test", "run": "unkeyed", "message_id
+    | 2026-10-27T12:19:18.874-07:00 [WRITER-2] PROCESS-START   corr=ord-unkeyed-121913-15 attempt=1 work_delay_s=0.0
+    | 2026-10-27T12:19:19.048-07:00 [WRITER-1] ORDER-PROCESSED corr=ord-unkeyed-121913-12 entity=RCL-2026-59801 seq=6 p=0 off=16
+    | 2026-10-27T12:19:19.052-07:00 [WRITER-1] COMMIT          corr=ord-unkeyed-121913-12 p=0 next_offset=17
+    | 2026-10-27T12:19:19.052-07:00 [WRITER-1] RECEIVE         corr=ord-unkeyed-121913-14 topic=s7875_tasks p=0 off=17 key=ord-unkeyed-121913-14 {"kind": "order_test", "run": "unkeyed", "message_i
+    | 2026-10-27T12:19:19.052-07:00 [WRITER-1] PROCESS-START   corr=ord-unkeyed-121913-14 attempt=1 work_delay_s=0.0
+    | 2026-10-27T12:19:19.166-07:00 [WRITER-2] ORDER-PROCESSED corr=ord-unkeyed-121913-15 entity=RCL-2026-66434 seq=4 p=1 off=9
+    | 2026-10-27T12:19:19.172-07:00 [WRITER-2] COMMIT          corr=ord-unkeyed-121913-15 p=1 next_offset=10
+    | 2026-10-27T12:19:19.172-07:00 [WRITER-2] RECEIVE         corr=ord-unkeyed-121913-17 topic=s7875_tasks p=1 off=10 key=ord-unkeyed-121913-17 {"kind": "order_test", "run": "unkeyed", "message_i
+    | 2026-10-27T12:19:19.172-07:00 [WRITER-2] PROCESS-START   corr=ord-unkeyed-121913-17 attempt=1 work_delay_s=0.0
+    | 2026-10-27T12:19:19.385-07:00 [WRITER-1] ORDER-PROCESSED corr=ord-unkeyed-121913-14 entity=RCL-2026-59801 seq=7 p=0 off=17
+    | 2026-10-27T12:19:19.401-07:00 [WRITER-1] COMMIT          corr=ord-unkeyed-121913-14 p=0 next_offset=18
+    | 2026-10-27T12:19:19.401-07:00 [WRITER-1] RECEIVE         corr=ord-unkeyed-121913-16 topic=s7875_tasks p=0 off=18 key=ord-unkeyed-121913-16 {"kind": "order_test", "run": "unkeyed", "message_i
+    | 2026-10-27T12:19:19.401-07:00 [WRITER-1] PROCESS-START   corr=ord-unkeyed-121913-16 attempt=1 work_delay_s=0.0
+    | 2026-10-27T12:19:19.742-07:00 [WRITER-1] ORDER-PROCESSED corr=ord-unkeyed-121913-16 entity=RCL-2026-59801 seq=8 p=0 off=18
+    | 2026-10-27T12:19:19.747-07:00 [WRITER-1] COMMIT          corr=ord-unkeyed-121913-16 p=0 next_offset=19
+    | 2026-10-27T12:19:19.747-07:00 [WRITER-1] RECEIVE         corr=ord-unkeyed-121913-18 topic=s7875_tasks p=0 off=19 key=ord-unkeyed-121913-18 {"kind": "order_test", "run": "unkeyed", "message_i
+    | 2026-10-27T12:19:19.747-07:00 [WRITER-1] PROCESS-START   corr=ord-unkeyed-121913-18 attempt=1 work_delay_s=0.0
+    | 2026-10-27T12:19:19.759-07:00 [WRITER-2] ORDER-PROCESSED corr=ord-unkeyed-121913-17 entity=RCL-2026-61335 seq=5 p=1 off=10
+    | 2026-10-27T12:19:19.763-07:00 [WRITER-2] COMMIT          corr=ord-unkeyed-121913-17 p=1 next_offset=11
+    | 2026-10-27T12:19:19.763-07:00 [WRITER-2] RECEIVE         corr=ord-unkeyed-121913-19 topic=s7875_tasks p=1 off=11 key=ord-unkeyed-121913-19 {"kind": "order_test", "run": "unkeyed", "message_i
+    | 2026-10-27T12:19:19.763-07:00 [WRITER-2] PROCESS-START   corr=ord-unkeyed-121913-19 attempt=1 work_delay_s=0.0
+    | 2026-10-27T12:19:20.108-07:00 [WRITER-2] ORDER-PROCESSED corr=ord-unkeyed-121913-19 entity=RCL-2026-61335 seq=6 p=1 off=11
+    | 2026-10-27T12:19:20.115-07:00 [WRITER-2] COMMIT          corr=ord-unkeyed-121913-19 p=1 next_offset=12
+    | 2026-10-27T12:19:20.160-07:00 [WRITER-1] ORDER-PROCESSED corr=ord-unkeyed-121913-18 entity=RCL-2026-66434 seq=5 p=0 off=19
+    | 2026-10-27T12:19:20.164-07:00 [WRITER-1] COMMIT          corr=ord-unkeyed-121913-18 p=0 next_offset=20
+    | 2026-10-27T12:19:20.269-07:00 [WRITER-1] stopping (signal)
+    | 2026-10-27T12:19:20.339-07:00 [WRITER-2] stopping (signal)
+
+  sent order (index: entity seq -> partition):
+     0: RCL-2026-66434 seq=1 -> p0 (work 445 ms)
+     1: RCL-2026-61335 seq=1 -> p1 (work 144 ms)
+     2: RCL-2026-59801 seq=1 -> p0 (work 263 ms)
+     3: RCL-2026-59801 seq=2 -> p1 (work 344 ms)
+     4: RCL-2026-74265 seq=1 -> p0 (work 347 ms)
+     5: RCL-2026-59801 seq=3 -> p1 (work 353 ms)
+     6: RCL-2026-66434 seq=2 -> p0 (work 375 ms)
+     7: RCL-2026-59801 seq=4 -> p1 (work 491 ms)
+     8: RCL-2026-66434 seq=3 -> p0 (work 126 ms)
+     9: RCL-2026-61335 seq=2 -> p1 (work 193 ms)
+    10: RCL-2026-61335 seq=3 -> p0 (work 501 ms)
+    11: RCL-2026-59801 seq=5 -> p1 (work 158 ms)
+    12: RCL-2026-59801 seq=6 -> p0 (work 173 ms)
+    13: RCL-2026-61335 seq=4 -> p1 (work 317 ms)
+    14: RCL-2026-59801 seq=7 -> p0 (work 330 ms)
+    15: RCL-2026-66434 seq=4 -> p1 (work 291 ms)
+    16: RCL-2026-59801 seq=8 -> p0 (work 340 ms)
+    17: RCL-2026-61335 seq=5 -> p1 (work 586 ms)
+    18: RCL-2026-66434 seq=5 -> p0 (work 411 ms)
+    19: RCL-2026-61335 seq=6 -> p1 (work 344 ms)
+
+  processed order per entity:
+    RCL-2026-59801: seq [2, 1, 3, 4, 5, 6, 7, 8]  partitions=[0, 1] writers=['writer-1', 'writer-2']  OUT OF ORDER
+    RCL-2026-66434: seq [1, 2, 3, 4, 5]  partitions=[0, 1] writers=['writer-1', 'writer-2']  IN ORDER
+    RCL-2026-74265: seq [1]  partitions=[0] writers=['writer-1']  IN ORDER
+    RCL-2026-61335: seq [1, 2, 4, 3, 5, 6]  partitions=[0, 1] writers=['writer-1', 'writer-2']  OUT OF ORDER
+2026-10-27T12:19:20.376-07:00 [PART3] RESULT unkeyed: processed=20 entities_out_of_order=2 inversions=2
+
+====================================================================================================
+2026-10-27T12:19:20.376-07:00  ORDERING - keyed run: 20 messages (VERIFY_SEED=267875) through s7875_tasks (2 partitions), 2 Writers in one consumer group
+====================================================================================================
+2026-10-27T12:19:20.526-07:00 [PART3] started writer-1 (pid 37449) group=s7875_writers_p3_ordering_keyed_121913 HW8_ORDER_LOG=/Users/atharvamundada/Desktop/data260-7875/reports/hw08/raw/part3_ordering_keyed.jsonl  log=part3_ordering_keyed_writer-1.log
+    | ===== Pinal Pawar | SID4 7875 | PREFIX s7875 | PORT_BASE 8675 | writer (writer-1) =====
+    | 2026-10-27T12:19:20.646-07:00 [WRITER-1] in=s7875_tasks group=s7875_writers_p3_ordering_keyed_121913 idempotency=True commit_mode=after max_retries=3 work_delay_s=0.0 dead_letter=s7875_dead_
+    | 2026-10-27T12:19:20.667-07:00 [WRITER-1] ASSIGNED partitions [0, 1]
+    | 2026-10-27T12:19:20.669-07:00 [WRITER-1] writer is ready and listening on s7875_tasks
+2026-10-27T12:19:20.730-07:00 [PART3] started writer-2 (pid 37452) group=s7875_writers_p3_ordering_keyed_121913 HW8_ORDER_LOG=/Users/atharvamundada/Desktop/data260-7875/reports/hw08/raw/part3_ordering_keyed.jsonl  log=part3_ordering_keyed_writer-2.log
+    | ===== Pinal Pawar | SID4 7875 | PREFIX s7875 | PORT_BASE 8675 | writer (writer-2) =====
+    | 2026-10-27T12:19:20.832-07:00 [WRITER-2] in=s7875_tasks group=s7875_writers_p3_ordering_keyed_121913 idempotency=True commit_mode=after max_retries=3 work_delay_s=0.0 dead_letter=s7875_dead_
+    | Heartbeat failed for group s7875_writers_p3_ordering_keyed_121913 because it is rebalancing
+    | 2026-10-27T12:19:23.670-07:00 [WRITER-1] REVOKED partitions [0, 1]
+    | 2026-10-27T12:19:23.678-07:00 [WRITER-1] ASSIGNED partitions [0]
+    | 2026-10-27T12:19:23.679-07:00 [WRITER-2] ASSIGNED partitions [1]
+    | 2026-10-27T12:19:23.683-07:00 [WRITER-2] writer is ready and listening on s7875_tasks
+2026-10-27T12:19:23.741-07:00 [PART3] assignment: writer-1 -> [0]  writer-2 -> [1]
+    | 2026-10-27T12:19:23.756-07:00 [WRITER-2] RECEIVE         corr=ord-keyed-121913-00 topic=s7875_tasks p=1 off=12 key=ord-keyed-121913-00 {"kind": "order_test", "run": "keyed", "message_id": "o
+    | 2026-10-27T12:19:23.756-07:00 [WRITER-2] PROCESS-START   corr=ord-keyed-121913-00 attempt=1 work_delay_s=0.0
+    | 2026-10-27T12:19:23.757-07:00 [WRITER-1] RECEIVE         corr=ord-keyed-121913-01 topic=s7875_tasks p=0 off=20 key=ord-keyed-121913-01 {"kind": "order_test", "run": "keyed", "message_id": "o
+    | 2026-10-27T12:19:23.758-07:00 [WRITER-1] PROCESS-START   corr=ord-keyed-121913-01 attempt=1 work_delay_s=0.0
+2026-10-27T12:19:23.810-07:00 [PART3] sent 20 messages (key=entity)
+    | 2026-10-27T12:19:23.903-07:00 [WRITER-1] ORDER-PROCESSED corr=ord-keyed-121913-01 entity=RCL-2026-61335 seq=1 p=0 off=20
+    | 2026-10-27T12:19:23.907-07:00 [WRITER-1] COMMIT          corr=ord-keyed-121913-01 p=0 next_offset=21
+    | 2026-10-27T12:19:23.909-07:00 [WRITER-1] RECEIVE         corr=ord-keyed-121913-09 topic=s7875_tasks p=0 off=21 key=ord-keyed-121913-09 {"kind": "order_test", "run": "keyed", "message_id": "o
+    | 2026-10-27T12:19:23.909-07:00 [WRITER-1] PROCESS-START   corr=ord-keyed-121913-09 attempt=1 work_delay_s=0.0
+    | 2026-10-27T12:19:24.103-07:00 [WRITER-1] ORDER-PROCESSED corr=ord-keyed-121913-09 entity=RCL-2026-61335 seq=2 p=0 off=21
+    | 2026-10-27T12:19:24.107-07:00 [WRITER-1] COMMIT          corr=ord-keyed-121913-09 p=0 next_offset=22
+    | 2026-10-27T12:19:24.108-07:00 [WRITER-1] RECEIVE         corr=ord-keyed-121913-10 topic=s7875_tasks p=0 off=22 key=ord-keyed-121913-10 {"kind": "order_test", "run": "keyed", "message_id": "o
+    | 2026-10-27T12:19:24.108-07:00 [WRITER-1] PROCESS-START   corr=ord-keyed-121913-10 attempt=1 work_delay_s=0.0
+    | 2026-10-27T12:19:24.202-07:00 [WRITER-2] ORDER-PROCESSED corr=ord-keyed-121913-00 entity=RCL-2026-66434 seq=1 p=1 off=12
+    | 2026-10-27T12:19:24.205-07:00 [WRITER-2] COMMIT          corr=ord-keyed-121913-00 p=1 next_offset=13
+    | 2026-10-27T12:19:24.207-07:00 [WRITER-2] RECEIVE         corr=ord-keyed-121913-02 topic=s7875_tasks p=1 off=13 key=ord-keyed-121913-02 {"kind": "order_test", "run": "keyed", "message_id": "o
+    | 2026-10-27T12:19:24.207-07:00 [WRITER-2] PROCESS-START   corr=ord-keyed-121913-02 attempt=1 work_delay_s=0.0
+    | 2026-10-27T12:19:24.471-07:00 [WRITER-2] ORDER-PROCESSED corr=ord-keyed-121913-02 entity=RCL-2026-59801 seq=1 p=1 off=13
+    | 2026-10-27T12:19:24.476-07:00 [WRITER-2] COMMIT          corr=ord-keyed-121913-02 p=1 next_offset=14
+    | 2026-10-27T12:19:24.476-07:00 [WRITER-2] RECEIVE         corr=ord-keyed-121913-03 topic=s7875_tasks p=1 off=14 key=ord-keyed-121913-03 {"kind": "order_test", "run": "keyed", "message_id": "o
+    | 2026-10-27T12:19:24.476-07:00 [WRITER-2] PROCESS-START   corr=ord-keyed-121913-03 attempt=1 work_delay_s=0.0
+    | 2026-10-27T12:19:24.610-07:00 [WRITER-1] ORDER-PROCESSED corr=ord-keyed-121913-10 entity=RCL-2026-61335 seq=3 p=0 off=22
+    | 2026-10-27T12:19:24.614-07:00 [WRITER-1] COMMIT          corr=ord-keyed-121913-10 p=0 next_offset=23
+    | 2026-10-27T12:19:24.614-07:00 [WRITER-1] RECEIVE         corr=ord-keyed-121913-13 topic=s7875_tasks p=0 off=23 key=ord-keyed-121913-13 {"kind": "order_test", "run": "keyed", "message_id": "o
+    | 2026-10-27T12:19:24.614-07:00 [WRITER-1] PROCESS-START   corr=ord-keyed-121913-13 attempt=1 work_delay_s=0.0
+    | 2026-10-27T12:19:24.821-07:00 [WRITER-2] ORDER-PROCESSED corr=ord-keyed-121913-03 entity=RCL-2026-59801 seq=2 p=1 off=14
+    | 2026-10-27T12:19:24.825-07:00 [WRITER-2] COMMIT          corr=ord-keyed-121913-03 p=1 next_offset=15
+    | 2026-10-27T12:19:24.826-07:00 [WRITER-2] RECEIVE         corr=ord-keyed-121913-04 topic=s7875_tasks p=1 off=15 key=ord-keyed-121913-04 {"kind": "order_test", "run": "keyed", "message_id": "o
+    | 2026-10-27T12:19:24.826-07:00 [WRITER-2] PROCESS-START   corr=ord-keyed-121913-04 attempt=1 work_delay_s=0.0
+    | 2026-10-27T12:19:24.932-07:00 [WRITER-1] ORDER-PROCESSED corr=ord-keyed-121913-13 entity=RCL-2026-61335 seq=4 p=0 off=23
+    | 2026-10-27T12:19:24.938-07:00 [WRITER-1] COMMIT          corr=ord-keyed-121913-13 p=0 next_offset=24
+    | 2026-10-27T12:19:24.938-07:00 [WRITER-1] RECEIVE         corr=ord-keyed-121913-17 topic=s7875_tasks p=0 off=24 key=ord-keyed-121913-17 {"kind": "order_test", "run": "keyed", "message_id": "o
+    | 2026-10-27T12:19:24.938-07:00 [WRITER-1] PROCESS-START   corr=ord-keyed-121913-17 attempt=1 work_delay_s=0.0
+    | 2026-10-27T12:19:25.174-07:00 [WRITER-2] ORDER-PROCESSED corr=ord-keyed-121913-04 entity=RCL-2026-74265 seq=1 p=1 off=15
+    | 2026-10-27T12:19:25.178-07:00 [WRITER-2] COMMIT          corr=ord-keyed-121913-04 p=1 next_offset=16
+    | 2026-10-27T12:19:25.178-07:00 [WRITER-2] RECEIVE         corr=ord-keyed-121913-05 topic=s7875_tasks p=1 off=16 key=ord-keyed-121913-05 {"kind": "order_test", "run": "keyed", "message_id": "o
+    | 2026-10-27T12:19:25.178-07:00 [WRITER-2] PROCESS-START   corr=ord-keyed-121913-05 attempt=1 work_delay_s=0.0
+    | 2026-10-27T12:19:25.525-07:00 [WRITER-1] ORDER-PROCESSED corr=ord-keyed-121913-17 entity=RCL-2026-61335 seq=5 p=0 off=24
+    | 2026-10-27T12:19:25.530-07:00 [WRITER-1] COMMIT          corr=ord-keyed-121913-17 p=0 next_offset=25
+    | 2026-10-27T12:19:25.530-07:00 [WRITER-1] RECEIVE         corr=ord-keyed-121913-19 topic=s7875_tasks p=0 off=25 key=ord-keyed-121913-19 {"kind": "order_test", "run": "keyed", "message_id": "o
+    | 2026-10-27T12:19:25.530-07:00 [WRITER-1] PROCESS-START   corr=ord-keyed-121913-19 attempt=1 work_delay_s=0.0
+    | 2026-10-27T12:19:25.532-07:00 [WRITER-2] ORDER-PROCESSED corr=ord-keyed-121913-05 entity=RCL-2026-59801 seq=3 p=1 off=16
+    | 2026-10-27T12:19:25.534-07:00 [WRITER-2] COMMIT          corr=ord-keyed-121913-05 p=1 next_offset=17
+    | 2026-10-27T12:19:25.534-07:00 [WRITER-2] RECEIVE         corr=ord-keyed-121913-06 topic=s7875_tasks p=1 off=17 key=ord-keyed-121913-06 {"kind": "order_test", "run": "keyed", "message_id": "o
+    | 2026-10-27T12:19:25.535-07:00 [WRITER-2] PROCESS-START   corr=ord-keyed-121913-06 attempt=1 work_delay_s=0.0
+    | 2026-10-27T12:19:25.876-07:00 [WRITER-1] ORDER-PROCESSED corr=ord-keyed-121913-19 entity=RCL-2026-61335 seq=6 p=0 off=25
+    | 2026-10-27T12:19:25.882-07:00 [WRITER-1] COMMIT          corr=ord-keyed-121913-19 p=0 next_offset=26
+    | 2026-10-27T12:19:25.915-07:00 [WRITER-2] ORDER-PROCESSED corr=ord-keyed-121913-06 entity=RCL-2026-66434 seq=2 p=1 off=17
+    | 2026-10-27T12:19:25.920-07:00 [WRITER-2] COMMIT          corr=ord-keyed-121913-06 p=1 next_offset=18
+    | 2026-10-27T12:19:25.920-07:00 [WRITER-2] RECEIVE         corr=ord-keyed-121913-07 topic=s7875_tasks p=1 off=18 key=ord-keyed-121913-07 {"kind": "order_test", "run": "keyed", "message_id": "o
+    | 2026-10-27T12:19:25.921-07:00 [WRITER-2] PROCESS-START   corr=ord-keyed-121913-07 attempt=1 work_delay_s=0.0
+    | 2026-10-27T12:19:26.413-07:00 [WRITER-2] ORDER-PROCESSED corr=ord-keyed-121913-07 entity=RCL-2026-59801 seq=4 p=1 off=18
+    | 2026-10-27T12:19:26.430-07:00 [WRITER-2] COMMIT          corr=ord-keyed-121913-07 p=1 next_offset=19
+    | 2026-10-27T12:19:26.431-07:00 [WRITER-2] RECEIVE         corr=ord-keyed-121913-08 topic=s7875_tasks p=1 off=19 key=ord-keyed-121913-08 {"kind": "order_test", "run": "keyed", "message_id": "o
+    | 2026-10-27T12:19:26.431-07:00 [WRITER-2] PROCESS-START   corr=ord-keyed-121913-08 attempt=1 work_delay_s=0.0
+    | 2026-10-27T12:19:26.558-07:00 [WRITER-2] ORDER-PROCESSED corr=ord-keyed-121913-08 entity=RCL-2026-66434 seq=3 p=1 off=19
+    | 2026-10-27T12:19:26.562-07:00 [WRITER-2] COMMIT          corr=ord-keyed-121913-08 p=1 next_offset=20
+    | 2026-10-27T12:19:26.563-07:00 [WRITER-2] RECEIVE         corr=ord-keyed-121913-11 topic=s7875_tasks p=1 off=20 key=ord-keyed-121913-11 {"kind": "order_test", "run": "keyed", "message_id": "o
+    | 2026-10-27T12:19:26.563-07:00 [WRITER-2] PROCESS-START   corr=ord-keyed-121913-11 attempt=1 work_delay_s=0.0
+    | 2026-10-27T12:19:26.722-07:00 [WRITER-2] ORDER-PROCESSED corr=ord-keyed-121913-11 entity=RCL-2026-59801 seq=5 p=1 off=20
+    | 2026-10-27T12:19:26.726-07:00 [WRITER-2] COMMIT          corr=ord-keyed-121913-11 p=1 next_offset=21
+    | 2026-10-27T12:19:26.726-07:00 [WRITER-2] RECEIVE         corr=ord-keyed-121913-12 topic=s7875_tasks p=1 off=21 key=ord-keyed-121913-12 {"kind": "order_test", "run": "keyed", "message_id": "o
+    | 2026-10-27T12:19:26.726-07:00 [WRITER-2] PROCESS-START   corr=ord-keyed-121913-12 attempt=1 work_delay_s=0.0
+    | 2026-10-27T12:19:26.901-07:00 [WRITER-2] ORDER-PROCESSED corr=ord-keyed-121913-12 entity=RCL-2026-59801 seq=6 p=1 off=21
+    | 2026-10-27T12:19:26.906-07:00 [WRITER-2] COMMIT          corr=ord-keyed-121913-12 p=1 next_offset=22
+    | 2026-10-27T12:19:26.906-07:00 [WRITER-2] RECEIVE         corr=ord-keyed-121913-14 topic=s7875_tasks p=1 off=22 key=ord-keyed-121913-14 {"kind": "order_test", "run": "keyed", "message_id": "o
+    | 2026-10-27T12:19:26.907-07:00 [WRITER-2] PROCESS-START   corr=ord-keyed-121913-14 attempt=1 work_delay_s=0.0
+    | 2026-10-27T12:19:27.238-07:00 [WRITER-2] ORDER-PROCESSED corr=ord-keyed-121913-14 entity=RCL-2026-59801 seq=7 p=1 off=22
+    | 2026-10-27T12:19:27.245-07:00 [WRITER-2] COMMIT          corr=ord-keyed-121913-14 p=1 next_offset=23
+    | 2026-10-27T12:19:27.245-07:00 [WRITER-2] RECEIVE         corr=ord-keyed-121913-15 topic=s7875_tasks p=1 off=23 key=ord-keyed-121913-15 {"kind": "order_test", "run": "keyed", "message_id": "o
+    | 2026-10-27T12:19:27.245-07:00 [WRITER-2] PROCESS-START   corr=ord-keyed-121913-15 attempt=1 work_delay_s=0.0
+    | 2026-10-27T12:19:27.537-07:00 [WRITER-2] ORDER-PROCESSED corr=ord-keyed-121913-15 entity=RCL-2026-66434 seq=4 p=1 off=23
+    | 2026-10-27T12:19:27.545-07:00 [WRITER-2] COMMIT          corr=ord-keyed-121913-15 p=1 next_offset=24
+    | 2026-10-27T12:19:27.545-07:00 [WRITER-2] RECEIVE         corr=ord-keyed-121913-16 topic=s7875_tasks p=1 off=24 key=ord-keyed-121913-16 {"kind": "order_test", "run": "keyed", "message_id": "o
+    | 2026-10-27T12:19:27.545-07:00 [WRITER-2] PROCESS-START   corr=ord-keyed-121913-16 attempt=1 work_delay_s=0.0
+    | 2026-10-27T12:19:27.887-07:00 [WRITER-2] ORDER-PROCESSED corr=ord-keyed-121913-16 entity=RCL-2026-59801 seq=8 p=1 off=24
+    | 2026-10-27T12:19:27.896-07:00 [WRITER-2] COMMIT          corr=ord-keyed-121913-16 p=1 next_offset=25
+    | 2026-10-27T12:19:27.896-07:00 [WRITER-2] RECEIVE         corr=ord-keyed-121913-18 topic=s7875_tasks p=1 off=25 key=ord-keyed-121913-18 {"kind": "order_test", "run": "keyed", "message_id": "o
+    | 2026-10-27T12:19:27.896-07:00 [WRITER-2] PROCESS-START   corr=ord-keyed-121913-18 attempt=1 work_delay_s=0.0
+    | 2026-10-27T12:19:28.309-07:00 [WRITER-2] ORDER-PROCESSED corr=ord-keyed-121913-18 entity=RCL-2026-66434 seq=5 p=1 off=25
+    | 2026-10-27T12:19:28.318-07:00 [WRITER-2] COMMIT          corr=ord-keyed-121913-18 p=1 next_offset=26
+    | 2026-10-27T12:19:28.324-07:00 [WRITER-1] stopping (signal)
+    | 2026-10-27T12:19:28.396-07:00 [WRITER-2] stopping (signal)
+
+  sent order (index: entity seq -> partition):
+     0: RCL-2026-66434 seq=1 -> p1 (work 445 ms)
+     1: RCL-2026-61335 seq=1 -> p0 (work 144 ms)
+     2: RCL-2026-59801 seq=1 -> p1 (work 263 ms)
+     3: RCL-2026-59801 seq=2 -> p1 (work 344 ms)
+     4: RCL-2026-74265 seq=1 -> p1 (work 347 ms)
+     5: RCL-2026-59801 seq=3 -> p1 (work 353 ms)
+     6: RCL-2026-66434 seq=2 -> p1 (work 375 ms)
+     7: RCL-2026-59801 seq=4 -> p1 (work 491 ms)
+     8: RCL-2026-66434 seq=3 -> p1 (work 126 ms)
+     9: RCL-2026-61335 seq=2 -> p0 (work 193 ms)
+    10: RCL-2026-61335 seq=3 -> p0 (work 501 ms)
+    11: RCL-2026-59801 seq=5 -> p1 (work 158 ms)
+    12: RCL-2026-59801 seq=6 -> p1 (work 173 ms)
+    13: RCL-2026-61335 seq=4 -> p0 (work 317 ms)
+    14: RCL-2026-59801 seq=7 -> p1 (work 330 ms)
+    15: RCL-2026-66434 seq=4 -> p1 (work 291 ms)
+    16: RCL-2026-59801 seq=8 -> p1 (work 340 ms)
+    17: RCL-2026-61335 seq=5 -> p0 (work 586 ms)
+    18: RCL-2026-66434 seq=5 -> p1 (work 411 ms)
+    19: RCL-2026-61335 seq=6 -> p0 (work 344 ms)
+
+  processed order per entity:
+    RCL-2026-59801: seq [1, 2, 3, 4, 5, 6, 7, 8]  partitions=[1] writers=['writer-2']  IN ORDER
+    RCL-2026-66434: seq [1, 2, 3, 4, 5]  partitions=[1] writers=['writer-2']  IN ORDER
+    RCL-2026-74265: seq [1]  partitions=[1] writers=['writer-2']  IN ORDER
+    RCL-2026-61335: seq [1, 2, 3, 4, 5, 6]  partitions=[0] writers=['writer-1']  IN ORDER
+2026-10-27T12:19:28.437-07:00 [PART3] RESULT keyed: processed=20 entities_out_of_order=0 inversions=0
+
+====================================================================================================
+2026-10-27T12:19:28.439-07:00  FAILURE TABLE
+====================================================================================================
+| Failure scenario | Before fix | After fix |
+|---|---|---|
+| Duplicate delivery | same task sent twice -> 2 model calls, 2 drafts (extra side effect) | 1 model call, 1 draft, 1 DUPLICATE-SKIP |
+| Consumer killed mid-work | offset committed on receipt (committed=6 > msg offset 5); after restart redelivered=False -> LOST (never completed) | commit after send (committed=1 at kill); redelivered=True -> completed after restart |
+| Poison message | Writer crashed 3x on the same offset; good message processed=False (blocked) | 3 attempts -> s7875_dead_letter (1 record); good message processed=True |
+| Two partitions/two consumers | no key: 2/4 notices processed out of order (2 inversions) | key=notice_code: 0/4 out of order; each notice on one partition |
+===== Pinal Pawar | SID4 7875 | PREFIX s7875 | PORT_BASE 8675 | run_hw08_part3.py duplicate (run 122204) =====
+
+====================================================================================================
+2026-10-27T12:22:04.983-07:00  DUPLICATE DELIVERY - before fix (IDEMPOTENCY=0)
+====================================================================================================
+2026-10-27T12:22:05.241-07:00 [PART3] started writer-A (pid 37535) group=s7875_writers_p3_duplicate_before_122204 IDEMPOTENCY=0  log=part3_duplicate_before_writer-A.log
+    | ===== Pinal Pawar | SID4 7875 | PREFIX s7875 | PORT_BASE 8675 | writer (writer-A) =====
+    | 2026-10-27T12:22:05.370-07:00 [WRITER-A] in=s7875_tasks group=s7875_writers_p3_duplicate_before_122204 idempotency=False commit_mode=after max_retries=3 work_delay_s=0.0 dead_letter=s7875_de
+    | 2026-10-27T12:22:05.398-07:00 [WRITER-A] ASSIGNED partitions [0, 1]
+    | 2026-10-27T12:22:05.401-07:00 [WRITER-A] writer is ready and listening on s7875_tasks
+2026-10-27T12:22:05.447-07:00 [PART3] send task corr=dup-before-8c578dd3, then REPLAY the identical message (same correlation_id)
+    | 2026-10-27T12:22:05.528-07:00 [WRITER-A] RECEIVE         corr=dup-before-8c578dd3 topic=s7875_tasks p=1 off=26 key=dup-before-8c578dd3 {"correlation_id": "dup-before-8c578dd3", "stage": "pla
+    | 2026-10-27T12:22:05.528-07:00 [WRITER-A] PROCESS-START   corr=dup-before-8c578dd3 attempt=1 work_delay_s=0.0
+    | 2026-10-27T12:22:05.528-07:00 [WRITER-A] PROCESS-DONE    corr=dup-before-8c578dd3 words=51 model=offline stand-in (HW8_FAKE_LLM=1)
+    | 2026-10-27T12:22:05.528-07:00 [WRITER-A] SEND            corr=dup-before-8c578dd3 topic=s7875_drafts {"correlation_id": "dup-before-8c578dd3", "question": "What should I do with a recalled b
+2026-10-27T12:22:05.533-07:00 [PART3] both copies written at (partition, offset) = [(1, 26), (1, 27)]
+    | 2026-10-27T12:22:05.551-07:00 [WRITER-A] COMMIT          corr=dup-before-8c578dd3 p=1 next_offset=27
+    | 2026-10-27T12:22:05.553-07:00 [WRITER-A] RECEIVE         corr=dup-before-8c578dd3 topic=s7875_tasks p=1 off=27 key=dup-before-8c578dd3 {"correlation_id": "dup-before-8c578dd3", "stage": "pla
+    | 2026-10-27T12:22:05.553-07:00 [WRITER-A] PROCESS-START   corr=dup-before-8c578dd3 attempt=1 work_delay_s=0.0
+    | 2026-10-27T12:22:05.553-07:00 [WRITER-A] PROCESS-DONE    corr=dup-before-8c578dd3 words=51 model=offline stand-in (HW8_FAKE_LLM=1)
+    | 2026-10-27T12:22:05.553-07:00 [WRITER-A] SEND            corr=dup-before-8c578dd3 topic=s7875_drafts {"correlation_id": "dup-before-8c578dd3", "question": "What should I do with a recalled b
+    | 2026-10-27T12:22:05.559-07:00 [WRITER-A] COMMIT          corr=dup-before-8c578dd3 p=1 next_offset=28
+    | 2026-10-27T12:22:10.876-07:00 [WRITER-A] stopping (signal)
+2026-10-27T12:22:10.913-07:00 [PART3] RESULT before: {"group": "s7875_writers_p3_duplicate_before_122204", "correlation_id": "dup-before-8c578dd3", "copies_sent": 2, "placed": [[1, 26], [1, 27]], "received": 2, "model_calls": 2, "duplicate_skips": 0, "drafts_on_s7875_drafts": 2, "log": "part3_duplicate_before_writer-A.log"}
+
+====================================================================================================
+2026-10-27T12:22:10.913-07:00  DUPLICATE DELIVERY - after fix (IDEMPOTENCY=1)
+====================================================================================================
+2026-10-27T12:22:11.163-07:00 [PART3] started writer-A (pid 37538) group=s7875_writers_p3_duplicate_after_122204 IDEMPOTENCY=1  log=part3_duplicate_after_writer-A.log
+    | ===== Pinal Pawar | SID4 7875 | PREFIX s7875 | PORT_BASE 8675 | writer (writer-A) =====
+    | 2026-10-27T12:22:11.283-07:00 [WRITER-A] in=s7875_tasks group=s7875_writers_p3_duplicate_after_122204 idempotency=True commit_mode=after max_retries=3 work_delay_s=0.0 dead_letter=s7875_dead
+    | 2026-10-27T12:22:11.308-07:00 [WRITER-A] ASSIGNED partitions [0, 1]
+    | 2026-10-27T12:22:11.312-07:00 [WRITER-A] writer is ready and listening on s7875_tasks
+2026-10-27T12:22:11.365-07:00 [PART3] send task corr=dup-after-61a4cf25, then REPLAY the identical message (same correlation_id)
+    | 2026-10-27T12:22:11.378-07:00 [WRITER-A] RECEIVE         corr=dup-after-61a4cf25 topic=s7875_tasks p=1 off=28 key=dup-after-61a4cf25 {"correlation_id": "dup-after-61a4cf25", "stage": "plan",
+    | 2026-10-27T12:22:11.378-07:00 [WRITER-A] PROCESS-START   corr=dup-after-61a4cf25 attempt=1 work_delay_s=0.0
+    | 2026-10-27T12:22:11.379-07:00 [WRITER-A] PROCESS-DONE    corr=dup-after-61a4cf25 words=51 model=offline stand-in (HW8_FAKE_LLM=1)
+    | 2026-10-27T12:22:11.379-07:00 [WRITER-A] SEND            corr=dup-after-61a4cf25 topic=s7875_drafts {"correlation_id": "dup-after-61a4cf25", "question": "What should I do with a recalled bag
+2026-10-27T12:22:11.380-07:00 [PART3] both copies written at (partition, offset) = [(1, 28), (1, 29)]
+    | 2026-10-27T12:22:11.387-07:00 [WRITER-A] COMMIT          corr=dup-after-61a4cf25 p=1 next_offset=29
+    | 2026-10-27T12:22:11.389-07:00 [WRITER-A] RECEIVE         corr=dup-after-61a4cf25 topic=s7875_tasks p=1 off=29 key=dup-after-61a4cf25 {"correlation_id": "dup-after-61a4cf25", "stage": "plan",
+    | 2026-10-27T12:22:11.389-07:00 [WRITER-A] DUPLICATE-SKIP  corr=dup-after-61a4cf25 key=dup-after-61a4cf25 note=already processed; no model call, nothing sent
+    | 2026-10-27T12:22:11.390-07:00 [WRITER-A] COMMIT          corr=dup-after-61a4cf25 p=1 next_offset=30
+    | 2026-10-27T12:22:16.715-07:00 [WRITER-A] stopping (signal)
+2026-10-27T12:22:16.787-07:00 [PART3] RESULT after: {"group": "s7875_writers_p3_duplicate_after_122204", "correlation_id": "dup-after-61a4cf25", "copies_sent": 2, "placed": [[1, 28], [1, 29]], "received": 2, "model_calls": 1, "duplicate_skips": 1, "drafts_on_s7875_drafts": 1, "log": "part3_duplicate_after_writer-A.log"}
+
+====================================================================================================
+2026-10-27T12:22:16.791-07:00  FAILURE TABLE
+====================================================================================================
+| Failure scenario | Before fix | After fix |
+|---|---|---|
+| Duplicate delivery | same task sent twice -> 2 model calls, 2 drafts (extra side effect) | 1 model call, 1 draft, 1 DUPLICATE-SKIP |
+| Consumer killed mid-work | offset committed on receipt (committed=6 > msg offset 5); after restart redelivered=False -> LOST (never completed) | commit after send (committed=1 at kill); redelivered=True -> completed after restart |
+| Poison message | Writer crashed 3x on the same offset; good message processed=False (blocked) | 3 attempts -> s7875_dead_letter (1 record); good message processed=True |
+| Two partitions/two consumers | no key: 2/4 notices processed out of order (2 inversions) | key=notice_code: 0/4 out of order; each notice on one partition |
+===== Pinal Pawar | SID4 7875 | PREFIX s7875 | PORT_BASE 8675 | verify_hw08.py =====
+[PASS] Section 0 values -- PORT_BASE=8675 PREFIX=s7875 VERIFY_SEED=267875
+[PASS] every HW8 topic name carries PREFIX -- s7875_notice_requests, s7875_notice_responses, s7875_inbox, s7875_tasks, s7875_drafts, s7875_final, s7875_dead_letter
+[PASS] Kafka reachable and all 7 s7875 topics exist -- localhost:9092
+[PASS] s7875_tasks has 2 partitions -- partitions=[0, 1]
+[PASS] docker ps: Kafka, worker and FastAPI containers up -- s7875_kafka, s7875_notice_worker, s7875_notice_api
+[PASS] worker log shows 'Consumer is ready and listening...'
+[PASS] API log shows server started at http://127.0.0.1:8675
+2026-10-27T12:23:31.929-07:00 [VERIFY] listening for responses on s7875_notice_responses
+2026-10-27T12:23:31.929-07:00 [VERIFY] SEND            corr=1c848438-78d6-41bf-9801-cd65ea51ff85 topic=s7875_notice_requests {"correlation_id": "1c848438-78d6-41bf-9801-cd65ea51ff85", "reply_to": "s7875_notice_responses", "operation": "CREATE_NOTICE", "data": {"product": "Frozen Wild Blueberries 16oz", "notice_code": "RCL-2026-26787", "units_affected": 1200, "manufacturer_id": 2, "email": "safety@northfarm-foods.com", "description": "Possible hepatitis A contamination in lots B1-B9.", "category": "bacterialContamination"}}
+2026-10-27T12:23:31.940-07:00 [VERIFY] CLIENT-RESPONSE corr=1c848438-78d6-41bf-9801-cd65ea51ff85 topic=s7875_notice_responses p=0 off=18 {"correlation_id": "1c848438-78d6-41bf-9801-cd65ea51ff85", "operation": "CREATE_NOTICE", "success": true, "notice_id": "680202c7-6057-4aa8-a7e7-f6e11301ff11", "message": "Notice created"}
+[PASS] CREATE_NOTICE over Kafka succeeds and returns a UUID notice_id -- notice_id=680202c7-6057-4aa8-a7e7-f6e11301ff11
+[PASS] CREATE_NOTICE response echoes the correlation_id unchanged
+2026-10-27T12:23:31.940-07:00 [VERIFY] SEND            corr=17bdb617-92f0-4c00-b7be-d1a8a266a773 topic=s7875_notice_requests {"correlation_id": "17bdb617-92f0-4c00-b7be-d1a8a266a773", "reply_to": "s7875_notice_responses", "operation": "GET_NOTICE", "data": {"notice_id": "680202c7-6057-4aa8-a7e7-f6e11301ff11"}}
+2026-10-27T12:23:31.945-07:00 [VERIFY] CLIENT-RESPONSE corr=17bdb617-92f0-4c00-b7be-d1a8a266a773 topic=s7875_notice_responses p=0 off=19 {"correlation_id": "17bdb617-92f0-4c00-b7be-d1a8a266a773", "operation": "GET_NOTICE", "success": true, "notice": {"notice_id": "680202c7-6057-4aa8-a7e7-f6e11301ff11", "product": "Frozen Wild Blueberries 16oz", "notice_code": "RCL-2026-26787", "units_affected": 1200, "manufacturer_id": 2, "email": "safety@northfarm-foods.com", "description": "Possible hepatitis A contamination in lots B1-B9.", "category": "bacterialContamination"}}
+[PASS] GET_NOTICE round-trips the created notice (all fields equal)
+[PASS] GET_NOTICE response echoes its correlation_id
+2026-10-27T12:23:31.945-07:00 [VERIFY] SEND            corr=1c848438-78d6-41bf-9801-cd65ea51ff85 topic=s7875_notice_requests {"correlation_id": "1c848438-78d6-41bf-9801-cd65ea51ff85", "reply_to": "s7875_notice_responses", "operation": "CREATE_NOTICE", "data": {"product": "Frozen Wild Blueberries 16oz", "notice_code": "RCL-2026-26787", "units_affected": 1200, "manufacturer_id": 2, "email": "safety@northfarm-foods.com", "description": "Possible hepatitis A contamination in lots B1-B9.", "category": "bacterialContamination"}}
+2026-10-27T12:23:31.947-07:00 [VERIFY] CLIENT-RESPONSE corr=1c848438-78d6-41bf-9801-cd65ea51ff85 topic=s7875_notice_responses p=0 off=20 {"correlation_id": "1c848438-78d6-41bf-9801-cd65ea51ff85", "operation": "CREATE_NOTICE", "success": true, "notice_id": "680202c7-6057-4aa8-a7e7-f6e11301ff11", "message": "Notice created"}
+[PASS] replayed CREATE (same correlation_id) creates no second notice -- first=680202c7-6057-4aa8-a7e7-f6e11301ff11 replay=680202c7-6057-4aa8-a7e7-f6e11301ff11
+2026-10-27T12:23:31.947-07:00 [VERIFY] SEND            corr=31125e72-5140-4430-ab71-57fa4469d7aa topic=s7875_notice_requests {"correlation_id": "31125e72-5140-4430-ab71-57fa4469d7aa", "reply_to": "s7875_notice_responses", "operation": "FLY_TO_MOON", "data": {}}
+2026-10-27T12:23:31.950-07:00 [VERIFY] CLIENT-RESPONSE corr=31125e72-5140-4430-ab71-57fa4469d7aa topic=s7875_notice_responses p=0 off=21 {"correlation_id": "31125e72-5140-4430-ab71-57fa4469d7aa", "operation": "FLY_TO_MOON", "success": false, "error": "Unknown operation"}
+[PASS] unknown operation is rejected (success=false, clean error, correlation_id kept) -- Unknown operation
+2026-10-27T12:23:31.950-07:00 [VERIFY] SEND            corr=9e61917b-36d2-4fcf-b59b-db79d99f9651 topic=s7875_notice_requests {"correlation_id": "9e61917b-36d2-4fcf-b59b-db79d99f9651", "reply_to": "s7875_notice_responses", "operation": "CREATE_NOTICE", "data": {"notice_code": "RCL-2026-26787", "units_affected": 1200, "manufacturer_id": 2, "email": "safety@northfarm-foods.com", "description": "Possible hepatitis A contamination in lots B1-B9.", "category": "bacterialContamination"}}
+2026-10-27T12:23:31.953-07:00 [VERIFY] CLIENT-RESPONSE corr=9e61917b-36d2-4fcf-b59b-db79d99f9651 topic=s7875_notice_responses p=0 off=22 {"correlation_id": "9e61917b-36d2-4fcf-b59b-db79d99f9651", "operation": "CREATE_NOTICE", "success": false, "error": "Missing required field(s): product"}
+[PASS] missing field is rejected (success=false, clean error, correlation_id kept) -- Missing required field(s): product
+2026-10-27T12:23:31.953-07:00 [VERIFY] SEND            corr=4bab40ca-c466-43a2-9b04-832d062bb0e4 topic=s7875_notice_requests {"correlation_id": "4bab40ca-c466-43a2-9b04-832d062bb0e4", "reply_to": "s7875_notice_responses", "operation": "CREATE_NOTICE", "data": {"product": "Frozen Wild Blueberries 16oz", "notice_code": "RCL-2026-26787", "units_affected": 1200, "manufacturer_id": 2, "email": "safety@northfarm-foods.com", "description": "  ", "category": "bacterialContamination"}}
+2026-10-27T12:23:31.955-07:00 [VERIFY] CLIENT-RESPONSE corr=4bab40ca-c466-43a2-9b04-832d062bb0e4 topic=s7875_notice_responses p=0 off=23 {"correlation_id": "4bab40ca-c466-43a2-9b04-832d062bb0e4", "operation": "CREATE_NOTICE", "success": false, "error": "Empty value for field(s): description"}
+[PASS] empty field is rejected (success=false, clean error, correlation_id kept) -- Empty value for field(s): description
+2026-10-27T12:23:31.955-07:00 [VERIFY] SEND            corr=12a6ee8d-0047-462a-b4cb-fa1937d35406 topic=s7875_notice_requests {"correlation_id": "12a6ee8d-0047-462a-b4cb-fa1937d35406", "reply_to": "s7875_notice_responses", "operation": "CREATE_NOTICE", "data": {"product": "Frozen Wild Blueberries 16oz", "notice_code": "RCL-2026-26787", "units_affected": 1200, "manufacturer_id": 2, "email": "not-an-email", "description": "Possible hepatitis A contamination in lots B1-B9.", "category": "bacterialContamination"}}
+2026-10-27T12:23:31.961-07:00 [VERIFY] CLIENT-RESPONSE corr=12a6ee8d-0047-462a-b4cb-fa1937d35406 topic=s7875_notice_responses p=0 off=24 {"correlation_id": "12a6ee8d-0047-462a-b4cb-fa1937d35406", "operation": "CREATE_NOTICE", "success": false, "error": "Invalid value(s): email: value is not a valid email address: An email address must have an @-sign."}
+[PASS] invalid email is rejected (success=false, clean error, correlation_id kept) -- Invalid value(s): email: value is not a valid email address: An email address must have an @-sign.
+2026-10-27T12:23:31.961-07:00 [VERIFY] SEND            corr=54b56a57-fffe-4241-aed7-7f1f9b60ba69 topic=s7875_notice_requests {"correlation_id": "54b56a57-fffe-4241-aed7-7f1f9b60ba69", "reply_to": "s7875_notice_responses", "operation": "CREATE_NOTICE", "data": {"product": "Frozen Wild Blueberries 16oz", "notice_code": "RCL-2026-26787", "units_affected": -5, "manufacturer_id": 2, "email": "safety@northfarm-foods.com", "description": "Possible hepatitis A contamination in lots B1-B9.", "category": "bacterialContamination"}}
+2026-10-27T12:23:31.967-07:00 [VERIFY] CLIENT-RESPONSE corr=54b56a57-fffe-4241-aed7-7f1f9b60ba69 topic=s7875_notice_responses p=0 off=25 {"correlation_id": "54b56a57-fffe-4241-aed7-7f1f9b60ba69", "operation": "CREATE_NOTICE", "success": false, "error": "Invalid value(s): units_affected: Input should be greater than or equal to 0"}
+[PASS] negative units_affected is rejected (success=false, clean error, correlation_id kept) -- Invalid value(s): units_affected: Input should be greater than or equal to 0
+2026-10-27T12:23:31.967-07:00 [VERIFY] SEND            corr=273c5e5c-e114-4855-925c-48cf2d5d1acb topic=s7875_notice_requests {"correlation_id": "273c5e5c-e114-4855-925c-48cf2d5d1acb", "reply_to": "s7875_notice_responses", "operation": "GET_NOTICE", "data": {"notice_id": "f39d30df-37eb-4e71-a4dd-b88cbc15eece"}}
+2026-10-27T12:23:31.969-07:00 [VERIFY] CLIENT-RESPONSE corr=273c5e5c-e114-4855-925c-48cf2d5d1acb topic=s7875_notice_responses p=0 off=26 {"correlation_id": "273c5e5c-e114-4855-925c-48cf2d5d1acb", "operation": "GET_NOTICE", "success": false, "error": "Notice not found"}
+[PASS] unknown notice_id gives 'Notice not found' (success=false, clean error, correlation_id kept) -- Notice not found
+[PASS] FastAPI wrapper answers on PORT_BASE 8675 -- 200
+[PASS] CREATE -> GET through the FastAPI wrapper (correlation_id kept) -- notice_id=9b281065-151f-4741-afb1-125c7456de4e
+[PASS] planner, writer and reviewer start as separate processes and join Kafka -- planner pid 37623, writer pid 37624, reviewer pid 37625
+[PASS] question on s7875_inbox reaches s7875_final -- status=approved
+[PASS] final JSON has a status and a non-empty answer
+[PASS] correlation_id preserved and trace shows planner -> writer -> reviewer -- ['planner', 'writer', 'reviewer']
+[PASS] one plan on s7875_tasks and one draft on s7875_drafts for that question -- tasks=1 drafts=1
+[PASS] replayed task (same correlation_id) is skipped: still exactly one draft -- drafts=1
+[PASS] poison message is retried 3 times then lands on s7875_dead_letter -- ValueError: task has no usable plan (expected a non-empty list of steps)
+[PASS] message behind the poison one is still processed
+[PASS] saved Part 3 runs show every fix working (dup, kill, poison, keyed ordering) -- {'duplicate': True, 'kill': True, 'poison': True, 'ordering': True}
+[PASS] offline HW8 tests pass (tests/test_hw08_kafka.py) -- tests/test_hw08_kafka.py: all 57 checks passed
+
+30/30 checks passed  ->  reports/hw08/verification.json

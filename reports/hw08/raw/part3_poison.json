@@ -1,0 +1,83 @@
+{
+  "run_id": "121747",
+  "run_at": "2026-10-27T12:18:10.032-07:00",
+  "writer_model": "offline stand-in",
+  "before": {
+    "group": "s7875_writers_p3_poison_before_121747",
+    "poison_correlation_id": "poison-before-f5a4be62",
+    "good_correlation_id": "good-before-fc18cd89",
+    "placed": [
+      [
+        0,
+        6
+      ],
+      [
+        0,
+        7
+      ]
+    ],
+    "max_retries": 0,
+    "writer_crashes": 3,
+    "poison_attempts": 3,
+    "retry_lines": 0,
+    "poison_on_dead_letter": 0,
+    "dead_letter_record": null,
+    "good_message_processed": false,
+    "committed_offset_partition0": 6,
+    "logs": [
+      "part3_poison_before_writer-run1.log",
+      "part3_poison_before_writer-run2.log",
+      "part3_poison_before_writer-run3.log"
+    ]
+  },
+  "after": {
+    "group": "s7875_writers_p3_poison_after_121747",
+    "poison_correlation_id": "poison-after-1794d9d5",
+    "good_correlation_id": "good-after-9c8f479e",
+    "placed": [
+      [
+        0,
+        8
+      ],
+      [
+        0,
+        9
+      ]
+    ],
+    "max_retries": 3,
+    "writer_crashes": 0,
+    "poison_attempts": 3,
+    "retry_lines": 3,
+    "poison_on_dead_letter": 1,
+    "dead_letter_record": {
+      "correlation_id": "poison-after-1794d9d5",
+      "failed_agent": "writer",
+      "agent_id": "writer-A",
+      "error": "ValueError: task has no usable plan (expected a non-empty list of steps)",
+      "attempts": 3,
+      "source": {
+        "topic": "s7875_tasks",
+        "partition": 0,
+        "offset": 8
+      },
+      "original": {
+        "correlation_id": "poison-after-1794d9d5",
+        "stage": "plan",
+        "question": "What should I do with a recalled bag of frozen blueberries in my freezer?",
+        "plan": null,
+        "trace": [
+          {
+            "agent": "part3-harness",
+            "at": "2026-10-27T12:17:59.094-07:00"
+          }
+        ]
+      },
+      "dead_lettered_at": "2026-10-27T12:18:00.811-07:00"
+    },
+    "good_message_processed": true,
+    "committed_offset_partition0": 10,
+    "logs": [
+      "part3_poison_after_writer-A.log"
+    ]
+  }
+}

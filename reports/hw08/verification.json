@@ -1,0 +1,184 @@
+{
+  "homework": 8,
+  "sid4": 7875,
+  "port_base": 8675,
+  "prefix": "s7875",
+  "domain_id": 3,
+  "seed": 7875,
+  "verify_seed": 267875,
+  "commit_hash": "59f221d",
+  "model": {
+    "agents": "qwen3:1.7b via Ollama, temperature 0, seed 7875, thinking off",
+    "part1_worker": "no model (pure Python)"
+  },
+  "config": {
+    "kafka": "apache/kafka:3.9.2 (KRaft), docker-compose.kafka.yml",
+    "bootstrap": "localhost:9092",
+    "topics": {
+      "s7875_notice_requests": 1,
+      "s7875_notice_responses": 1,
+      "s7875_inbox": 1,
+      "s7875_tasks": 2,
+      "s7875_drafts": 1,
+      "s7875_final": 1,
+      "s7875_dead_letter": 1
+    },
+    "max_retries": 3,
+    "commit_mode": "after",
+    "idempotency": "on (key = message_id or correlation_id)"
+  },
+  "generated_at": "2026-10-27T12:24:12",
+  "summary": "30/30 checks passed",
+  "checks": [
+    {
+      "name": "Section 0 values",
+      "passed": true,
+      "detail": "PORT_BASE=8675 PREFIX=s7875 VERIFY_SEED=267875"
+    },
+    {
+      "name": "every HW8 topic name carries PREFIX",
+      "passed": true,
+      "detail": "s7875_notice_requests, s7875_notice_responses, s7875_inbox, s7875_tasks, s7875_drafts, s7875_final, s7875_dead_letter"
+    },
+    {
+      "name": "Kafka reachable and all 7 s7875 topics exist",
+      "passed": true,
+      "detail": "localhost:9092"
+    },
+    {
+      "name": "s7875_tasks has 2 partitions",
+      "passed": true,
+      "detail": "partitions=[0, 1]"
+    },
+    {
+      "name": "docker ps: Kafka, worker and FastAPI containers up",
+      "passed": true,
+      "detail": "s7875_kafka, s7875_notice_worker, s7875_notice_api"
+    },
+    {
+      "name": "worker log shows 'Consumer is ready and listening...'",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "API log shows server started at http://127.0.0.1:8675",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "CREATE_NOTICE over Kafka succeeds and returns a UUID notice_id",
+      "passed": true,
+      "detail": "notice_id=680202c7-6057-4aa8-a7e7-f6e11301ff11"
+    },
+    {
+      "name": "CREATE_NOTICE response echoes the correlation_id unchanged",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "GET_NOTICE round-trips the created notice (all fields equal)",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "GET_NOTICE response echoes its correlation_id",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "replayed CREATE (same correlation_id) creates no second notice",
+      "passed": true,
+      "detail": "first=680202c7-6057-4aa8-a7e7-f6e11301ff11 replay=680202c7-6057-4aa8-a7e7-f6e11301ff11"
+    },
+    {
+      "name": "unknown operation is rejected (success=false, clean error, correlation_id kept)",
+      "passed": true,
+      "detail": "Unknown operation"
+    },
+    {
+      "name": "missing field is rejected (success=false, clean error, correlation_id kept)",
+      "passed": true,
+      "detail": "Missing required field(s): product"
+    },
+    {
+      "name": "empty field is rejected (success=false, clean error, correlation_id kept)",
+      "passed": true,
+      "detail": "Empty value for field(s): description"
+    },
+    {
+      "name": "invalid email is rejected (success=false, clean error, correlation_id kept)",
+      "passed": true,
+      "detail": "Invalid value(s): email: value is not a valid email address: An email address must have an @-sign."
+    },
+    {
+      "name": "negative units_affected is rejected (success=false, clean error, correlation_id kept)",
+      "passed": true,
+      "detail": "Invalid value(s): units_affected: Input should be greater than or equal to 0"
+    },
+    {
+      "name": "unknown notice_id gives 'Notice not found' (success=false, clean error, correlation_id kept)",
+      "passed": true,
+      "detail": "Notice not found"
+    },
+    {
+      "name": "FastAPI wrapper answers on PORT_BASE 8675",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "CREATE -> GET through the FastAPI wrapper (correlation_id kept)",
+      "passed": true,
+      "detail": "notice_id=9b281065-151f-4741-afb1-125c7456de4e"
+    },
+    {
+      "name": "planner, writer and reviewer start as separate processes and join Kafka",
+      "passed": true,
+      "detail": "planner pid 37623, writer pid 37624, reviewer pid 37625"
+    },
+    {
+      "name": "question on s7875_inbox reaches s7875_final",
+      "passed": true,
+      "detail": "status=approved"
+    },
+    {
+      "name": "final JSON has a status and a non-empty answer",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "correlation_id preserved and trace shows planner -> writer -> reviewer",
+      "passed": true,
+      "detail": "['planner', 'writer', 'reviewer']"
+    },
+    {
+      "name": "one plan on s7875_tasks and one draft on s7875_drafts for that question",
+      "passed": true,
+      "detail": "tasks=1 drafts=1"
+    },
+    {
+      "name": "replayed task (same correlation_id) is skipped: still exactly one draft",
+      "passed": true,
+      "detail": "drafts=1"
+    },
+    {
+      "name": "poison message is retried 3 times then lands on s7875_dead_letter",
+      "passed": true,
+      "detail": "ValueError: task has no usable plan (expected a non-empty list of steps)"
+    },
+    {
+      "name": "message behind the poison one is still processed",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "saved Part 3 runs show every fix working (dup, kill, poison, keyed ordering)",
+      "passed": true,
+      "detail": "{'duplicate': True, 'kill': True, 'poison': True, 'ordering': True}"
+    },
+    {
+      "name": "offline HW8 tests pass (tests/test_hw08_kafka.py)",
+      "passed": true,
+      "detail": "tests/test_hw08_kafka.py: all 57 checks passed"
+    }
+  ]
+}

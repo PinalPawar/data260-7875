@@ -1,0 +1,126 @@
+{
+  "run_at": "2026-10-27T11:46:53.569-07:00",
+  "via": "kafka",
+  "request_topic": "s7875_notice_requests",
+  "response_topic": "s7875_notice_responses",
+  "create": {
+    "correlation_id": "007c1cf0-c86c-4024-a84d-fa942ebc9c5f",
+    "request": {
+      "correlation_id": "007c1cf0-c86c-4024-a84d-fa942ebc9c5f",
+      "reply_to": "s7875_notice_responses",
+      "operation": "CREATE_NOTICE",
+      "data": {
+        "product": "Organic Baby Spinach 5oz",
+        "notice_code": "RCL-2026-07875",
+        "units_affected": 4471,
+        "manufacturer_id": 1,
+        "email": "recalls@greenfields-foods.com",
+        "description": "Routine testing found Listeria monocytogenes in lot L4471. Bags were sold in California and Nevada stores.",
+        "category": "bacterialContamination"
+      }
+    },
+    "response": {
+      "correlation_id": "007c1cf0-c86c-4024-a84d-fa942ebc9c5f",
+      "operation": "CREATE_NOTICE",
+      "success": true,
+      "notice_id": "9264c6ab-d48c-4268-9db1-ee6113f956df",
+      "message": "Notice created"
+    }
+  },
+  "get": {
+    "correlation_id": "233d96f0-e04d-4442-9132-a4599aed101a",
+    "request": {
+      "correlation_id": "233d96f0-e04d-4442-9132-a4599aed101a",
+      "reply_to": "s7875_notice_responses",
+      "operation": "GET_NOTICE",
+      "data": {
+        "notice_id": "9264c6ab-d48c-4268-9db1-ee6113f956df"
+      }
+    },
+    "response": {
+      "correlation_id": "233d96f0-e04d-4442-9132-a4599aed101a",
+      "operation": "GET_NOTICE",
+      "success": true,
+      "notice": {
+        "notice_id": "9264c6ab-d48c-4268-9db1-ee6113f956df",
+        "product": "Organic Baby Spinach 5oz",
+        "notice_code": "RCL-2026-07875",
+        "units_affected": 4471,
+        "manufacturer_id": 1,
+        "email": "recalls@greenfields-foods.com",
+        "description": "Routine testing found Listeria monocytogenes in lot L4471. Bags were sold in California and Nevada stores.",
+        "category": "bacterialContamination"
+      }
+    }
+  },
+  "error_cases": [
+    {
+      "case": "unknown operation",
+      "sent_correlation_id": "419ab7ee-5f2a-49dd-93a0-a4706cd3111e",
+      "response": {
+        "correlation_id": "419ab7ee-5f2a-49dd-93a0-a4706cd3111e",
+        "operation": "DELETE_EVERYTHING",
+        "success": false,
+        "error": "Unknown operation"
+      },
+      "correlation_id_preserved": true
+    },
+    {
+      "case": "missing field",
+      "sent_correlation_id": "67107daa-5244-4016-89a3-c58921ff1bb9",
+      "response": {
+        "correlation_id": "67107daa-5244-4016-89a3-c58921ff1bb9",
+        "operation": "CREATE_NOTICE",
+        "success": false,
+        "error": "Missing required field(s): email"
+      },
+      "correlation_id_preserved": true
+    },
+    {
+      "case": "invalid notice_code",
+      "sent_correlation_id": "aadcf4a4-1e14-4fd5-85df-15d4fccad6ae",
+      "response": {
+        "correlation_id": "aadcf4a4-1e14-4fd5-85df-15d4fccad6ae",
+        "operation": "CREATE_NOTICE",
+        "success": false,
+        "error": "Invalid value(s): notice_code: String should match pattern '^RCL-\\d{4}-\\d{5}$'"
+      },
+      "correlation_id_preserved": true
+    },
+    {
+      "case": "unknown notice_id",
+      "sent_correlation_id": "c6668ec4-e0f7-4737-b71c-0d784352c1aa",
+      "response": {
+        "correlation_id": "c6668ec4-e0f7-4737-b71c-0d784352c1aa",
+        "operation": "GET_NOTICE",
+        "success": false,
+        "error": "Notice not found"
+      },
+      "correlation_id_preserved": true
+    }
+  ],
+  "merged_log": {
+    "CREATE_NOTICE": [
+      "2026-10-27T11:46:53.445-07:00 [CLIENT] SEND            corr=007c1cf0-c86c-4024-a84d-fa942ebc9c5f topic=s7875_notice_requests {\"correlation_id\": \"007c1cf0-c86c-4024-a84d-fa942ebc9c5f\", \"reply_to\": \"s7875_notice_responses\", \"operation\": \"CREATE_NOTICE\", \"data\": {\"product\": \"Organic Baby Spinach 5oz\", \"notice_code\": \"RCL-2026-07875\", \"units_affected\": 4471, \"manufacturer_id\": 1, \"email\": \"recalls@greenfields-foods.com\", \"description\": \"Routine testing found Listeria monocytogenes in lot L4471. Bags were sold in California and Nevada stores.\", \"category\": \"bacterialContamination\"}}",
+      "2026-10-27T18:46:53.468+00:00 [WORKER] RECEIVE         corr=007c1cf0-c86c-4024-a84d-fa942ebc9c5f topic=s7875_notice_requests p=0 off=6 {\"correlation_id\": \"007c1cf0-c86c-4024-a84d-fa942ebc9c5f\", \"reply_to\": \"s7875_notice_responses\", \"operation\": \"CREATE_NOTICE\", \"data\": {\"product\": \"Organic Baby Spinach 5oz\", \"notice_code\": \"RCL-2026-07875\", \"units_affected\": 4471, \"manufacturer_id\": 1, \"email\": \"recalls@greenfields-foods.com\", \"description\": \"Routine testing found Listeria monocytogenes in lot L4471. Bags were sold in California and Nevada stores.\", \"category\": \"bacterialContamination\"}}",
+      "2026-10-27T18:46:53.470+00:00 [WORKER] PROCESS         corr=007c1cf0-c86c-4024-a84d-fa942ebc9c5f operation=CREATE_NOTICE success=True notices_in_store=2",
+      "2026-10-27T18:46:53.470+00:00 [WORKER] REPLY           corr=007c1cf0-c86c-4024-a84d-fa942ebc9c5f topic=s7875_notice_responses {\"correlation_id\": \"007c1cf0-c86c-4024-a84d-fa942ebc9c5f\", \"operation\": \"CREATE_NOTICE\", \"success\": true, \"notice_id\": \"9264c6ab-d48c-4268-9db1-ee6113f956df\", \"message\": \"Notice created\"}",
+      "2026-10-27T11:46:53.478-07:00 [CLIENT] CLIENT-RESPONSE corr=007c1cf0-c86c-4024-a84d-fa942ebc9c5f topic=s7875_notice_responses p=0 off=6 {\"correlation_id\": \"007c1cf0-c86c-4024-a84d-fa942ebc9c5f\", \"operation\": \"CREATE_NOTICE\", \"success\": true, \"notice_id\": \"9264c6ab-d48c-4268-9db1-ee6113f956df\", \"message\": \"Notice created\"}"
+    ],
+    "GET_NOTICE": [
+      "2026-10-27T11:46:53.478-07:00 [CLIENT] SEND            corr=233d96f0-e04d-4442-9132-a4599aed101a topic=s7875_notice_requests {\"correlation_id\": \"233d96f0-e04d-4442-9132-a4599aed101a\", \"reply_to\": \"s7875_notice_responses\", \"operation\": \"GET_NOTICE\", \"data\": {\"notice_id\": \"9264c6ab-d48c-4268-9db1-ee6113f956df\"}}",
+      "2026-10-27T18:46:53.481+00:00 [WORKER] RECEIVE         corr=233d96f0-e04d-4442-9132-a4599aed101a topic=s7875_notice_requests p=0 off=7 {\"correlation_id\": \"233d96f0-e04d-4442-9132-a4599aed101a\", \"reply_to\": \"s7875_notice_responses\", \"operation\": \"GET_NOTICE\", \"data\": {\"notice_id\": \"9264c6ab-d48c-4268-9db1-ee6113f956df\"}}",
+      "2026-10-27T18:46:53.482+00:00 [WORKER] PROCESS         corr=233d96f0-e04d-4442-9132-a4599aed101a operation=GET_NOTICE success=True notices_in_store=2",
+      "2026-10-27T18:46:53.482+00:00 [WORKER] REPLY           corr=233d96f0-e04d-4442-9132-a4599aed101a topic=s7875_notice_responses {\"correlation_id\": \"233d96f0-e04d-4442-9132-a4599aed101a\", \"operation\": \"GET_NOTICE\", \"success\": true, \"notice\": {\"notice_id\": \"9264c6ab-d48c-4268-9db1-ee6113f956df\", \"product\": \"Organic Baby Spinach 5oz\", \"notice_code\": \"RCL-2026-07875\", \"units_affected\": 4471, \"manufacturer_id\": 1, \"email\": \"recalls@greenfields-foods.com\", \"description\": \"Routine testing found Listeria monocytogenes in lot L4471. Bags were sold in California and Nevada stores.\", \"category\": \"bacterialContamination\"}}",
+      "2026-10-27T11:46:53.485-07:00 [CLIENT] CLIENT-RESPONSE corr=233d96f0-e04d-4442-9132-a4599aed101a topic=s7875_notice_responses p=0 off=7 {\"correlation_id\": \"233d96f0-e04d-4442-9132-a4599aed101a\", \"operation\": \"GET_NOTICE\", \"success\": true, \"notice\": {\"notice_id\": \"9264c6ab-d48c-4268-9db1-ee6113f956df\", \"product\": \"Organic Baby Spinach 5oz\", \"notice_code\": \"RCL-2026-07875\", \"units_affected\": 4471, \"manufacturer_id\": 1, \"email\": \"recalls@greenfields-foods.com\", \"description\": \"Routine testing found Listeria monocytogenes in lot L4471. Bags were sold in California and Nevada stores.\", \"category\": \"bacterialContamination\"}}"
+    ]
+  },
+  "checks": {
+    "create_success": true,
+    "create_correlation_id_preserved": true,
+    "get_success": true,
+    "get_correlation_id_preserved": true,
+    "retrieved_notice_matches_created": true,
+    "all_error_responses_keep_correlation_id": true
+  }
+}

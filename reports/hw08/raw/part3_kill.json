@@ -1,0 +1,39 @@
+{
+  "run_id": "121603",
+  "run_at": "2026-10-27T12:17:00.564-07:00",
+  "writer_model": "offline stand-in",
+  "before": {
+    "group": "s7875_writers_p3_kill_before_121603",
+    "correlation_id": "kill-before-181768dd",
+    "partition": 0,
+    "offset": 5,
+    "writer_A_started_processing": true,
+    "writer_A_finished": false,
+    "committed_offset_at_kill": 6,
+    "redelivered_to_writer_B": false,
+    "drafts_on_s7875_drafts": 0,
+    "committed_offset_at_end": 6,
+    "outcome": "LOST (never completed)",
+    "logs": [
+      "part3_kill_before_writer-A.log",
+      "part3_kill_before_writer-B.log"
+    ]
+  },
+  "after": {
+    "group": "s7875_writers_p3_kill_after_121603",
+    "correlation_id": "kill-after-6d291d0c",
+    "partition": 1,
+    "offset": 1,
+    "writer_A_started_processing": true,
+    "writer_A_finished": false,
+    "committed_offset_at_kill": 1,
+    "redelivered_to_writer_B": true,
+    "drafts_on_s7875_drafts": 1,
+    "committed_offset_at_end": 2,
+    "outcome": "completed after restart",
+    "logs": [
+      "part3_kill_after_writer-A.log",
+      "part3_kill_after_writer-B.log"
+    ]
+  }
+}

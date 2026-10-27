@@ -1,0 +1,9 @@
+# HW8: image for the notice worker and the FastAPI wrapper (docker-compose.kafka.yml).
+# Only what those two need: the kafka_hw8 package and the shared schemas.py (NoticeCreate).
+FROM python:3.11-slim
+WORKDIR /app
+ENV PYTHONUNBUFFERED=1
+COPY requirements-kafka.txt .
+RUN pip install --no-cache-dir -r requirements-kafka.txt
+COPY schemas.py .
+COPY kafka_hw8/ kafka_hw8/

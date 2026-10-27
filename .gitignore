@@ -3,3 +3,6 @@ __pycache__/
 *.pyc
 node_modules/
 data/bikeshare/months/
+
+# HW8: agent idempotency stores (SQLite)
+.hw08_state/

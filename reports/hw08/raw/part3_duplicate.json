@@ -1,0 +1,45 @@
+{
+  "run_id": "122204",
+  "run_at": "2026-10-27T12:22:16.787-07:00",
+  "writer_model": "offline stand-in",
+  "before": {
+    "group": "s7875_writers_p3_duplicate_before_122204",
+    "correlation_id": "dup-before-8c578dd3",
+    "copies_sent": 2,
+    "placed": [
+      [
+        1,
+        26
+      ],
+      [
+        1,
+        27
+      ]
+    ],
+    "received": 2,
+    "model_calls": 2,
+    "duplicate_skips": 0,
+    "drafts_on_s7875_drafts": 2,
+    "log": "part3_duplicate_before_writer-A.log"
+  },
+  "after": {
+    "group": "s7875_writers_p3_duplicate_after_122204",
+    "correlation_id": "dup-after-61a4cf25",
+    "copies_sent": 2,
+    "placed": [
+      [
+        1,
+        28
+      ],
+      [
+        1,
+        29
+      ]
+    ],
+    "received": 2,
+    "model_calls": 1,
+    "duplicate_skips": 1,
+    "drafts_on_s7875_drafts": 1,
+    "log": "part3_duplicate_after_writer-A.log"
+  }
+}

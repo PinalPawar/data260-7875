@@ -207,3 +207,66 @@ The tool layer lives in `recall_tools/` (`tools.py`, `store.py`, `retry.py`, `ex
 ```
 python3 scripts/verify_hw05.py               # backend must be running; writes reports/hw05/verification.json
 ```
+
+---
+
+# DATA-260 HW8, Pinal Pawar (SID4: 7875)
+
+Kafka request/response service (Part 1), a three-agent Kafka pipeline (Part 2) and failure
+handling (Part 3). PREFIX `s7875`, PORT_BASE `8675`, VERIFY_SEED `267875`, local model
+`qwen3:1.7b` (Ollama). Tagged commit: `hw8`.
+
+| Topic | Partitions | Used by |
+|---|---|---|
+| `s7875_notice_requests` | 1 | client / FastAPI -> worker (CREATE_NOTICE, GET_NOTICE) |
+| `s7875_notice_responses` | 1 | worker -> client / FastAPI |
+| `s7875_inbox` | 1 | you -> Planner |
+| `s7875_tasks` | 2 | Planner -> Writer (two Writers in the ordering test) |
+| `s7875_drafts` | 1 | Writer -> Reviewer |
+| `s7875_final` | 1 | Reviewer -> you |
+| `s7875_dead_letter` | 1 | any agent, after 3 failed attempts |
+
+Code: `kafka_hw8/` (worker, API, Kafka client, agent loop), `homework_demo.py`, `planner.py`,
+`writer.py`, `reviewer.py`, `send_question.py`, `scripts/run_hw08_part3.py`,
+`scripts/verify_hw08.py`, `docker-compose.kafka.yml`, `Dockerfile.kafka`.
+Notice validation reuses `NoticeCreate` from `schemas.py`.
+
+## HW8 Reproducible run instructions
+
+```
+pip install -r requirements.txt                                   # adds aiokafka
+docker compose -f docker-compose.kafka.yml up -d --build           # Kafka + worker + API
+bash scripts/hw08_create_topics.sh                                 # the s7875 topics (CLI)
+```
+Stop `python main.py` first: the Kafka API also uses port 8675.
+
+### Part 1
+```
+docker ps
+docker logs s7875_notice_worker        # Consumer is ready and listening...
+docker logs s7875_notice_api           # FastAPI server started at http://127.0.0.1:8675
+python homework_demo.py                # Kafka client: steps 1-10, merged log, checks
+python homework_demo.py --via api      # same flow through the FastAPI wrapper
+```
+
+### Part 2 (four terminals)
+```
+python planner.py
+python writer.py
+python reviewer.py
+python send_question.py                # prints the journey and the final JSON
+```
+
+### Part 3
+```
+python scripts/run_hw08_part3.py all   # duplicate, kill, poison, ordering; before + after
+```
+Switches (env vars) read by every agent: `IDEMPOTENCY=0|1`, `COMMIT_MODE=after|before`,
+`MAX_RETRIES=N` (0 = no handling), `WORK_DELAY_S=S`, `HW8_FAKE_LLM=1`.
+
+### Self-check and offline tests
+```
+python tests/test_hw08_kafka.py        # no Kafka, no Ollama
+python scripts/verify_hw08.py          # or: make verify-hw08 -> reports/hw08/verification.json
+docker compose -f docker-compose.kafka.yml down
+```

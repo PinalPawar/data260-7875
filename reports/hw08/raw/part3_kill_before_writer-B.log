@@ -1,0 +1,5 @@
+===== Pinal Pawar | SID4 7875 | PREFIX s7875 | PORT_BASE 8675 | writer (writer-B) =====
+2026-10-27T12:16:06.232-07:00 [WRITER-B] in=s7875_tasks group=s7875_writers_p3_kill_before_121603 idempotency=True commit_mode=before max_retries=3 work_delay_s=0.0 dead_letter=s7875_dead_letter
+2026-10-27T12:16:14.382-07:00 [WRITER-B] ASSIGNED partitions [0, 1]
+2026-10-27T12:16:14.391-07:00 [WRITER-B] writer is ready and listening on s7875_tasks
+2026-10-27T12:16:44.759-07:00 [WRITER-B] stopping (signal)

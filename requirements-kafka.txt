@@ -1,0 +1,6 @@
+# HW8: dependencies of the Kafka worker + API containers (Dockerfile.kafka)
+aiokafka==0.14.0
+fastapi==0.115.12
+uvicorn==0.34.0
+pydantic==2.12.5
+email-validator==2.2.0

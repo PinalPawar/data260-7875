@@ -1,0 +1,45 @@
+===== Pinal Pawar | SID4 7875 | PREFIX s7875 | PORT_BASE 8675 | writer (writer-2) =====
+2026-10-27T12:19:13.856-07:00 [WRITER-2] in=s7875_tasks group=s7875_writers_p3_ordering_unkeyed_121913 idempotency=True commit_mode=after max_retries=3 work_delay_s=0.0 dead_letter=s7875_dead_letter
+2026-10-27T12:19:16.523-07:00 [WRITER-2] ASSIGNED partitions [1]
+2026-10-27T12:19:16.527-07:00 [WRITER-2] writer is ready and listening on s7875_tasks
+2026-10-27T12:19:16.738-07:00 [WRITER-2] RECEIVE         corr=ord-unkeyed-121913-01 topic=s7875_tasks p=1 off=2 key=ord-unkeyed-121913-01 {"kind": "order_test", "run": "unkeyed", "message_id": "ord-unkeyed-121913-01", "correlation_id": "ord-unkeyed-121913-01", "entity": "RCL-2026-61335", "seq": 1, "action": "press_release", "work_ms": 144, "sent_index": 1}
+2026-10-27T12:19:16.739-07:00 [WRITER-2] PROCESS-START   corr=ord-unkeyed-121913-01 attempt=1 work_delay_s=0.0
+2026-10-27T12:19:16.884-07:00 [WRITER-2] ORDER-PROCESSED corr=ord-unkeyed-121913-01 entity=RCL-2026-61335 seq=1 p=1 off=2
+2026-10-27T12:19:16.891-07:00 [WRITER-2] COMMIT          corr=ord-unkeyed-121913-01 p=1 next_offset=3
+2026-10-27T12:19:16.894-07:00 [WRITER-2] RECEIVE         corr=ord-unkeyed-121913-03 topic=s7875_tasks p=1 off=3 key=ord-unkeyed-121913-03 {"kind": "order_test", "run": "unkeyed", "message_id": "ord-unkeyed-121913-03", "correlation_id": "ord-unkeyed-121913-03", "entity": "RCL-2026-59801", "seq": 2, "action": "opened", "work_ms": 344, "sent_index": 3}
+2026-10-27T12:19:16.894-07:00 [WRITER-2] PROCESS-START   corr=ord-unkeyed-121913-03 attempt=1 work_delay_s=0.0
+2026-10-27T12:19:17.240-07:00 [WRITER-2] ORDER-PROCESSED corr=ord-unkeyed-121913-03 entity=RCL-2026-59801 seq=2 p=1 off=3
+2026-10-27T12:19:17.247-07:00 [WRITER-2] COMMIT          corr=ord-unkeyed-121913-03 p=1 next_offset=4
+2026-10-27T12:19:17.247-07:00 [WRITER-2] RECEIVE         corr=ord-unkeyed-121913-05 topic=s7875_tasks p=1 off=4 key=ord-unkeyed-121913-05 {"kind": "order_test", "run": "unkeyed", "message_id": "ord-unkeyed-121913-05", "correlation_id": "ord-unkeyed-121913-05", "entity": "RCL-2026-59801", "seq": 3, "action": "stores_added", "work_ms": 353, "sent_index": 5}
+2026-10-27T12:19:17.248-07:00 [WRITER-2] PROCESS-START   corr=ord-unkeyed-121913-05 attempt=1 work_delay_s=0.0
+2026-10-27T12:19:17.601-07:00 [WRITER-2] ORDER-PROCESSED corr=ord-unkeyed-121913-05 entity=RCL-2026-59801 seq=3 p=1 off=4
+2026-10-27T12:19:17.607-07:00 [WRITER-2] COMMIT          corr=ord-unkeyed-121913-05 p=1 next_offset=5
+2026-10-27T12:19:17.608-07:00 [WRITER-2] RECEIVE         corr=ord-unkeyed-121913-07 topic=s7875_tasks p=1 off=5 key=ord-unkeyed-121913-07 {"kind": "order_test", "run": "unkeyed", "message_id": "ord-unkeyed-121913-07", "correlation_id": "ord-unkeyed-121913-07", "entity": "RCL-2026-59801", "seq": 4, "action": "units_updated", "work_ms": 491, "sent_index": 7}
+2026-10-27T12:19:17.608-07:00 [WRITER-2] PROCESS-START   corr=ord-unkeyed-121913-07 attempt=1 work_delay_s=0.0
+2026-10-27T12:19:18.100-07:00 [WRITER-2] ORDER-PROCESSED corr=ord-unkeyed-121913-07 entity=RCL-2026-59801 seq=4 p=1 off=5
+2026-10-27T12:19:18.103-07:00 [WRITER-2] COMMIT          corr=ord-unkeyed-121913-07 p=1 next_offset=6
+2026-10-27T12:19:18.103-07:00 [WRITER-2] RECEIVE         corr=ord-unkeyed-121913-09 topic=s7875_tasks p=1 off=6 key=ord-unkeyed-121913-09 {"kind": "order_test", "run": "unkeyed", "message_id": "ord-unkeyed-121913-09", "correlation_id": "ord-unkeyed-121913-09", "entity": "RCL-2026-61335", "seq": 2, "action": "class_changed", "work_ms": 193, "sent_index": 9}
+2026-10-27T12:19:18.103-07:00 [WRITER-2] PROCESS-START   corr=ord-unkeyed-121913-09 attempt=1 work_delay_s=0.0
+2026-10-27T12:19:18.297-07:00 [WRITER-2] ORDER-PROCESSED corr=ord-unkeyed-121913-09 entity=RCL-2026-61335 seq=2 p=1 off=6
+2026-10-27T12:19:18.301-07:00 [WRITER-2] COMMIT          corr=ord-unkeyed-121913-09 p=1 next_offset=7
+2026-10-27T12:19:18.301-07:00 [WRITER-2] RECEIVE         corr=ord-unkeyed-121913-11 topic=s7875_tasks p=1 off=7 key=ord-unkeyed-121913-11 {"kind": "order_test", "run": "unkeyed", "message_id": "ord-unkeyed-121913-11", "correlation_id": "ord-unkeyed-121913-11", "entity": "RCL-2026-59801", "seq": 5, "action": "stores_added", "work_ms": 158, "sent_index": 11}
+2026-10-27T12:19:18.301-07:00 [WRITER-2] PROCESS-START   corr=ord-unkeyed-121913-11 attempt=1 work_delay_s=0.0
+2026-10-27T12:19:18.459-07:00 [WRITER-2] ORDER-PROCESSED corr=ord-unkeyed-121913-11 entity=RCL-2026-59801 seq=5 p=1 off=7
+2026-10-27T12:19:18.463-07:00 [WRITER-2] COMMIT          corr=ord-unkeyed-121913-11 p=1 next_offset=8
+2026-10-27T12:19:18.464-07:00 [WRITER-2] RECEIVE         corr=ord-unkeyed-121913-13 topic=s7875_tasks p=1 off=8 key=ord-unkeyed-121913-13 {"kind": "order_test", "run": "unkeyed", "message_id": "ord-unkeyed-121913-13", "correlation_id": "ord-unkeyed-121913-13", "entity": "RCL-2026-61335", "seq": 4, "action": "lots_added", "work_ms": 317, "sent_index": 13}
+2026-10-27T12:19:18.464-07:00 [WRITER-2] PROCESS-START   corr=ord-unkeyed-121913-13 attempt=1 work_delay_s=0.0
+2026-10-27T12:19:18.782-07:00 [WRITER-2] ORDER-PROCESSED corr=ord-unkeyed-121913-13 entity=RCL-2026-61335 seq=4 p=1 off=8
+2026-10-27T12:19:18.874-07:00 [WRITER-2] COMMIT          corr=ord-unkeyed-121913-13 p=1 next_offset=9
+2026-10-27T12:19:18.874-07:00 [WRITER-2] RECEIVE         corr=ord-unkeyed-121913-15 topic=s7875_tasks p=1 off=9 key=ord-unkeyed-121913-15 {"kind": "order_test", "run": "unkeyed", "message_id": "ord-unkeyed-121913-15", "correlation_id": "ord-unkeyed-121913-15", "entity": "RCL-2026-66434", "seq": 4, "action": "class_changed", "work_ms": 291, "sent_index": 15}
+2026-10-27T12:19:18.874-07:00 [WRITER-2] PROCESS-START   corr=ord-unkeyed-121913-15 attempt=1 work_delay_s=0.0
+2026-10-27T12:19:19.166-07:00 [WRITER-2] ORDER-PROCESSED corr=ord-unkeyed-121913-15 entity=RCL-2026-66434 seq=4 p=1 off=9
+2026-10-27T12:19:19.172-07:00 [WRITER-2] COMMIT          corr=ord-unkeyed-121913-15 p=1 next_offset=10
+2026-10-27T12:19:19.172-07:00 [WRITER-2] RECEIVE         corr=ord-unkeyed-121913-17 topic=s7875_tasks p=1 off=10 key=ord-unkeyed-121913-17 {"kind": "order_test", "run": "unkeyed", "message_id": "ord-unkeyed-121913-17", "correlation_id": "ord-unkeyed-121913-17", "entity": "RCL-2026-61335", "seq": 5, "action": "units_updated", "work_ms": 586, "sent_index": 17}
+2026-10-27T12:19:19.172-07:00 [WRITER-2] PROCESS-START   corr=ord-unkeyed-121913-17 attempt=1 work_delay_s=0.0
+2026-10-27T12:19:19.759-07:00 [WRITER-2] ORDER-PROCESSED corr=ord-unkeyed-121913-17 entity=RCL-2026-61335 seq=5 p=1 off=10
+2026-10-27T12:19:19.763-07:00 [WRITER-2] COMMIT          corr=ord-unkeyed-121913-17 p=1 next_offset=11
+2026-10-27T12:19:19.763-07:00 [WRITER-2] RECEIVE         corr=ord-unkeyed-121913-19 topic=s7875_tasks p=1 off=11 key=ord-unkeyed-121913-19 {"kind": "order_test", "run": "unkeyed", "message_id": "ord-unkeyed-121913-19", "correlation_id": "ord-unkeyed-121913-19", "entity": "RCL-2026-61335", "seq": 6, "action": "lots_added", "work_ms": 344, "sent_index": 19}
+2026-10-27T12:19:19.763-07:00 [WRITER-2] PROCESS-START   corr=ord-unkeyed-121913-19 attempt=1 work_delay_s=0.0
+2026-10-27T12:19:20.108-07:00 [WRITER-2] ORDER-PROCESSED corr=ord-unkeyed-121913-19 entity=RCL-2026-61335 seq=6 p=1 off=11
+2026-10-27T12:19:20.115-07:00 [WRITER-2] COMMIT          corr=ord-unkeyed-121913-19 p=1 next_offset=12
+2026-10-27T12:19:20.339-07:00 [WRITER-2] stopping (signal)
