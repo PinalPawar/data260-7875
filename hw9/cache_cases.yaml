@@ -1,0 +1,68 @@
+# HW9 Part 3.1 - labeled cache test set (Pinal Pawar, s7875). FROZEN before the threshold sweep:
+# do not relabel after seeing results; labeling mistakes go in reports/hw09/LABEL_NOTES.md.
+#
+# seeds: the 10 questions put in the cache first (each answered once by the HW8 pipeline).
+# cases: 40 incoming queries. expect = hit -> should be served by `seed`;
+#        expect = miss -> no seed has the right answer (cached answer would be wrong).
+# Facts in comments come from s7875_rel.notices.
+
+seeds:
+  S1:  "How many units of Butter batch 4609 were recalled?"                       # 3671 units
+  S2:  "What is the reason for the Peanut Butter batch 4680 recall?"              # metal fragments
+  S3:  "Which lot is affected by the Baby Formula batch 4622 recall?"             # lot #L14622
+  S4:  "Who manufactures the Yogurt batch 4682 that was recalled?"                # Harvest Point
+  S5:  "What should I do if I bought the recalled Frozen Spinach from GreenFields Co?"  # notice 5001, Listeria
+  S6:  "What category is the Ice Cream batch 4602 recall?"                        # mislabelling
+  S7:  "Is the Deli Turkey batch 4619 recall because of Listeria?"                # yes, bacterialContamination
+  S8:  "How many units of Orange Juice batch 4606 are affected?"                  # 4914 units
+  S9:  "What is the notice code for the Hummus batch 4618 recall?"                # RCL-2026-04618
+  S10: "Which company recalled the Granola Bars batch 4612?"                      # Golden Acres
+
+cases:
+  # ---- 10 exact duplicates (should hit the same seed) ----
+  - {id: E1,  type: exact, expect: hit, seed: S1,  text: "How many units of Butter batch 4609 were recalled?"}
+  - {id: E2,  type: exact, expect: hit, seed: S2,  text: "What is the reason for the Peanut Butter batch 4680 recall?"}
+  - {id: E3,  type: exact, expect: hit, seed: S3,  text: "Which lot is affected by the Baby Formula batch 4622 recall?"}
+  - {id: E4,  type: exact, expect: hit, seed: S4,  text: "Who manufactures the Yogurt batch 4682 that was recalled?"}
+  - {id: E5,  type: exact, expect: hit, seed: S5,  text: "What should I do if I bought the recalled Frozen Spinach from GreenFields Co?"}
+  - {id: E6,  type: exact, expect: hit, seed: S6,  text: "What category is the Ice Cream batch 4602 recall?"}
+  - {id: E7,  type: exact, expect: hit, seed: S7,  text: "Is the Deli Turkey batch 4619 recall because of Listeria?"}
+  - {id: E8,  type: exact, expect: hit, seed: S8,  text: "How many units of Orange Juice batch 4606 are affected?"}
+  - {id: E9,  type: exact, expect: hit, seed: S9,  text: "What is the notice code for the Hummus batch 4618 recall?"}
+  - {id: E10, type: exact, expect: hit, seed: S10, text: "Which company recalled the Granola Bars batch 4612?"}
+
+  # ---- 10 paraphrases (same question, new wording; should hit the same seed) ----
+  - {id: P1,  type: paraphrase, expect: hit, seed: S1,  text: "For Butter batch 4609, what is the number of recalled units?"}
+  - {id: P2,  type: paraphrase, expect: hit, seed: S2,  text: "Why was Peanut Butter batch 4680 recalled?"}
+  - {id: P3,  type: paraphrase, expect: hit, seed: S3,  text: "Baby Formula batch 4622 recall: what lot number does it cover?"}
+  - {id: P4,  type: paraphrase, expect: hit, seed: S4,  text: "Which manufacturer makes the recalled Yogurt batch 4682?"}
+  - {id: P5,  type: paraphrase, expect: hit, seed: S5,  text: "I have GreenFields Co frozen spinach that is under recall. What steps should I take?"}
+  - {id: P6,  type: paraphrase, expect: hit, seed: S6,  text: "Ice Cream batch 4602 was recalled - which recall category does it fall under?"}
+  - {id: P7,  type: paraphrase, expect: hit, seed: S7,  text: "Was Deli Turkey batch 4619 recalled due to Listeria contamination?"}
+  - {id: P8,  type: paraphrase, expect: hit, seed: S8,  text: "What number of Orange Juice batch 4606 units does the recall affect?"}
+  - {id: P9,  type: paraphrase, expect: hit, seed: S9,  text: "Give me the recall notice code for Hummus batch 4618."}
+  - {id: P10, type: paraphrase, expect: hit, seed: S10, text: "Who is the company behind the Granola Bars batch 4612 recall?"}
+
+  # ---- 10 superficially similar, different correct answer (should miss) ----
+  - {id: D1,  type: similar_different, expect: miss, near: S1,  text: "How many units of Butter batch 4656 were recalled?"}                       # 864, not 3671
+  - {id: D2,  type: similar_different, expect: miss, near: S2,  text: "What is the reason for the Peanut Butter batch 4699 recall?"}              # undeclared allergen, not metal
+  - {id: D3,  type: similar_different, expect: miss, near: S3,  text: "Which lot is affected by the Baby Formula batch 4632 recall?"}             # lot #L14632
+  - {id: D4,  type: similar_different, expect: miss, near: S4,  text: "Who manufactures the Yogurt batch 4628 that was recalled?"}                # GreenFields Co
+  - {id: D5,  type: similar_different, expect: miss, near: S5,  text: "What should I do if I bought the recalled Frozen Spinach batch 4626?"}     # packaging shortage, not Listeria
+  - {id: D6,  type: similar_different, expect: miss, near: S6,  text: "What category is the Ice Cream batch 4604 recall?"}                        # bacterialContamination
+  - {id: D7,  type: similar_different, expect: miss, near: S7,  text: "Is the Deli Turkey batch 4624 recall because of Listeria?"}                # no - mislabelling
+  - {id: D8,  type: similar_different, expect: miss, near: S8,  text: "How many units of Orange Juice batch 4596 are affected?"}                  # 724, not 4914
+  - {id: D9,  type: similar_different, expect: miss, near: S9,  text: "What is the notice code for the Hummus batch 4654 recall?"}                # RCL-2026-04654
+  - {id: D10, type: similar_different, expect: miss, near: S10, text: "Which company recalled the Granola Bars batch 4635?"}                      # GreenFields Co
+
+  # ---- 10 unrelated (should miss) ----
+  - {id: U1,  type: unrelated, expect: miss, text: "What is the capital of France?"}
+  - {id: U2,  type: unrelated, expect: miss, text: "How do I reset my password on the grocery store website?"}
+  - {id: U3,  type: unrelated, expect: miss, text: "What time does the store open on Sundays?"}
+  - {id: U4,  type: unrelated, expect: miss, text: "Can you give me a recipe for banana bread?"}
+  - {id: U5,  type: unrelated, expect: miss, text: "How long should I boil an egg for a soft yolk?"}
+  - {id: U6,  type: unrelated, expect: miss, text: "What is the difference between Listeria and Salmonella?"}
+  - {id: U7,  type: unrelated, expect: miss, text: "Can I freeze sliced bread to keep it fresh longer?"}
+  - {id: U8,  type: unrelated, expect: miss, text: "How do I return an item to the store without a receipt?"}
+  - {id: U9,  type: unrelated, expect: miss, text: "Do you sell gluten-free pasta?"}
+  - {id: U10, type: unrelated, expect: miss, text: "Who won the last FIFA World Cup?"}
