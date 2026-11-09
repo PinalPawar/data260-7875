@@ -270,3 +270,60 @@ python tests/test_hw08_kafka.py        # no Kafka, no Ollama
 python scripts/verify_hw08.py          # or: make verify-hw08 -> reports/hw08/verification.json
 docker compose -f docker-compose.kafka.yml down
 ```
+
+---
+
+# DATA-260 HW9, Pinal Pawar (SID4: 7875)
+
+Caching in front of the HW8 system: a Redis view counter (Part 1), a semantic response cache at
+the ingress of the HW8 Kafka agent pipeline (Part 2), a threshold sweep with a cost model and a
+stale-answer fix (Part 3), and a self-improving two-agent system (Part 4). PREFIX `s7875` (all
+Redis keys and index names), MySQL `s7875_rel`, conda env `data260`. Tagged commit: `hw9`.
+Report: `reports/hw09/Pawar_HW9.pdf`.
+
+Code: `hw9/` (`common.py`, `view_counter.py`, `semantic_cache.py`, `notice_context.py`,
+`pipeline.py`, `threshold_sweep.py`, `stale_demo.py`, `cache_cases.yaml`, `part2_queries.yaml`),
+`hw9/part4/` (`agents.py`, `run_part4.py`, `build_reference.py`, `reference_data.json`,
+`training_data.json`, `validation_data.json`, `test_data.json`, `lessons.json`),
+`scripts/verify_hw09.py`.
+
+## HW9 Reproducible run instructions
+
+```
+pip install redis sentence-transformers pyyaml                     # in the data260 env
+docker run -d --name s7875-redis -p 6379:6379 redis/redis-stack-server:latest
+```
+
+### Part 1
+```
+python hw9/view_counter.py             # 25 accesses, sync every 10th, latency comparison
+```
+
+### Part 2 (HW8 pipeline running in three other terminals)
+```
+docker compose -f docker-compose.kafka.yml up -d && bash scripts/hw08_create_topics.sh
+python planner.py
+python writer.py
+HW8_MODEL=qwen3:8b python reviewer.py
+python hw9/semantic_cache.py --demo    # 12 queries -> reports/hw09/raw/part2_run.json
+```
+
+### Part 3
+```
+python hw9/threshold_sweep.py          # 40 labeled cases x 5 thresholds (resumable) -> raw/part3_*.json
+python hw9/stale_demo.py               # stale hit, then data-version invalidation (row restored)
+```
+
+### Part 4 (no Kafka needed)
+```
+python hw9/part4/build_reference.py    # ground truth from s7875_rel
+python hw9/part4/run_part4.py train    # lessons created from repeated failures
+python hw9/part4/run_part4.py validate # keep a lesson only if validation does not regress
+python hw9/part4/run_part4.py demo     # controlled revision + lesson reuse
+python hw9/part4/run_part4.py test     # four variants on the held-out test set
+```
+
+### Self-check
+```
+python scripts/verify_hw09.py          # or: make verify-hw09 -> reports/hw09/verification.json
+```

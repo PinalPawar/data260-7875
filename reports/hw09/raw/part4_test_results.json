@@ -1,0 +1,1122 @@
+{
+  "table": [
+    {
+      "variant": "Baseline",
+      "correct": 3,
+      "incorrect": 9,
+      "avg_attempts": 1,
+      "avg_latency_s": 3.41
+    },
+    {
+      "variant": "Evaluator Repair",
+      "correct": 6,
+      "incorrect": 6,
+      "avg_attempts": 1.75,
+      "avg_latency_s": 6.19
+    },
+    {
+      "variant": "Lesson Memory",
+      "correct": 12,
+      "incorrect": 0,
+      "avg_attempts": 1,
+      "avg_latency_s": 3.24
+    },
+    {
+      "variant": "Validated Improvement",
+      "correct": 12,
+      "incorrect": 0,
+      "avg_attempts": 1,
+      "avg_latency_s": 2.63
+    }
+  ],
+  "detail": {
+    "Baseline": [
+      {
+        "question": "How many units of Shredded Cheese batch 4610 were recalled?",
+        "final_answer": "The recall involved 1,590 units of Shredded Cheese batch 4610. The notice code is RCL-2026-04610, and the category is foreign material.",
+        "final_result": "REVISE",
+        "attempts": 1,
+        "latency_ms": 2042.7,
+        "lessons_used": [],
+        "trace": [
+          {
+            "attempt": 1,
+            "answer": "The recall involved 1,590 units of Shredded Cheese batch 4610. The notice code is RCL-2026-04610, and the category is foreign material.",
+            "result": "REVISE",
+            "explanation": "Checked against reference_data.json: MISSING_ACTION.",
+            "feedback": "Tell the customer what to do: stop using it, do not eat it, throw it away or return it to the store, and clean surfaces it touched.",
+            "failure_codes": [
+              "MISSING_ACTION"
+            ]
+          }
+        ],
+        "id": "X01"
+      },
+      {
+        "question": "Which lot is affected by the Bagged Lettuce batch 4633 recall?",
+        "final_answer": "The Bagged Lettuce batch 4633 recall affects lot #L14633. The units affected are 3727. The recall was initiated due to a packaging shortage that caused incorrect fill levels.",
+        "final_result": "REVISE",
+        "attempts": 1,
+        "latency_ms": 3528.1,
+        "lessons_used": [],
+        "trace": [
+          {
+            "attempt": 1,
+            "answer": "The Bagged Lettuce batch 4633 recall affects lot #L14633. The units affected are 3727. The recall was initiated due to a packaging shortage that caused incorrect fill levels.",
+            "result": "REVISE",
+            "explanation": "Checked against reference_data.json: MISSING_ACTION.",
+            "feedback": "Tell the customer what to do: stop using it, do not eat it, throw it away or return it to the store, and clean surfaces it touched.",
+            "failure_codes": [
+              "MISSING_ACTION"
+            ]
+          }
+        ],
+        "id": "X02"
+      },
+      {
+        "question": "Who manufactures the recalled Ice Cream batch 4650?",
+        "final_answer": "The recalled Ice Cream batch 4650 was manufactured by Harvest Point. The recall was issued for lot #L14650 due to bacterial contamination.",
+        "final_result": "REVISE",
+        "attempts": 1,
+        "latency_ms": 2424.9,
+        "lessons_used": [],
+        "trace": [
+          {
+            "attempt": 1,
+            "answer": "The recalled Ice Cream batch 4650 was manufactured by Harvest Point. The recall was issued for lot #L14650 due to bacterial contamination.",
+            "result": "REVISE",
+            "explanation": "Checked against reference_data.json: MISSING_ACTION.",
+            "feedback": "Tell the customer what to do: stop using it, do not eat it, throw it away or return it to the store, and clean surfaces it touched.",
+            "failure_codes": [
+              "MISSING_ACTION"
+            ]
+          }
+        ],
+        "id": "X03"
+      },
+      {
+        "question": "Why was Hummus batch 4654 recalled?",
+        "final_answer": "The Hummus batch 4654 was recalled due to a packaging shortage that caused incorrect fill levels. The recall was initiated by Valley Fresh, and 26 units were affected. The recall code is RCL-2026-04654.",
+        "final_result": "REVISE",
+        "attempts": 1,
+        "latency_ms": 4130.8,
+        "lessons_used": [],
+        "trace": [
+          {
+            "attempt": 1,
+            "answer": "The Hummus batch 4654 was recalled due to a packaging shortage that caused incorrect fill levels. The recall was initiated by Valley Fresh, and 26 units were affected. The recall code is RCL-2026-04654.",
+            "result": "REVISE",
+            "explanation": "Checked against reference_data.json: MISSING_ACTION.",
+            "feedback": "Tell the customer what to do: stop using it, do not eat it, throw it away or return it to the store, and clean surfaces it touched.",
+            "failure_codes": [
+              "MISSING_ACTION"
+            ]
+          }
+        ],
+        "id": "X04"
+      },
+      {
+        "question": "Is the Butter batch 4656 recall because of Listeria?",
+        "final_answer": "Yes, the Butter batch 4656 recall is due to bacterial contamination detected in lot #L14656. The recall was issued with notice code RCL-2026-04656. The affected units are 864.",
+        "final_result": "REVISE",
+        "attempts": 1,
+        "latency_ms": 4198.2,
+        "lessons_used": [],
+        "trace": [
+          {
+            "attempt": 1,
+            "answer": "Yes, the Butter batch 4656 recall is due to bacterial contamination detected in lot #L14656. The recall was issued with notice code RCL-2026-04656. The affected units are 864.",
+            "result": "REVISE",
+            "explanation": "Checked against reference_data.json: MISSING_ACTION.",
+            "feedback": "Tell the customer what to do: stop using it, do not eat it, throw it away or return it to the store, and clean surfaces it touched.",
+            "failure_codes": [
+              "MISSING_ACTION"
+            ]
+          }
+        ],
+        "id": "X05"
+      },
+      {
+        "question": "What should I do if I bought Deli Turkey batch 4658?",
+        "final_answer": "If you bought Deli Turkey batch 4658, you should discard it immediately. The product is recalled due to bacterial contamination. Do not eat or use the affected batch. Contact the recall hotline for further instructions.",
+        "final_result": "PASS",
+        "attempts": 1,
+        "latency_ms": 3230.2,
+        "lessons_used": [],
+        "trace": [
+          {
+            "attempt": 1,
+            "answer": "If you bought Deli Turkey batch 4658, you should discard it immediately. The product is recalled due to bacterial contamination. Do not eat or use the affected batch. Contact the recall hotline for further instructions.",
+            "result": "PASS",
+            "explanation": "All facts the question needs match the reference dataset and the required consumer action is present.",
+            "feedback": "",
+            "failure_codes": []
+          }
+        ],
+        "id": "X06"
+      },
+      {
+        "question": "What is the notice code for the Frozen Spinach batch 4659 recall?",
+        "final_answer": "The notice code for the Frozen Spinach batch 4659 recall is RCL-2026-04659. The recall involves foreign material in the product, and 4621 units were affected. The recall was issued for lot #L14659.",
+        "final_result": "REVISE",
+        "attempts": 1,
+        "latency_ms": 4814.7,
+        "lessons_used": [],
+        "trace": [
+          {
+            "attempt": 1,
+            "answer": "The notice code for the Frozen Spinach batch 4659 recall is RCL-2026-04659. The recall involves foreign material in the product, and 4621 units were affected. The recall was issued for lot #L14659.",
+            "result": "REVISE",
+            "explanation": "Checked against reference_data.json: MISSING_ACTION.",
+            "feedback": "Tell the customer what to do: stop using it, do not eat it, throw it away or return it to the store, and clean surfaces it touched.",
+            "failure_codes": [
+              "MISSING_ACTION"
+            ]
+          }
+        ],
+        "id": "X07"
+      },
+      {
+        "question": "Which company recalled the Yogurt batch 4675?",
+        "final_answer": "The Yogurt batch 4675 was recalled by Prairie Mills due to bacterial contamination. The recall notice code is RCL-2026-04675, and 1,325 units were affected.",
+        "final_result": "REVISE",
+        "attempts": 1,
+        "latency_ms": 2954.7,
+        "lessons_used": [],
+        "trace": [
+          {
+            "attempt": 1,
+            "answer": "The Yogurt batch 4675 was recalled by Prairie Mills due to bacterial contamination. The recall notice code is RCL-2026-04675, and 1,325 units were affected.",
+            "result": "REVISE",
+            "explanation": "Checked against reference_data.json: MISSING_ACTION.",
+            "feedback": "Tell the customer what to do: stop using it, do not eat it, throw it away or return it to the store, and clean surfaces it touched.",
+            "failure_codes": [
+              "MISSING_ACTION"
+            ]
+          }
+        ],
+        "id": "X08"
+      },
+      {
+        "question": "How many units of Orange Juice batch 4596 are affected?",
+        "final_answer": "The recall affects 724 units of Orange Juice batch 4596. The manufacturer is ACME Foods, and the notice code is RCL-2026-04596. The shortage caused incorrect fill levels in lot #L14596.",
+        "final_result": "REVISE",
+        "attempts": 1,
+        "latency_ms": 4602.6,
+        "lessons_used": [],
+        "trace": [
+          {
+            "attempt": 1,
+            "answer": "The recall affects 724 units of Orange Juice batch 4596. The manufacturer is ACME Foods, and the notice code is RCL-2026-04596. The shortage caused incorrect fill levels in lot #L14596.",
+            "result": "REVISE",
+            "explanation": "Checked against reference_data.json: MISSING_ACTION.",
+            "feedback": "Tell the customer what to do: stop using it, do not eat it, throw it away or return it to the store, and clean surfaces it touched.",
+            "failure_codes": [
+              "MISSING_ACTION"
+            ]
+          }
+        ],
+        "id": "X09"
+      },
+      {
+        "question": "Is the Peanut Butter batch 4699 recall because of Listeria?",
+        "final_answer": "The Peanut Butter batch 4699 recall was due to an undeclared allergen, not Listeria. The recall was initiated based on a consumer complaint and the discovery of an allergen on the label. The affected units are 1381.",
+        "final_result": "REVISE",
+        "attempts": 1,
+        "latency_ms": 3879.8,
+        "lessons_used": [],
+        "trace": [
+          {
+            "attempt": 1,
+            "answer": "The Peanut Butter batch 4699 recall was due to an undeclared allergen, not Listeria. The recall was initiated based on a consumer complaint and the discovery of an allergen on the label. The affected units are 1381.",
+            "result": "REVISE",
+            "explanation": "Checked against reference_data.json: MISSING_ACTION.",
+            "feedback": "Tell the customer what to do: stop using it, do not eat it, throw it away or return it to the store, and clean surfaces it touched.",
+            "failure_codes": [
+              "MISSING_ACTION"
+            ]
+          }
+        ],
+        "id": "X10"
+      },
+      {
+        "question": "What wine pairs well with salmon?",
+        "final_answer": "There is no recall notice on file regarding wine pairing recommendations. Generally, salmon pairs well with bold red wines like Bordeaux or Merlot, and lighter white wines like Pinot Grigio or Sauvignon Blanc.",
+        "final_result": "PASS",
+        "attempts": 1,
+        "latency_ms": 3060.0,
+        "lessons_used": [],
+        "trace": [
+          {
+            "attempt": 1,
+            "answer": "There is no recall notice on file regarding wine pairing recommendations. Generally, salmon pairs well with bold red wines like Bordeaux or Merlot, and lighter white wines like Pinot Grigio or Sauvignon Blanc.",
+            "result": "PASS",
+            "explanation": "All facts the question needs match the reference dataset; no invented recall details.",
+            "feedback": "",
+            "failure_codes": []
+          }
+        ],
+        "id": "X11"
+      },
+      {
+        "question": "How do I sign up for the store loyalty program?",
+        "final_answer": "There is no recall notice on file regarding a store loyalty program. You can sign up for the store loyalty program by visiting the store's website or contacting the store directly.",
+        "final_result": "PASS",
+        "attempts": 1,
+        "latency_ms": 2096.2,
+        "lessons_used": [],
+        "trace": [
+          {
+            "attempt": 1,
+            "answer": "There is no recall notice on file regarding a store loyalty program. You can sign up for the store loyalty program by visiting the store's website or contacting the store directly.",
+            "result": "PASS",
+            "explanation": "All facts the question needs match the reference dataset; no invented recall details.",
+            "feedback": "",
+            "failure_codes": []
+          }
+        ],
+        "id": "X12"
+      }
+    ],
+    "Evaluator Repair": [
+      {
+        "question": "How many units of Shredded Cheese batch 4610 were recalled?",
+        "final_answer": "Stop using the product. Do not eat it. Throw it away or return it to the store. Clean surfaces it touched.",
+        "final_result": "REVISE",
+        "attempts": 2,
+        "latency_ms": 8370.1,
+        "lessons_used": [],
+        "trace": [
+          {
+            "attempt": 1,
+            "answer": "The recall involved 1,590 units of Shredded Cheese batch 4610. The notice code is RCL-2026-04610, and the category is foreign material.",
+            "result": "REVISE",
+            "explanation": "Checked against reference_data.json: MISSING_ACTION.",
+            "feedback": "Tell the customer what to do: stop using it, do not eat it, throw it away or return it to the store, and clean surfaces it touched.",
+            "failure_codes": [
+              "MISSING_ACTION"
+            ]
+          },
+          {
+            "attempt": 2,
+            "answer": "Stop using the product. Do not eat it. Throw it away or return it to the store. Clean surfaces it touched.",
+            "result": "REVISE",
+            "explanation": "Checked against reference_data.json: MISSING_UNITS.",
+            "feedback": "State the exact number of units affected, as written in the notice.",
+            "failure_codes": [
+              "MISSING_UNITS"
+            ]
+          }
+        ],
+        "id": "X01"
+      },
+      {
+        "question": "Which lot is affected by the Bagged Lettuce batch 4633 recall?",
+        "final_answer": "Stop using the Bagged Lettuce batch 4633. Do not eat it. Throw it away or return it to the store. Clean surfaces it touched.",
+        "final_result": "REVISE",
+        "attempts": 2,
+        "latency_ms": 7311.1,
+        "lessons_used": [],
+        "trace": [
+          {
+            "attempt": 1,
+            "answer": "The Bagged Lettuce batch 4633 recall affects lot #L14633. The units affected are 3727. The recall was initiated due to a packaging shortage that caused incorrect fill levels.",
+            "result": "REVISE",
+            "explanation": "Checked against reference_data.json: MISSING_ACTION.",
+            "feedback": "Tell the customer what to do: stop using it, do not eat it, throw it away or return it to the store, and clean surfaces it touched.",
+            "failure_codes": [
+              "MISSING_ACTION"
+            ]
+          },
+          {
+            "attempt": 2,
+            "answer": "Stop using the Bagged Lettuce batch 4633. Do not eat it. Throw it away or return it to the store. Clean surfaces it touched.",
+            "result": "REVISE",
+            "explanation": "Checked against reference_data.json: MISSING_LOT.",
+            "feedback": "Give the affected lot number exactly as written in the notice (e.g. L1xxxx).",
+            "failure_codes": [
+              "MISSING_LOT"
+            ]
+          }
+        ],
+        "id": "X02"
+      },
+      {
+        "question": "Who manufactures the recalled Ice Cream batch 4650?",
+        "final_answer": "The recalled Ice Cream batch 4650 was manufactured by Harvest Point. The recall was issued for lot #L14650 due to bacterial contamination. You should stop using it, do not eat it, throw it away, or return it to the store. Clean any surfaces it touched.",
+        "final_result": "PASS",
+        "attempts": 2,
+        "latency_ms": 6523.3,
+        "lessons_used": [],
+        "trace": [
+          {
+            "attempt": 1,
+            "answer": "The recalled Ice Cream batch 4650 was manufactured by Harvest Point. The recall was issued for lot #L14650 due to bacterial contamination.",
+            "result": "REVISE",
+            "explanation": "Checked against reference_data.json: MISSING_ACTION.",
+            "feedback": "Tell the customer what to do: stop using it, do not eat it, throw it away or return it to the store, and clean surfaces it touched.",
+            "failure_codes": [
+              "MISSING_ACTION"
+            ]
+          },
+          {
+            "attempt": 2,
+            "answer": "The recalled Ice Cream batch 4650 was manufactured by Harvest Point. The recall was issued for lot #L14650 due to bacterial contamination. You should stop using it, do not eat it, throw it away, or return it to the store. Clean any surfaces it touched.",
+            "result": "PASS",
+            "explanation": "All facts the question needs match the reference dataset and the required consumer action is present.",
+            "feedback": "",
+            "failure_codes": []
+          }
+        ],
+        "id": "X03"
+      },
+      {
+        "question": "Why was Hummus batch 4654 recalled?",
+        "final_answer": "Stop using the Hummus batch 4654. Do not eat it. Throw it away or return it to the store. Clean any surfaces it touched.",
+        "final_result": "REVISE",
+        "attempts": 2,
+        "latency_ms": 5996.8,
+        "lessons_used": [],
+        "trace": [
+          {
+            "attempt": 1,
+            "answer": "The Hummus batch 4654 was recalled due to a packaging shortage that caused incorrect fill levels. The recall was initiated by Valley Fresh, and 26 units were affected. The recall code is RCL-2026-04654.",
+            "result": "REVISE",
+            "explanation": "Checked against reference_data.json: MISSING_ACTION.",
+            "feedback": "Tell the customer what to do: stop using it, do not eat it, throw it away or return it to the store, and clean surfaces it touched.",
+            "failure_codes": [
+              "MISSING_ACTION"
+            ]
+          },
+          {
+            "attempt": 2,
+            "answer": "Stop using the Hummus batch 4654. Do not eat it. Throw it away or return it to the store. Clean any surfaces it touched.",
+            "result": "REVISE",
+            "explanation": "Checked against reference_data.json: WRONG_REASON.",
+            "feedback": "State the recall reason/category from the notice; do not substitute another hazard (e.g. do not say Listeria for an allergen or metal recall).",
+            "failure_codes": [
+              "WRONG_REASON"
+            ]
+          }
+        ],
+        "id": "X04"
+      },
+      {
+        "question": "Is the Butter batch 4656 recall because of Listeria?",
+        "final_answer": "Stop using the Butter batch 4656. Do not eat it. Throw it away or return it to the store. Clean surfaces it touched.",
+        "final_result": "REVISE",
+        "attempts": 2,
+        "latency_ms": 6822.9,
+        "lessons_used": [],
+        "trace": [
+          {
+            "attempt": 1,
+            "answer": "Yes, the Butter batch 4656 recall is due to bacterial contamination detected in lot #L14656. The recall was issued with notice code RCL-2026-04656. The affected units are 864.",
+            "result": "REVISE",
+            "explanation": "Checked against reference_data.json: MISSING_ACTION.",
+            "feedback": "Tell the customer what to do: stop using it, do not eat it, throw it away or return it to the store, and clean surfaces it touched.",
+            "failure_codes": [
+              "MISSING_ACTION"
+            ]
+          },
+          {
+            "attempt": 2,
+            "answer": "Stop using the Butter batch 4656. Do not eat it. Throw it away or return it to the store. Clean surfaces it touched.",
+            "result": "REVISE",
+            "explanation": "Checked against reference_data.json: WRONG_REASON.",
+            "feedback": "State the recall reason/category from the notice; do not substitute another hazard (e.g. do not say Listeria for an allergen or metal recall).",
+            "failure_codes": [
+              "WRONG_REASON"
+            ]
+          }
+        ],
+        "id": "X05"
+      },
+      {
+        "question": "What should I do if I bought Deli Turkey batch 4658?",
+        "final_answer": "If you bought Deli Turkey batch 4658, you should discard it immediately. The product is recalled due to bacterial contamination. Do not eat or use the affected batch. Contact the recall hotline for further instructions.",
+        "final_result": "PASS",
+        "attempts": 1,
+        "latency_ms": 3400.2,
+        "lessons_used": [],
+        "trace": [
+          {
+            "attempt": 1,
+            "answer": "If you bought Deli Turkey batch 4658, you should discard it immediately. The product is recalled due to bacterial contamination. Do not eat or use the affected batch. Contact the recall hotline for further instructions.",
+            "result": "PASS",
+            "explanation": "All facts the question needs match the reference dataset and the required consumer action is present.",
+            "feedback": "",
+            "failure_codes": []
+          }
+        ],
+        "id": "X06"
+      },
+      {
+        "question": "What is the notice code for the Frozen Spinach batch 4659 recall?",
+        "final_answer": "The notice code for the Frozen Spinach batch 4659 recall is RCL-2026-04659. The recall involves foreign material, and 4621 units were affected. The recall was issued for lot #L14659. Customers are advised to stop using the product, discard it, and clean any surfaces it touched.",
+        "final_result": "PASS",
+        "attempts": 2,
+        "latency_ms": 9284.9,
+        "lessons_used": [],
+        "trace": [
+          {
+            "attempt": 1,
+            "answer": "The notice code for the Frozen Spinach batch 4659 recall is RCL-2026-04659. The recall involves foreign material in the product, and 4621 units were affected. The recall was issued for lot #L14659.",
+            "result": "REVISE",
+            "explanation": "Checked against reference_data.json: MISSING_ACTION.",
+            "feedback": "Tell the customer what to do: stop using it, do not eat it, throw it away or return it to the store, and clean surfaces it touched.",
+            "failure_codes": [
+              "MISSING_ACTION"
+            ]
+          },
+          {
+            "attempt": 2,
+            "answer": "The notice code for the Frozen Spinach batch 4659 recall is RCL-2026-04659. The recall involves foreign material, and 4621 units were affected. The recall was issued for lot #L14659. Customers are advised to stop using the product, discard it, and clean any surfaces it touched.",
+            "result": "PASS",
+            "explanation": "All facts the question needs match the reference dataset and the required consumer action is present.",
+            "feedback": "",
+            "failure_codes": []
+          }
+        ],
+        "id": "X07"
+      },
+      {
+        "question": "Which company recalled the Yogurt batch 4675?",
+        "final_answer": "Stop using the Yogurt batch 4675. Do not eat it. Throw it away or return it to the store. Clean surfaces it touched.",
+        "final_result": "REVISE",
+        "attempts": 2,
+        "latency_ms": 5296.3,
+        "lessons_used": [],
+        "trace": [
+          {
+            "attempt": 1,
+            "answer": "The Yogurt batch 4675 was recalled by Prairie Mills due to bacterial contamination. The recall notice code is RCL-2026-04675, and 1,325 units were affected.",
+            "result": "REVISE",
+            "explanation": "Checked against reference_data.json: MISSING_ACTION.",
+            "feedback": "Tell the customer what to do: stop using it, do not eat it, throw it away or return it to the store, and clean surfaces it touched.",
+            "failure_codes": [
+              "MISSING_ACTION"
+            ]
+          },
+          {
+            "attempt": 2,
+            "answer": "Stop using the Yogurt batch 4675. Do not eat it. Throw it away or return it to the store. Clean surfaces it touched.",
+            "result": "REVISE",
+            "explanation": "Checked against reference_data.json: MISSING_MANUFACTURER.",
+            "feedback": "Name the manufacturer listed on the notice.",
+            "failure_codes": [
+              "MISSING_MANUFACTURER"
+            ]
+          }
+        ],
+        "id": "X08"
+      },
+      {
+        "question": "How many units of Orange Juice batch 4596 are affected?",
+        "final_answer": "Stop using the product. Do not eat it. Throw it away or return it to the store. Clean surfaces it touched.",
+        "final_result": "REVISE",
+        "attempts": 2,
+        "latency_ms": 6212.7,
+        "lessons_used": [],
+        "trace": [
+          {
+            "attempt": 1,
+            "answer": "The recall affects 724 units of Orange Juice batch 4596. The manufacturer is ACME Foods, and the notice code is RCL-2026-04596. The shortage caused incorrect fill levels in lot #L14596.",
+            "result": "REVISE",
+            "explanation": "Checked against reference_data.json: MISSING_ACTION.",
+            "feedback": "Tell the customer what to do: stop using it, do not eat it, throw it away or return it to the store, and clean surfaces it touched.",
+            "failure_codes": [
+              "MISSING_ACTION"
+            ]
+          },
+          {
+            "attempt": 2,
+            "answer": "Stop using the product. Do not eat it. Throw it away or return it to the store. Clean surfaces it touched.",
+            "result": "REVISE",
+            "explanation": "Checked against reference_data.json: MISSING_UNITS.",
+            "feedback": "State the exact number of units affected, as written in the notice.",
+            "failure_codes": [
+              "MISSING_UNITS"
+            ]
+          }
+        ],
+        "id": "X09"
+      },
+      {
+        "question": "Is the Peanut Butter batch 4699 recall because of Listeria?",
+        "final_answer": "The Peanut Butter batch 4699 recall was due to an undeclared allergen, not Listeria. The recall was initiated based on a consumer complaint and the discovery of an allergen on the label. The affected units are 1381. Please stop using it, do not eat it, throw it away, or return it to the store. Clean surfaces it touched.",
+        "final_result": "PASS",
+        "attempts": 2,
+        "latency_ms": 9307.6,
+        "lessons_used": [],
+        "trace": [
+          {
+            "attempt": 1,
+            "answer": "The Peanut Butter batch 4699 recall was due to an undeclared allergen, not Listeria. The recall was initiated based on a consumer complaint and the discovery of an allergen on the label. The affected units are 1381.",
+            "result": "REVISE",
+            "explanation": "Checked against reference_data.json: MISSING_ACTION.",
+            "feedback": "Tell the customer what to do: stop using it, do not eat it, throw it away or return it to the store, and clean surfaces it touched.",
+            "failure_codes": [
+              "MISSING_ACTION"
+            ]
+          },
+          {
+            "attempt": 2,
+            "answer": "The Peanut Butter batch 4699 recall was due to an undeclared allergen, not Listeria. The recall was initiated based on a consumer complaint and the discovery of an allergen on the label. The affected units are 1381. Please stop using it, do not eat it, throw it away, or return it to the store. Clean surfaces it touched.",
+            "result": "PASS",
+            "explanation": "All facts the question needs match the reference dataset and the required consumer action is present.",
+            "feedback": "",
+            "failure_codes": []
+          }
+        ],
+        "id": "X10"
+      },
+      {
+        "question": "What wine pairs well with salmon?",
+        "final_answer": "There is no recall notice on file regarding wine pairing recommendations. Generally, salmon pairs well with bold red wines like Bordeaux or Merlot, and lighter white wines like Pinot Grigio or Sauvignon Blanc.",
+        "final_result": "PASS",
+        "attempts": 1,
+        "latency_ms": 3362.8,
+        "lessons_used": [],
+        "trace": [
+          {
+            "attempt": 1,
+            "answer": "There is no recall notice on file regarding wine pairing recommendations. Generally, salmon pairs well with bold red wines like Bordeaux or Merlot, and lighter white wines like Pinot Grigio or Sauvignon Blanc.",
+            "result": "PASS",
+            "explanation": "All facts the question needs match the reference dataset; no invented recall details.",
+            "feedback": "",
+            "failure_codes": []
+          }
+        ],
+        "id": "X11"
+      },
+      {
+        "question": "How do I sign up for the store loyalty program?",
+        "final_answer": "There is no recall notice on file regarding a store loyalty program. You can sign up for the store loyalty program by visiting the store's website or contacting the store directly.",
+        "final_result": "PASS",
+        "attempts": 1,
+        "latency_ms": 2400.7,
+        "lessons_used": [],
+        "trace": [
+          {
+            "attempt": 1,
+            "answer": "There is no recall notice on file regarding a store loyalty program. You can sign up for the store loyalty program by visiting the store's website or contacting the store directly.",
+            "result": "PASS",
+            "explanation": "All facts the question needs match the reference dataset; no invented recall details.",
+            "feedback": "",
+            "failure_codes": []
+          }
+        ],
+        "id": "X12"
+      }
+    ],
+    "Lesson Memory": [
+      {
+        "question": "How many units of Shredded Cheese batch 4610 were recalled?",
+        "final_answer": "The recall affects 1,590 units of Shredded Cheese batch 4610. Consumers are advised to stop using it, throw it away, and clean any surfaces it touched.",
+        "final_result": "PASS",
+        "attempts": 1,
+        "latency_ms": 3574.0,
+        "lessons_used": [
+          "lesson_001"
+        ],
+        "trace": [
+          {
+            "attempt": 1,
+            "answer": "The recall affects 1,590 units of Shredded Cheese batch 4610. Consumers are advised to stop using it, throw it away, and clean any surfaces it touched.",
+            "result": "PASS",
+            "explanation": "All facts the question needs match the reference dataset and the required consumer action is present.",
+            "feedback": "",
+            "failure_codes": []
+          }
+        ],
+        "id": "X01"
+      },
+      {
+        "question": "Which lot is affected by the Bagged Lettuce batch 4633 recall?",
+        "final_answer": "The affected lot is lot #L14633. Consumers are advised to stop using the product, throw it away, and return it to the store.",
+        "final_result": "PASS",
+        "attempts": 1,
+        "latency_ms": 2517.4,
+        "lessons_used": [
+          "lesson_001"
+        ],
+        "trace": [
+          {
+            "attempt": 1,
+            "answer": "The affected lot is lot #L14633. Consumers are advised to stop using the product, throw it away, and return it to the store.",
+            "result": "PASS",
+            "explanation": "All facts the question needs match the reference dataset and the required consumer action is present.",
+            "feedback": "",
+            "failure_codes": []
+          }
+        ],
+        "id": "X02"
+      },
+      {
+        "question": "Who manufactures the recalled Ice Cream batch 4650?",
+        "final_answer": "The recalled Ice Cream batch 4650 was manufactured by Harvest Point. Customers are advised to stop using it, throw it away, and clean any surfaces it touched.",
+        "final_result": "PASS",
+        "attempts": 1,
+        "latency_ms": 2487.8,
+        "lessons_used": [
+          "lesson_001"
+        ],
+        "trace": [
+          {
+            "attempt": 1,
+            "answer": "The recalled Ice Cream batch 4650 was manufactured by Harvest Point. Customers are advised to stop using it, throw it away, and clean any surfaces it touched.",
+            "result": "PASS",
+            "explanation": "All facts the question needs match the reference dataset and the required consumer action is present.",
+            "feedback": "",
+            "failure_codes": []
+          }
+        ],
+        "id": "X03"
+      },
+      {
+        "question": "Why was Hummus batch 4654 recalled?",
+        "final_answer": "The Hummus batch 4654 was recalled due to a packaging shortage that caused incorrect fill levels. Consumers are advised to stop using it, throw it away, and clean any surfaces it touched. The recall affects 26 units.",
+        "final_result": "PASS",
+        "attempts": 1,
+        "latency_ms": 3708.8,
+        "lessons_used": [
+          "lesson_001"
+        ],
+        "trace": [
+          {
+            "attempt": 1,
+            "answer": "The Hummus batch 4654 was recalled due to a packaging shortage that caused incorrect fill levels. Consumers are advised to stop using it, throw it away, and clean any surfaces it touched. The recall affects 26 units.",
+            "result": "PASS",
+            "explanation": "All facts the question needs match the reference dataset and the required consumer action is present.",
+            "feedback": "",
+            "failure_codes": []
+          }
+        ],
+        "id": "X04"
+      },
+      {
+        "question": "Is the Butter batch 4656 recall because of Listeria?",
+        "final_answer": "The Butter batch 4656 recall is due to bacterial contamination. Customers should stop using it, throw it away, and clean any surfaces it touched. The recall was issued by Valley Fresh with notice code RCL-2026-04656.",
+        "final_result": "PASS",
+        "attempts": 1,
+        "latency_ms": 4582.8,
+        "lessons_used": [
+          "lesson_001"
+        ],
+        "trace": [
+          {
+            "attempt": 1,
+            "answer": "The Butter batch 4656 recall is due to bacterial contamination. Customers should stop using it, throw it away, and clean any surfaces it touched. The recall was issued by Valley Fresh with notice code RCL-2026-04656.",
+            "result": "PASS",
+            "explanation": "All facts the question needs match the reference dataset and the required consumer action is present.",
+            "feedback": "",
+            "failure_codes": []
+          }
+        ],
+        "id": "X05"
+      },
+      {
+        "question": "What should I do if I bought Deli Turkey batch 4658?",
+        "final_answer": "If you bought Deli Turkey batch 4658, stop using it immediately. Do not eat it. Throw it away and clean any surfaces it touched. Return it to the store if possible.",
+        "final_result": "PASS",
+        "attempts": 1,
+        "latency_ms": 3325.4,
+        "lessons_used": [
+          "lesson_001"
+        ],
+        "trace": [
+          {
+            "attempt": 1,
+            "answer": "If you bought Deli Turkey batch 4658, stop using it immediately. Do not eat it. Throw it away and clean any surfaces it touched. Return it to the store if possible.",
+            "result": "PASS",
+            "explanation": "All facts the question needs match the reference dataset and the required consumer action is present.",
+            "feedback": "",
+            "failure_codes": []
+          }
+        ],
+        "id": "X06"
+      },
+      {
+        "question": "What is the notice code for the Frozen Spinach batch 4659 recall?",
+        "final_answer": "The notice code for the Frozen Spinach batch 4659 recall is RCL-2026-04659. The recall involves foreign material and affects 4621 units. Customers should stop using the product, throw it away, and return it to the store for proper disposal.",
+        "final_result": "PASS",
+        "attempts": 1,
+        "latency_ms": 5108.7,
+        "lessons_used": [
+          "lesson_001"
+        ],
+        "trace": [
+          {
+            "attempt": 1,
+            "answer": "The notice code for the Frozen Spinach batch 4659 recall is RCL-2026-04659. The recall involves foreign material and affects 4621 units. Customers should stop using the product, throw it away, and return it to the store for proper disposal.",
+            "result": "PASS",
+            "explanation": "All facts the question needs match the reference dataset and the required consumer action is present.",
+            "feedback": "",
+            "failure_codes": []
+          }
+        ],
+        "id": "X07"
+      },
+      {
+        "question": "Which company recalled the Yogurt batch 4675?",
+        "final_answer": "The Yogurt batch 4675 was recalled by Prairie Mills due to bacterial contamination. Customers are advised to stop using it, throw it away, and clean any surfaces it touched.",
+        "final_result": "PASS",
+        "attempts": 1,
+        "latency_ms": 2672.0,
+        "lessons_used": [
+          "lesson_001"
+        ],
+        "trace": [
+          {
+            "attempt": 1,
+            "answer": "The Yogurt batch 4675 was recalled by Prairie Mills due to bacterial contamination. Customers are advised to stop using it, throw it away, and clean any surfaces it touched.",
+            "result": "PASS",
+            "explanation": "All facts the question needs match the reference dataset and the required consumer action is present.",
+            "feedback": "",
+            "failure_codes": []
+          }
+        ],
+        "id": "X08"
+      },
+      {
+        "question": "How many units of Orange Juice batch 4596 are affected?",
+        "final_answer": "The recall affects 724 units of Orange Juice batch 4596. Consumers are advised to stop using the product, discard any affected units, and clean surfaces it touched.",
+        "final_result": "PASS",
+        "attempts": 1,
+        "latency_ms": 2905.1,
+        "lessons_used": [
+          "lesson_001"
+        ],
+        "trace": [
+          {
+            "attempt": 1,
+            "answer": "The recall affects 724 units of Orange Juice batch 4596. Consumers are advised to stop using the product, discard any affected units, and clean surfaces it touched.",
+            "result": "PASS",
+            "explanation": "All facts the question needs match the reference dataset and the required consumer action is present.",
+            "feedback": "",
+            "failure_codes": []
+          }
+        ],
+        "id": "X09"
+      },
+      {
+        "question": "Is the Peanut Butter batch 4699 recall because of Listeria?",
+        "final_answer": "The Peanut Butter batch 4699 recall is due to an undeclared allergen, not Listeria. Consumers are advised to stop using it, throw it away, and clean surfaces it touched. The recall was initiated based on a consumer complaint about an allergen not being properly listed on the label.",
+        "final_result": "PASS",
+        "attempts": 1,
+        "latency_ms": 4352.8,
+        "lessons_used": [
+          "lesson_001"
+        ],
+        "trace": [
+          {
+            "attempt": 1,
+            "answer": "The Peanut Butter batch 4699 recall is due to an undeclared allergen, not Listeria. Consumers are advised to stop using it, throw it away, and clean surfaces it touched. The recall was initiated based on a consumer complaint about an allergen not being properly listed on the label.",
+            "result": "PASS",
+            "explanation": "All facts the question needs match the reference dataset and the required consumer action is present.",
+            "feedback": "",
+            "failure_codes": []
+          }
+        ],
+        "id": "X10"
+      },
+      {
+        "question": "What wine pairs well with salmon?",
+        "final_answer": "There is no recall notice on file regarding wine pairing recommendations. The question is not about a recall on file.",
+        "final_result": "PASS",
+        "attempts": 1,
+        "latency_ms": 1645.1,
+        "lessons_used": [
+          "lesson_001"
+        ],
+        "trace": [
+          {
+            "attempt": 1,
+            "answer": "There is no recall notice on file regarding wine pairing recommendations. The question is not about a recall on file.",
+            "result": "PASS",
+            "explanation": "All facts the question needs match the reference dataset; no invented recall details.",
+            "feedback": "",
+            "failure_codes": []
+          }
+        ],
+        "id": "X11"
+      },
+      {
+        "question": "How do I sign up for the store loyalty program?",
+        "final_answer": "The question is not about a recall on file. There is no store loyalty program available through the provided information.",
+        "final_result": "PASS",
+        "attempts": 1,
+        "latency_ms": 2002.4,
+        "lessons_used": [
+          "lesson_001"
+        ],
+        "trace": [
+          {
+            "attempt": 1,
+            "answer": "The question is not about a recall on file. There is no store loyalty program available through the provided information.",
+            "result": "PASS",
+            "explanation": "All facts the question needs match the reference dataset; no invented recall details.",
+            "feedback": "",
+            "failure_codes": []
+          }
+        ],
+        "id": "X12"
+      }
+    ],
+    "Validated Improvement": [
+      {
+        "question": "How many units of Shredded Cheese batch 4610 were recalled?",
+        "final_answer": "The recall affects 1,590 units of Shredded Cheese batch 4610. Consumers are advised to stop using it, throw it away, and clean any surfaces it touched.",
+        "final_result": "PASS",
+        "attempts": 1,
+        "latency_ms": 2777.6,
+        "lessons_used": [
+          "lesson_001"
+        ],
+        "trace": [
+          {
+            "attempt": 1,
+            "answer": "The recall affects 1,590 units of Shredded Cheese batch 4610. Consumers are advised to stop using it, throw it away, and clean any surfaces it touched.",
+            "result": "PASS",
+            "explanation": "All facts the question needs match the reference dataset and the required consumer action is present.",
+            "feedback": "",
+            "failure_codes": []
+          }
+        ],
+        "id": "X01"
+      },
+      {
+        "question": "Which lot is affected by the Bagged Lettuce batch 4633 recall?",
+        "final_answer": "The affected lot is lot #L14633. Consumers are advised to stop using the product, throw it away, and return it to the store.",
+        "final_result": "PASS",
+        "attempts": 1,
+        "latency_ms": 2036.7,
+        "lessons_used": [
+          "lesson_001"
+        ],
+        "trace": [
+          {
+            "attempt": 1,
+            "answer": "The affected lot is lot #L14633. Consumers are advised to stop using the product, throw it away, and return it to the store.",
+            "result": "PASS",
+            "explanation": "All facts the question needs match the reference dataset and the required consumer action is present.",
+            "feedback": "",
+            "failure_codes": []
+          }
+        ],
+        "id": "X02"
+      },
+      {
+        "question": "Who manufactures the recalled Ice Cream batch 4650?",
+        "final_answer": "The recalled Ice Cream batch 4650 was manufactured by Harvest Point. Customers are advised to stop using it, throw it away, and clean any surfaces it touched.",
+        "final_result": "PASS",
+        "attempts": 1,
+        "latency_ms": 2166.0,
+        "lessons_used": [
+          "lesson_001"
+        ],
+        "trace": [
+          {
+            "attempt": 1,
+            "answer": "The recalled Ice Cream batch 4650 was manufactured by Harvest Point. Customers are advised to stop using it, throw it away, and clean any surfaces it touched.",
+            "result": "PASS",
+            "explanation": "All facts the question needs match the reference dataset and the required consumer action is present.",
+            "feedback": "",
+            "failure_codes": []
+          }
+        ],
+        "id": "X03"
+      },
+      {
+        "question": "Why was Hummus batch 4654 recalled?",
+        "final_answer": "The Hummus batch 4654 was recalled due to a packaging shortage that caused incorrect fill levels. Consumers are advised to stop using it, throw it away, and clean any surfaces it touched.",
+        "final_result": "PASS",
+        "attempts": 1,
+        "latency_ms": 2963.1,
+        "lessons_used": [
+          "lesson_001"
+        ],
+        "trace": [
+          {
+            "attempt": 1,
+            "answer": "The Hummus batch 4654 was recalled due to a packaging shortage that caused incorrect fill levels. Consumers are advised to stop using it, throw it away, and clean any surfaces it touched.",
+            "result": "PASS",
+            "explanation": "All facts the question needs match the reference dataset and the required consumer action is present.",
+            "feedback": "",
+            "failure_codes": []
+          }
+        ],
+        "id": "X04"
+      },
+      {
+        "question": "Is the Butter batch 4656 recall because of Listeria?",
+        "final_answer": "The Butter batch 4656 recall is due to bacterial contamination. Customers should stop using it, throw it away, and clean any surfaces it touched. The recall was issued by Valley Fresh with notice code RCL-2026-04656.",
+        "final_result": "PASS",
+        "attempts": 1,
+        "latency_ms": 3584.2,
+        "lessons_used": [
+          "lesson_001"
+        ],
+        "trace": [
+          {
+            "attempt": 1,
+            "answer": "The Butter batch 4656 recall is due to bacterial contamination. Customers should stop using it, throw it away, and clean any surfaces it touched. The recall was issued by Valley Fresh with notice code RCL-2026-04656.",
+            "result": "PASS",
+            "explanation": "All facts the question needs match the reference dataset and the required consumer action is present.",
+            "feedback": "",
+            "failure_codes": []
+          }
+        ],
+        "id": "X05"
+      },
+      {
+        "question": "What should I do if I bought Deli Turkey batch 4658?",
+        "final_answer": "If you bought Deli Turkey batch 4658, stop using it immediately. Do not eat it. Throw it away and clean any surfaces it touched. Return it to the store if possible.",
+        "final_result": "PASS",
+        "attempts": 1,
+        "latency_ms": 2740.4,
+        "lessons_used": [
+          "lesson_001"
+        ],
+        "trace": [
+          {
+            "attempt": 1,
+            "answer": "If you bought Deli Turkey batch 4658, stop using it immediately. Do not eat it. Throw it away and clean any surfaces it touched. Return it to the store if possible.",
+            "result": "PASS",
+            "explanation": "All facts the question needs match the reference dataset and the required consumer action is present.",
+            "feedback": "",
+            "failure_codes": []
+          }
+        ],
+        "id": "X06"
+      },
+      {
+        "question": "What is the notice code for the Frozen Spinach batch 4659 recall?",
+        "final_answer": "The notice code for the Frozen Spinach batch 4659 recall is RCL-2026-04659. The recall involves foreign material and affects 4621 units. Customers should stop using the product, throw it away, and return it to the store for proper disposal.",
+        "final_result": "PASS",
+        "attempts": 1,
+        "latency_ms": 4462.0,
+        "lessons_used": [
+          "lesson_001"
+        ],
+        "trace": [
+          {
+            "attempt": 1,
+            "answer": "The notice code for the Frozen Spinach batch 4659 recall is RCL-2026-04659. The recall involves foreign material and affects 4621 units. Customers should stop using the product, throw it away, and return it to the store for proper disposal.",
+            "result": "PASS",
+            "explanation": "All facts the question needs match the reference dataset and the required consumer action is present.",
+            "feedback": "",
+            "failure_codes": []
+          }
+        ],
+        "id": "X07"
+      },
+      {
+        "question": "Which company recalled the Yogurt batch 4675?",
+        "final_answer": "The Yogurt batch 4675 was recalled by Prairie Mills due to bacterial contamination. Customers are advised to stop using it, throw it away, and clean any surfaces it touched.",
+        "final_result": "PASS",
+        "attempts": 1,
+        "latency_ms": 2232.0,
+        "lessons_used": [
+          "lesson_001"
+        ],
+        "trace": [
+          {
+            "attempt": 1,
+            "answer": "The Yogurt batch 4675 was recalled by Prairie Mills due to bacterial contamination. Customers are advised to stop using it, throw it away, and clean any surfaces it touched.",
+            "result": "PASS",
+            "explanation": "All facts the question needs match the reference dataset and the required consumer action is present.",
+            "feedback": "",
+            "failure_codes": []
+          }
+        ],
+        "id": "X08"
+      },
+      {
+        "question": "How many units of Orange Juice batch 4596 are affected?",
+        "final_answer": "The recall affects 724 units of Orange Juice batch 4596. Consumers are advised to stop using the product, discard any affected units, and clean surfaces it touched.",
+        "final_result": "PASS",
+        "attempts": 1,
+        "latency_ms": 2752.8,
+        "lessons_used": [
+          "lesson_001"
+        ],
+        "trace": [
+          {
+            "attempt": 1,
+            "answer": "The recall affects 724 units of Orange Juice batch 4596. Consumers are advised to stop using the product, discard any affected units, and clean surfaces it touched.",
+            "result": "PASS",
+            "explanation": "All facts the question needs match the reference dataset and the required consumer action is present.",
+            "feedback": "",
+            "failure_codes": []
+          }
+        ],
+        "id": "X09"
+      },
+      {
+        "question": "Is the Peanut Butter batch 4699 recall because of Listeria?",
+        "final_answer": "The Peanut Butter batch 4699 recall is due to an undeclared allergen, not Listeria. Consumers are advised to stop using it, throw it away, and clean surfaces it touched.",
+        "final_result": "PASS",
+        "attempts": 1,
+        "latency_ms": 2864.1,
+        "lessons_used": [
+          "lesson_001"
+        ],
+        "trace": [
+          {
+            "attempt": 1,
+            "answer": "The Peanut Butter batch 4699 recall is due to an undeclared allergen, not Listeria. Consumers are advised to stop using it, throw it away, and clean surfaces it touched.",
+            "result": "PASS",
+            "explanation": "All facts the question needs match the reference dataset and the required consumer action is present.",
+            "feedback": "",
+            "failure_codes": []
+          }
+        ],
+        "id": "X10"
+      },
+      {
+        "question": "What wine pairs well with salmon?",
+        "final_answer": "There is no recall notice on file regarding wine pairing recommendations. The question is not about a recall on file.",
+        "final_result": "PASS",
+        "attempts": 1,
+        "latency_ms": 1734.6,
+        "lessons_used": [
+          "lesson_001"
+        ],
+        "trace": [
+          {
+            "attempt": 1,
+            "answer": "There is no recall notice on file regarding wine pairing recommendations. The question is not about a recall on file.",
+            "result": "PASS",
+            "explanation": "All facts the question needs match the reference dataset; no invented recall details.",
+            "feedback": "",
+            "failure_codes": []
+          }
+        ],
+        "id": "X11"
+      },
+      {
+        "question": "How do I sign up for the store loyalty program?",
+        "final_answer": "The question is not about a recall on file. There is no store loyalty program available through the provided information.",
+        "final_result": "PASS",
+        "attempts": 1,
+        "latency_ms": 1244.2,
+        "lessons_used": [
+          "lesson_001"
+        ],
+        "trace": [
+          {
+            "attempt": 1,
+            "answer": "The question is not about a recall on file. There is no store loyalty program available through the provided information.",
+            "result": "PASS",
+            "explanation": "All facts the question needs match the reference dataset; no invented recall details.",
+            "feedback": "",
+            "failure_codes": []
+          }
+        ],
+        "id": "X12"
+      }
+    ]
+  }
+}

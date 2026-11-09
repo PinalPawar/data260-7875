@@ -1,0 +1,42 @@
+[
+  {
+    "id": "V01",
+    "question": "How many units of Yogurt batch 4628 were recalled?"
+  },
+  {
+    "id": "V02",
+    "question": "Which lot is affected by the Baby Formula batch 4632 recall?"
+  },
+  {
+    "id": "V03",
+    "question": "Who manufactures the recalled Cream Cheese batch 4642?"
+  },
+  {
+    "id": "V04",
+    "question": "Why was Chicken Nuggets batch 4644 recalled?"
+  },
+  {
+    "id": "V05",
+    "question": "Is the Whole Milk batch 4645 recall because of Listeria?"
+  },
+  {
+    "id": "V06",
+    "question": "What should I do if I bought Frozen Waffles batch 4646?"
+  },
+  {
+    "id": "V07",
+    "question": "What is the notice code for the Ground Beef batch 4655 recall?"
+  },
+  {
+    "id": "V08",
+    "question": "Which company recalled the Peanut Butter batch 4680?"
+  },
+  {
+    "id": "V09",
+    "question": "How do I cook rice in a microwave?"
+  },
+  {
+    "id": "V10",
+    "question": "Do you offer home delivery?"
+  }
+]

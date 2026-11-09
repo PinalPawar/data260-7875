@@ -1,0 +1,284 @@
+[
+  {
+    "question": "How many units of Butter batch 4601 were recalled?",
+    "final_answer": "Stop using the butter, do not eat it, throw it away, or return it to the store. Clean any surfaces it touched.",
+    "final_result": "REVISE",
+    "attempts": 2,
+    "latency_ms": 4524.9,
+    "lessons_used": [],
+    "trace": [
+      {
+        "attempt": 1,
+        "answer": "The recall involved 319 units of Butter batch 4601.",
+        "result": "REVISE",
+        "explanation": "Checked against reference_data.json: MISSING_ACTION.",
+        "feedback": "Tell the customer what to do: stop using it, do not eat it, throw it away or return it to the store, and clean surfaces it touched.",
+        "failure_codes": [
+          "MISSING_ACTION"
+        ]
+      },
+      {
+        "attempt": 2,
+        "answer": "Stop using the butter, do not eat it, throw it away, or return it to the store. Clean any surfaces it touched.",
+        "result": "REVISE",
+        "explanation": "Checked against reference_data.json: MISSING_UNITS.",
+        "feedback": "State the exact number of units affected, as written in the notice.",
+        "failure_codes": [
+          "MISSING_UNITS"
+        ]
+      }
+    ],
+    "id": "T01"
+  },
+  {
+    "question": "Which lot is affected by the Ice Cream batch 4602 recall?",
+    "final_answer": "Stop using the affected Ice Cream batch 4602. Do not eat or consume it. Throw away the affected units. Return any remaining product to the store for disposal.",
+    "final_result": "REVISE",
+    "attempts": 2,
+    "latency_ms": 6165.9,
+    "lessons_used": [],
+    "trace": [
+      {
+        "attempt": 1,
+        "answer": "The Ice Cream batch 4602 recall affects lot #L14602. The product was mislabeled with an undeclared allergen. The affected units are 3238.",
+        "result": "REVISE",
+        "explanation": "Checked against reference_data.json: MISSING_ACTION.",
+        "feedback": "Tell the customer what to do: stop using it, do not eat it, throw it away or return it to the store, and clean surfaces it touched.",
+        "failure_codes": [
+          "MISSING_ACTION"
+        ]
+      },
+      {
+        "attempt": 2,
+        "answer": "Stop using the affected Ice Cream batch 4602. Do not eat or consume it. Throw away the affected units. Return any remaining product to the store for disposal.",
+        "result": "REVISE",
+        "explanation": "Checked against reference_data.json: MISSING_LOT.",
+        "feedback": "Give the affected lot number exactly as written in the notice (e.g. L1xxxx).",
+        "failure_codes": [
+          "MISSING_LOT"
+        ]
+      }
+    ],
+    "id": "T02"
+  },
+  {
+    "question": "Who manufactures the recalled Whole Milk batch 4603?",
+    "final_answer": "The recalled Whole Milk batch 4603 was manufactured by Sunny Farms Co. Customers are advised to stop using it, throw it away, and clean any surfaces it touched.",
+    "final_result": "PASS",
+    "attempts": 1,
+    "latency_ms": 3159.5,
+    "lessons_used": [
+      "lesson_001"
+    ],
+    "trace": [
+      {
+        "attempt": 1,
+        "answer": "The recalled Whole Milk batch 4603 was manufactured by Sunny Farms Co. Customers are advised to stop using it, throw it away, and clean any surfaces it touched.",
+        "result": "PASS",
+        "explanation": "All facts the question needs match the reference dataset and the required consumer action is present.",
+        "feedback": "",
+        "failure_codes": []
+      }
+    ],
+    "id": "T03"
+  },
+  {
+    "question": "Why was Trail Mix batch 4605 recalled?",
+    "final_answer": "The Trail Mix batch 4605 was recalled due to the presence of small metal fragments. Customers should stop using the product, throw it away, and clean any surfaces it may have touched.",
+    "final_result": "PASS",
+    "attempts": 1,
+    "latency_ms": 3006.5,
+    "lessons_used": [
+      "lesson_001"
+    ],
+    "trace": [
+      {
+        "attempt": 1,
+        "answer": "The Trail Mix batch 4605 was recalled due to the presence of small metal fragments. Customers should stop using the product, throw it away, and clean any surfaces it may have touched.",
+        "result": "PASS",
+        "explanation": "All facts the question needs match the reference dataset and the required consumer action is present.",
+        "feedback": "",
+        "failure_codes": []
+      }
+    ],
+    "id": "T04"
+  },
+  {
+    "question": "What is the notice code for the Orange Juice batch 4606 recall?",
+    "final_answer": "The notice code for the Orange Juice batch 4606 recall is RCL-2026-04606. The recall was issued for lot #L14606 due to a packaging shortage. Customers are advised to stop using the product, discard it, and return it to the store.",
+    "final_result": "PASS",
+    "attempts": 1,
+    "latency_ms": 4966.1,
+    "lessons_used": [
+      "lesson_001"
+    ],
+    "trace": [
+      {
+        "attempt": 1,
+        "answer": "The notice code for the Orange Juice batch 4606 recall is RCL-2026-04606. The recall was issued for lot #L14606 due to a packaging shortage. Customers are advised to stop using the product, discard it, and return it to the store.",
+        "result": "PASS",
+        "explanation": "All facts the question needs match the reference dataset and the required consumer action is present.",
+        "feedback": "",
+        "failure_codes": []
+      }
+    ],
+    "id": "T05"
+  },
+  {
+    "question": "Is the Salad Kit batch 4598 recall because of Listeria?",
+    "final_answer": "The Salad Kit batch 4598 recall is due to bacterial contamination. Customers should stop using the product, throw it away, and clean any surfaces it touched. The recall was issued for lot #L14598.",
+    "final_result": "PASS",
+    "attempts": 1,
+    "latency_ms": 3323.5,
+    "lessons_used": [
+      "lesson_001"
+    ],
+    "trace": [
+      {
+        "attempt": 1,
+        "answer": "The Salad Kit batch 4598 recall is due to bacterial contamination. Customers should stop using the product, throw it away, and clean any surfaces it touched. The recall was issued for lot #L14598.",
+        "result": "PASS",
+        "explanation": "All facts the question needs match the reference dataset and the required consumer action is present.",
+        "feedback": "",
+        "failure_codes": []
+      }
+    ],
+    "id": "T06"
+  },
+  {
+    "question": "How many units of Granola Bars batch 4612 are affected?",
+    "final_answer": "The recall affects 2428 units of Granola Bars batch 4612. Customers should stop using the product, throw away the affected units, and return them to the store. The recall was issued due to a packaging shortage.",
+    "final_result": "PASS",
+    "attempts": 1,
+    "latency_ms": 3862.8,
+    "lessons_used": [
+      "lesson_001"
+    ],
+    "trace": [
+      {
+        "attempt": 1,
+        "answer": "The recall affects 2428 units of Granola Bars batch 4612. Customers should stop using the product, throw away the affected units, and return them to the store. The recall was issued due to a packaging shortage.",
+        "result": "PASS",
+        "explanation": "All facts the question needs match the reference dataset and the required consumer action is present.",
+        "feedback": "",
+        "failure_codes": []
+      }
+    ],
+    "id": "T07"
+  },
+  {
+    "question": "Which company recalled the Hummus batch 4618?",
+    "final_answer": "The Hummus batch 4618 was recalled by Prairie Mills. Customers should stop using it, throw it away, and return any unused portions to the store. The recall was due to an undeclared allergen.",
+    "final_result": "PASS",
+    "attempts": 1,
+    "latency_ms": 3572.2,
+    "lessons_used": [
+      "lesson_001"
+    ],
+    "trace": [
+      {
+        "attempt": 1,
+        "answer": "The Hummus batch 4618 was recalled by Prairie Mills. Customers should stop using it, throw it away, and return any unused portions to the store. The recall was due to an undeclared allergen.",
+        "result": "PASS",
+        "explanation": "All facts the question needs match the reference dataset and the required consumer action is present.",
+        "feedback": "",
+        "failure_codes": []
+      }
+    ],
+    "id": "T08"
+  },
+  {
+    "question": "What should I do if I bought Canned Corn batch 4617?",
+    "final_answer": "If you bought Canned Corn batch 4617, stop using it immediately. Do not eat it. Throw it away and return it to the store. Clean any surfaces it touched.",
+    "final_result": "PASS",
+    "attempts": 1,
+    "latency_ms": 2702.0,
+    "lessons_used": [
+      "lesson_001"
+    ],
+    "trace": [
+      {
+        "attempt": 1,
+        "answer": "If you bought Canned Corn batch 4617, stop using it immediately. Do not eat it. Throw it away and return it to the store. Clean any surfaces it touched.",
+        "result": "PASS",
+        "explanation": "All facts the question needs match the reference dataset and the required consumer action is present.",
+        "feedback": "",
+        "failure_codes": []
+      }
+    ],
+    "id": "T09"
+  },
+  {
+    "question": "Which lot is affected by the Deli Turkey batch 4611 recall?",
+    "final_answer": "The affected lot number is L14611. Customers should stop using the product, throw it away, and return it to the store.",
+    "final_result": "PASS",
+    "attempts": 2,
+    "latency_ms": 5743.5,
+    "lessons_used": [
+      "lesson_001"
+    ],
+    "trace": [
+      {
+        "attempt": 1,
+        "answer": "The Deli Turkey batch 4611 is affected by the recall. The units affected are 4509. Customers should stop using the product, throw it away, and return it to the store.",
+        "result": "REVISE",
+        "explanation": "Checked against reference_data.json: MISSING_LOT.",
+        "feedback": "Give the affected lot number exactly as written in the notice (e.g. L1xxxx).",
+        "failure_codes": [
+          "MISSING_LOT"
+        ]
+      },
+      {
+        "attempt": 2,
+        "answer": "The affected lot number is L14611. Customers should stop using the product, throw it away, and return it to the store.",
+        "result": "PASS",
+        "explanation": "All facts the question needs match the reference dataset and the required consumer action is present.",
+        "feedback": "",
+        "failure_codes": []
+      }
+    ],
+    "id": "T10"
+  },
+  {
+    "question": "What is a good recipe for pancakes?",
+    "final_answer": "There is no recall notice on file regarding pancakes. A simple recipe for pancakes can include flour, eggs, milk, and butter. Mix the ingredients, cook on a skillet, and serve. Enjoy your pancakes!",
+    "final_result": "PASS",
+    "attempts": 1,
+    "latency_ms": 3170.7,
+    "lessons_used": [
+      "lesson_001"
+    ],
+    "trace": [
+      {
+        "attempt": 1,
+        "answer": "There is no recall notice on file regarding pancakes. A simple recipe for pancakes can include flour, eggs, milk, and butter. Mix the ingredients, cook on a skillet, and serve. Enjoy your pancakes!",
+        "result": "PASS",
+        "explanation": "All facts the question needs match the reference dataset; no invented recall details.",
+        "feedback": "",
+        "failure_codes": []
+      }
+    ],
+    "id": "T11"
+  },
+  {
+    "question": "What are the store's holiday hours?",
+    "final_answer": "The store's holiday hours are not currently listed in the recall notice provided.",
+    "final_result": "PASS",
+    "attempts": 1,
+    "latency_ms": 1532.7,
+    "lessons_used": [
+      "lesson_001"
+    ],
+    "trace": [
+      {
+        "attempt": 1,
+        "answer": "The store's holiday hours are not currently listed in the recall notice provided.",
+        "result": "PASS",
+        "explanation": "All facts the question needs match the reference dataset; no invented recall details.",
+        "feedback": "",
+        "failure_codes": []
+      }
+    ],
+    "id": "T12"
+  }
+]

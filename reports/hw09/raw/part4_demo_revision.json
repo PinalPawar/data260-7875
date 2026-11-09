@@ -1,0 +1,29 @@
+{
+  "question": "How many units of Butter batch 4609 were recalled?",
+  "final_answer": "The recall affects 3,671 units of Butter batch 4609. Stop using it, do not eat it, and throw it away. Return it to the store for proper disposal.",
+  "final_result": "PASS",
+  "attempts": 2,
+  "latency_ms": 5457.0,
+  "lessons_used": [],
+  "trace": [
+    {
+      "attempt": 1,
+      "answer": "No recall notice is available for Butter batch 4609.",
+      "result": "REVISE",
+      "explanation": "Checked against reference_data.json: MISSING_UNITS, MISSING_ACTION.",
+      "feedback": "State the exact number of units affected, as written in the notice. Tell the customer what to do: stop using it, do not eat it, throw it away or return it to the store, and clean surfaces it touched.",
+      "failure_codes": [
+        "MISSING_UNITS",
+        "MISSING_ACTION"
+      ]
+    },
+    {
+      "attempt": 2,
+      "answer": "The recall affects 3,671 units of Butter batch 4609. Stop using it, do not eat it, and throw it away. Return it to the store for proper disposal.",
+      "result": "PASS",
+      "explanation": "All facts the question needs match the reference dataset and the required consumer action is present.",
+      "feedback": "",
+      "failure_codes": []
+    }
+  ]
+}

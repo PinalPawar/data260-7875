@@ -1,0 +1,50 @@
+[
+  {
+    "id": "T01",
+    "question": "How many units of Butter batch 4601 were recalled?"
+  },
+  {
+    "id": "T02",
+    "question": "Which lot is affected by the Ice Cream batch 4602 recall?"
+  },
+  {
+    "id": "T03",
+    "question": "Who manufactures the recalled Whole Milk batch 4603?"
+  },
+  {
+    "id": "T04",
+    "question": "Why was Trail Mix batch 4605 recalled?"
+  },
+  {
+    "id": "T05",
+    "question": "What is the notice code for the Orange Juice batch 4606 recall?"
+  },
+  {
+    "id": "T06",
+    "question": "Is the Salad Kit batch 4598 recall because of Listeria?"
+  },
+  {
+    "id": "T07",
+    "question": "How many units of Granola Bars batch 4612 are affected?"
+  },
+  {
+    "id": "T08",
+    "question": "Which company recalled the Hummus batch 4618?"
+  },
+  {
+    "id": "T09",
+    "question": "What should I do if I bought Canned Corn batch 4617?"
+  },
+  {
+    "id": "T10",
+    "question": "Which lot is affected by the Deli Turkey batch 4611 recall?"
+  },
+  {
+    "id": "T11",
+    "question": "What is a good recipe for pancakes?"
+  },
+  {
+    "id": "T12",
+    "question": "What are the store's holiday hours?"
+  }
+]

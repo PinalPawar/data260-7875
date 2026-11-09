@@ -1,0 +1,357 @@
+HW9 RUN_LOG (Pinal Pawar, SID4 7875) - console output of the runs reported in METRICS.md.
+Part 3 sweep: verbatim. Parts 1, 2, 3.5 and 4: copied from the terminal and screenshots; long answer
+lines and repeated per-question lines shortened (full per-question data in raw/*.json).
+
+====================================================================================================
+Part 1 - python hw9/view_counter.py  (2026-11-06 23:43)
+====================================================================================================
+===== Pinal Pawar | SID4 7875 | PREFIX s7875 | HW9 Part 1 - Redis view counter =====
+Notice id 1 | Redis key s7875:views:notice:1 | sync every 10
+
+=== Testing Counter ===
+
+Access #1: Total = 1
+Access #2: Total = 2
+Access #3: Total = 3
+Access #4: Total = 4
+Access #5: Total = 5
+Access #6: Total = 6
+Access #7: Total = 7
+Access #8: Total = 8
+Access #9: Total = 9
+2026-11-06 23:43:51,650 INFO Synced views to database (notice_id=1, view_count=10)
+Access #10: Total = 10
+✓ Synced views to database
+Access #11: Total = 11
+Access #12: Total = 12
+Access #13: Total = 13
+Access #14: Total = 14
+Access #15: Total = 15
+Access #16: Total = 16
+Access #17: Total = 17
+Access #18: Total = 18
+Access #19: Total = 19
+2026-11-06 23:43:51,658 INFO Synced views to database (notice_id=1, view_count=20)
+Access #20: Total = 20
+✓ Synced views to database
+Access #21: Total = 21
+Access #22: Total = 22
+Access #23: Total = 23
+Access #24: Total = 24
+Access #25: Total = 25
+
+Redis s7875:views:notice:1 = 25
+MySQL notices.view_count (id=1) = 20  (last multiple of 10)
+
+Latency per view (50 trials, median): Redis INCR 0.587 ms | MySQL UPDATE 1.043 ms
+
+$ docker exec s7875-redis redis-cli GET s7875:views:notice:1
+25
+$ mysql -u root -p s7875_rel -e "SELECT id, product, view_count FROM notices WHERE id=1;"
+| 1 | Frozen Spinach (10oz) | 20 |
+====================================================================================================
+Part 2 - python hw9/semantic_cache.py --demo  (2026-11-07 00:03)
+====================================================================================================
+===== Pinal Pawar | SID4 7875 | PREFIX s7875 | HW9 Part 2 - semantic cache (threshold 0.85) =====
+(HW8 agents running: planner.py and writer.py on qwen3:1.7b, HW8_MODEL=qwen3:8b python reviewer.py)
+cleared 3 old cache entries
+
+--- Q1 [new] How many units of Butter batch 4609 were recalled and why?
+2026-11-07 00:03:56,778 INFO CACHE MISS best_sim=0.000 -> running HW8 pipeline
+2026-11-07 00:04:43,645 INFO CACHE MISS done latency=56689.1ms status=approved
+--- Q2 [exact] How many units of Butter batch 4609 were recalled and why?
+2026-11-07 00:04:44,357 INFO CACHE HIT  sim=1.000 latency=710.0ms matched='How many units of Butter batch 4609 were recalled and why?'
+--- Q3 [paraphrase] For the Butter batch 4609 recall, how many units are affected and what is the reason?
+2026-11-07 00:04:44,395 INFO CACHE HIT  sim=0.918 latency=37.1ms matched='How many units of Butter batch 4609 were recalled and why?'
+--- Q4 [new] What should I do if I bought the recalled Frozen Spinach from GreenFields Co?
+2026-11-07 00:04:44,419 INFO CACHE MISS best_sim=0.426 -> running HW8 pipeline
+2026-11-07 00:05:29,625 INFO CACHE MISS done latency=45230.2ms status=approved
+--- Q5 [paraphrase] I have GreenFields Co frozen spinach that is under recall. What steps should I take?
+2026-11-07 00:05:30,297 INFO CACHE MISS best_sim=0.849 -> running HW8 pipeline
+2026-11-07 00:06:12,019 INFO CACHE MISS done latency=42392.9ms status=approved
+--- Q6 [new] Which lot is affected by the Baby Formula batch 4622 recall?
+2026-11-07 00:06:12,515 INFO CACHE MISS best_sim=0.633 -> running HW8 pipeline
+2026-11-07 00:07:00,036 INFO CACHE MISS done latency=48015.5ms status=approved
+--- Q7 [exact] What should I do if I bought the recalled Frozen Spinach from GreenFields Co?
+2026-11-07 00:07:00,590 INFO CACHE HIT  sim=1.000 latency=549.3ms matched='What should I do if I bought the recalled Frozen Spinach from GreenFields Co?'
+--- Q8 [new] What is the reason for the Peanut Butter batch 4680 recall?
+2026-11-07 00:07:00,617 INFO CACHE MISS best_sim=0.753 -> running HW8 pipeline
+2026-11-07 00:07:49,222 INFO CACHE MISS done latency=48630.8ms status=approved
+--- Q9 [paraphrase] Baby Formula batch 4622 recall: what lot number is affected?
+2026-11-07 00:07:50,570 INFO CACHE HIT  sim=0.940 latency=1345.1ms matched='Which lot is affected by the Baby Formula batch 4622 recall?'
+--- Q10 [new] How do I report a food product that I think should be recalled?
+2026-11-07 00:07:50,647 INFO CACHE MISS best_sim=0.604 -> running HW8 pipeline
+2026-11-07 00:08:10,802 INFO CACHE MISS done latency=20231.6ms status=rejected
+--- Q11 [exact] What is the reason for the Peanut Butter batch 4680 recall?
+2026-11-07 00:08:11,157 INFO CACHE HIT  sim=1.000 latency=354.8ms matched='What is the reason for the Peanut Butter batch 4680 recall?'
+--- Q12 [paraphrase] What is the way to report a grocery product that I believe needs a recall?
+2026-11-07 00:08:11,185 INFO CACHE MISS best_sim=0.572 -> running HW8 pipeline
+2026-11-07 00:08:24,390 INFO CACHE MISS done latency=13232.5ms status=rejected
+
+===== Part 2 results =====
+ # type       cached    sim  latency ms  query
+ 1 new        False   0.000     56689.1  How many units of Butter batch 4609 were recalled and why?
+ 2 exact      True    1.000       710.0  How many units of Butter batch 4609 were recalled and why?
+ 3 paraphrase True    0.918        37.1  For the Butter batch 4609 recall, how many units are affecte
+ 4 new        False   0.426     45230.2  What should I do if I bought the recalled Frozen Spinach fro
+ 5 paraphrase False   0.849     42392.9  I have GreenFields Co frozen spinach that is under recall. W
+ 6 new        False   0.633     48015.5  Which lot is affected by the Baby Formula batch 4622 recall?
+ 7 exact      True    1.000       549.3  What should I do if I bought the recalled Frozen Spinach fro
+ 8 new        False   0.753     48630.8  What is the reason for the Peanut Butter batch 4680 recall?
+ 9 paraphrase True    0.940      1345.1  Baby Formula batch 4622 recall: what lot number is affected?
+10 new        False   0.604     20231.6  How do I report a food product that I think should be recall
+11 exact      True    1.000       354.8  What is the reason for the Peanut Butter batch 4680 recall?
+12 paraphrase False   0.572     13232.5  What is the way to report a grocery product that I believe n
+
+Hit rate: 5/12 = 41.7%
+Avg latency cached: 599.3 ms | not cached: 39203.2 ms
+saved reports/hw09/raw/part2_run.json
+
+(Earlier run with the qwen3:1.7b Reviewer, kept for the record: 6 of 9 pipeline answers were
+"rejected" - 4 with self-contradicting reasons, 2 by the regex rule check - so hit rate was 3/12.)
+====================================================================================================
+Part 3.1 - git commit hw9/cache_cases.yaml
+====================================================================================================
+c75ddd9 2026-11-07 00:19:21 -0800 HW9 Part 3.1: freeze cache_cases.yaml (40 labeled cases) before threshold sweep
+
+====================================================================================================
+Part 3.2-3.4 - python hw9/threshold_sweep.py  (2026-11-07 00:20, verbatim)
+====================================================================================================
+(data260) Pinal Pawar | s7875 ~/Desktop/data260-7875 $  python hw9/threshold_sweep.py
+===== Pinal Pawar | SID4 7875 | PREFIX s7875 | HW9 Part 3 - threshold sweep =====
+cache_cases.yaml sha256=5f3213c09546218a  seeds=10  cases=40
+2026-11-07 00:20:50,559 INFO created vector index s7875:sweep:idx
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-11-07 00:20:57,245 WARNING Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-11-07 00:21:00,634 INFO SEED S1 -> HW8 pipeline: How many units of Butter batch 4609 were recalled?
+2026-11-07 00:21:50,252 INFO SEED S2 -> HW8 pipeline: What is the reason for the Peanut Butter batch 4680 recall?
+2026-11-07 00:22:36,262 INFO SEED S3 -> HW8 pipeline: Which lot is affected by the Baby Formula batch 4622 recall?
+2026-11-07 00:23:21,558 INFO SEED S4 -> HW8 pipeline: Who manufactures the Yogurt batch 4682 that was recalled?
+2026-11-07 00:24:05,487 INFO SEED S5 -> HW8 pipeline: What should I do if I bought the recalled Frozen Spinach from GreenFields Co?
+2026-11-07 00:24:49,298 INFO SEED S6 -> HW8 pipeline: What category is the Ice Cream batch 4602 recall?
+2026-11-07 00:25:29,761 INFO SEED S7 -> HW8 pipeline: Is the Deli Turkey batch 4619 recall because of Listeria?
+2026-11-07 00:26:09,191 INFO SEED S8 -> HW8 pipeline: How many units of Orange Juice batch 4606 are affected?
+2026-11-07 00:26:57,497 INFO SEED S9 -> HW8 pipeline: What is the notice code for the Hummus batch 4618 recall?
+2026-11-07 00:27:48,553 INFO SEED S10 -> HW8 pipeline: Which company recalled the Granola Bars batch 4612?
+2026-11-07 00:28:33,388 INFO CASE E1  exact             sim=1.000 nearest=S1   lookup=24.9ms
+2026-11-07 00:28:33,405 INFO CASE E2  exact             sim=1.000 nearest=S2   lookup=15.1ms
+2026-11-07 00:28:33,418 INFO CASE E3  exact             sim=1.000 nearest=S3   lookup=12.7ms
+2026-11-07 00:28:33,432 INFO CASE E4  exact             sim=1.000 nearest=S4   lookup=14.0ms
+2026-11-07 00:28:33,446 INFO CASE E5  exact             sim=1.000 nearest=S5   lookup=12.9ms
+2026-11-07 00:28:33,457 INFO CASE E6  exact             sim=1.000 nearest=S6   lookup=10.7ms
+2026-11-07 00:28:33,470 INFO CASE E7  exact             sim=1.000 nearest=S7   lookup=11.9ms
+2026-11-07 00:28:33,484 INFO CASE E8  exact             sim=1.000 nearest=S8   lookup=12.9ms
+2026-11-07 00:28:33,495 INFO CASE E9  exact             sim=1.000 nearest=S9   lookup=11.0ms
+2026-11-07 00:28:33,507 INFO CASE E10 exact             sim=1.000 nearest=S10  lookup=11.1ms
+2026-11-07 00:28:33,523 INFO CASE P1  paraphrase        sim=0.957 nearest=S1   lookup=15.3ms
+2026-11-07 00:28:33,550 INFO CASE P2 sim=0.948 (nearest S2) -> HW8 pipeline
+2026-11-07 00:29:21,887 INFO CASE P2  paraphrase        sim=0.948 nearest=S2   lookup=26.9ms
+2026-11-07 00:29:22,530 INFO CASE P3 sim=0.823 (nearest S3) -> HW8 pipeline
+2026-11-07 00:30:04,769 INFO CASE P3  paraphrase        sim=0.823 nearest=S3   lookup=641.7ms
+2026-11-07 00:30:05,093 INFO CASE P4  paraphrase        sim=0.969 nearest=S4   lookup=322.7ms
+2026-11-07 00:30:05,108 INFO CASE P5 sim=0.849 (nearest S5) -> HW8 pipeline
+2026-11-07 00:30:47,855 INFO CASE P5  paraphrase        sim=0.849 nearest=S5   lookup=14.3ms
+2026-11-07 00:30:48,641 INFO CASE P6 sim=0.924 (nearest S6) -> HW8 pipeline
+2026-11-07 00:31:27,152 INFO CASE P6  paraphrase        sim=0.924 nearest=S6   lookup=785.2ms
+2026-11-07 00:31:27,760 INFO CASE P7  paraphrase        sim=0.966 nearest=S7   lookup=607.1ms
+2026-11-07 00:31:27,777 INFO CASE P8 sim=0.823 (nearest S8) -> HW8 pipeline
+2026-11-07 00:32:06,598 INFO CASE P8  paraphrase        sim=0.823 nearest=S8   lookup=16.0ms
+2026-11-07 00:32:07,229 INFO CASE P9  paraphrase        sim=0.954 nearest=S9   lookup=628.7ms
+2026-11-07 00:32:07,251 INFO CASE P10 sim=0.944 (nearest S10) -> HW8 pipeline
+2026-11-07 00:32:51,865 INFO CASE P10 paraphrase        sim=0.944 nearest=S10  lookup=21.2ms
+2026-11-07 00:32:52,281 INFO CASE D1 sim=0.979 (nearest S1) -> HW8 pipeline
+2026-11-07 00:33:31,229 INFO CASE D1  similar_different sim=0.979 nearest=S1   lookup=414.6ms
+2026-11-07 00:33:31,633 INFO CASE D2 sim=0.984 (nearest S2) -> HW8 pipeline
+2026-11-07 00:34:15,335 INFO CASE D2  similar_different sim=0.984 nearest=S2   lookup=403.6ms
+2026-11-07 00:34:15,975 INFO CASE D3 sim=0.992 (nearest S3) -> HW8 pipeline
+2026-11-07 00:34:55,042 INFO CASE D3  similar_different sim=0.992 nearest=S3   lookup=632.0ms
+2026-11-07 00:34:55,668 INFO CASE D4 sim=0.994 (nearest S4) -> HW8 pipeline
+2026-11-07 00:35:33,847 INFO CASE D4  similar_different sim=0.994 nearest=S4   lookup=625.3ms
+2026-11-07 00:35:34,429 INFO CASE D5 sim=0.910 (nearest S5) -> HW8 pipeline
+2026-11-07 00:36:12,541 INFO CASE D5  similar_different sim=0.910 nearest=S5   lookup=580.9ms
+2026-11-07 00:36:13,545 INFO CASE D6 sim=0.992 (nearest S6) -> HW8 pipeline
+2026-11-07 00:37:02,558 INFO CASE D6  similar_different sim=0.992 nearest=S6   lookup=1003.3ms
+2026-11-07 00:37:03,178 INFO CASE D7 sim=0.997 (nearest S7) -> HW8 pipeline
+2026-11-07 00:37:43,730 INFO CASE D7  similar_different sim=0.997 nearest=S7   lookup=619.2ms
+2026-11-07 00:37:44,565 INFO CASE D8 sim=0.971 (nearest S8) -> HW8 pipeline
+2026-11-07 00:38:28,741 INFO CASE D8  similar_different sim=0.971 nearest=S8   lookup=833.6ms
+2026-11-07 00:38:29,492 INFO CASE D9 sim=0.995 (nearest S9) -> HW8 pipeline
+2026-11-07 00:39:12,161 INFO CASE D9  similar_different sim=0.995 nearest=S9   lookup=750.6ms
+2026-11-07 00:39:12,809 INFO CASE D10 sim=0.987 (nearest S10) -> HW8 pipeline
+2026-11-07 00:39:54,031 INFO CASE D10 similar_different sim=0.987 nearest=S10  lookup=647.5ms
+2026-11-07 00:39:54,604 INFO CASE U1 sim=0.092 (nearest S7) -> HW8 pipeline
+2026-11-07 00:40:04,825 INFO CASE U1  unrelated         sim=0.092 nearest=S7   lookup=572.4ms
+2026-11-07 00:40:04,923 INFO CASE U2 sim=0.289 (nearest S5) -> HW8 pipeline
+2026-11-07 00:40:31,034 INFO CASE U2  unrelated         sim=0.289 nearest=S5   lookup=98.3ms
+2026-11-07 00:40:31,822 INFO CASE U3 sim=0.191 (nearest S4) -> HW8 pipeline
+2026-11-07 00:40:59,863 INFO CASE U3  unrelated         sim=0.191 nearest=S4   lookup=786.4ms
+2026-11-07 00:41:00,400 INFO CASE U4 sim=0.230 (nearest S6) -> HW8 pipeline
+2026-11-07 00:41:40,099 INFO CASE U4  unrelated         sim=0.230 nearest=S6   lookup=536.1ms
+2026-11-07 00:41:40,506 INFO CASE U5 sim=0.132 (nearest S4) -> HW8 pipeline
+2026-11-07 00:42:16,792 INFO CASE U5  unrelated         sim=0.132 nearest=S4   lookup=405.9ms
+2026-11-07 00:42:17,766 INFO CASE U6 sim=0.566 (nearest S7) -> HW8 pipeline
+2026-11-07 00:42:54,852 INFO CASE U6  unrelated         sim=0.566 nearest=S7   lookup=973.6ms
+2026-11-07 00:42:55,538 INFO CASE U7 sim=0.243 (nearest S5) -> HW8 pipeline
+2026-11-07 00:43:11,271 INFO CASE U7  unrelated         sim=0.243 nearest=S5   lookup=684.8ms
+2026-11-07 00:43:11,378 INFO CASE U8 sim=0.248 (nearest S5) -> HW8 pipeline
+2026-11-07 00:43:45,619 INFO CASE U8  unrelated         sim=0.248 nearest=S5   lookup=106.2ms
+2026-11-07 00:43:46,073 INFO CASE U9 sim=0.306 (nearest S10) -> HW8 pipeline
+2026-11-07 00:44:00,142 INFO CASE U9  unrelated         sim=0.306 nearest=S10  lookup=453.3ms
+2026-11-07 00:44:00,224 INFO CASE U10 sim=0.147 (nearest S4) -> HW8 pipeline
+2026-11-07 00:44:29,401 INFO CASE U10 unrelated         sim=0.147 nearest=S4   lookup=82.4ms
+
+Cost model: C_miss = $0.02 per miss, C_false = $5.00 per false hit
+
+Threshold | Hit rate | False-hit rate | Mean latency (ms) | Total cost | false hits
+     0.75 |    75.0% |   33.3% (10) |            7112.4 | $    50.20 | D1, D2, D3, D4, D5, D6, D7, D8, D9, D10
+     0.80 |    75.0% |   33.3% (10) |            7112.4 | $    50.20 | D1, D2, D3, D4, D5, D6, D7, D8, D9, D10
+     0.85 |    67.5% |   37.0% (10) |           10205.4 | $    50.26 | D1, D2, D3, D4, D5, D6, D7, D8, D9, D10
+     0.90 |    67.5% |   37.0% (10) |           10205.4 | $    50.26 | D1, D2, D3, D4, D5, D6, D7, D8, D9, D10
+     0.95 |    57.5% |   39.1% ( 9) |           14424.2 | $    45.34 | D1, D2, D3, D4, D6, D7, D8, D9, D10
+
+Lowest total cost: threshold 0.95 ($45.34)
+
+Per-case similarity to nearest seed:
+  E1   exact             expect=hit  sim=1.000 nearest=S1
+  E2   exact             expect=hit  sim=1.000 nearest=S2
+  E3   exact             expect=hit  sim=1.000 nearest=S3
+  E4   exact             expect=hit  sim=1.000 nearest=S4
+  E5   exact             expect=hit  sim=1.000 nearest=S5
+  E6   exact             expect=hit  sim=1.000 nearest=S6
+  E7   exact             expect=hit  sim=1.000 nearest=S7
+  E8   exact             expect=hit  sim=1.000 nearest=S8
+  E9   exact             expect=hit  sim=1.000 nearest=S9
+  E10  exact             expect=hit  sim=1.000 nearest=S10
+  P1   paraphrase        expect=hit  sim=0.957 nearest=S1
+  P2   paraphrase        expect=hit  sim=0.948 nearest=S2
+  P3   paraphrase        expect=hit  sim=0.823 nearest=S3
+  P4   paraphrase        expect=hit  sim=0.969 nearest=S4
+  P5   paraphrase        expect=hit  sim=0.849 nearest=S5
+  P6   paraphrase        expect=hit  sim=0.924 nearest=S6
+  P7   paraphrase        expect=hit  sim=0.966 nearest=S7
+  P8   paraphrase        expect=hit  sim=0.823 nearest=S8
+  P9   paraphrase        expect=hit  sim=0.954 nearest=S9
+  P10  paraphrase        expect=hit  sim=0.944 nearest=S10
+  D1   similar_different expect=miss sim=0.979 nearest=S1
+  D2   similar_different expect=miss sim=0.984 nearest=S2
+  D3   similar_different expect=miss sim=0.992 nearest=S3
+  D4   similar_different expect=miss sim=0.994 nearest=S4
+  D5   similar_different expect=miss sim=0.910 nearest=S5
+  D6   similar_different expect=miss sim=0.992 nearest=S6
+  D7   similar_different expect=miss sim=0.997 nearest=S7
+  D8   similar_different expect=miss sim=0.971 nearest=S8
+  D9   similar_different expect=miss sim=0.995 nearest=S9
+  D10  similar_different expect=miss sim=0.987 nearest=S10
+  U1   unrelated         expect=miss sim=0.092 nearest=S7
+  U2   unrelated         expect=miss sim=0.289 nearest=S5
+  U3   unrelated         expect=miss sim=0.191 nearest=S4
+  U4   unrelated         expect=miss sim=0.230 nearest=S6
+  U5   unrelated         expect=miss sim=0.132 nearest=S4
+  U6   unrelated         expect=miss sim=0.566 nearest=S7
+  U7   unrelated         expect=miss sim=0.243 nearest=S5
+  U8   unrelated         expect=miss sim=0.248 nearest=S5
+  U9   unrelated         expect=miss sim=0.306 nearest=S10
+  U10  unrelated         expect=miss sim=0.147 nearest=S4
+
+saved reports/hw09/raw/part3_sweep.json and part3_state.json
+====================================================================================================
+Part 3.5 - python hw9/stale_demo.py  (2026-11-07 08:29)
+====================================================================================================
+===== Pinal Pawar | SID4 7875 | PREFIX s7875 | HW9 Part 3.5 - stale answer and data-version invalidation =====
+notice 4609: Butter (batch 4609) units_affected=3671 data_version=912788eec9
+2026-11-07 08:29:27,059 INFO created vector index s7875:stale:idx
+
+[1] first ask (empty cache): How many units of Butter batch 4609 were recalled?
+2026-11-07 08:29:36,959 INFO CACHE MISS best_sim=0.000 -> running HW8 pipeline
+2026-11-07 08:30:21,507 INFO CACHE MISS done latency=54447.0ms status=approved
+  -> is_cached=False similarity=0.000 latency=54447.0 ms data_version=912788eec9 | answer has OLD value 3671
+
+[2] UPDATE notices SET units_affected = 5200 WHERE id = 4609
+    current data_version=053bac3182
+
+[3] ask again, version check OFF (plain semantic cache)
+2026-11-07 08:30:22,425 INFO CACHE HIT  sim=1.000 latency=586.1ms matched='How many units of Butter batch 4609 were recalled?'
+  -> is_cached=True similarity=1.000 latency=586.1 ms data_version=912788eec9 | answer has OLD value 3671
+    !! STALE: the cache served an answer built from the old row (cached version 912788eec9 != current 053bac3182)
+
+[4] ask again, version check ON (fix)
+2026-11-07 08:30:22,444 INFO CACHE STALE sim=1.000 cached_version=912788eec9 current_version=053bac3182 -> invalidate s7875:stale:entry:088ba74bdddc
+2026-11-07 08:30:22,462 INFO CACHE MISS best_sim=1.000 (stale entry invalidated) -> running HW8 pipeline
+2026-11-07 08:31:02,628 INFO CACHE MISS done latency=40201.7ms status=approved
+  -> is_cached=False similarity=1.000 latency=40201.7 ms data_version=053bac3182 | answer has NEW value 5200
+
+[5] ask once more, version check ON
+2026-11-07 08:31:03,265 INFO CACHE HIT  sim=1.000 latency=636.0ms matched='How many units of Butter batch 4609 were recalled?'
+  -> is_cached=True similarity=1.000 latency=636.0 ms data_version=053bac3182 | answer has NEW value 5200
+
+restored notice 4609 units_affected=3671
+====================================================================================================
+Part 4 - hw9/part4 build_reference / train / validate / demo / test  (2026-11-07)
+====================================================================================================
+===== Pinal Pawar | SID4 7875 | PREFIX s7875 | HW9 Part 4 - build reference_data.json =====
+wrote 30 reference records -> hw9/part4/reference_data.json
+
+===== Pinal Pawar | SID4 7875 | PREFIX s7875 | HW9 Part 4 - training run (Evaluator Repair + lesson creation) =====
+  T01 attempt 1 REVISE -> attempt 2 REVISE   final=REVISE attempts=2   4.5s  MISSING_ACTION
+  T02 attempt 1 REVISE -> attempt 2 REVISE   final=REVISE attempts=2   6.2s  MISSING_ACTION
+    NEW LESSON lesson_001 from repeated MISSING_ACTION (applies_to=['all']): Provide clear steps: stop using it, do not eat it, throw it away, or return it to the store, and clean surfaces it touched.
+    LESSONS LOADED: lesson_001 (use_count=1)
+  T03 attempt 1 PASS                         final=PASS   attempts=1   3.2s
+  ... T04-T09, T11, T12 attempt 1 PASS with lesson_001 loaded ...
+  T10 attempt 1 REVISE -> attempt 2 PASS     final=PASS   attempts=2   5.7s  MISSING_LOT
+failure codes on first attempts: {'MISSING_ACTION': 2, 'MISSING_LOT': 1}
+lessons.json now has 1 lesson(s)
+
+===== Pinal Pawar | SID4 7875 | PREFIX s7875 | HW9 Part 4 - validate lessons on validation_data.json =====
+[before] Evaluator Repair + kept lessons (none)
+  V01-V05, V07, V08 attempt 1 REVISE (MISSING_ACTION); V02, V03, V05, V08 still REVISE after attempt 2
+  V06, V09, V10 attempt 1 PASS
+[candidate lesson_001] MISSING_ACTION applies_to=['all']
+  V01-V10 attempt 1 PASS
+  first-attempt failures 7 -> 0 | final failures 4 -> 0 | regressions none | unrelated ok True => KEEP
+kept lessons: ['lesson_001']
+
+===== Pinal Pawar | SID4 7875 | PREFIX s7875 | HW9 Part 4 - required demonstrations =====
+=== 4.1 controlled revision (attempt 1 is given NO notice on purpose) ===
+Question: How many units of Butter batch 4609 were recalled?
+-- attempt 1 answer: No recall notice is available for Butter batch 4609.
+-- evaluator: REVISE | Checked against reference_data.json: MISSING_UNITS, MISSING_ACTION.
+-- feedback: State the exact number of units affected, as written in the notice. Tell the customer what to do: stop using it, do not eat it, throw it away or return it to the store, and clean surfaces it touched.
+-- attempt 2 answer: The recall affects 3,671 units of Butter batch 4609. Stop using it, do not eat it, and throw it away. Return it to the store for proper disposal.
+-- evaluator: PASS | All facts the question needs match the reference dataset and the required consumer action is present.
+FINAL: result=PASS attempts=2 latency=5.5s
+=== 4.2 a stored lesson is loaded for a later, related question ===
+Later question (not in training): What should I do if I bought Granola Bars batch 4664?
+    LESSONS LOADED: lesson_001 (use_count=11)
+evaluator: PASS | All facts the question needs match the reference dataset and the required consumer action is present.
+lessons used: ['lesson_001'] | final=PASS attempts=1
+
+===== Pinal Pawar | SID4 7875 | PREFIX s7875 | HW9 Part 4.4 - four variants on test_data.json (held out) =====
+Variant                | Correct | Incorrect | Avg attempts | Avg latency (s)
+Baseline               |    3/12 |         9 |         1.00 |            3.41
+Evaluator Repair       |    6/12 |         6 |         1.75 |            6.19
+Lesson Memory          |   12/12 |         0 |         1.00 |            3.24
+Validated Improvement  |   12/12 |         0 |         1.00 |            2.63
+
+====================================================================================================
+Part 3.4 - rescore with the same-notice filter: python hw9/threshold_sweep.py | sed -n '/^Cost model/,/^Lowest total cost: threshold 0.75/p'  (2026-11-08)
+====================================================================================================
+Cost model: C_miss = $0.02 per miss, C_false = $5.00 per false hit
+
+A) Cosine threshold only (Part 3.2)
+Threshold | Hit rate | False-hit rate | Mean latency (ms) | Total cost | false hits
+     0.75 |    75.0% |   33.3% (10) |            7112.4 | $    50.20 | D1, D2, D3, D4, D5, D6, D7, D8, D9, D10
+     0.80 |    75.0% |   33.3% (10) |            7112.4 | $    50.20 | D1, D2, D3, D4, D5, D6, D7, D8, D9, D10
+     0.85 |    67.5% |   37.0% (10) |           10205.4 | $    50.26 | D1, D2, D3, D4, D5, D6, D7, D8, D9, D10
+     0.90 |    67.5% |   37.0% (10) |           10205.4 | $    50.26 | D1, D2, D3, D4, D5, D6, D7, D8, D9, D10
+     0.95 |    57.5% |   39.1% ( 9) |           14424.2 | $    45.34 | D1, D2, D3, D4, D6, D7, D8, D9, D10
+Lowest total cost: threshold 0.95 ($45.34)
+
+B) Threshold + same-notice filter (Part 3 fix)
+Threshold | Hit rate | False-hit rate | Mean latency (ms) | Total cost | false hits
+     0.75 |    50.0% |    0.0% ( 0) |           17478.9 | $     0.40 | -
+     0.80 |    50.0% |    0.0% ( 0) |           17478.9 | $     0.40 | -
+     0.85 |    42.5% |    0.0% ( 0) |           20571.9 | $     0.46 | -
+     0.90 |    42.5% |    0.0% ( 0) |           20571.9 | $     0.46 | -
+     0.95 |    35.0% |    0.0% ( 0) |           23839.1 | $     0.52 | -
+Lowest total cost: threshold 0.75 ($0.40)

@@ -1,0 +1,16 @@
+# HW9 Part 2: 12 test queries, run in this order against an empty cache (threshold 0.85).
+# type: new = first time this question is asked; exact = identical text to an earlier query;
+#       paraphrase = same meaning as an earlier query, different wording.
+queries:
+  - {type: new,        text: "How many units of Butter batch 4609 were recalled and why?"}
+  - {type: exact,      text: "How many units of Butter batch 4609 were recalled and why?"}
+  - {type: paraphrase, text: "For the Butter batch 4609 recall, how many units are affected and what is the reason?"}
+  - {type: new,        text: "What should I do if I bought the recalled Frozen Spinach from GreenFields Co?"}
+  - {type: paraphrase, text: "I have GreenFields Co frozen spinach that is under recall. What steps should I take?"}
+  - {type: new,        text: "Which lot is affected by the Baby Formula batch 4622 recall?"}
+  - {type: exact,      text: "What should I do if I bought the recalled Frozen Spinach from GreenFields Co?"}
+  - {type: new,        text: "What is the reason for the Peanut Butter batch 4680 recall?"}
+  - {type: paraphrase, text: "Baby Formula batch 4622 recall: what lot number is affected?"}
+  - {type: new,        text: "How do I report a food product that I think should be recalled?"}
+  - {type: exact,      text: "What is the reason for the Peanut Butter batch 4680 recall?"}
+  - {type: paraphrase, text: "What is the way to report a grocery product that I believe needs a recall?"}

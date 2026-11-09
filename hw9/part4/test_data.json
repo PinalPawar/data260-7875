@@ -1,0 +1,50 @@
+[
+  {
+    "id": "X01",
+    "question": "How many units of Shredded Cheese batch 4610 were recalled?"
+  },
+  {
+    "id": "X02",
+    "question": "Which lot is affected by the Bagged Lettuce batch 4633 recall?"
+  },
+  {
+    "id": "X03",
+    "question": "Who manufactures the recalled Ice Cream batch 4650?"
+  },
+  {
+    "id": "X04",
+    "question": "Why was Hummus batch 4654 recalled?"
+  },
+  {
+    "id": "X05",
+    "question": "Is the Butter batch 4656 recall because of Listeria?"
+  },
+  {
+    "id": "X06",
+    "question": "What should I do if I bought Deli Turkey batch 4658?"
+  },
+  {
+    "id": "X07",
+    "question": "What is the notice code for the Frozen Spinach batch 4659 recall?"
+  },
+  {
+    "id": "X08",
+    "question": "Which company recalled the Yogurt batch 4675?"
+  },
+  {
+    "id": "X09",
+    "question": "How many units of Orange Juice batch 4596 are affected?"
+  },
+  {
+    "id": "X10",
+    "question": "Is the Peanut Butter batch 4699 recall because of Listeria?"
+  },
+  {
+    "id": "X11",
+    "question": "What wine pairs well with salmon?"
+  },
+  {
+    "id": "X12",
+    "question": "How do I sign up for the store loyalty program?"
+  }
+]

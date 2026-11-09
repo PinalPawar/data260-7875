@@ -1,0 +1,20 @@
+{
+  "question": "What should I do if I bought Granola Bars batch 4664?",
+  "final_answer": "If you bought Granola Bars batch 4664, stop using it immediately. Do not eat or consume the bars. Throw them away and clean any surfaces they touched. Return the bars to the store if possible.",
+  "final_result": "PASS",
+  "attempts": 1,
+  "latency_ms": 4027.6,
+  "lessons_used": [
+    "lesson_001"
+  ],
+  "trace": [
+    {
+      "attempt": 1,
+      "answer": "If you bought Granola Bars batch 4664, stop using it immediately. Do not eat or consume the bars. Throw them away and clean any surfaces they touched. Return the bars to the store if possible.",
+      "result": "PASS",
+      "explanation": "All facts the question needs match the reference dataset and the required consumer action is present.",
+      "feedback": "",
+      "failure_codes": []
+    }
+  ]
+}

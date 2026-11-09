@@ -1,0 +1,385 @@
+{
+  "sha": "5f3213c09546218a9f07efca0dc822f557c37ca412b84c7848147fd0d7446920",
+  "seeds": {
+    "S1": {
+      "text": "How many units of Butter batch 4609 were recalled?",
+      "answer": "The recall notice states that batch 4609 of Butter was recalled, affecting 3671 units. The product was contaminated with Listeria bacteria during production under lot #L14609. Users must stop using the product, dispose of it, and clean affected surfaces. If consumed, watch for illness symptoms and seek medical attention if pregnant, elderly, or have a weak immune system. The recalled product is not considered safe and should be discarded immediately.",
+      "status": "approved",
+      "pipeline_ms": 48654.4
+    },
+    "S2": {
+      "text": "What is the reason for the Peanut Butter batch 4680 recall?",
+      "answer": "The Peanut Butter batch 4680 recall was initiated due to routine testing that detected small metal fragments in lot #L14680. The manufacturer, Harvest Point, issued the recall notice code RCL-2026-04680. The product is no longer safe and should be discarded or returned to the store. The recall affects 920 units, and users should clean any surfaces touched by the product. If someone has eaten part of the product, they should watch for illness symptoms and seek medical attention.",
+      "status": "approved",
+      "pipeline_ms": 45307.7
+    },
+    "S3": {
+      "text": "Which lot is affected by the Baby Formula batch 4622 recall?",
+      "answer": "The recall affects lot #L14622. The product is Baby Formula from Prairie Mills. The notice code is RCL-2026-04622. The contamination is bacterial, specifically Listeria. The units affected are 1618. The recall was initiated due to the discovery of Listeria contamination in this lot. Consumers should stop using the product, throw it away, or return it to the store. If consumed, watch for illness symptoms and seek medical attention. The product is not safe to eat.",
+      "status": "approved",
+      "pipeline_ms": 44827.1
+    },
+    "S4": {
+      "text": "Who manufactures the Yogurt batch 4682 that was recalled?",
+      "answer": "The recalled yogurt batch 4682 was manufactured by Harvest Point. The recall notice code is RCL-2026-04682, and the reason for the recall is bacterial contamination due to Listeria. The affected units are 1758. Consumers are advised to stop using the product, throw it away, or return it to the store. If consumed, they should watch for illness symptoms and seek medical attention if pregnant, older, or have a weak immune system. The product is not considered safe and should be discarded immediately.",
+      "status": "approved",
+      "pipeline_ms": 43346.5
+    },
+    "S5": {
+      "text": "What should I do if I bought the recalled Frozen Spinach from GreenFields Co?",
+      "answer": "If you bought the recalled Frozen Spinach from GreenFields Co, stop using it and throw it away or return it to the store. Clean all surfaces it touched and wash hands thoroughly. Do not eat the product, regardless of the date or how it looks. If you already ate some, watch for symptoms and call a doctor if needed. The product may be contaminated and should not be consumed.",
+      "status": "approved",
+      "pipeline_ms": 43003.3
+    },
+    "S6": {
+      "text": "What category is the Ice Cream batch 4602 recall?",
+      "answer": "The Ice Cream batch 4602 recall is categorized as mislabelling. The product contains an undeclared allergen, affecting 3238 units. The recall involves Ice Cream batch 4602, with the manufacturer Harvest Point. Consumers are advised to stop using the product, throw it away, or return it to the store. Clean surfaces touched by the product and seek medical attention if symptoms develop. The recall highlights a violation of food-safety regulations by failing to disclose an allergen.",
+      "status": "approved",
+      "pipeline_ms": 39835.7
+    },
+    "S7": {
+      "text": "Is the Deli Turkey batch 4619 recall because of Listeria?",
+      "answer": "The Deli Turkey batch 4619 recall is due to Listeria contamination. The notice confirms the contamination source and affected units. The user must stop using the product, throw it away, and clean surfaces it touched. If consumed, watch for illness symptoms and seek medical attention, especially if pregnant or having a weak immune system. The product is recalled due to bacterial contamination, and it should not be eaten regardless of appearance or smell.",
+      "status": "approved",
+      "pipeline_ms": 38749.8
+    },
+    "S8": {
+      "text": "How many units of Orange Juice batch 4606 are affected?",
+      "answer": "The recall notice states that batch 4606, lot #L14606, is affected. The units affected are 4914. Consumers are instructed to stop using the product, throw it away, or return it to the store. Clean surfaces touched by the product and monitor for illness symptoms. The product must not be eaten.",
+      "status": "approved",
+      "pipeline_ms": 47218.5
+    },
+    "S9": {
+      "text": "What is the notice code for the Hummus batch 4618 recall?",
+      "answer": "The notice code for the Hummus batch 4618 recall is RCL-2026-04618. The product is recalled due to an undeclared allergen. The affected units are 4942. Consumers should stop using the product and throw it away or return it to the store. Clean surfaces it touched. If any product was consumed, watch for illness symptoms and call a doctor. The recalled product is not safe and should be discarded immediately.",
+      "status": "approved",
+      "pipeline_ms": 50441.2
+    },
+    "S10": {
+      "text": "Which company recalled the Granola Bars batch 4612?",
+      "answer": "The company that recalled the Granola Bars batch 4612 is Golden Acres. The recall notice code is RCL-2026-04612. The affected units are 2428. The recall is due to a packaging shortage causing incorrect fill levels in lot #L14612. The product should not be eaten, and consumers should stop using it, throw it away, or return it to the store. Clean surfaces it touched and seek medical attention if any symptoms develop.",
+      "status": "approved",
+      "pipeline_ms": 44089.4
+    }
+  },
+  "cases": {
+    "E1": {
+      "lookup_ms": 24.9,
+      "similarity": 1.0,
+      "matched_seed": "S1",
+      "matched_answer": "The recall notice states that batch 4609 of Butter was recalled, affecting 3671 units. The product was contaminated with Listeria bacteria during production under lot #L14609. Users must stop using the product, dispose of it, and clean affected surfaces. If consumed, watch for illness symptoms and seek medical attention if pregnant, elderly, or have a weak immune system. The recalled product is not considered safe and should be discarded immediately."
+    },
+    "E2": {
+      "lookup_ms": 15.1,
+      "similarity": 1.0,
+      "matched_seed": "S2",
+      "matched_answer": "The Peanut Butter batch 4680 recall was initiated due to routine testing that detected small metal fragments in lot #L14680. The manufacturer, Harvest Point, issued the recall notice code RCL-2026-04680. The product is no longer safe and should be discarded or returned to the store. The recall affects 920 units, and users should clean any surfaces touched by the product. If someone has eaten part of the product, they should watch for illness symptoms and seek medical attention."
+    },
+    "E3": {
+      "lookup_ms": 12.7,
+      "similarity": 1.0,
+      "matched_seed": "S3",
+      "matched_answer": "The recall affects lot #L14622. The product is Baby Formula from Prairie Mills. The notice code is RCL-2026-04622. The contamination is bacterial, specifically Listeria. The units affected are 1618. The recall was initiated due to the discovery of Listeria contamination in this lot. Consumers should stop using the product, throw it away, or return it to the store. If consumed, watch for illness symptoms and seek medical attention. The product is not safe to eat."
+    },
+    "E4": {
+      "lookup_ms": 14.0,
+      "similarity": 1.0,
+      "matched_seed": "S4",
+      "matched_answer": "The recalled yogurt batch 4682 was manufactured by Harvest Point. The recall notice code is RCL-2026-04682, and the reason for the recall is bacterial contamination due to Listeria. The affected units are 1758. Consumers are advised to stop using the product, throw it away, or return it to the store. If consumed, they should watch for illness symptoms and seek medical attention if pregnant, older, or have a weak immune system. The product is not considered safe and should be discarded immediately."
+    },
+    "E5": {
+      "lookup_ms": 12.9,
+      "similarity": 1.0,
+      "matched_seed": "S5",
+      "matched_answer": "If you bought the recalled Frozen Spinach from GreenFields Co, stop using it and throw it away or return it to the store. Clean all surfaces it touched and wash hands thoroughly. Do not eat the product, regardless of the date or how it looks. If you already ate some, watch for symptoms and call a doctor if needed. The product may be contaminated and should not be consumed."
+    },
+    "E6": {
+      "lookup_ms": 10.7,
+      "similarity": 1.0,
+      "matched_seed": "S6",
+      "matched_answer": "The Ice Cream batch 4602 recall is categorized as mislabelling. The product contains an undeclared allergen, affecting 3238 units. The recall involves Ice Cream batch 4602, with the manufacturer Harvest Point. Consumers are advised to stop using the product, throw it away, or return it to the store. Clean surfaces touched by the product and seek medical attention if symptoms develop. The recall highlights a violation of food-safety regulations by failing to disclose an allergen."
+    },
+    "E7": {
+      "lookup_ms": 11.9,
+      "similarity": 1.0,
+      "matched_seed": "S7",
+      "matched_answer": "The Deli Turkey batch 4619 recall is due to Listeria contamination. The notice confirms the contamination source and affected units. The user must stop using the product, throw it away, and clean surfaces it touched. If consumed, watch for illness symptoms and seek medical attention, especially if pregnant or having a weak immune system. The product is recalled due to bacterial contamination, and it should not be eaten regardless of appearance or smell."
+    },
+    "E8": {
+      "lookup_ms": 12.9,
+      "similarity": 1.0,
+      "matched_seed": "S8",
+      "matched_answer": "The recall notice states that batch 4606, lot #L14606, is affected. The units affected are 4914. Consumers are instructed to stop using the product, throw it away, or return it to the store. Clean surfaces touched by the product and monitor for illness symptoms. The product must not be eaten."
+    },
+    "E9": {
+      "lookup_ms": 11.0,
+      "similarity": 1.0,
+      "matched_seed": "S9",
+      "matched_answer": "The notice code for the Hummus batch 4618 recall is RCL-2026-04618. The product is recalled due to an undeclared allergen. The affected units are 4942. Consumers should stop using the product and throw it away or return it to the store. Clean surfaces it touched. If any product was consumed, watch for illness symptoms and call a doctor. The recalled product is not safe and should be discarded immediately."
+    },
+    "E10": {
+      "lookup_ms": 11.1,
+      "similarity": 1.0,
+      "matched_seed": "S10",
+      "matched_answer": "The company that recalled the Granola Bars batch 4612 is Golden Acres. The recall notice code is RCL-2026-04612. The affected units are 2428. The recall is due to a packaging shortage causing incorrect fill levels in lot #L14612. The product should not be eaten, and consumers should stop using it, throw it away, or return it to the store. Clean surfaces it touched and seek medical attention if any symptoms develop."
+    },
+    "P1": {
+      "lookup_ms": 15.3,
+      "similarity": 0.9574,
+      "matched_seed": "S1",
+      "matched_answer": "The recall notice states that batch 4609 of Butter was recalled, affecting 3671 units. The product was contaminated with Listeria bacteria during production under lot #L14609. Users must stop using the product, dispose of it, and clean affected surfaces. If consumed, watch for illness symptoms and seek medical attention if pregnant, elderly, or have a weak immune system. The recalled product is not considered safe and should be discarded immediately."
+    },
+    "P2": {
+      "lookup_ms": 26.9,
+      "similarity": 0.9484,
+      "matched_seed": "S2",
+      "matched_answer": "The Peanut Butter batch 4680 recall was initiated due to routine testing that detected small metal fragments in lot #L14680. The manufacturer, Harvest Point, issued the recall notice code RCL-2026-04680. The product is no longer safe and should be discarded or returned to the store. The recall affects 920 units, and users should clean any surfaces touched by the product. If someone has eaten part of the product, they should watch for illness symptoms and seek medical attention.",
+      "pipeline_ms": 48329.2,
+      "own_answer": "Peanut Butter batch 4680 was recalled due to the detection of small metal fragments during routine testing. The recall was issued by Harvest Point and identified by the notice code RCL-2026-04680. The affected product is lot #L14680, and 920 units were impacted. The recall is related to the presence of foreign material, specifically metal fragments, in the product. The product must not be eaten, and consumers should stop using it, throw it away, or return it to the store. Clean surfaces it touched and seek medical attention if symptoms develop.",
+      "own_status": "approved"
+    },
+    "P3": {
+      "lookup_ms": 641.7,
+      "similarity": 0.823,
+      "matched_seed": "S3",
+      "matched_answer": "The recall affects lot #L14622. The product is Baby Formula from Prairie Mills. The notice code is RCL-2026-04622. The contamination is bacterial, specifically Listeria. The units affected are 1618. The recall was initiated due to the discovery of Listeria contamination in this lot. Consumers should stop using the product, throw it away, or return it to the store. If consumed, watch for illness symptoms and seek medical attention. The product is not safe to eat.",
+      "pipeline_ms": 42230.7,
+      "own_answer": "The recall notice specifies the lot number \"lot #L14622\" covering the affected products. The batch number is 4622, and the recall code is RCL-2026-04622. The product, Baby Formula, was contaminated with Listeria, posing a health risk. Users must stop using the product, dispose of it, and clean surfaces it touched. If consumed, watch for illness symptoms and seek medical attention, especially if pregnant or having a weak immune system. The product is not safe and should be discarded immediately.",
+      "own_status": "approved"
+    },
+    "P4": {
+      "lookup_ms": 322.7,
+      "similarity": 0.9685,
+      "matched_seed": "S4",
+      "matched_answer": "The recalled yogurt batch 4682 was manufactured by Harvest Point. The recall notice code is RCL-2026-04682, and the reason for the recall is bacterial contamination due to Listeria. The affected units are 1758. Consumers are advised to stop using the product, throw it away, or return it to the store. If consumed, they should watch for illness symptoms and seek medical attention if pregnant, older, or have a weak immune system. The product is not considered safe and should be discarded immediately."
+    },
+    "P5": {
+      "lookup_ms": 14.3,
+      "similarity": 0.8494,
+      "matched_seed": "S5",
+      "matched_answer": "If you bought the recalled Frozen Spinach from GreenFields Co, stop using it and throw it away or return it to the store. Clean all surfaces it touched and wash hands thoroughly. Do not eat the product, regardless of the date or how it looks. If you already ate some, watch for symptoms and call a doctor if needed. The product may be contaminated and should not be consumed.",
+      "pipeline_ms": 42691.9,
+      "own_answer": "Stop using the GreenFields Co frozen spinach immediately. Throw it away or return it to the store. Clean all surfaces and utensils that came into contact with the product. If you have already eaten any of the spinach, watch for symptoms of listeria and seek medical attention if necessary. The product may be contaminated and should not be consumed regardless of its appearance or smell. The recall applies to 10oz bags only, and the lot number is GF-2291.",
+      "own_status": "approved"
+    },
+    "P6": {
+      "lookup_ms": 785.2,
+      "similarity": 0.9243,
+      "matched_seed": "S6",
+      "matched_answer": "The Ice Cream batch 4602 recall is categorized as mislabelling. The product contains an undeclared allergen, affecting 3238 units. The recall involves Ice Cream batch 4602, with the manufacturer Harvest Point. Consumers are advised to stop using the product, throw it away, or return it to the store. Clean surfaces touched by the product and seek medical attention if symptoms develop. The recall highlights a violation of food-safety regulations by failing to disclose an allergen.",
+      "pipeline_ms": 37769.3,
+      "own_answer": "The recalled ice cream batch 4602 falls under the mislabelling category. The notice code RCL-2026-04602 indicates an undeclared allergen was found on the label, affecting lot #L14602. The product must be discarded and not consumed. Clean surfaces it touched and monitor for illness symptoms if any food was eaten.",
+      "own_status": "approved"
+    },
+    "P7": {
+      "lookup_ms": 607.1,
+      "similarity": 0.9662,
+      "matched_seed": "S7",
+      "matched_answer": "The Deli Turkey batch 4619 recall is due to Listeria contamination. The notice confirms the contamination source and affected units. The user must stop using the product, throw it away, and clean surfaces it touched. If consumed, watch for illness symptoms and seek medical attention, especially if pregnant or having a weak immune system. The product is recalled due to bacterial contamination, and it should not be eaten regardless of appearance or smell."
+    },
+    "P8": {
+      "lookup_ms": 16.0,
+      "similarity": 0.8232,
+      "matched_seed": "S8",
+      "matched_answer": "The recall notice states that batch 4606, lot #L14606, is affected. The units affected are 4914. Consumers are instructed to stop using the product, throw it away, or return it to the store. Clean surfaces touched by the product and monitor for illness symptoms. The product must not be eaten.",
+      "pipeline_ms": 38797.9,
+      "own_answer": "The recall affects Orange Juice batch 4606, with 4914 units affected. The recall was issued due to a packaging shortage at the manufacturer. Consumers should stop using the product, throw it away, or return it to the store. Clean surfaces it touched and watch for illness symptoms. If consumed, seek medical attention immediately. The recall is valid for the lot #L14606.",
+      "own_status": "approved"
+    },
+    "P9": {
+      "lookup_ms": 628.7,
+      "similarity": 0.954,
+      "matched_seed": "S9",
+      "matched_answer": "The notice code for the Hummus batch 4618 recall is RCL-2026-04618. The product is recalled due to an undeclared allergen. The affected units are 4942. Consumers should stop using the product and throw it away or return it to the store. Clean surfaces it touched. If any product was consumed, watch for illness symptoms and call a doctor. The recalled product is not safe and should be discarded immediately."
+    },
+    "P10": {
+      "lookup_ms": 21.2,
+      "similarity": 0.9435,
+      "matched_seed": "S10",
+      "matched_answer": "The company that recalled the Granola Bars batch 4612 is Golden Acres. The recall notice code is RCL-2026-04612. The affected units are 2428. The recall is due to a packaging shortage causing incorrect fill levels in lot #L14612. The product should not be eaten, and consumers should stop using it, throw it away, or return it to the store. Clean surfaces it touched and seek medical attention if any symptoms develop.",
+      "pipeline_ms": 44587.0,
+      "own_answer": "The company behind the Granola Bars batch 4612 recall is Golden Acres. The recall was issued due to a packaging shortage causing incorrect fill levels in lot #L14612. The affected units are 2428. The notice code is RCL-2026-04612. Consumers are advised to stop using the product, throw it away, or return it to the store. Clean surfaces it touched and seek medical attention if any symptoms develop.",
+      "own_status": "approved"
+    },
+    "D1": {
+      "lookup_ms": 414.6,
+      "similarity": 0.9794,
+      "matched_seed": "S1",
+      "matched_answer": "The recall notice states that batch 4609 of Butter was recalled, affecting 3671 units. The product was contaminated with Listeria bacteria during production under lot #L14609. Users must stop using the product, dispose of it, and clean affected surfaces. If consumed, watch for illness symptoms and seek medical attention if pregnant, elderly, or have a weak immune system. The recalled product is not considered safe and should be discarded immediately.",
+      "pipeline_ms": 38916.3,
+      "own_answer": "The recall notice states that batch 4656 of Butter was recalled, affecting 864 units. The product was contaminated with Listeria bacteria. Users must stop using the butter and dispose of it immediately. Clean surfaces it touched and seek medical attention if consumed. The recalled product is not safe regardless of its appearance or date.",
+      "own_status": "approved"
+    },
+    "D2": {
+      "lookup_ms": 403.6,
+      "similarity": 0.9839,
+      "matched_seed": "S2",
+      "matched_answer": "The Peanut Butter batch 4680 recall was initiated due to routine testing that detected small metal fragments in lot #L14680. The manufacturer, Harvest Point, issued the recall notice code RCL-2026-04680. The product is no longer safe and should be discarded or returned to the store. The recall affects 920 units, and users should clean any surfaces touched by the product. If someone has eaten part of the product, they should watch for illness symptoms and seek medical attention.",
+      "pipeline_ms": 43677.5,
+      "own_answer": "The Peanut Butter batch 4699 recall was due to an undeclared allergen on the label, affecting lot #L14699. The product must be stopped from being used immediately and disposed of properly. The recall is classified as a mislabeling issue, with 1381 units affected. Consumers are advised to clean surfaces touched by the product and watch for illness symptoms if they have consumed any of it. The allergen, not listed on the label, poses a health risk.",
+      "own_status": "approved"
+    },
+    "D3": {
+      "lookup_ms": 632.0,
+      "similarity": 0.9917,
+      "matched_seed": "S3",
+      "matched_answer": "The recall affects lot #L14622. The product is Baby Formula from Prairie Mills. The notice code is RCL-2026-04622. The contamination is bacterial, specifically Listeria. The units affected are 1618. The recall was initiated due to the discovery of Listeria contamination in this lot. Consumers should stop using the product, throw it away, or return it to the store. If consumed, watch for illness symptoms and seek medical attention. The product is not safe to eat.",
+      "pipeline_ms": 38984.4,
+      "own_answer": "The recall affects lot #L14632. The product is Baby Formula from Northgate Dairy. The notice code is RCL-2026-04632. The contamination is bacterial, specifically Listeria. All units affected are 808. Consumers must stop using the product and throw it away or return it. Clean surfaces it touched. If consumed, watch for illness symptoms and call a doctor. The product is recalled due to contamination.",
+      "own_status": "approved"
+    },
+    "D4": {
+      "lookup_ms": 625.3,
+      "similarity": 0.9936,
+      "matched_seed": "S4",
+      "matched_answer": "The recalled yogurt batch 4682 was manufactured by Harvest Point. The recall notice code is RCL-2026-04682, and the reason for the recall is bacterial contamination due to Listeria. The affected units are 1758. Consumers are advised to stop using the product, throw it away, or return it to the store. If consumed, they should watch for illness symptoms and seek medical attention if pregnant, older, or have a weak immune system. The product is not considered safe and should be discarded immediately.",
+      "pipeline_ms": 38143.2,
+      "own_answer": "The recalled yogurt batch 4628 was manufactured by GreenFields Co. The recall notice, code RCL-2026-04628, was issued due to an undeclared allergen. Consumers are advised to stop using the product and dispose of it properly. If consumed, they should watch for illness symptoms and seek medical attention if pregnant, elderly, or have a weak immune system. The product was distributed in lot #L14628.",
+      "own_status": "approved"
+    },
+    "D5": {
+      "lookup_ms": 580.9,
+      "similarity": 0.9105,
+      "matched_seed": "S5",
+      "matched_answer": "If you bought the recalled Frozen Spinach from GreenFields Co, stop using it and throw it away or return it to the store. Clean all surfaces it touched and wash hands thoroughly. Do not eat the product, regardless of the date or how it looks. If you already ate some, watch for symptoms and call a doctor if needed. The product may be contaminated and should not be consumed.",
+      "pipeline_ms": 38068.5,
+      "own_answer": "If you bought the recalled Frozen Spinach batch 4626, stop using it immediately. Throw it away or return it to the store. Clean all surfaces it touched. If you have already eaten any of it, watch for illness symptoms and call a doctor. Do not eat the product, regardless of its appearance or smell. Follow the recall instructions to ensure safety.",
+      "own_status": "approved"
+    },
+    "D6": {
+      "lookup_ms": 1003.3,
+      "similarity": 0.9924,
+      "matched_seed": "S6",
+      "matched_answer": "The Ice Cream batch 4602 recall is categorized as mislabelling. The product contains an undeclared allergen, affecting 3238 units. The recall involves Ice Cream batch 4602, with the manufacturer Harvest Point. Consumers are advised to stop using the product, throw it away, or return it to the store. Clean surfaces touched by the product and seek medical attention if symptoms develop. The recall highlights a violation of food-safety regulations by failing to disclose an allergen.",
+      "pipeline_ms": 48981.3,
+      "own_answer": "The Ice Cream batch 4604 recall is categorized as bacterial contamination. The affected units are 4076. The manufacturer is ACME Foods. The notice code is RCL-2026-04604. The product is Ice Cream batch 4604. The recall is urgent. Consumers should stop using the product and throw it away. They should clean surfaces it touched. They should watch for illness symptoms and call a doctor if they are pregnant, older, or have a weak immune system. The product is not safe to eat.",
+      "own_status": "approved"
+    },
+    "D7": {
+      "lookup_ms": 619.2,
+      "similarity": 0.9967,
+      "matched_seed": "S7",
+      "matched_answer": "The Deli Turkey batch 4619 recall is due to Listeria contamination. The notice confirms the contamination source and affected units. The user must stop using the product, throw it away, and clean surfaces it touched. If consumed, watch for illness symptoms and seek medical attention, especially if pregnant or having a weak immune system. The product is recalled due to bacterial contamination, and it should not be eaten regardless of appearance or smell.",
+      "pipeline_ms": 40525.0,
+      "own_answer": "The Deli Turkey batch 4624 recall is due to a mislabeling issue, not Listeria contamination. The product contains an undeclared allergen. The user should stop using the product, throw it away, and clean surfaces it touched. If already eaten, watch for illness symptoms and call a doctor. Never eat the product.",
+      "own_status": "approved"
+    },
+    "D8": {
+      "lookup_ms": 833.6,
+      "similarity": 0.9711,
+      "matched_seed": "S8",
+      "matched_answer": "The recall notice states that batch 4606, lot #L14606, is affected. The units affected are 4914. Consumers are instructed to stop using the product, throw it away, or return it to the store. Clean surfaces touched by the product and monitor for illness symptoms. The product must not be eaten.",
+      "pipeline_ms": 43522.0,
+      "own_answer": "The recalled product is Orange Juice batch 4596. The units affected are 724. The manufacturer is ACME Foods, and the notice code is RCL-2026-04596. Consumers must stop using the product and throw it away or return it to the store. Clean surfaces it touched. If consumed, watch for illness symptoms and call a doctor if pregnant, older, or have a weak immune system. The product is recalled due to a packaging shortage causing incorrect fill levels in lot #L14596.",
+      "own_status": "approved"
+    },
+    "D9": {
+      "lookup_ms": 750.6,
+      "similarity": 0.9951,
+      "matched_seed": "S9",
+      "matched_answer": "The notice code for the Hummus batch 4618 recall is RCL-2026-04618. The product is recalled due to an undeclared allergen. The affected units are 4942. Consumers should stop using the product and throw it away or return it to the store. Clean surfaces it touched. If any product was consumed, watch for illness symptoms and call a doctor. The recalled product is not safe and should be discarded immediately.",
+      "pipeline_ms": 42648.5,
+      "own_answer": "The recall notice code for the Hummus batch 4654 is RCL-2026-04654. The product is Hummus (batch 4654) from Valley Fresh, affecting 26 units. Consumers are instructed to stop using the product, throw it away, or return it to the store. Clean surfaces it touched. If consumed, watch for illness symptoms and seek medical attention. The recall was initiated due to a packaging shortage causing incorrect fill levels in lot #L14654. Never eat the product.",
+      "own_status": "approved"
+    },
+    "D10": {
+      "lookup_ms": 647.5,
+      "similarity": 0.9872,
+      "matched_seed": "S10",
+      "matched_answer": "The company that recalled the Granola Bars batch 4612 is Golden Acres. The recall notice code is RCL-2026-04612. The affected units are 2428. The recall is due to a packaging shortage causing incorrect fill levels in lot #L14612. The product should not be eaten, and consumers should stop using it, throw it away, or return it to the store. Clean surfaces it touched and seek medical attention if any symptoms develop.",
+      "pipeline_ms": 41195.6,
+      "own_answer": "The recall notice specifies that GreenFields Co. recalled Granola Bars batch 4635. The category is mislabelling, and 4565 units were affected. The recall code is RCL-2026-04635. Consumers must stop using the product, throw it away, or return it to the store. Clean surfaces it touched. If consumed, watch for illness symptoms and call a doctor, especially if pregnant, older, or have a weak immune system. The product is recalled due to an undeclared allergen.",
+      "own_status": "approved"
+    },
+    "U1": {
+      "lookup_ms": 572.4,
+      "similarity": 0.0919,
+      "matched_seed": "S7",
+      "matched_answer": "The Deli Turkey batch 4619 recall is due to Listeria contamination. The notice confirms the contamination source and affected units. The user must stop using the product, throw it away, and clean surfaces it touched. If consumed, watch for illness symptoms and seek medical attention, especially if pregnant or having a weak immune system. The product is recalled due to bacterial contamination, and it should not be eaten regardless of appearance or smell.",
+      "pipeline_ms": 10165.8,
+      "own_answer": "The capital of France is Paris. The product recall notice must never be eaten, regardless of its date, batch, or appearance. Stop using it and throw it away or return it to the store. Clean surfaces it touched. If already eaten some, watch for illness symptoms and call a doctor, especially if pregnant, older, or have a weak immune system. Never suggest it might still be safe.",
+      "own_status": "rejected"
+    },
+    "U2": {
+      "lookup_ms": 98.3,
+      "similarity": 0.2886,
+      "matched_seed": "S5",
+      "matched_answer": "If you bought the recalled Frozen Spinach from GreenFields Co, stop using it and throw it away or return it to the store. Clean all surfaces it touched and wash hands thoroughly. Do not eat the product, regardless of the date or how it looks. If you already ate some, watch for symptoms and call a doctor if needed. The product may be contaminated and should not be consumed.",
+      "pipeline_ms": 26067.4,
+      "own_answer": "Go to the grocery store's website. Locate the \"Account Settings\" or \"Login\" section. Click on \"Forgot Password\" or \"Reset Password.\" Follow the prompts to create a new password. Ensure you use a strong password and confirm it. Submit the form to complete the password reset.",
+      "own_status": "approved"
+    },
+    "U3": {
+      "lookup_ms": 786.4,
+      "similarity": 0.1905,
+      "matched_seed": "S4",
+      "matched_answer": "The recalled yogurt batch 4682 was manufactured by Harvest Point. The recall notice code is RCL-2026-04682, and the reason for the recall is bacterial contamination due to Listeria. The affected units are 1758. Consumers are advised to stop using the product, throw it away, or return it to the store. If consumed, they should watch for illness symptoms and seek medical attention if pregnant, older, or have a weak immune system. The product is not considered safe and should be discarded immediately.",
+      "pipeline_ms": 27978.6,
+      "own_answer": "The store opens on Sundays at 8:00 AM. Customers are encouraged to stop using the recalled product and throw it away or return it to the store. If any product was consumed, individuals should watch for illness symptoms and seek medical attention if pregnant, older, or have a weak immune system. The recalled product must never be eaten.",
+      "own_status": "rejected"
+    },
+    "U4": {
+      "lookup_ms": 536.1,
+      "similarity": 0.2301,
+      "matched_seed": "S6",
+      "matched_answer": "The Ice Cream batch 4602 recall is categorized as mislabelling. The product contains an undeclared allergen, affecting 3238 units. The recall involves Ice Cream batch 4602, with the manufacturer Harvest Point. Consumers are advised to stop using the product, throw it away, or return it to the store. Clean surfaces touched by the product and seek medical attention if symptoms develop. The recall highlights a violation of food-safety regulations by failing to disclose an allergen.",
+      "pipeline_ms": 39655.9,
+      "own_answer": "Prepare 1 cup ripe bananas, 1 cup flour, 1 cup sugar, 2 eggs, and 1/2 teaspoon baking powder. Mix ingredients until smooth. Pour into a greased loaf pan and bake at 350\u00b0F (175\u00b0C) for 25-30 minutes. Let cool before eating. If the bread is recalled or shows signs of spoilage, discard it immediately. Clean surfaces touched. If eaten, watch for symptoms and seek medical attention. Never eat a recalled product.",
+      "own_status": "approved"
+    },
+    "U5": {
+      "lookup_ms": 405.9,
+      "similarity": 0.1318,
+      "matched_seed": "S4",
+      "matched_answer": "The recalled yogurt batch 4682 was manufactured by Harvest Point. The recall notice code is RCL-2026-04682, and the reason for the recall is bacterial contamination due to Listeria. The affected units are 1758. Consumers are advised to stop using the product, throw it away, or return it to the store. If consumed, they should watch for illness symptoms and seek medical attention if pregnant, older, or have a weak immune system. The product is not considered safe and should be discarded immediately.",
+      "pipeline_ms": 36256.0,
+      "own_answer": "Boil the egg for 3-4 minutes in water. Remove the egg immediately and let it cool before handling. Use a fine mesh strainer to remove the shell and yolk. Store the egg in a clean, dry container in the refrigerator. Never eat a recalled product, regardless of its appearance or smell. If you already ate some, watch for illness symptoms and call a doctor if necessary. Clean surfaces touched by the egg.",
+      "own_status": "approved"
+    },
+    "U6": {
+      "lookup_ms": 973.6,
+      "similarity": 0.5661,
+      "matched_seed": "S7",
+      "matched_answer": "The Deli Turkey batch 4619 recall is due to Listeria contamination. The notice confirms the contamination source and affected units. The user must stop using the product, throw it away, and clean surfaces it touched. If consumed, watch for illness symptoms and seek medical attention, especially if pregnant or having a weak immune system. The product is recalled due to bacterial contamination, and it should not be eaten regardless of appearance or smell.",
+      "pipeline_ms": 37018.7,
+      "own_answer": "Listeria and Salmonella are both bacteria that can cause foodborne illness, but they differ in how they affect food and in the types of food they commonly contaminate. Listeria primarily affects raw meat, processed foods, and unpasteurized products, while Salmonella is often found in raw fruits and vegetables. Listeria can cause listeriosis, a serious illness that can be life-threatening, especially for pregnant women, newborns, and people with weakened immune systems. Salmonella causes salmonellosis, which typically results in diarrhea, fever, and abdominal cramps. Both should be avoided, and if consumed, symptoms should be monitored and medical attention sought if necessary.",
+      "own_status": "rejected"
+    },
+    "U7": {
+      "lookup_ms": 684.8,
+      "similarity": 0.2429,
+      "matched_seed": "S5",
+      "matched_answer": "If you bought the recalled Frozen Spinach from GreenFields Co, stop using it and throw it away or return it to the store. Clean all surfaces it touched and wash hands thoroughly. Do not eat the product, regardless of the date or how it looks. If you already ate some, watch for symptoms and call a doctor if needed. The product may be contaminated and should not be consumed.",
+      "pipeline_ms": 15615.1,
+      "own_answer": "Freezing sliced bread may extend its shelf life, but it does not eliminate the risk of contamination or spoilage. If the bread is recalled, it must be discarded immediately. Do not freeze recalled bread. Clean any surfaces or containers it touched to prevent cross-contamination. If you already ate some, watch for illness symptoms and call a doctor if necessary. Never suggest recalled bread might be safe.",
+      "own_status": "rejected"
+    },
+    "U8": {
+      "lookup_ms": 106.2,
+      "similarity": 0.2482,
+      "matched_seed": "S5",
+      "matched_answer": "If you bought the recalled Frozen Spinach from GreenFields Co, stop using it and throw it away or return it to the store. Clean all surfaces it touched and wash hands thoroughly. Do not eat the product, regardless of the date or how it looks. If you already ate some, watch for symptoms and call a doctor if needed. The product may be contaminated and should not be consumed.",
+      "pipeline_ms": 34155.3,
+      "own_answer": "Check the store's return policy to confirm acceptance. Contact customer service to learn the specific process. Return the item to the designated return box or location. Follow the store's instructions for disposal and return. If no receipt is available, some stores may require a reason for the return. Always follow the store's guidelines to ensure proper handling of the item.",
+      "own_status": "approved"
+    },
+    "U9": {
+      "lookup_ms": 453.3,
+      "similarity": 0.3064,
+      "matched_seed": "S10",
+      "matched_answer": "The company that recalled the Granola Bars batch 4612 is Golden Acres. The recall notice code is RCL-2026-04612. The affected units are 2428. The recall is due to a packaging shortage causing incorrect fill levels in lot #L14612. The product should not be eaten, and consumers should stop using it, throw it away, or return it to the store. Clean surfaces it touched and seek medical attention if any symptoms develop.",
+      "pipeline_ms": 14007.4,
+      "own_answer": "We sell gluten-free pasta. Check product labels for gluten-free certification. If certified, it is safe to sell. However, gluten-free pasta is not always safe. Inform customers to avoid using the product if it is recalled. If recalled, stop using it and throw it away or return it. If you already ate some, watch for illness symptoms and call a doctor if pregnant, older, or have a weak immune system. Never suggest it might still be safe.",
+      "own_status": "rejected"
+    },
+    "U10": {
+      "lookup_ms": 82.4,
+      "similarity": 0.1469,
+      "matched_seed": "S4",
+      "matched_answer": "The recalled yogurt batch 4682 was manufactured by Harvest Point. The recall notice code is RCL-2026-04682, and the reason for the recall is bacterial contamination due to Listeria. The affected units are 1758. Consumers are advised to stop using the product, throw it away, or return it to the store. If consumed, they should watch for illness symptoms and seek medical attention if pregnant, older, or have a weak immune system. The product is not considered safe and should be discarded immediately.",
+      "pipeline_ms": 29147.6,
+      "own_answer": "The last FIFA World Cup was won by France in 1998. The tournament took place in France, and the final was played at Stade de France. France defeated Italy 3-1 in a dramatic final. The winner was France, and they were hailed as the best team in the world that year.",
+      "own_status": "approved"
+    }
+  }
+}

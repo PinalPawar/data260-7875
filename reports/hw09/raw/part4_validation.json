@@ -1,0 +1,36 @@
+{
+  "kept": [
+    "lesson_001"
+  ],
+  "lessons": [
+    {
+      "lesson_id": "lesson_001",
+      "failure_pattern": "Missing action instructions for the customer",
+      "correction": "Provide clear steps: stop using it, do not eat it, throw it away, or return it to the store, and clean surfaces it touched.",
+      "created_at": "2026-11-07",
+      "use_count": 10,
+      "failure_code": "MISSING_ACTION",
+      "applies_to": [
+        "all"
+      ],
+      "evidence": [
+        "How many units of Butter batch 4601 were recalled?",
+        "Which lot is affected by the Ice Cream batch 4602 recall?"
+      ],
+      "validated": true,
+      "validation": {
+        "first_attempt_failures": [
+          7,
+          0
+        ],
+        "final_failures": [
+          4,
+          0
+        ],
+        "regressions": [],
+        "unrelated_ok": true,
+        "decision": "KEEP"
+      }
+    }
+  ]
+}

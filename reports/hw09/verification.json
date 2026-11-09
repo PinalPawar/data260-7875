@@ -1,0 +1,210 @@
+{
+  "homework": 9,
+  "sid4": 7875,
+  "port_base": 8675,
+  "prefix": "s7875",
+  "domain_id": 3,
+  "seed": 7875,
+  "verify_seed": 267875,
+  "commit_hash": "c75ddd9",
+  "model": {
+    "answering_agent": "qwen3:1.7b via Ollama (HW8 adapter, temperature 0, seed 7875)",
+    "hw8_pipeline": "planner/writer qwen3:1.7b, reviewer qwen3:8b",
+    "embeddings": "sentence-transformers all-MiniLM-L6-v2 (384-dim)"
+  },
+  "config": {
+    "redis": "redis/redis-stack-server (container s7875-redis)",
+    "cache_threshold_shipped": 0.8,
+    "notice_filter": true,
+    "version_check": true
+  },
+  "generated_at": "2026-11-09T02:56:41",
+  "summary": "37/37 checks passed",
+  "checks": [
+    {
+      "name": "Section 0 values",
+      "passed": true,
+      "detail": "SID4=7875 PREFIX=s7875 PORT_BASE=8675"
+    },
+    {
+      "name": "Redis reachable",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Redis has the search module (vector index support)",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "every Redis key starts with PREFIX s7875",
+      "passed": true,
+      "detail": "17 keys, non-prefixed: []"
+    },
+    {
+      "name": "every vector index name starts with PREFIX",
+      "passed": true,
+      "detail": "['s7875:verify:idx', 's7875:sweep:idx', 's7875:stale:idx', 's7875:semcache:idx']"
+    },
+    {
+      "name": "Part 1: INCR returns 1..12 in order",
+      "passed": true,
+      "detail": "[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]"
+    },
+    {
+      "name": "Part 1: synced to MySQL exactly at view 10",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Part 1: Redis 12 vs MySQL 10 (write-behind)",
+      "passed": true,
+      "detail": "redis=12 mysql=10"
+    },
+    {
+      "name": "Part 1: key format s7875:views:notice:{id}",
+      "passed": true,
+      "detail": "s7875:views:notice:1"
+    },
+    {
+      "name": "Part 2: first ask is a miss (is_cached=false)",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Part 2: repeat ask is a hit with similarity ~1.0",
+      "passed": true,
+      "detail": "1.0"
+    },
+    {
+      "name": "Part 2: response carries is_cached, similarity, latency_ms, data_version",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Part 3: plain cosine cache false-hits a different batch (the problem)",
+      "passed": true,
+      "detail": "sim=0.9794"
+    },
+    {
+      "name": "Part 3 fix: same-notice filter turns the other batch into a miss",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Part 3 fix: a paraphrase about the same batch still hits",
+      "passed": true,
+      "detail": "sim=0.9574"
+    },
+    {
+      "name": "Part 3.5: without version check the changed row still gives a stale hit",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Part 3.5: version check invalidates the stale entry and re-answers",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Part 3.5: next ask hits the re-cached entry with the new data_version",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Part 2 run saved: >=10 queries with exact, paraphrase and new",
+      "passed": true,
+      "detail": "12 queries, hit rate 41.7%"
+    },
+    {
+      "name": "cache_cases.yaml: 40 cases, 10 per required category",
+      "passed": true,
+      "detail": "{('exact', 'hit'): 10, ('paraphrase', 'hit'): 10, ('similar_different', 'miss'): 10, ('unrelated', 'miss'): 10}"
+    },
+    {
+      "name": "cache_cases.yaml is committed",
+      "passed": true,
+      "detail": "c75ddd9 2026-11-07 00:19:21 -0800"
+    },
+    {
+      "name": "cache_cases.yaml unchanged since its commit (no relabeling)",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "sweep ran on the committed labels (sha256 match)",
+      "passed": true,
+      "detail": "5f3213c09546218a"
+    },
+    {
+      "name": "sweep covers thresholds 0.75-0.95 for both scoring modes",
+      "passed": true,
+      "detail": "[0.75, 0.8, 0.85, 0.9, 0.95]"
+    },
+    {
+      "name": "with the same-notice filter no threshold has a false hit",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Part 4 datasets contain only id + question (no expected answers)",
+      "passed": true,
+      "detail": "{'training': 12, 'validation': 10, 'test': 12}"
+    },
+    {
+      "name": "training / validation / test do not overlap",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "lessons.json has the required fields",
+      "passed": true,
+      "detail": "['lesson_001']"
+    },
+    {
+      "name": "lessons were created from training questions only (never test)",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "every lesson has a validation decision",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Evaluator: correct answer -> PASS",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Evaluator: missing consumer action -> REVISE with feedback",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Evaluator: wrong unit count -> REVISE MISSING_UNITS",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Evaluator: invented recall details on an unrelated question -> UNSUPPORTED_CLAIM",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "test results saved for all four variants",
+      "passed": true,
+      "detail": "{'Baseline': '3/12', 'Evaluator Repair': '6/12', 'Lesson Memory': '12/12', 'Validated Improvement': '12/12'}"
+    },
+    {
+      "name": "no run used more than 2 attempts",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "controlled revision demo: REVISE then PASS in 2 attempts",
+      "passed": true,
+      "detail": ""
+    }
+  ]
+}

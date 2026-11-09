@@ -18,3 +18,9 @@ hw08-test:
 
 hw08-down:
 	docker compose -f docker-compose.kafka.yml down
+
+# HW9 shortcuts (run from the repo root)
+.PHONY: verify-hw09
+
+verify-hw09:
+	python scripts/verify_hw09.py
