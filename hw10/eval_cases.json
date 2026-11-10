@@ -1,0 +1,244 @@
+{
+  "created_at": "2026-11-10T12:38:52-0800",
+  "n": 20,
+  "source": "HW8 Planner + Writer prompts (kafka_hw8/agents.py), in-process",
+  "settings": {
+    "temperature": 0.0,
+    "seed": 7875
+  },
+  "cases": [
+    {
+      "case_id": "c01",
+      "question": "What should I do if I bought the recalled Frozen Spinach from GreenFields Co?",
+      "plan": [
+        "If you bought the recalled Frozen Spinach from GreenFields Co, stop using it immediately.",
+        "Throw away or return the product as it is no longer safe to consume.",
+        "Clean any surfaces or utensils that came into contact with the product.",
+        "If you have already eaten some of it, watch for illness symptoms and call a doctor if needed."
+      ],
+      "draft": "If you bought the recalled Frozen Spinach from GreenFields Co, stop using it immediately. Throw away or return the product as it is no longer safe to consume. Clean any surfaces or utensils that came into contact with the product. If you have already eaten some of it, watch for illness symptoms and call a doctor if needed. Never eat the product, regardless of its appearance or smell.",
+      "writer_model": "qwen3:1.7b via Ollama",
+      "seconds": 14.5
+    },
+    {
+      "case_id": "c02",
+      "question": "I already ate a salad with recalled romaine lettuce. What symptoms of E. coli should I watch for?",
+      "plan": [
+        "Stop using the recalled romaine lettuce and throw it away or return it to the store. Clean surfaces it touched. Watch for symptoms such as severe stomach cramps, diarrhea, fever, or nausea. If you are pregnant, older, or have a weak immune system, seek medical attention sooner."
+      ],
+      "draft": "If you have eaten recalled romaine lettuce, stop using it and throw it away or return it to the store. Clean surfaces it touched. Watch for symptoms such as severe stomach cramps, diarrhea, fever, or nausea. If you are pregnant, older, or have a weak immune system, seek medical attention sooner.",
+      "writer_model": "qwen3:1.7b via Ollama",
+      "seconds": 9.1
+    },
+    {
+      "case_id": "c03",
+      "question": "Can I still eat recalled cantaloupe if I wash the rind really well?",
+      "plan": [
+        "wash the rind really well does not make it safe",
+        "the product is recalled and must be discarded immediately",
+        "do not eat the cantaloupe regardless of appearance or smell",
+        "contact the store or recall information for further instructions"
+      ],
+      "draft": "Washing the rind does not make the cantaloupe safe. The product is recalled and must be discarded immediately. Do not eat it regardless of appearance or smell. Contact the store or recall information for further instructions. If you already ate some, watch for illness symptoms and call a doctor if pregnant, older, or have a weak immune system. Never suggest it might still be safe.",
+      "writer_model": "qwen3:1.7b via Ollama",
+      "seconds": 9.4
+    },
+    {
+      "case_id": "c04",
+      "question": "How do I find out whether the eggs in my fridge are part of the Salmonella egg recall?",
+      "plan": [
+        "Check the packaging for a recall notice. Look for the recall number and date. Contact the store where you purchased the eggs. Check the local health department website for the recall."
+      ],
+      "draft": "Check the packaging for a recall notice, look for the recall number and date. Contact the store where you purchased the eggs. Check the local health department website for the recall. If the recall is listed, follow the instructions to stop using the eggs, throw them away, or return them. If you already ate some, watch for illness symptoms and call a doctor. Never eat the recalled eggs.",
+      "writer_model": "qwen3:1.7b via Ollama",
+      "seconds": 7.9
+    },
+    {
+      "case_id": "c05",
+      "question": "Is it safe to cook recalled ground beef to 160F instead of throwing it away?",
+      "plan": [
+        "a recalled product must never be cooked even if it reaches the required temperature",
+        "the recall indicates the product is unsafe regardless of cooking temperature",
+        "cooking does not make it safe",
+        "the product should be discarded immediately rather than cooked"
+      ],
+      "draft": "A recalled product must never be cooked, regardless of temperature. The recall indicates it is unsafe, and cooking does not make it safe. The product should be discarded immediately. Do not attempt to cook it. If already eaten, watch for illness symptoms and call a doctor. Clean surfaces it touched.",
+      "writer_model": "qwen3:1.7b via Ollama",
+      "seconds": 8.3
+    },
+    {
+      "case_id": "c06",
+      "question": "My baby drank formula that was later recalled for botulism. What should I watch for and who do I call?",
+      "plan": [
+        "Stop using the recalled formula and throw it away. Clean surfaces it touched. Watch for symptoms of botulism, such as difficulty breathing, muscle weakness, or poor muscle control. Call a doctor immediately, especially if you are pregnant or have a weak immune system."
+      ],
+      "draft": "Stop using the recalled formula and throw it away. Clean surfaces it touched. Watch for symptoms of botulism, such as difficulty breathing, muscle weakness, or poor muscle control. Call a doctor immediately, especially if you are pregnant or have a weak immune system. The product is recalled due to potential botulism contamination. Never eat it, regardless of appearance or smell.",
+      "writer_model": "qwen3:1.7b via Ollama",
+      "seconds": 11.2
+    },
+    {
+      "case_id": "c07",
+      "question": "How do I get a refund for a recalled product if I lost the receipt?",
+      "plan": [
+        "Contact the store where the product was purchased to request a refund.",
+        "Provide them with the product's details, such as the item name, batch number, and date of purchase.",
+        "Follow the store's instructions for returning the product or claiming a refund.",
+        "If unable to return the product, consider filing a claim through the retailer's customer service."
+      ],
+      "draft": "Contact the store where the product was purchased to request a refund. Provide the item name, batch number, and date of purchase. Follow the store's instructions for returning the product or claiming a refund. If unable to return the product, file a claim through the retailer's customer service. Always ensure the product is discarded or returned as per recall instructions. If already consumed, watch for illness symptoms and seek medical attention.",
+      "writer_model": "qwen3:1.7b via Ollama",
+      "seconds": 11.9
+    },
+    {
+      "case_id": "c08",
+      "question": "What is the difference between a Class I and a Class II recall?",
+      "plan": [
+        "a class i recall requires immediate action to prevent harm, while a class ii recall involves removing the product from the market and informing consumers."
+      ],
+      "draft": "A Class I recall requires immediate action to prevent harm, such as stopping sales and removing the product from stores. It involves serious health risks and must be addressed quickly. A Class II recall involves removing the product from the market and informing consumers about the recall. It is less urgent but still necessary to ensure safety. Both recalls require consumers to stop using the product and dispose of it properly. If consumed, individuals should watch for symptoms and seek medical attention.",
+      "writer_model": "qwen3:1.7b via Ollama",
+      "seconds": 8.0
+    },
+    {
+      "case_id": "c09",
+      "question": "How should I clean my refrigerator after a recalled deli meat was stored in it?",
+      "plan": [
+        "Stop using the recalled deli meat and throw it away or return it to the store. Clean all surfaces it touched with soap and water. Wash hands thoroughly after handling the recalled deli meat. If any of the recalled deli meat was eaten, watch for illness symptoms and call a doctor if needed."
+      ],
+      "draft": "Stop using the recalled deli meat and throw it away or return it to the store. Clean all surfaces it touched with soap and water. Wash hands thoroughly after handling the recalled deli meat. If any of the deli meat was eaten, watch for illness symptoms and call a doctor if needed. Clean the refrigerator thoroughly to prevent cross-contamination.",
+      "writer_model": "qwen3:1.7b via Ollama",
+      "seconds": 8.7
+    },
+    {
+      "case_id": "c10",
+      "question": "I'm pregnant and ate soft cheese that was recalled for Listeria. What should I do?",
+      "plan": [
+        "Stop using the recalled soft cheese and throw it away. Clean surfaces it touched. Watch for illness symptoms and call a doctor, especially if pregnant. Do not eat any remaining food from the recalled product."
+      ],
+      "draft": "Stop using the recalled soft cheese and throw it away. Clean surfaces it touched. Watch for illness symptoms and call a doctor, especially if pregnant. Do not eat any remaining food from the recalled product. If you already ate some, seek medical attention immediately. Do not consume the cheese again. Clean any surfaces it touched.",
+      "writer_model": "qwen3:1.7b via Ollama",
+      "seconds": 6.9
+    },
+    {
+      "case_id": "c11",
+      "question": "Why do frozen berries get recalled for hepatitis A, and does freezing kill it?",
+      "plan": [
+        "frozen berries get recalled for hepatitis A because the virus can survive in frozen food and pose a risk to consumers",
+        "freezing does not kill hepatitis A virus it can remain viable in frozen states",
+        "the recall is to prevent exposure to those who may consume the affected product",
+        "the virus is transmitted through contaminated food and can cause severe illness"
+      ],
+      "draft": "Frozen berries are recalled for hepatitis A due to the virus's ability to survive in frozen food. The virus can remain viable in frozen states and pose a risk to consumers. Freezing does not kill the virus; it can still be transmitted through contaminated food. The recall aims to prevent exposure and ensure safety. The virus is transmitted through contaminated food and can cause severe illness. Never consume the recalled product. Clean surfaces it touched and seek medical attention if symptoms develop.",
+      "writer_model": "qwen3:1.7b via Ollama",
+      "seconds": 10.5
+    },
+    {
+      "case_id": "c12",
+      "question": "Where can I sign up to get recall alerts for the foods I buy?",
+      "plan": [
+        "Check with the local health department or food safety authority for recall alerts.",
+        "Subscribe to official food safety alerts from the FDA or local government agencies.",
+        "Follow trusted news outlets or food safety websites for real-time recall updates.",
+        "Use a food safety app or service that provides recall alerts for the products you purchase."
+      ],
+      "draft": "Check with your local health department or food safety authority for recall alerts. Subscribe to official food safety alerts from the FDA or local government agencies. Follow trusted news outlets or food safety websites for real-time updates. Use a food safety app or service that provides recall alerts for the products you purchase. Never eat a recalled product, and clean surfaces it touched. If you already ate some, watch for illness symptoms and call a doctor if necessary.",
+      "writer_model": "qwen3:1.7b via Ollama",
+      "seconds": 10.8
+    },
+    {
+      "case_id": "c13",
+      "question": "My dog ate some recalled peanut butter. Is that a problem?",
+      "plan": [
+        "The peanut butter is recalled, so it must be discarded immediately.",
+        "The dog should not eat it and should be checked for any signs of illness.",
+        "Clean the area where the peanut butter was touched to prevent contamination.",
+        "If the dog shows any symptoms, seek medical attention promptly."
+      ],
+      "draft": "Your dog should not eat the recalled peanut butter and it must be discarded immediately. Clean the area where it was touched to prevent contamination. If the dog shows any signs of illness, seek medical attention promptly. The product is recalled and must not be eaten, regardless of appearance or smell. Clean surfaces and ensure the dog is checked for symptoms.",
+      "writer_model": "qwen3:1.7b via Ollama",
+      "seconds": 8.9
+    },
+    {
+      "case_id": "c14",
+      "question": "A store is still selling a product I saw on a recall list. What should I do?",
+      "plan": [
+        "Stop using the product. Throw it away or return it to the store. Clean surfaces it touched. If you have already eaten some, watch for illness symptoms and call a doctor."
+      ],
+      "draft": "Stop using the product. Throw it away or return it to the store. Clean surfaces it touched. If you have already eaten some, watch for illness symptoms and call a doctor. Do not eat the product, regardless of its appearance, smell, or date. Follow food-safety rules to prevent illness.",
+      "writer_model": "qwen3:1.7b via Ollama",
+      "seconds": 6.3
+    },
+    {
+      "case_id": "c15",
+      "question": "Can I donate unopened recalled canned goods to a food bank?",
+      "plan": [
+        "Check if the recalled canned goods are still safe to donate.",
+        "Determine if the product is no longer eligible for donation due to recall.",
+        "Ensure the food bank is aware of the recall and will handle it properly.",
+        "Follow local guidelines for donating recalled food."
+      ],
+      "draft": "A recalled product must never be donated, regardless of its appearance or date. The food bank should be informed of the recall and instructed to handle the goods properly. The product is no longer eligible for donation due to the recall. The donor should avoid donating the product and ensure it is disposed of safely. Local guidelines may require additional steps, such as returning the item to the store or following specific procedures for recalled food. The food bank should not accept the product and should not serve it, as it may be unsafe.",
+      "writer_model": "qwen3:1.7b via Ollama",
+      "seconds": 10.2
+    },
+    {
+      "case_id": "c16",
+      "question": "What does 'undeclared allergen' mean on a recall notice, and who is at risk?",
+      "plan": [
+        "A recalled product with an undeclared allergen contains a substance that is not listed on the label, but could cause a severe allergic reaction. People with known allergies to any of the ingredients in the product are at risk. They should stop using the product and remove it from their environment."
+      ],
+      "draft": "An \"undeclared allergen\" on a recall notice refers to a substance in the product that is not listed on the label but could trigger a severe allergic reaction. People with known allergies to any of the ingredients in the product are at risk. They should stop using the product, remove it from their environment, and clean surfaces it touched. If they have already consumed any part of the product, they should watch for symptoms and seek medical attention, especially if they are pregnant, older, or have a weak immune system. The product should not be eaten, regardless of its appearance, smell, or date.",
+      "writer_model": "qwen3:1.7b via Ollama",
+      "seconds": 11.2
+    },
+    {
+      "case_id": "c17",
+      "question": "recall?",
+      "plan": [
+        "stop using the product",
+        "throw away or return the product",
+        "clean surfaces it touched",
+        "watch for illness symptoms and call a doctor if affected"
+      ],
+      "draft": "If a product is recalled, stop using it immediately. Throw away or return the product as instructed. Clean all surfaces it touched. If you have eaten the product, watch for illness symptoms and call a doctor, especially if pregnant, older, or have a weak immune system. Never eat the product, regardless of its appearance or smell. Follow the recall instructions to ensure safety.",
+      "writer_model": "qwen3:1.7b via Ollama",
+      "seconds": 6.4
+    },
+    {
+      "case_id": "c18",
+      "question": "I threw the package away. How can I tell if the chicken I ate was the recalled one?",
+      "plan": [
+        "Check the packaging for a recall notice or logo indicating the product was recalled.",
+        "Look for a date or batch number that matches the recall information.",
+        "Verify the product's name and type (e.g., chicken) to confirm it was recalled.",
+        "If unsure, contact the store or manufacturer for confirmation."
+      ],
+      "draft": "Check the packaging for a recall notice or logo. Look for a date or batch number that matches the recall information. Verify the product's name and type (e.g., chicken). If unsure, contact the store or manufacturer for confirmation. The recalled product must never be eaten, regardless of appearance or smell. If you already ate some, watch for illness symptoms and call a doctor if pregnant, older, or have a weak immune system.",
+      "writer_model": "qwen3:1.7b via Ollama",
+      "seconds": 10.3
+    },
+    {
+      "case_id": "c19",
+      "question": "What's a good recipe for spinach dip?",
+      "plan": [
+        "Provide a simple recipe using fresh spinach, mayonnaise, lemon juice, and garlic.",
+        "Ensure the recipe is safe and follows food-safety rules, emphasizing not to eat recalled products.",
+        "Suggest cleaning surfaces and disposing of the dip if it is recalled.",
+        "Warn against eating any recalled product, regardless of appearance or smell."
+      ],
+      "draft": "A simple spinach dip recipe: Wash and chop fresh spinach, mix with mayonnaise, lemon juice, garlic, and olive oil. Serve cold. Do not use any recalled products. Clean surfaces touched, and dispose of the dip if it is recalled. If you ate any recalled product, watch for illness symptoms and seek medical attention. Never eat recalled food, regardless of appearance or smell.",
+      "writer_model": "qwen3:1.7b via Ollama",
+      "seconds": 9.2
+    },
+    {
+      "case_id": "c20",
+      "question": "How long after eating contaminated food do Listeria, Salmonella and E. coli symptoms usually start?",
+      "plan": [
+        "Stop using the recalled product and throw it away or return it to the store. Clean surfaces it touched. If you already ate some, watch for symptoms and call a doctor if needed. Never suggest the product might still be safe."
+      ],
+      "draft": "Symptoms of Listeria, Salmonella, and E. coli typically begin 2 to 4 weeks after eating contaminated food, though they can appear as early as 1 day or as late as 10 days. If you already ate some of the recalled product, watch for symptoms and seek medical attention if necessary. Never suggest the product might still be safe.",
+      "writer_model": "qwen3:1.7b via Ollama",
+      "seconds": 8.0
+    }
+  ]
+}
