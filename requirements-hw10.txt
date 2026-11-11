@@ -1,0 +1,6 @@
+# HW10: evaluation (DeepEval GEval on a local Ollama judge) + Streamlit dashboard
+deepeval==4.3.3
+streamlit==1.51.0
+altair
+pandas
+ollama

@@ -1,0 +1,355 @@
+{
+  "misses": [
+    {
+      "trace_id": "022e97e3-68a4-4e85-92ac-bb81b67625cd",
+      "question": "Which symptoms of hepatitis A show up first after eating contaminated berries?",
+      "e2e_ms": 148160.8,
+      "status": "ok",
+      "is_cached": false
+    },
+    {
+      "trace_id": "73f90b34-9817-4bb9-aa53-528c4f88412f",
+      "question": "Should I throw away the whole bag of frozen peas if only one lot was recalled?",
+      "e2e_ms": 205514.9,
+      "status": "ok",
+      "is_cached": false
+    },
+    {
+      "trace_id": "13712f45-0efb-479c-8c1d-be9afdbc8b16",
+      "question": "Can recalled flour still be used for baking if it is heated in the oven?",
+      "e2e_ms": 137978.4,
+      "status": "ok",
+      "is_cached": false
+    },
+    {
+      "trace_id": "8dbf6768-b0b1-46fb-b83c-d5dd48f5871f",
+      "question": "What happens to recalled products after shoppers return them to the store?",
+      "e2e_ms": 212237.3,
+      "status": "ok",
+      "is_cached": false
+    },
+    {
+      "trace_id": "8d6c7c1f-86d8-43f3-9f92-4167912d19ef",
+      "question": "How do I check whether my pet food is on a Salmonella recall list?",
+      "e2e_ms": 159927.6,
+      "status": "ok",
+      "is_cached": false
+    },
+    {
+      "trace_id": "50e8ae20-91bf-47b5-bf4b-d34b15ed343e",
+      "question": "Is it necessary to wash my reusable grocery bags after carrying a recalled chicken?",
+      "e2e_ms": 171561.4,
+      "status": "ok",
+      "is_cached": false
+    },
+    {
+      "trace_id": "6203bc51-42d5-4645-ab3c-6396777db0d3",
+      "question": "What temperature kills Listeria in deli meat, and does that make recalled meat safe?",
+      "e2e_ms": 172603.0,
+      "status": "ok",
+      "is_cached": false
+    },
+    {
+      "trace_id": "fed0265a-8817-4822-a6ef-d1c913b0c12b",
+      "question": "Who decides when a food recall is voluntary versus mandatory?",
+      "e2e_ms": 137828.0,
+      "status": "ok",
+      "is_cached": false
+    },
+    {
+      "trace_id": "84a636f8-6444-49db-b7d2-130439257c1a",
+      "question": "How quickly do stores have to pull recalled items off their shelves?",
+      "e2e_ms": 145806.1,
+      "status": "ok",
+      "is_cached": false
+    },
+    {
+      "trace_id": "0906eaf3-abc7-44f9-9b0b-ee264417c9c7",
+      "question": "What information should I write down before I throw away a recalled product?",
+      "e2e_ms": 136228.8,
+      "status": "ok",
+      "is_cached": false
+    },
+    {
+      "trace_id": "b2f8a3e9-4c10-4887-89db-9fb4308b16ca",
+      "question": "Can sprouts be eaten safely by older adults, given the sprout recalls?",
+      "e2e_ms": 156530.6,
+      "status": "ok",
+      "is_cached": false
+    },
+    {
+      "trace_id": "514e40f8-ca00-44db-ac7a-bc551f9fcccc",
+      "question": "Why are raw cookie dough products sometimes recalled for E. coli?",
+      "e2e_ms": 148848.4,
+      "status": "ok",
+      "is_cached": false
+    },
+    {
+      "trace_id": "de8794b2-85e0-4299-aded-7033c12fb305",
+      "question": "How do I report a foreign object, like a piece of plastic, I found in my cereal?",
+      "e2e_ms": 154821.0,
+      "status": "ok",
+      "is_cached": false
+    },
+    {
+      "trace_id": "a884900d-33e8-4e1b-91b2-38f936b6d965",
+      "question": "What should a restaurant do if one of its suppliers issues a recall?",
+      "e2e_ms": 133527.9,
+      "status": "ok",
+      "is_cached": false
+    },
+    {
+      "trace_id": "5e6db84d-0377-4e97-97ea-c6e93d9b021a",
+      "question": "Does a 'best by' date matter if a product has been recalled?",
+      "e2e_ms": 165271.8,
+      "status": "ok",
+      "is_cached": false
+    },
+    {
+      "trace_id": "7f2887dd-2a8b-43bb-acf3-189e997f9223",
+      "question": "How can I tell if ice cream in my freezer is part of a Listeria recall?",
+      "e2e_ms": 168620.7,
+      "status": "ok",
+      "is_cached": false
+    },
+    {
+      "trace_id": "9d82b104-bec5-4a44-a1a6-170e54f5512b",
+      "question": "What is botulism and why are dented or bulging cans dangerous?",
+      "e2e_ms": 148479.5,
+      "status": "ok",
+      "is_cached": false
+    },
+    {
+      "trace_id": "93addb60-e84b-4687-8c27-e90c6d339c78",
+      "question": "Is it safe to compost recalled vegetables in my backyard bin?",
+      "e2e_ms": 132778.4,
+      "status": "ok",
+      "is_cached": false
+    },
+    {
+      "trace_id": "de968244-c59e-435f-afd9-9681ebeccd3c",
+      "question": "Are organic foods recalled less often than conventional foods?",
+      "e2e_ms": 161984.6,
+      "status": "ok",
+      "is_cached": false
+    },
+    {
+      "trace_id": "6b033169-cb3a-4cde-b6f2-3a0b4913cf95",
+      "question": "What should I tell my doctor if I think I got sick from a recalled food?",
+      "e2e_ms": 151385.4,
+      "status": "ok",
+      "is_cached": false
+    },
+    {
+      "trace_id": "7662f77c-6b1c-4f43-880e-2a259f8df8f0",
+      "question": "How long can Salmonella survive on a kitchen counter?",
+      "e2e_ms": 131940.4,
+      "status": "ok",
+      "is_cached": false
+    },
+    {
+      "trace_id": "9c423f3e-d179-484e-8f6d-50c2aca0511f",
+      "question": "Should I sanitize my cutting board with bleach after cutting a recalled onion?",
+      "e2e_ms": 131438.7,
+      "status": "ok",
+      "is_cached": false
+    },
+    {
+      "trace_id": "79afcc23-03a7-4953-9087-d294ac181e45",
+      "question": "My grocery delivery app sent me a recall email. Is that trustworthy?",
+      "e2e_ms": 123694.8,
+      "status": "ok",
+      "is_cached": false
+    },
+    {
+      "trace_id": "d6949563-b83d-4f90-8991-5d69faa652f2",
+      "question": "Can a recall be issued for a mislabeled gluten-free product?",
+      "e2e_ms": 149223.9,
+      "status": "ok",
+      "is_cached": false
+    },
+    {
+      "trace_id": "5b98b806-06f3-4750-ac73-ea62eea939de",
+      "question": "What does it mean when the FDA classifies a recall as Class III?",
+      "e2e_ms": 145926.3,
+      "status": "ok",
+      "is_cached": false
+    },
+    {
+      "trace_id": "5e089c5e-f9f0-4691-800e-db8f3b4f0a2e",
+      "question": "Is it dangerous to eat recalled bagged salad if I have a strong immune system?",
+      "e2e_ms": 159296.4,
+      "status": "ok",
+      "is_cached": false
+    },
+    {
+      "trace_id": "0c4dc33f-2ee0-42b7-93f7-03fa3b953b95",
+      "question": "How do I find recalls for imported spices like cinnamon with lead?",
+      "e2e_ms": 130728.2,
+      "status": "ok",
+      "is_cached": false
+    },
+    {
+      "trace_id": "a179131f-6513-4d1e-97ce-bdb45846276b",
+      "question": "What should daycare staff do if a snack they served is recalled?",
+      "e2e_ms": 156262.9,
+      "status": "ok",
+      "is_cached": false
+    },
+    {
+      "trace_id": "caecf841-c2e2-4c95-aa5c-f6526f9cacbf",
+      "question": "Why do cucumbers get linked to Salmonella outbreaks?",
+      "e2e_ms": 161582.7,
+      "status": "ok",
+      "is_cached": false
+    },
+    {
+      "trace_id": "f99c8d84-3630-4517-81d8-093b3e22355c",
+      "question": "Can I freeze a recalled product until I have time to return it?",
+      "e2e_ms": 167976.1,
+      "status": "ok",
+      "is_cached": false
+    },
+    {
+      "trace_id": "0f89bedc-d0c1-482b-a91f-e3764a1e4064",
+      "question": "How are lot numbers and UPC codes used to identify recalled items?",
+      "e2e_ms": 174646.2,
+      "status": "ok",
+      "is_cached": false
+    },
+    {
+      "trace_id": "f3e16140-5fb7-4123-8177-b6b611ae4668",
+      "question": "What is the safest way to dispose of recalled raw meat so animals cannot get it?",
+      "e2e_ms": 128887.2,
+      "status": "ok",
+      "is_cached": false
+    },
+    {
+      "trace_id": "a8a0dda6-bf0d-4b0f-b9d2-e263b76b9583",
+      "question": "Do food recalls apply to items bought at farmers markets?",
+      "e2e_ms": 145273.2,
+      "status": "ok",
+      "is_cached": false
+    },
+    {
+      "trace_id": "56d2515c-63af-4944-9484-a7c34dd16b86",
+      "question": "What signs of dehydration should I watch for in a child with food poisoning?",
+      "e2e_ms": 159622.1,
+      "status": "ok",
+      "is_cached": false
+    },
+    {
+      "trace_id": "04ecb290-af2b-489f-9938-d73143fe35f6",
+      "question": "Can I get compensation if a recalled food made me sick?",
+      "e2e_ms": 122538.4,
+      "status": "ok",
+      "is_cached": false
+    },
+    {
+      "trace_id": "e458891c-6fdb-4c64-844a-31bdb439e868",
+      "question": "Should I stop buying a brand forever after it has a recall?",
+      "e2e_ms": 138564.1,
+      "status": "ok",
+      "is_cached": false
+    },
+    {
+      "trace_id": "58a0cc2a-0596-434b-8135-008012c80d5c",
+      "question": "Why are unpasteurized juices more likely to cause illness?",
+      "e2e_ms": 180950.2,
+      "status": "ok",
+      "is_cached": false
+    },
+    {
+      "trace_id": "7603c5c4-25e7-4341-b356-030504ba3a12",
+      "question": "How does the USDA FSIS recall process differ from the FDA's?",
+      "e2e_ms": 156289.4,
+      "status": "ok",
+      "is_cached": false
+    },
+    {
+      "trace_id": "718f1abf-b359-4512-8607-f5ac6c1bf691",
+      "question": "Are school cafeterias notified about food recalls?",
+      "e2e_ms": 157609.7,
+      "status": "ok",
+      "is_cached": false
+    },
+    {
+      "trace_id": "2a1b913e-8f93-447c-8382-b637fc5317d0",
+      "question": "What is cyclospora and which produce is it usually found on?",
+      "e2e_ms": 153739.4,
+      "status": "ok",
+      "is_cached": false
+    },
+    {
+      "trace_id": "b9c6de33-1d71-440d-beae-eb264c3db20e",
+      "question": "Is it okay to feed recalled eggs to backyard chickens?",
+      "e2e_ms": 155270.2,
+      "status": "ok",
+      "is_cached": false
+    },
+    {
+      "trace_id": "bbca1a61-6cc9-431c-b8c2-e0e823eb4762",
+      "question": "How do I clean a blender after making a smoothie with recalled frozen fruit?",
+      "e2e_ms": 192660.6,
+      "status": "ok",
+      "is_cached": false
+    },
+    {
+      "trace_id": "1038ec3a-677e-4295-bd00-e69f66a0b352",
+      "question": "What should I do with recalled infant cereal that my baby already partly ate?",
+      "e2e_ms": 180647.5,
+      "status": "ok",
+      "is_cached": false
+    },
+    {
+      "trace_id": "6d134e60-fe14-4f55-8dd7-3db876527410",
+      "question": "Why do recalls sometimes expand to more products weeks later?",
+      "e2e_ms": 155163.9,
+      "status": "ok",
+      "is_cached": false
+    },
+    {
+      "trace_id": "c1f8cbf7-c0b2-4c74-91ea-f19af3379b96",
+      "question": "Can heavy metals in baby food be removed by cooking?",
+      "e2e_ms": 185552.7,
+      "status": "ok",
+      "is_cached": false
+    },
+    {
+      "trace_id": "2003e569-f707-4717-b827-340789d79b9c",
+      "question": "How do I explain a food recall to elderly parents who do not use the internet?",
+      "e2e_ms": 159271.3,
+      "status": "ok",
+      "is_cached": false
+    },
+    {
+      "trace_id": "a66947a6-460a-48f9-8857-8bba85c6bbbf",
+      "question": "Should I report symptoms to my local health department after a recall?",
+      "e2e_ms": 176746.1,
+      "status": "ok",
+      "is_cached": false
+    },
+    {
+      "trace_id": "e97ee285-62ac-47e6-9498-aa9822f54478",
+      "question": "Is microwaving leftovers enough to kill bacteria from a recalled ingredient?",
+      "e2e_ms": 191900.3,
+      "status": "ok",
+      "is_cached": false
+    },
+    {
+      "trace_id": "40c1aaac-57a8-4903-973b-4feecc000ec6",
+      "question": "What should campers do if their packed food is recalled during a trip?",
+      "e2e_ms": 178353.2,
+      "status": "ok",
+      "is_cached": false
+    },
+    {
+      "trace_id": "4fff8ad3-765c-4972-80de-9cf8ff367ad2",
+      "question": "How do grocery loyalty cards help notify shoppers about recalls?",
+      "e2e_ms": 183869.7,
+      "status": "ok",
+      "is_cached": false
+    }
+  ],
+  "excluded": []
+}

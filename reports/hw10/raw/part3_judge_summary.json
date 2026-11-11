@@ -1,0 +1,63 @@
+{
+  "frozen": {
+    "files": [
+      "hw10/eval_cases.json",
+      "hw10/human_labels.csv"
+    ],
+    "commit": "8454314abac51c22d8c53150169f3c99c8472b20",
+    "committed_at": "2026-11-10T13:15:04-08:00",
+    "subject": "HW10 Part 3.1: freeze 20 Writer drafts and human labels before judging"
+  },
+  "judge": {
+    "framework": "DeepEval 4.3.3 GEval",
+    "judge_model": "qwen3:8b (Ollama, temperature 0, seed 7875, think off)",
+    "scale": "1-5 integer rubric (1 very poor ... 5 excellent)",
+    "temperature": 0.0,
+    "seed": 7875,
+    "max_tokens": 400,
+    "timeout_s": 180.0,
+    "evaluation_steps": "fixed in hw10/judge.py (no step-generation call)"
+  },
+  "n_cases": 20,
+  "mean_human": 4.35,
+  "per_run": [
+    {
+      "run": 1,
+      "n_scored": 20,
+      "spearman": -0.5413,
+      "mean_abs_diff": 1.0,
+      "mean_judge": 4.15
+    },
+    {
+      "run": 2,
+      "n_scored": 20,
+      "spearman": -0.5413,
+      "mean_abs_diff": 1.0,
+      "mean_judge": 4.15
+    },
+    {
+      "run": 3,
+      "n_scored": 20,
+      "spearman": -0.5413,
+      "mean_abs_diff": 1.0,
+      "mean_judge": 4.15
+    }
+  ],
+  "headline": {
+    "run": 1,
+    "n_scored": 20,
+    "spearman": -0.5413,
+    "mean_abs_diff": 1.0,
+    "mean_judge": 4.15
+  },
+  "repeatability": {
+    "cases": 20,
+    "cases_changed": 0,
+    "pct_cases_changed": 0.0,
+    "pairwise_mean_abs_change": 0.0,
+    "max_abs_change": 0.0,
+    "mean_range_per_case": 0.0
+  },
+  "judge_failures": 0,
+  "ran_at": "2026-11-10T14:01:31-0800"
+}

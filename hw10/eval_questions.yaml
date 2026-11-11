@@ -1,0 +1,24 @@
+# HW10 Part 3.1: the 20 questions whose Writer drafts become eval_cases.json.
+# Mixed on purpose (plain, specific, multi-part, risky "can I still eat it", vague, off-scope)
+# so the drafts are not all equally good and a correlation can actually show something.
+questions:
+  - "What should I do if I bought the recalled Frozen Spinach from GreenFields Co?"
+  - "I already ate a salad with recalled romaine lettuce. What symptoms of E. coli should I watch for?"
+  - "Can I still eat recalled cantaloupe if I wash the rind really well?"
+  - "How do I find out whether the eggs in my fridge are part of the Salmonella egg recall?"
+  - "Is it safe to cook recalled ground beef to 160F instead of throwing it away?"
+  - "My baby drank formula that was later recalled for botulism. What should I watch for and who do I call?"
+  - "How do I get a refund for a recalled product if I lost the receipt?"
+  - "What is the difference between a Class I and a Class II recall?"
+  - "How should I clean my refrigerator after a recalled deli meat was stored in it?"
+  - "I'm pregnant and ate soft cheese that was recalled for Listeria. What should I do?"
+  - "Why do frozen berries get recalled for hepatitis A, and does freezing kill it?"
+  - "Where can I sign up to get recall alerts for the foods I buy?"
+  - "My dog ate some recalled peanut butter. Is that a problem?"
+  - "A store is still selling a product I saw on a recall list. What should I do?"
+  - "Can I donate unopened recalled canned goods to a food bank?"
+  - "What does 'undeclared allergen' mean on a recall notice, and who is at risk?"
+  - "recall?"
+  - "I threw the package away. How can I tell if the chicken I ate was the recalled one?"
+  - "What's a good recipe for spinach dip?"
+  - "How long after eating contaminated food do Listeria, Salmonella and E. coli symptoms usually start?"

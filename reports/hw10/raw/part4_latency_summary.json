@@ -1,0 +1,55 @@
+{
+  "n_traces": 50,
+  "rows": [
+    {
+      "stage": "Cache lookup",
+      "p50_ms": 921.6,
+      "p95_ms": 2782.6,
+      "pct_of_e2e": 0.79
+    },
+    {
+      "stage": "Planner",
+      "p50_ms": 7227.0,
+      "p95_ms": 9625.1,
+      "pct_of_e2e": 4.56
+    },
+    {
+      "stage": "Writer",
+      "p50_ms": 6781.4,
+      "p95_ms": 8380.6,
+      "pct_of_e2e": 4.26
+    },
+    {
+      "stage": "Reviewer",
+      "p50_ms": 22239.1,
+      "p95_ms": 27674.1,
+      "pct_of_e2e": 10.64
+    },
+    {
+      "stage": "Queue wait (total)",
+      "p50_ms": 76.7,
+      "p95_ms": 213.6,
+      "pct_of_e2e": 0.06
+    },
+    {
+      "stage": "Evaluation",
+      "p50_ms": 120375.2,
+      "p95_ms": 158125.4,
+      "pct_of_e2e": 79.15
+    }
+  ],
+  "end_to_end": {
+    "p50_ms": 156276.1,
+    "p95_ms": 192318.4,
+    "mean_ms": 157714.4
+  },
+  "unattributed_pct": 0.54,
+  "dominant": "Evaluation",
+  "cache_hit_e2e": {
+    "n": 1,
+    "p50_ms": 1049.3,
+    "p95_ms": 1049.3
+  },
+  "all_cache_lookup_results_miss": true,
+  "excluded": []
+}

@@ -24,3 +24,15 @@ hw08-down:
 
 verify-hw09:
 	python scripts/verify_hw09.py
+
+# HW10 shortcuts (run from the repo root)
+.PHONY: verify-hw10 hw10-test hw10-dashboard
+
+verify-hw10:
+	python scripts/verify_hw10.py
+
+hw10-test:
+	python tests/test_hw10.py
+
+hw10-dashboard:
+	streamlit run hw10/dashboard.py --server.port 8676

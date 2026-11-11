@@ -327,3 +327,34 @@ python hw9/part4/run_part4.py test     # four variants on the held-out test set
 ```
 python scripts/verify_hw09.py          # or: make verify-hw09 -> reports/hw09/verification.json
 ```
+
+---
+
+# DATA-260 HW10, Pinal Pawar (SID4: 7875)
+
+Evaluation, judge validation and tracing for the HW8/HW9 system, plus a Streamlit operations
+dashboard. PREFIX `s7875`, dashboard on port 8676 (PORT_BASE + 1; 8675 is the HW8 API).
+Judge: DeepEval GEval on a local Ollama model (`qwen3:8b`, temperature 0, seed 7875, think off,
+1-5 rubric). trace_id == HW8 correlation_id. Tagged commit: `hw10`.
+
+Code: `hw10/` (`ingress.py`, `evaluator.py`, `judge.py`, `build_eval_cases.py`,
+`label_drafts.py`, `validate_judge.py`, `latency_experiment.py`, `trace_analysis.py`,
+`dashboard.py`), `kafka_hw8/tracing.py` (spans), span hooks in `kafka_hw8/agent_base.py`,
+`tests/test_hw10.py`, `scripts/verify_hw10.py`. Data: `reports/hw10/raw/`.
+
+## HW10 Reproducible run instructions
+
+```
+pip install -r requirements-hw10.txt                      # deepeval, streamlit
+docker compose -f docker-compose.kafka.yml up -d && bash scripts/hw08_create_topics.sh
+docker start s7875-redis                                  # Redis Stack from HW9; MySQL s7875_rel running
+python planner.py | python writer.py | HW8_MODEL=qwen3:8b python reviewer.py   # three terminals
+```
+
+1. Part 3.1 freeze first: `python hw10/build_eval_cases.py`, `python hw10/label_drafts.py`
+   (labels typed by hand), then commit both files.
+2. Part 2 + 4.2: `python hw10/ingress.py --examples` (evaluated cache miss, cache hit, failed).
+3. Part 3.2-3.3: `python hw10/validate_judge.py`.
+4. Part 4.3: `python hw10/latency_experiment.py` (50 confirmed cache misses).
+5. Part 1: `streamlit run hw10/dashboard.py --server.port 8676`.
+6. Checks: `python tests/test_hw10.py` and `python scripts/verify_hw10.py`.

@@ -35,6 +35,11 @@ from aiokafka import AIOKafkaConsumer, AIOKafkaProducer, ConsumerRebalanceListen
 from .config import BOOTSTRAP, DEAD_LETTER_TOPIC, banner
 from .kafka_util import wait_for_kafka
 from .logutil import log, now, say
+from .tracing import now_ms, write_span
+
+# HW10 Part 4: which queue-wait span a message read from each topic closes.
+QUEUE_STAGE = {"s7875_inbox": "queue_inbox", "s7875_tasks": "queue_tasks",
+               "s7875_drafts": "queue_drafts"}
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -166,6 +171,7 @@ class KafkaAgent:
         msg, decode_error = _decode(record.value)
         corr = msg.get("correlation_id") if isinstance(msg, dict) else None
         key = _idem_key(msg, record)
+        trace_id = _trace_queue_wait(self, msg, record, corr)
         log(self.tag, "RECEIVE", corr, msg if msg is not None else {"_raw": _raw(record.value)},
             topic=record.topic, p=record.partition, off=record.offset, key=key)
 
@@ -183,6 +189,7 @@ class KafkaAgent:
         outputs: list[Out] = []
         outcome = "ok"
         attempt = 0
+        t_start = now_ms()
         while True:
             attempt += 1
             try:
@@ -192,10 +199,18 @@ class KafkaAgent:
                     work_delay_s=s.work_delay_s)
                 if s.work_delay_s:
                     await asyncio.sleep(s.work_delay_s)
+                t_start = now_ms()
+                _maybe_inject_fault(self, msg)
                 outputs = await self.handle(msg, record)
+                write_span(trace_id, self.name, t_start, now_ms(), "ok", None, self.agent_id,
+                           attempt=attempt, topic=record.topic, partition=record.partition,
+                           offset=record.offset)
                 break
             except Exception as exc:  # noqa: BLE001 - every failure is retried or dead-lettered
                 err = f"{type(exc).__name__}: {exc}"
+                write_span(trace_id, self.name, t_start, now_ms(), "error", err, self.agent_id,
+                           attempt=attempt, topic=record.topic, partition=record.partition,
+                           offset=record.offset)
                 if s.max_retries <= 0:
                     log(self.tag, "CRASH", corr, error=err, p=record.partition,
                         off=record.offset, note="no retry handling (MAX_RETRIES=0); "
@@ -216,12 +231,21 @@ class KafkaAgent:
                     }
                     outputs = [Out(DEAD_LETTER_TOPIC, corr, dead)]
                     outcome = "dead_letter"
+                    t_dl = now_ms()
+                    write_span(trace_id, "dead_letter", t_dl, t_dl, "error", err, self.agent_id,
+                               failed_stage=self.name, attempts=attempt,
+                               topic=DEAD_LETTER_TOPIC)
                     log(self.tag, "DEAD-LETTER", corr, topic=DEAD_LETTER_TOPIC,
                         attempts=attempt, error=err)
                     break
                 await asyncio.sleep(s.retry_backoff_s * attempt)
 
         for out in outputs:
+            if trace_id:  # HW10: carry trace_id forward and stamp the send time
+                out.value.setdefault("trace_id", trace_id)
+                out.value["sent_at_ms"] = now_ms()
+                if isinstance(msg, dict) and msg.get("inject_fault"):
+                    out.value.setdefault("inject_fault", msg["inject_fault"])
             log(self.tag, "SEND", out.value.get("correlation_id"), out.value, topic=out.topic)
             await self.producer.send_and_wait(out.topic, json.dumps(out.value).encode(),
                                               key=out.key.encode() if out.key else None)
@@ -233,6 +257,30 @@ class KafkaAgent:
         if self.settings.commit_mode == "after":
             await self.consumer.commit({tp: record.offset + 1})
             log(self.tag, "COMMIT", corr, p=record.partition, next_offset=record.offset + 1)
+
+
+def _trace_queue_wait(agent: "KafkaAgent", msg, record, corr: str | None) -> str | None:
+    """HW10: write the queue-wait span (sent_at_ms -> now) and return the trace_id.
+
+    Only HW10 messages carry trace_id/sent_at_ms, so HW8 runs and the ordering test are
+    unaffected. trace_id is the same value as correlation_id."""
+    if not isinstance(msg, dict) or msg.get("kind") == "order_test":
+        return None
+    trace_id = msg.get("trace_id") or None
+    sent = msg.get("sent_at_ms")
+    stage = QUEUE_STAGE.get(record.topic)
+    if trace_id and isinstance(sent, (int, float)) and stage:
+        write_span(trace_id, stage, float(sent), now_ms(), "ok", None, agent.agent_id,
+                   topic=record.topic, partition=record.partition, offset=record.offset,
+                   correlation_id=corr)
+    return trace_id
+
+
+def _maybe_inject_fault(agent: "KafkaAgent", msg) -> None:
+    """HW10 Part 4.2 failed trace: a message with inject_fault == this agent's name fails here
+    on every attempt, so the normal retry -> dead-letter path runs and is traced."""
+    if isinstance(msg, dict) and msg.get("inject_fault") == agent.name:
+        raise RuntimeError(f"injected fault for HW10 failed-trace example ({agent.name})")
 
 
 def trace_entry(agent: "KafkaAgent", record) -> dict:

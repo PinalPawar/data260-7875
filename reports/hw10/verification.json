@@ -1,0 +1,101 @@
+{
+  "passed": 19,
+  "total": 19,
+  "checks": [
+    {
+      "check": "file hw10/dashboard.py",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "file hw10/evaluator.py",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "file hw10/judge.py",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "file hw10/ingress.py",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "file hw10/validate_judge.py",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "file hw10/latency_experiment.py",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "file kafka_hw8/tracing.py",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "file tests/test_hw10.py",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "dashboard uses st.cache_data and st.cache_resource",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "eval_cases.json has 20 drafts",
+      "ok": true,
+      "detail": "20"
+    },
+    {
+      "check": "human_labels.csv has 20 labels in 1-5",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "labels committed before judge results",
+      "ok": true,
+      "detail": "labels 2026-11-10T13:15:04-08:00 / judge "
+    },
+    {
+      "check": "spans have the required fields",
+      "ok": true,
+      "detail": "540 spans"
+    },
+    {
+      "check": "trace example cache_hit present in spans",
+      "ok": true,
+      "detail": "3ec85a84-1916-4794-9924-26c8ba6a8176"
+    },
+    {
+      "check": "trace example cache_miss present in spans",
+      "ok": true,
+      "detail": "fc5eeb2a-f33f-41e9-9723-8d64ea033229"
+    },
+    {
+      "check": "trace example failed present in spans",
+      "ok": true,
+      "detail": "378f1087-ca1a-41a8-9847-a7ef7fb9e89c"
+    },
+    {
+      "check": "at least one ok end-to-end evaluation",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "judge summary has Spearman, MAD, repeatability",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "50 confirmed cache misses",
+      "ok": true,
+      "detail": "50"
+    }
+  ]
+}

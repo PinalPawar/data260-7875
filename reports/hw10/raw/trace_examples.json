@@ -1,0 +1,7 @@
+{
+  "cache_miss": "fc5eeb2a-f33f-41e9-9723-8d64ea033229",
+  "cache_hit": "3ec85a84-1916-4794-9924-26c8ba6a8176",
+  "failed": "378f1087-ca1a-41a8-9847-a7ef7fb9e89c",
+  "failed_stage": "writer",
+  "failed_error": "RuntimeError: injected fault for HW10 failed-trace example (writer)"
+}
